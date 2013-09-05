@@ -1,5 +1,13 @@
+{% url 'fpr.views.format_list' as url_format %}
+{% url 'fpr.views.idtool_list' as url_idtool %}
+{% url 'fpr.views.fprule_list' as url_fprule %}
+{% url 'fpr.views.normalizationtool_list' as url_normalizationtool %}
+
 <div class="sidebar span2">
   <ul>
-    <li class="active"><a href='#'>Example</a></li>
+      <li class="{% active request url_format %}"><a href="{% url 'format_list'%}">Formats</a></li>
+      <li class="{% active request url_idtool %}"><a href="{% url 'idtool_list'%}">Identification Tools</a></li>
+      <li class="{% active request url_fprule %}"><a href="{% url 'fprule_list'%}">Format Policy Rules</a></li>
+      <li class="{% active request url_normalizationtool %}"><a href="{% url 'normalizationtool_list' %}">Normalization Tools</a></li>
   </ul>
 </div>
