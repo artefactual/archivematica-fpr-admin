@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.views.generic.edit import FormView
 from django.contrib import messages
 
-from common import utils
+from fpr import utils
 from fpr import forms as fprforms
 from fpr import models as fprmodels
 
