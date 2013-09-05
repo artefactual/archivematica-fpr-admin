@@ -16,37 +16,50 @@
 
 {% block content %}
 
-<div class='tool'>
-    {% if fprule %}
-    <form action="{% url 'fprule_edit' fprule.uuid %}" method="post">
-    {% else %}
-    <form action="{% url 'fprule_create' %}" method="post">
-    {% endif %}
-        {% csrf_token %}
-        {{ form.as_p }}
+<div class="row">
 
-  {% if fprule %}
-  <form action="{% url 'fprule_edit' fprule.uuid %}" method="post" id='fprule_form'>
-  {% else %}
-  <form action="{% url 'fprule_create' %}" method="post" id='fprule_form'>
-  {% endif %}
-    {% csrf_token %}
-    <!--
-    <p>
-      {{ form.command.errors }}
-      {{ form.command.label_tag }} {{ form.command }}
-    </p>
-    -->
-    <div id='fprule_command_form'>
-      {{ fprule_command_form.as_p }}
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='tool'>
+      {% if fprule %}
+        <form action="{% url 'fprule_edit' fprule.uuid %}" method="post">
+      {% else %}
+        <form action="{% url 'fprule_create' %}" method="post">
+      {% endif %}
+
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      {% if fprule %}
+      <form action="{% url 'fprule_edit' fprule.uuid %}" method="post" id='fprule_form'>
+      {% else %}
+      <form action="{% url 'fprule_create' %}" method="post" id='fprule_form'>
+      {% endif %}
+
+        {% csrf_token %}
+
+        <!--
+        <p>
+          {{ form.command.errors }}
+          {{ form.command.label_tag }} {{ form.command }}
+        </p>
+        -->
+        <div id='fprule_command_form'>
+          {{ fprule_command_form.as_p }}
+        </div>
+        <p>
+          {{ form.description.errors }}
+          {{ form.description.label_tag }} {{ form.description }}
+        </p>
+        <input type="submit" value="{{ action }} Format" />
+      </form>
     </div>
-    <p>
-      {{ form.description.errors }}
-      {{ form.description.label_tag }} {{ form.description }}
-    </p>
-    <input type="submit" value="{{ action }} Format" />
-  </form>
-</div>
+
+  </div> <!-- /span12 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}
 
