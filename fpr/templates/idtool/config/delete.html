@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Disable Format Version{% endblock title %}
+
+{% block page_title %}
+Disable {{ version.description }}
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idtool_list' %}">Formats</a></li>
+<li><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></li>
+<li>Disable {{ config.description }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='idtool_config'>
+    <form action="{% url 'idtool_config_delete' idtool.slug config.slug %}" method="post">{% csrf_token %}
+        <p>Are you sure?  The following rules will also be disabled:</p>
+
+        {% regroup dependent_objects by model as dependent_rules %}
+        <dl>
+            {% for model in dependent_rules %}
+                <dt>{{ model.grouper }}</dt>
+                {% for rule in model.list %}
+                    <dd>{{ rule.value }}</dd>
+                {% endfor %}
+            {% endfor %}
+        </dl>
+
+        <input type="submit" name="delete" value="Disable ID Tool Config" />
+        <input type="submit" name="cancel" value="Cancel, change nothing" />
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Formats{% endblock title %}
+
+{% block page_title %}
+Format Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Formats</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<p><a href="{% url 'format_create' %}">Create New Format</a></p>
+
+{% if formats %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Group</th>
+        <th>Description</th>
+        <th>UUID</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for format in formats %}
+      <tr>
+        <td>{{ format.group }}</td>
+        <td><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></td>
+        <td>{{ format.uuid }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No formats exist.</p>
+{% endif %}
+
+{% endblock content %}

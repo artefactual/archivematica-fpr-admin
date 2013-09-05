@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server{% endblock title %}
+
+{% block page_title %}
+FPR
+{% endblock page_title %}
+
+{% block content %}
+
+<dl>
+<dt>File Identification</dt>
+<dd><a href="{% url 'format_list' %}">Formats</a></dd>
+<dd><a href="{% url 'idtool_list' %}">Tools</a></dd>
+<dt>Normalization</dt>
+<dd><a href="">Rules</a></dd>
+<dd><a href="">Tools</a></dd>
+</dl>
+
+{% endblock content %}

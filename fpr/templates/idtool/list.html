@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Identification Tools{% endblock title %}
+
+{% block page_title %}
+Identification Tool Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Identification Tools</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<p><a href="{% url 'idtool_create' %}">Create New Tool</a></p>
+
+{% if idtools %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Version</th>
+        <th>UUID</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for idtool in idtools %}
+      <tr>
+        <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></td>
+        <td>{{ idtool.version }}</td>
+        <td>{{ idtool.uuid }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No identification tools exist.</p>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Normalization Tools{% endblock title %}
+
+{% block page_title %}
+Normalization Tool Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Normalization Tools</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<p><a href="{% url 'normalizationtool_create' %}">Create New Tool</a></p>
+
+{% if normalizationtools %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Version</th>
+        <th>UUID</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for normalizationtool in normalizationtools %}
+      <tr>
+        <td><a href="{% url 'normalizationtool_detail' normalizationtool.slug %}">{{ normalizationtool.description }}</a></td>
+        <td>{{ normalizationtool.version }}</td>
+        <td>{{ normalizationtool.uuid }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No normalization tools exist.</p>
+{% endif %}
+
+{% endblock content %}

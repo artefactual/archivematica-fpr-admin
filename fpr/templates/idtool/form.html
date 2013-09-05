@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ action }} Identification Tool{% endblock title %}
+
+{% block page_title %}
+{{ action }} Identification Tool
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idtool_list' %}">Identification Tools</a></li>
+<li>{{ action }} Identification Tool</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='tool'>
+    {% if idtool %}
+    <form action="{% url 'idtool_edit' idtool.slug %}" method="post">
+    {% else %}
+    <form action="{% url 'idtool_create' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{{ action }}" />
+    </form>
+</div>
+
+{% endblock content %}

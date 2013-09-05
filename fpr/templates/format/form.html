@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ action }} Format{% endblock title %}
+
+{% block page_title %}
+{{ action }} Format
+{% endblock page_title %}
+
+{% block extra_css %}
+<style type="text/css">
+#format_group_form {
+  margin-left: 2em;
+}
+</style>
+{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_list' %}">Formats</a></li>
+<li>{{ action }} Format</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+
+  {% if format %}
+  <form action="{% url 'format_edit' format.slug %}" method="post" id='format_form'>
+  {% else %}
+  <form action="{% url 'format_create' %}" method="post" id='format_form'>
+  {% endif %}
+    {% csrf_token %}
+    <p>
+      {{ form.group.errors }}
+      {{ form.group.label_tag }} {{ form.group }}
+    </p>
+    <div id='format_group_form'>
+      {{ format_group_form.as_p }}
+    </div>
+    <p>
+      {{ form.description.errors }}
+      {{ form.description.label_tag }} {{ form.description }}
+    </p>
+    <input type="submit" value="{{ action }} Format" />
+  </form>
+</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script type="text/javascript">
+
+function display_extra_form() {
+  val = $("#id_f-group option:selected").val();
+  if (val == 'new') {
+    $('#format_group_form').show();
+  } else {
+    $('#format_group_form').hide();
+  }
+}
+
+$(document).ready(function () {
+  display_extra_form();
+  $("#id_f-group").change(function () {display_extra_form();});
+
+});
+
+</script>
+{% endblock %}

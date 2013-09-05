@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ action }} Format Version{% endblock title %}
+
+{% block page_title %}
+{{ action }} Format Version
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_list' %}">Formats</a></li>
+<li><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></li>
+<li>{{ action }} Format Version</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+    {% if version %}
+    <form action="{% url 'format_version_edit' format.slug version.slug %}" method="post">
+    {% else %}
+    <form action="{% url 'format_version_create' format.slug %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <p>Format: {{ format.description }}</p>
+        {{ form.as_p }}
+        <input type="submit" value="{{ action }}" />
+    </form>
+</div>
+
+{% endblock content %}

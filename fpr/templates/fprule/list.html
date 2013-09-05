@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Format Policy Rules{% endblock title %}
+
+{% block page_title %}
+Format Policy Rule Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Format Policy Rules</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <p><a href="{% url 'fprule_create' %}">Create New Rule</a></p>
+
+    {% if fprules %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Purpose</th>
+            <th>UUID</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for fprule in fprules %}
+          <tr>
+            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.purpose }}</a></td>
+            <td>{{ fprule.uuid }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No format policy rules exist.</p>
+    {% endif %}
+
+  </div> <!-- /span12 -->
+
+</div> <!-- /row -->
+
+{% endblock content %}

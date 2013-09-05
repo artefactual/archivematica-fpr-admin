@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ fprule.purpose }}{% endblock title %}
+
+{% block page_title %}
+{{ fprule.purpose }} Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'fprule_list' %}">Format Policy Rules</a></li>
+<li>{{ fprule.purpose }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+  <dl>
+    <dt>Purpose</dt>
+      <dd>{{ fprule.purpose }}</dd>
+    <dt>Actions</dt>
+      <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
+  </dl>
+</div>
+
+{% endblock content %}

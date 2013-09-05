@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ normalizationtool.description }} {{ normalizationtool.version }}{% endblock title %}
+
+{% block page_title %}
+{{ normalizationtool.description }} Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'normalizationtool_list' %}">Normalization Tools</a></li>
+<li>{{ normalizationtool.description }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+  <dl>
+    <dt>Description</dt>
+      <dd>{{ normalizationtool.description }}</dd>
+    <dt>Version</dt>
+      <dd>{{ normalizationtool.version }}</dd>
+    <dt>UUID</dt>
+      <dd>{{ normalizationtool.uuid }}</dd>
+    <dt>Actions</dt>
+      <dd><a href="{% url 'normalizationtool_edit' normalizationtool.slug %}">Replace</a></dd>
+  </dl>
+</div>
+
+<h2>Tool Configurations</h2>
+
+<p><a href="#">Create New Tool Configuration</a></p>
+
+{% if normalizationtool_config %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Configuration</th>
+        <th>UUID</th>
+        <th>Command</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for config in normalizationtool_config %}
+      <tr>
+        <td>{{ config.config }}</td>
+        <td>{{ config.uuid }}</td>
+        <td>{{ config.command.script }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No configurations exist for {{ normalizationtool.description }}.</p>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Format {{format.description}}{% endblock title %}
+
+{% block page_title %}
+{{format}} Format Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_list' %}">Formats</a></li>
+<li>{{ format.description }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+    <dl>
+        <dt>Group</dt> <dd>{{ format.group }}</dd>
+        <dt>Description</dt> <dd>{{ format.description }}</dd>
+        <dt>UUID</dt> <dd>{{ format.uuid }}</dd>
+        <dt>Actions</dt>
+            <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
+    </dl>
+</div>
+
+<h2>Specific Versions</h2>
+
+<p><a href="{% url 'format_version_create' format.slug %}">Create New Format Version</a></p>
+
+{% if format_versions %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Access format?</th>
+        <th>Preservation format?</th>
+        <th>UUID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for fv in format_versions %}
+      <tr>
+        <td>{{ fv.description }}</td>
+        <td>{{ fv.access_format|yesno:"Yes, No" }}</td>
+        <td>{{ fv.preservation_format|yesno:"Yes, No" }}</td>
+        <td>{{ fv.uuid }}</td>
+        <td><a href="{% url 'format_version_edit' format.slug fv.slug %}">Replace</a> | <a href="{% url 'format_version_delete' format.slug fv.slug %}">Disable</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No versions exist for {{ format.description }}.</p>
+{% endif %}
+
+{% endblock content %}

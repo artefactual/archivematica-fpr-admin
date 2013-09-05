@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Create Format Group{% endblock title %}
+
+{% block page_title %}
+Create New Format Group
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_list' %}">Formats</a></li>
+<li>Format Group</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class='format'>
+    <form action="{% url 'format_group_create' %}" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create Format Group" />
+    </form>
+</div>
+
+{% endblock content %}
