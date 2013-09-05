@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
-from fprserver.urls import UUID
-
 UUID_REGEX = '[\w]{8}(-[\w]{4}){3}-[\w]{12}'
 
 urlpatterns = patterns('fpr.views',
