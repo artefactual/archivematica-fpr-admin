@@ -88,6 +88,7 @@ class IDCommand(models.Model):
     and parses the output. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     script = models.CharField(max_length=256, help_text="Path to the script executed.")
+    tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
     replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
@@ -105,7 +106,7 @@ class IDCommand(models.Model):
 class IDRule(models.Model):
     """ Mapping between an IDCommand output and a FormatVersion. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    tool = models.ForeignKey('IDCommand', to_field='uuid')
+    script = models.ForeignKey('IDCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
     # Output from IDToolConfig.script to match on that gives the format
     script_output = models.TextField()
@@ -121,9 +122,19 @@ class IDRule(models.Model):
     active = Enabled()
 
     def __unicode__(self):
-        return u"{tool} with {output} is {format}".format(tool=self.tool,
+        return u"{script} with {output} is {format}".format(script=self.script,
             output=self.script_output,
             format=self.format)
+
+    def save(self, replacing=None, *args, **kwargs):
+        if replacing:
+            self.replaces = replacing
+            # Force it to create a new row
+            self.uuid = None
+            self.pk = None
+            replacing.enabled = False
+            replacing.save()
+        super(IDRule, self).save(*args, **kwargs)
 
 
 class IDTool(models.Model):

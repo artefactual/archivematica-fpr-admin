@@ -62,6 +62,14 @@ class IDCommandForm(forms.ModelForm):
         model = fprmodels.IDCommand
         fields = ('script',)
 
+############ ID RULES ############
+
+class IDRuleForm(forms.ModelForm):
+
+    class Meta:
+        model = fprmodels.IDRule
+        fields = ('format', 'script', 'script_output')
+
 ############ FP RULES ############
 
 class FPRuleForm(forms.ModelForm):

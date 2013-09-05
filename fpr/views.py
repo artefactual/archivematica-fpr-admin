@@ -1,11 +1,16 @@
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
-from django.views.generic.edit import FormView
+# stdlib, alphabetical
+
+# Django core, alphabetical
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from fpr import utils
+# External dependencies, alphabetical
+from annoying.functions import get_object_or_None
+
+# This project, alphabetical
 from fpr import forms as fprforms
 from fpr import models as fprmodels
+from fpr import utils
 
 
 ############ FORMATS ############
@@ -190,6 +195,31 @@ def idtool_config_delete(request, idtool_slug, slug):
                 obj['value'].save()
         return redirect('idtool_detail', idtool.slug)
     return render(request, 'fpr/idtool/config/delete.html', locals())
+
+
+############ ID RULES ############
+
+def idrule_list(request):
+    idrules = fprmodels.IDRule.active.all()
+    return render(request, 'fpr/idrule/list.html', locals())
+
+
+def idrule_edit(request, uuid=None):
+    if uuid:
+        action = "Edit"
+        idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
+    else:
+        action = "Create"
+        idrule = None
+    form = fprforms.IDRuleForm(request.POST or None, instance=idrule, prefix='f')
+    if form.is_valid():
+        new_idrule = form.save(commit=False)
+        old_idrule = get_object_or_None(fprmodels.IDRule, uuid=uuid, enabled=True)
+        new_idrule.save(replacing=old_idrule)
+        messages.info(request, 'Saved.')
+        return redirect('idrule_list')
+    return render(request, 'fpr/idrule/form.html', locals())
+
 
 ############ FP RULES ############
 

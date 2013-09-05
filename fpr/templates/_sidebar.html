@@ -3,14 +3,16 @@
 
 {% url 'fpr.views.format_list' as url_format %}
 {% url 'fpr.views.idtool_list' as url_idtool %}
+{% url 'fpr.views.idrule_list' as url_idrule %}
 {% url 'fpr.views.fprule_list' as url_fprule %}
 {% url 'fpr.views.normalizationtool_list' as url_normalizationtool %}
 
 <div class="sidebar span2">
   <ul>
-      <li class="{% active request url_format %}"><a href="{% url 'format_list'%}">Formats</a></li>
-      <li class="{% active request url_idtool %}"><a href="{% url 'idtool_list'%}">Identification Tools</a></li>
-      <li class="{% active request url_fprule %}"><a href="{% url 'fprule_list'%}">Format Policy Rules</a></li>
-      <li class="{% active request url_normalizationtool %}"><a href="{% url 'normalizationtool_list' %}">Normalization Tools</a></li>
+    <li class="{% active request url_format %}"><a href="{{ url_format }}">Formats</a></li>
+    <li class="{% active request url_idtool %}"><a href="{{ url_idtool }}">Identification Tools</a></li>
+    <li class="{% active request url_idrule %}"><a href="{{ url_idrule }}">Identification Rules</a></li>
+    <li class="{% active request url_normalizationtool %}"><a href="{{  url_normalizationtool}}">Normalization Tools</a></li>
+    <li class="{% active request url_fprule %}"><a href="{{ url_fprule }}">Format Policy Rules</a></li>
   </ul>
 </div>

@@ -48,6 +48,14 @@ urlpatterns = patterns('fpr.views',
         'idtool_config_delete',
         name='idtool_config_delete'),
 
+    # ID Rules
+    url(r'^idrule/$', 'idrule_list',
+        name='idrule_list'),
+    url(r'^idrule/create/$', 'idrule_edit',
+        name='idrule_create'),
+    url(r'^idrule/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'idrule_edit',
+        name='idrule_edit'),
+
     # FP Rules
     url(r'^fprule/$', 'fprule_list',
         name='fprule_list'),
