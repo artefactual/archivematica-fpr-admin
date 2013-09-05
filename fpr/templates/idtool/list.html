@@ -15,29 +15,39 @@ Identification Tool Information
 
 {% block content %}
 
-<p><a href="{% url 'idtool_create' %}">Create New Tool</a></p>
+<div class="row">
 
-{% if idtools %}
-  <table class="datatable">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Version</th>
-        <th>UUID</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for idtool in idtools %}
-      <tr>
-        <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></td>
-        <td>{{ idtool.version }}</td>
-        <td>{{ idtool.uuid }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>No identification tools exist.</p>
-{% endif %}
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <p><a href="{% url 'idtool_create' %}">Create New Tool</a></p>
+
+    {% if idtools %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Version</th>
+            <th>UUID</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for idtool in idtools %}
+          <tr>
+            <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></td>
+            <td>{{ idtool.version }}</td>
+            <td>{{ idtool.uuid }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No identification tools exist.</p>
+    {% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}

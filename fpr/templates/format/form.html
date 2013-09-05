@@ -24,28 +24,38 @@
 
 {% block content %}
 
-<div class='format'>
+<div class="row">
 
-  {% if format %}
-  <form action="{% url 'format_edit' format.slug %}" method="post" id='format_form'>
-  {% else %}
-  <form action="{% url 'format_create' %}" method="post" id='format_form'>
-  {% endif %}
-    {% csrf_token %}
-    <p>
-      {{ form.group.errors }}
-      {{ form.group.label_tag }} {{ form.group }}
-    </p>
-    <div id='format_group_form'>
-      {{ format_group_form.as_p }}
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+
+      {% if format %}
+      <form action="{% url 'format_edit' format.slug %}" method="post" id='format_form'>
+      {% else %}
+      <form action="{% url 'format_create' %}" method="post" id='format_form'>
+      {% endif %}
+        {% csrf_token %}
+        <p>
+          {{ form.group.errors }}
+          {{ form.group.label_tag }} {{ form.group }}
+        </p>
+        <div id='format_group_form'>
+          {{ format_group_form.as_p }}
+        </div>
+        <p>
+          {{ form.description.errors }}
+          {{ form.description.label_tag }} {{ form.description }}
+        </p>
+        <input type="submit" value="{{ action }} Format" />
+      </form>
     </div>
-    <p>
-      {{ form.description.errors }}
-      {{ form.description.label_tag }} {{ form.description }}
-    </p>
-    <input type="submit" value="{{ action }} Format" />
-  </form>
-</div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}
 

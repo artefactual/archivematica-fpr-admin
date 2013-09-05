@@ -16,16 +16,26 @@
 
 {% block content %}
 
-<div class='tool'>
-    {% if normalizationtool %}
-    <form action="{% url 'normalizationtool_edit' normalizationtool.slug %}" method="post">
-    {% else %}
-    <form action="{% url 'normalizationtool_create' %}" method="post">
-    {% endif %}
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="{{ action }}" />
-    </form>
-</div>
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='tool'>
+        {% if normalizationtool %}
+        <form action="{% url 'normalizationtool_edit' normalizationtool.slug %}" method="post">
+        {% else %}
+        <form action="{% url 'normalizationtool_create' %}" method="post">
+        {% endif %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="{{ action }}" />
+        </form>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}

@@ -15,29 +15,39 @@ Format Information
 
 {% block content %}
 
-<p><a href="{% url 'format_create' %}">Create New Format</a></p>
+<div class="row">
 
-{% if formats %}
-  <table class="datatable">
-    <thead>
-      <tr>
-        <th>Group</th>
-        <th>Description</th>
-        <th>UUID</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for format in formats %}
-      <tr>
-        <td>{{ format.group }}</td>
-        <td><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></td>
-        <td>{{ format.uuid }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>No formats exist.</p>
-{% endif %}
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <p><a href="{% url 'format_create' %}">Create New Format</a></p>
+
+    {% if formats %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Description</th>
+            <th>UUID</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for format in formats %}
+          <tr>
+            <td>{{ format.group }}</td>
+            <td><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></td>
+            <td>{{ format.uuid }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No formats exist.</p>
+    {% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}

@@ -16,46 +16,56 @@
 
 {% block content %}
 
-<div class='format'>
-  <dl>
-    <dt>Description</dt>
-      <dd>{{ idtool.description }}</dd>
-    <dt>Version</dt>
-      <dd>{{ idtool.version }}</dd>
-    <dt>UUID</dt>
-      <dd>{{ idtool.uuid }}</dd>
-    <dt>Actions</dt>
-      <dd><a href="{% url 'idtool_edit' idtool.slug %}">Replace</a></dd>
-  </dl>
-</div>
+<div class="row">
 
-<h2>Tool Configurations</h2>
+  {% include 'fpr/_sidebar.html' %}
 
-<p><a href="{% url 'idtool_config_create' idtool.slug %}">Create New Tool Configuration</a></p>
+  <div class="span10">
 
-{% if idtool_config %}
-  <table class="datatable">
-    <thead>
-      <tr>
-        <th>Configuration</th>
-        <th>UUID</th>
-        <th>Command</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for config in idtool_config %}
-      <tr>
-        <td>{{ config.config }}</td>
-        <td>{{ config.uuid }}</td>
-        <td>{{ config.command.script }}</td>
-        <td><a href="{% url 'idtool_config_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtool_config_delete' idtool.slug config.slug %}">Disable</a></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  <p>No configurations exist for {{ idtool.description }}.</p>
-{% endif %}
+    <div class='format'>
+      <dl>
+        <dt>Description</dt>
+          <dd>{{ idtool.description }}</dd>
+        <dt>Version</dt>
+          <dd>{{ idtool.version }}</dd>
+        <dt>UUID</dt>
+          <dd>{{ idtool.uuid }}</dd>
+        <dt>Actions</dt>
+          <dd><a href="{% url 'idtool_edit' idtool.slug %}">Replace</a></dd>
+      </dl>
+    </div>
+
+    <h2>Tool Configurations</h2>
+
+    <p><a href="{% url 'idtool_config_create' idtool.slug %}">Create New Tool Configuration</a></p>
+
+    {% if idtool_config %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Configuration</th>
+            <th>UUID</th>
+            <th>Command</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for config in idtool_config %}
+          <tr>
+            <td>{{ config.config }}</td>
+            <td>{{ config.uuid }}</td>
+            <td>{{ config.command.script }}</td>
+            <td><a href="{% url 'idtool_config_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtool_config_delete' idtool.slug config.slug %}">Disable</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No configurations exist for {{ idtool.description }}.</p>
+    {% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}
