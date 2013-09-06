@@ -10,9 +10,13 @@
 <div class="sidebar span2">
   <ul>
     <li class="{% active request url_format %}"><a href="{{ url_format }}">Formats</a></li>
-    <li class="{% active request url_idtool %}"><a href="{{ url_idtool }}">Identification Tools</a></li>
-    <li class="{% active request url_idrule %}"><a href="{{ url_idrule }}">Identification Rules</a></li>
-    <li class="{% active request url_normalizationtool %}"><a href="{{  url_normalizationtool}}">Normalization Tools</a></li>
-    <li class="{% active request url_fprule %}"><a href="{{ url_fprule }}">Format Policy Rules</a></li>
+
+    <li style="margin-top: 20px">Identification</li>
+    <li class="{% active request url_idtool %}">&nbsp;&nbsp;<a href="{{ url_idtool }}">Tools</a></li>
+    <li class="{% active request url_idrule %}">&nbsp;&nbsp;<a href="{{ url_idrule }}">Rules</a></li>
+
+    <li style="margin-top: 20px">Normalization</li>
+    <li class="{% active request url_normalizationtool %}">&nbsp;&nbsp;<a href="{{  url_normalizationtool}}">Tools</a></li>
+    <li class="{% active request url_fprule %}">&nbsp;&nbsp;<a href="{{ url_fprule }}">Rules</a></li>
   </ul>
 </div>
