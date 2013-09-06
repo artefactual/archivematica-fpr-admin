@@ -28,6 +28,14 @@ urlpatterns = patterns('fpr.views',
         'format_version_delete',
         name='format_version_delete'),
 
+    # Format groups
+    url(r'^formatgroup/$', 'format_group_list',
+        name='format_group_list'),
+    url(r'^formatgroup/create/$', 'format_group_edit',
+        name='format_group_create'),
+    url(r'^formatgroup/(?P<slug>[-\w]+)/$', 'format_group_edit',
+        name='format_group_edit'),
+
     # ID Tools
     url(r'^idtool/$', 'idtool_list',
         name='idtool_list'),

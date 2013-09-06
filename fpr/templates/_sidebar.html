@@ -2,6 +2,7 @@
 {% load url from future %}
 
 {% url 'fpr.views.format_list' as url_format %}
+{% url 'fpr.views.format_group_list' as url_formatgroup %}
 {% url 'fpr.views.idtool_list' as url_idtool %}
 {% url 'fpr.views.idrule_list' as url_idrule %}
 {% url 'fpr.views.fprule_list' as url_fprule %}
@@ -10,6 +11,7 @@
 <div class="sidebar span2">
   <ul>
     <li class="{% active request url_format %}"><a href="{{ url_format }}">Formats</a></li>
+    <li class="{% active request url_formatgroup %}">&nbsp;&nbsp;<a href="{{ url_formatgroup }}">Groups</a></li>
 
     <li style="margin-top: 20px">Identification</li>
     <li class="{% active request url_idtool %}">&nbsp;&nbsp;<a href="{{ url_idtool }}">Tools</a></li>

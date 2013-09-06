@@ -104,6 +104,31 @@ def format_version_delete(request, format_slug, slug):
         return redirect('format_detail', format.slug)
     return render(request, 'fpr/format/version/delete.html', locals())
 
+############ FORMAT GROUPS ############
+
+def format_group_list(request):
+    groups = fprmodels.FormatGroup.objects.all()
+    return render(request, 'fpr/format/group/list.html', locals())
+
+def format_group_edit(request,  slug=None):
+    if slug:
+        action = "Edit"
+        group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
+    else:
+        action = "Create"
+        group = None
+
+    if request.method == 'POST':
+        form = fprforms.FormatGroupForm(request.POST, instance=group)
+        if form.is_valid():
+            group = form.save()
+            messages.info(request, 'Saved.')
+            return redirect('format_group_list')
+    else:
+        form = fprforms.FormatGroupForm(instance=group)
+
+    return render(request, 'fpr/format/group/form.html', locals())
+
 ############ ID TOOLS ############
 
 def idtool_list(request):

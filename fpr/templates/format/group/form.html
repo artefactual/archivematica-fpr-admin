@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ action }} Format Group{% endblock title %}
+
+{% block page_title %}
+{{ action }} Format Group
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_group_list' %}">Format Groups</a></li>
+<li>{{ action }} Format Group</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+
+      {% if group %}
+      <form action="{% url 'format_group_edit' group.slug %}" method="post" id='format_group_form'>
+      {% else %}
+      <form action="{% url 'format_group_create' %}" method="post" id='format_group_form'>
+      {% endif %}
+        {% csrf_token %}
+        <p>
+          {{ form.errors }}
+          {{ form.label_tag }} {{ form.description }}
+        </p>
+        <input type="submit" value="{{ action }} Format Group" />
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock content %}
