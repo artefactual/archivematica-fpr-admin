@@ -17,8 +17,14 @@ Disable {{ version.description }}
 
 {% block content %}
 
-<div class='format_version'>
-    <form action="{% url 'format_version_delete' format.slug version.slug %}" method="post">{% csrf_token %}
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format_version'>
+      <form action="{% url 'format_version_delete' format.slug version.slug %}" method="post">{% csrf_token %}
         <p>Are you sure?  The following rules will also be disabled:</p>
 
         {% regroup dependent_objects by model as dependent_rules %}
@@ -33,7 +39,10 @@ Disable {{ version.description }}
 
         <input type="submit" name="delete" value="Disable Format Version" />
         <input type="submit" name="cancel" value="Cancel, change nothing" />
-    </form>
-</div>
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+</div> <!-- /row -->
 
 {% endblock content %}

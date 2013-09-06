@@ -25,11 +25,17 @@
 
 {% block content %}
 
-<div class='format'>
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
     {% if version %}
-    <form action="{% url 'idtool_config_edit' idtool.slug config.slug %}" method="post">
+      <form action="{% url 'idtool_config_edit' idtool.slug config.slug %}" method="post">
     {% else %}
-    <form action="{% url 'idtool_config_create' idtool.slug %}" method="post">
+      <form action="{% url 'idtool_config_create' idtool.slug %}" method="post">
     {% endif %}
         {% csrf_token %}
         <p>Format: {{ idtool.description }}</p>
@@ -38,8 +44,11 @@
           {{ config_command_form.as_p }}
         </div>
         <input type="submit" value="{{ action }}" />
-    </form>
-</div>
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+</div> <!-- /row -->
 
 {% endblock content %}
 

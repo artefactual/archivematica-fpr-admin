@@ -17,17 +17,27 @@
 
 {% block content %}
 
-<div class='format'>
-    {% if version %}
-    <form action="{% url 'format_version_edit' format.slug version.slug %}" method="post">
-    {% else %}
-    <form action="{% url 'format_version_create' format.slug %}" method="post">
-    {% endif %}
-        {% csrf_token %}
-        <p>Format: {{ format.description }}</p>
-        {{ form.as_p }}
-        <input type="submit" value="{{ action }}" />
-    </form>
-</div>
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+        {% if version %}
+        <form action="{% url 'format_version_edit' format.slug version.slug %}" method="post">
+        {% else %}
+        <form action="{% url 'format_version_create' format.slug %}" method="post">
+        {% endif %}
+            {% csrf_token %}
+            <p>Format: {{ format.description }}</p>
+            {{ form.as_p }}
+            <input type="submit" value="{{ action }}" />
+        </form>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
 
 {% endblock content %}
