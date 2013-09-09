@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "fpr_app_layout.html" %}
 {% load url from future %}
 {% load staticfiles %}
 
@@ -14,7 +14,7 @@
 <li>{{ action }} Format Policy Rule</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
+{% block app_content %}
 
 <div class="row">
 
@@ -61,7 +61,7 @@
 
 </div> <!-- /row -->
 
-{% endblock content %}
+{% endblock app_content %}
 
 {% block extra_js %}
 <script type="text/javascript">

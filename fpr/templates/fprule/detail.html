@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "fpr/app_layout.html" %}
 {% load url from future %}
 {% load staticfiles %}
 
@@ -14,7 +14,7 @@
 <li>{{ fprule.purpose }}</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
+{% block app_content %}
 
 <div class="row">
 
@@ -35,4 +35,4 @@
 
 </div> <!-- /row -->
 
-{% endblock content %}
+{% endblock app_content %}

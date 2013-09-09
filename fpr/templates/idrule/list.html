@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "fpr/app_layout.html" %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - Identification Rules{% endblock title %}
@@ -12,7 +12,7 @@ Identification Rule Information
 <li>Identification Rules</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
+{% block app_content %}
 <div class="row">
 
   {% include 'fpr/_sidebar.html' %}
@@ -54,4 +54,4 @@ Identification Rule Information
 
 </div> <!-- /row -->
 
-{% endblock content %}
+{% endblock app_content %}

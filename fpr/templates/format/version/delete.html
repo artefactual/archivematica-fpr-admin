@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "fpr/app_layout.html" %}
 {% load url from future %}
 {% load staticfiles %}
 
@@ -15,7 +15,7 @@ Disable {{ version.description }}
 <li>Disable {{ version.description }}</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
+{% block app_content %}
 
 <div class="row">
 
@@ -45,4 +45,4 @@ Disable {{ version.description }}
   </div> <!-- /span10 -->
 </div> <!-- /row -->
 
-{% endblock content %}
+{% endblock app_content %}

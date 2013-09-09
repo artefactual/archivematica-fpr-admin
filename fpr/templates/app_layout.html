@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Format {{format.description}}{% endblock title %}
+
+{% block content %}
+
+  <ul class="breadcrumb">
+  {% block breadcrumbs %}
+  {% endblock breadcrumbs %}
+  </ul>
+
+  <h1>{% block page_title %}
+  {{format}} Format Information
+  {% endblock page_title %}</h1>
+
+  {% block app_content %}
+  {% endblock app_content %}
+
+{% endblock content %}
