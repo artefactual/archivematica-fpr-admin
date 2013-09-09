@@ -1,12 +1,10 @@
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 
 UUID_REGEX = '[\w]{8}(-[\w]{4}){3}-[\w]{12}'
 
 urlpatterns = patterns('fpr.views',
 
-    url(r'^$', TemplateView.as_view(template_name='fpr/index.html'),
-        name='fpr_index'),
+    url(r'^$', 'home', name='fpr_index'),
 
     # Formats
     url(r'^format/$', 'format_list',

@@ -1,8 +1,12 @@
 # stdlib, alphabetical
 
 # Django core, alphabetical
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.core.urlresolvers import reverse
 
 # External dependencies, alphabetical
 from annoying.functions import get_object_or_None
@@ -12,6 +16,9 @@ from fpr import forms as fprforms
 from fpr import models as fprmodels
 from fpr import utils
 
+
+def home(request):
+    return HttpResponseRedirect(reverse('fpr.views.format_list'))
 
 ############ FORMATS ############
 
