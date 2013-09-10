@@ -33,6 +33,8 @@ urlpatterns = patterns('fpr.views',
         name='format_group_create'),
     url(r'^formatgroup/(?P<slug>[-\w]+)/$', 'format_group_edit',
         name='format_group_edit'),
+    url(r'^formatgroup/delete/(?P<slug>[-\w]+)/$', 'format_group_delete',
+        name='format_group_delete'),
 
     # ID Tools
     url(r'^idtool/$', 'idtool_list',

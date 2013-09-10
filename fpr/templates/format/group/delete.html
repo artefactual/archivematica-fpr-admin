@@ -1,0 +1,57 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Delete Format Group{% endblock title %}
+
+{% block page_title %}
+Delete {{ group.description }}
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'format_group_list' %}">Format Groupss</a></li>
+<li><a href="{% url 'format_group_edit' group.slug %}">{{ group.description }}</a></li>
+<li>Delete {{ group.description }}</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format_group'>
+      <form action="{% url 'format_group_delete' group.slug %}" method="post">{% csrf_token %}
+        <p>Are you sure?</p>
+
+        {% if format_count > 0 %}
+          <p>
+            <strong>{{ format_count }} format(s) were found that are a member of this group.</strong>
+          </p>
+
+          {% if other_group_count %}
+            <p>Substitute formats that are a member of this group with the following group:</p>
+
+            <p>
+            <select name="substitute">
+              <option value="">--select--</option>
+              {% for other_group in other_groups %}
+                <option value="{{ other_group.uuid }}">{{ other_group.description }}</option>
+              {% endfor %}
+            </select>
+            </p>
+          {% endif %}
+        {% endif %}
+
+        <input type="submit" name="delete" value="Delete Format Group" />
+        <input type="submit" name="cancel" value="Cancel, change nothing" />
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+</div> <!-- /row -->
+
+{% endblock app_content %}

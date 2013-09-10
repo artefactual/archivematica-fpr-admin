@@ -117,7 +117,7 @@ def format_group_list(request):
     groups = fprmodels.FormatGroup.objects.all()
     return render(request, 'fpr/format/group/list.html', locals())
 
-def format_group_edit(request,  slug=None):
+def format_group_edit(request, slug=None):
     if slug:
         action = "Edit"
         group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
@@ -135,6 +135,34 @@ def format_group_edit(request,  slug=None):
         form = fprforms.FormatGroupForm(instance=group)
 
     return render(request, 'fpr/format/group/form.html', locals())
+
+def format_group_delete(request, slug):
+    group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
+    format_count = fprmodels.Format.objects.filter(group=group.uuid).count()
+    other_groups = fprmodels.FormatGroup.objects.exclude(uuid=group.uuid)
+    other_group_count = len(other_groups)
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            # if formats exist that are a member of this group, perform group substitution
+            formats = fprmodels.Format.objects.filter(group=group.uuid)
+            if (len(formats)) > 0:
+                substitute_group_uuid = request.POST.get('substitute', '')
+                if 'substitute' in request.POST and substitute_group_uuid != '':
+                    substitute_group = fprmodels.FormatGroup.objects.get(uuid=substitute_group_uuid)
+                    substitution_count = 0
+                    for format in formats:
+                        format.group = substitute_group
+                        format.save()
+                        substitution_count += 1
+                    messages.info(request, str(substitution_count) + ' subtitutions were performed.')
+                else:
+                    messages.warning(request, 'Please select a group to substitute for this group in member formats.')
+                    return redirect('format_group_delete', slug)
+            group.delete()
+            messages.info(request, 'Deleted.')
+        return redirect('format_group_list')
+    else:
+        return render(request, 'fpr/format/group/delete.html', locals())
 
 ############ ID TOOLS ############
 
