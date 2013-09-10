@@ -87,7 +87,15 @@ class IDCommand(models.Model):
     IDCommand runs 'script' (which runs an IDTool with a specific IDToolConfig)
     and parses the output. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    script = models.CharField(max_length=256, help_text="Path to the script executed.")
+    description = models.CharField(max_length=256, verbose_name='Identifier', help_text="Name to identify script")
+    script = models.TextField(help_text="Script to be executed.")
+    SCRIPT_TYPE_CHOICES = (
+        ('bashScript', 'Bash Script'),
+        ('pythonScript', 'Python Script'),
+        ('command', 'Command Line'),
+        ('as_is', 'No shebang (#!/path/to/interpreter) needed')
+    )
+    script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
     replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
@@ -100,7 +108,7 @@ class IDCommand(models.Model):
     active = Enabled()
 
     def __unicode__(self):
-        return u"{}".format(self.script)
+        return u"{}".format(self.description)
 
 
 class IDRule(models.Model):
@@ -226,9 +234,10 @@ class NormalizationCommand(models.Model):
     description = models.CharField(max_length=256)
     command = models.TextField()
     SCRIPT_TYPE_CHOICES = (
-        ('bash', 'Bash Script'),
-        ('python', 'Python Script'),
+        ('bashScript', 'Bash Script'),
+        ('pythonScript', 'Python Script'),
         ('command', 'Command Line'),
+        ('as_is', 'No shebang (#!/path/to/interpreter) needed')
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     output_file_format = models.CharField(max_length=256, null=True, blank=True)
