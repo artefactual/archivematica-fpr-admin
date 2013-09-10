@@ -1,4 +1,5 @@
 # stdlib, alphabetical
+import os
 
 # Django core, alphabetical
 from django.shortcuts import get_object_or_404
@@ -19,7 +20,8 @@ from fpr import utils
 def home(request):
     # once per session, display the welcome text
     if not 'welcome_message_shown' in request.session: # or not request.session['welcome_message_shown']:
-        file = open('templates/fpr/welcome.html', 'r')
+        file_path = os.path.join(os.path.dirname(__file__), 'templates/welcome.html')
+        file = open(file_path, 'r')
         messages.info(request, file.read())        
         request.session['welcome_message_shown'] = True
     return redirect('format_list')
