@@ -44,8 +44,9 @@
         <thead>
           <tr>
             <th>Configuration</th>
-            <th>UUID</th>
+            <th>Identifier</th>
             <th>Command</th>
+            <th>UUID</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -53,8 +54,9 @@
         {% for config in idtool_config %}
           <tr>
             <td>{{ config.config }}</td>
+            <td>{{ config.command.description }}</td>
+            <td>{{ config.command.script|truncatechars:100 }}</td>
             <td>{{ config.uuid }}</td>
-            <td>{{ config.command.script }}</td>
             <td><a href="{% url 'idtool_config_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtool_config_delete' idtool.slug config.slug %}">Disable</a></td>
           </tr>
         {% endfor %}
