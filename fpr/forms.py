@@ -46,7 +46,7 @@ class IDToolConfigForm(forms.ModelForm):
         super(IDToolConfigForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the IDCommand dropdown
-        choices = [(f.uuid, f.script) for f in fprmodels.IDCommand.objects.all()]
+        choices = [(f.uuid, f.description) for f in fprmodels.IDCommand.objects.all()]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
@@ -60,7 +60,7 @@ class IDToolConfigForm(forms.ModelForm):
 class IDCommandForm(forms.ModelForm):
     class Meta:
         model = fprmodels.IDCommand
-        fields = ('script',)
+        fields = ('description', 'script_type', 'script',)
 
 ############ ID RULES ############
 
