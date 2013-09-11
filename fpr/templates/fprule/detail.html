@@ -2,16 +2,16 @@
 {% load url from future %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ fprule.purpose }}{% endblock title %}
+{% block title %}Archivematica FPR Server - {{ fprule.purpose|title }}{% endblock title %}
 
 {% block page_title %}
-{{ fprule.purpose }} Information
+{{ fprule.purpose|title }} Information
 {% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
 <li><a href="{% url 'fprule_list' %}">Format Policy Rules</a></li>
-<li>{{ fprule.purpose }}</li>
+<li>{{ fprule.purpose|title }} Rule</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -25,7 +25,7 @@
     <div class='format'>
       <dl>
         <dt>Purpose</dt>
-          <dd>{{ fprule.purpose }}</dd>
+          <dd>{{ fprule.purpose|title }} Rule</dd>
         <dt>Format</dt>
           <dd>{{ fprule.format.description }}</dd>
         <dt>Command</dt>
