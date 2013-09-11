@@ -308,7 +308,7 @@ def fprule_edit(request, uuid=None):
         command = None
     if request.method == 'POST':
         form = fprforms.FPRuleForm(request.POST, instance=fprule, prefix='f')
-        fprule_command_form = fprforms.NormalizationCommandForm(request.POST, instance=command, prefix='fc')
+        fprule_command_form = fprforms.FPCommandForm(request.POST, instance=command, prefix='fc')
         if form.is_valid():
             if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
                 fprule = form.save(commit=False)
@@ -326,11 +326,11 @@ def fprule_edit(request, uuid=None):
                 return redirect('fprule_detail', fprule.uuid)
     else:
         form = fprforms.FPRuleForm(instance=fprule, prefix='f')
-        fprule_command_form = fprforms.NormalizationCommandForm(instance=command, prefix='fc')
+        fprule_command_form = fprforms.FPCommandForm(instance=command, prefix='fc')
 
     return render(request, 'fpr/fprule/form.html', locals())
 
-############ NORMALIZATION TOOLS ############
+############ FP TOOLS ############
 
 def fptool_list(request):
     fptools = fprmodels.FPTool.objects.filter(enabled=True)

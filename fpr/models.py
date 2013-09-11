@@ -14,6 +14,8 @@ from tastypie.models import create_api_key
 
 ############################### API V2 MODELS ###############################
 
+############ MANAGERS ############
+
 class Enabled(models.Manager):
     """ Manager to only return enabled objects.
 
@@ -227,6 +229,13 @@ class FPRule(models.Model):
             purpose=self.get_purpose_display(),
             command=self.command)
 
+
+class NormalizationRules(models.Manager):
+    """ Manager to only return normalization FPCommands.  """
+    def get_query_set(self):
+        return super(NormalizationRules, self).get_query_set().filter(enabled=True)
+
+
 class FPCommand(models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
@@ -243,8 +252,8 @@ class FPCommand(models.Model):
     output_file_format = models.CharField(max_length=256, null=True, blank=True)
     output_location = models.TextField(null=True, blank=True)
     COMMAND_USAGE_CHOICES = (
+        ('normalization', 'Normalization'),
         ('event_detail', 'Event Detail'),
-        ('command', 'Command'),
         ('verification', 'Verification'),
     )
     command_usage = models.CharField(max_length=16, choices=COMMAND_USAGE_CHOICES)
@@ -257,10 +266,11 @@ class FPCommand(models.Model):
     enabled = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name = "Normalization Command"
+        verbose_name = "Format Policy Command"
 
     objects = models.Manager()
     active = Enabled()
+    normalization = NormalizationRules()
 
     def __unicode__(self):
         # TODO better unicode display
