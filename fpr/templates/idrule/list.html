@@ -26,10 +26,10 @@ Identification Rule Information
   <table class="datatable">
     <thead>
       <tr>
-        <th>Output</th>
-        <th>Script</th>
-        <th>Tools</th>
         <th>Format</th>
+        <th>Command</th>
+        <th>Output</th>
+        <th>Tools</th>
         <th>UUID</th>
         <th>Actions</th>
       </tr>
@@ -37,10 +37,14 @@ Identification Rule Information
     <tbody>
     {% for idrule in idrules %}
       <tr>
-        <td>{{ idrule.script_output }}</td>
-        <td>{{ idrule.script }}</td>
-        <td>{{ idrule.script.tool.all|join:", " }}</td>
         <td><a href="{% url 'format_detail' idrule.format.format.slug %}">{{ idrule.format }}</a></td>
+        <td>{{ idrule.command.description }}</a></td>
+        <td>{{ idrule.command_output }}</td>
+        <td>
+          {% for tool in idrule.command.tool.all %}
+            <a href="{% url 'idtool_detail' tool.slug %}">{{ tool }}</a><br />
+          {% endfor %}
+        </td>
         <td>{{ idrule.uuid }}</td>
         <td><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></td>
       </tr>
