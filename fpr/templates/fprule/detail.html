@@ -26,6 +26,10 @@
       <dl>
         <dt>Purpose</dt>
           <dd>{{ fprule.purpose }}</dd>
+        <dt>Format</dt>
+          <dd>{{ fprule.format.description }}</dd>
+        <dt>Command</dt>
+          <dd>{{ fprule.command.description }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
       </dl>

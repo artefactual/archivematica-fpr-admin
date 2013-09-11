@@ -29,13 +29,17 @@ Format Policy Rule Information
           <tr>
             <th>Purpose</th>
             <th>UUID</th>
+            <th>Format</th>
+            <th>Command</th>
           </tr>
         </thead>
         <tbody>
         {% for fprule in fprules %}
           <tr>
-            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.purpose }}</a></td>
+            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.purpose|title }}</a></td>
             <td>{{ fprule.uuid }}</td>
+            <td>{{ fprule.format.description }}</td>
+            <td>{{ fprule.command.description }}</td>
           </tr>
         {% endfor %}
         </tbody>
