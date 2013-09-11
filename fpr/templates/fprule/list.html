@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
-Z{% load url from future %}
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - Format Policy Rules{% endblock title %}
@@ -13,7 +13,7 @@ Format Policy Rule Information
 <li>Format Policy Rules</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
+{% block app_content %}
 
 <div class="row">
 
@@ -48,4 +48,4 @@ Format Policy Rule Information
 
 </div> <!-- /row -->
 
-{% endblock content %}
+{% endblock app_content %}
