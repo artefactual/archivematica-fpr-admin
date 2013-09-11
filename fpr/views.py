@@ -47,27 +47,23 @@ def format_edit(request, slug=None):
         action = "Create"
         format = None
         group = None
-    if request.method == 'POST':
-        form = fprforms.FormatForm(request.POST, instance=format, prefix='f')
-        format_group_form = fprforms.FormatGroupForm(request.POST, instance=group, prefix='fg')
-        if form.is_valid():
-            if form.cleaned_data['group'] == 'new' and format_group_form.is_valid():
-                format = form.save(commit=False)
-                group = format_group_form.save()
-                format.group = group
-                format.save()
-                messages.info(request, 'Saved.')
-                return redirect('format_detail', format.slug)
-            elif form.cleaned_data['group'] != 'new':
-                format = form.save(commit=False)
-                group = fprmodels.FormatGroup.objects.get(uuid=form.cleaned_data['group'])
-                format.group = group
-                format = form.save()
-                messages.info(request, 'Saved.')
-                return redirect('format_detail', format.slug)
-    else:
-        form = fprforms.FormatForm(instance=format, prefix='f')
-        format_group_form = fprforms.FormatGroupForm(instance=group, prefix='fg')
+    form = fprforms.FormatForm(request.POST or None, instance=format, prefix='f')
+    format_group_form = fprforms.FormatGroupForm(request.POST or None, instance=group, prefix='fg')
+    if form.is_valid():
+        if form.cleaned_data['group'] == 'new' and format_group_form.is_valid():
+            format = form.save(commit=False)
+            group = format_group_form.save()
+            format.group = group
+            format.save()
+            messages.info(request, 'Saved.')
+            return redirect('format_detail', format.slug)
+        elif form.cleaned_data['group'] != 'new':
+            format = form.save(commit=False)
+            group = fprmodels.FormatGroup.objects.get(uuid=form.cleaned_data['group'])
+            format.group = group
+            format = form.save()
+            messages.info(request, 'Saved.')
+            return redirect('format_detail', format.slug)
 
     return render(request, 'fpr/format/form.html', locals())
 
@@ -81,24 +77,21 @@ def format_version_edit(request, format_slug, slug=None):
     else:
         action = "Create"
         version = None
-    if request.method == 'POST':
-        form = fprforms.FormatVersionForm(request.POST, instance=version)
-        if form.is_valid():
-            # If replacing, disable old one and set replaces info for new one
-            new_version = form.save(commit=False)
-            new_version.format = format
-            if version:
-                old_version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
-                old_version.enabled = False
-                old_version.save()
-                new_version.replaces = old_version
-                new_version.uuid = None
-                new_version.pk = None
-            new_version.save()
-            messages.info(request, 'Saved.')
-            return redirect('format_detail', format.slug)
-    else:
-        form = fprforms.FormatVersionForm(instance=version)
+    form = fprforms.FormatVersionForm(request.POST or None, instance=version)
+    if form.is_valid():
+        # If replacing, disable old one and set replaces info for new one
+        new_version = form.save(commit=False)
+        new_version.format = format
+        if version:
+            old_version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
+            old_version.enabled = False
+            old_version.save()
+            new_version.replaces = old_version
+            new_version.uuid = None
+            new_version.pk = None
+        new_version.save()
+        messages.info(request, 'Saved.')
+        return redirect('format_detail', format.slug)
 
     return render(request, 'fpr/format/version/form.html', locals())
 
@@ -131,14 +124,11 @@ def format_group_edit(request, slug=None):
         action = "Create"
         group = None
 
-    if request.method == 'POST':
-        form = fprforms.FormatGroupForm(request.POST, instance=group)
-        if form.is_valid():
-            group = form.save()
-            messages.info(request, 'Saved.')
-            return redirect('format_group_list')
-    else:
-        form = fprforms.FormatGroupForm(instance=group)
+    form = fprforms.FormatGroupForm(request.POST or None, instance=group)
+    if form.is_valid():
+        group = form.save()
+        messages.info(request, 'Saved.')
+        return redirect('format_group_list')
 
     return render(request, 'fpr/format/group/form.html', locals())
 
@@ -189,22 +179,20 @@ def idtool_edit(request, slug=None):
     else:
         action = "Create"
         idtool = None
-    if request.method == 'POST':
-        form = fprforms.IDToolForm(request.POST, instance=idtool)
-        if form.is_valid():
-            new_idtool = form.save(commit=False)
-            if idtool:
-                old_idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
-                old_idtool.enabled = False
-                old_idtool.save()
-                new_idtool.replaces = old_idtool
-                new_idtool.uuid = None
-                new_idtool.pk = None
-            new_idtool.save()
-            messages.info(request, 'Saved.')
-            return redirect('idtool_detail', new_idtool.slug)
-    else:
-        form = fprforms.IDToolForm(instance=idtool)
+
+    form = fprforms.IDToolForm(request.POST or None, instance=idtool)
+    if form.is_valid():
+        new_idtool = form.save(commit=False)
+        if idtool:
+            old_idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
+            old_idtool.enabled = False
+            old_idtool.save()
+            new_idtool.replaces = old_idtool
+            new_idtool.uuid = None
+            new_idtool.pk = None
+        new_idtool.save()
+        messages.info(request, 'Saved.')
+        return redirect('idtool_detail', new_idtool.slug)
 
     return render(request, 'fpr/idtool/form.html', locals())
 
@@ -220,30 +208,27 @@ def idtool_config_edit(request, idtool_slug, slug=None):
         action = "Create"
         config = None
         command = None
-    if request.method == 'POST':
-        form = fprforms.IDToolConfigForm(request.POST, instance=config)
-        config_command_form = fprforms.IDCommandForm(request.POST, instance=command, prefix='c')
 
-        if form.is_valid():
-            if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
-                config = form.save(commit=False)
-                command = config_command_form.save()
-                config.tool = idtool
-                config.command = command
-                config.save()
-                messages.info(request, 'Saved.')
-                return redirect('idtool_detail', idtool.slug)
-            elif form.cleaned_data['command'] != 'new':
-                config = form.save(commit=False)
-                config.tool = idtool
-                command = fprmodels.IDCommand.objects.get(uuid=form.cleaned_data['command'])
-                config.command = command
-                config = form.save()
-                messages.info(request, 'Saved.')
-                return redirect('idtool_detail', idtool.slug)
-    else:
-        form = fprforms.IDToolConfigForm(instance=config)
-        config_command_form = fprforms.IDCommandForm(instance=command, prefix='c')
+    form = fprforms.IDToolConfigForm(request.POST or None, instance=config)
+    config_command_form = fprforms.IDCommandForm(request.POST or None, instance=command, prefix='c')
+
+    if form.is_valid():
+        if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
+            config = form.save(commit=False)
+            command = config_command_form.save()
+            config.tool = idtool
+            config.command = command
+            config.save()
+            messages.info(request, 'Saved.')
+            return redirect('idtool_detail', idtool.slug)
+        elif form.cleaned_data['command'] != 'new':
+            config = form.save(commit=False)
+            config.tool = idtool
+            command = fprmodels.IDCommand.objects.get(uuid=form.cleaned_data['command'])
+            config.command = command
+            config = form.save()
+            messages.info(request, 'Saved.')
+            return redirect('idtool_detail', idtool.slug)
 
     return render(request, 'fpr/idtool/config/form.html', locals())
 
@@ -277,7 +262,7 @@ def idrule_edit(request, uuid=None):
     else:
         action = "Create"
         idrule = None
-    form = fprforms.IDRuleForm(request.POST or None, instance=idrule, prefix='f')
+    form = fprforms.IDRuleForm(request.POST or None, instance=idrule)
     if form.is_valid():
         new_idrule = form.save(commit=False)
         old_idrule = get_object_or_None(fprmodels.IDRule, uuid=uuid, enabled=True)
@@ -333,27 +318,23 @@ def fprule_edit(request, uuid=None):
         action = "Create"
         fprule = None
         command = None
-    if request.method == 'POST':
-        form = fprforms.FPRuleForm(request.POST, instance=fprule, prefix='f')
-        fprule_command_form = fprforms.FPCommandForm(request.POST, instance=command, prefix='fc')
-        if form.is_valid():
-            if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
-                fprule = form.save(commit=False)
-                command = fprule_command_form.save()
-                fprule.command = command
-                fprule.save()
-                messages.info(request, 'Saved.')
-                return redirect('fprule_detail', fprule.uuid)
-            elif form.cleaned_data['command'] != 'new':
-                fprule = form.save(commit=False)
-                command = fprmodels.NormalizationCommand.objects.get(uuid=form.cleaned_data['command'])
-                fprule.command = command
-                fprule = form.save()
-                messages.info(request, 'Saved.')
-                return redirect('fprule_detail', fprule.uuid)
-    else:
-        form = fprforms.FPRuleForm(instance=fprule, prefix='f')
-        fprule_command_form = fprforms.FPCommandForm(instance=command, prefix='fc')
+    form = fprforms.FPRuleForm(request.POST or None, instance=fprule, prefix='f')
+    fprule_command_form = fprforms.FPCommandForm(request.POST or None, instance=command, prefix='fc')
+    if form.is_valid():
+        if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
+            fprule = form.save(commit=False)
+            command = fprule_command_form.save()
+            fprule.command = command
+            fprule.save()
+            messages.info(request, 'Saved.')
+            return redirect('fprule_detail', fprule.uuid)
+        elif form.cleaned_data['command'] != 'new':
+            fprule = form.save(commit=False)
+            command = fprmodels.NormalizationCommand.objects.get(uuid=form.cleaned_data['command'])
+            fprule.command = command
+            fprule = form.save()
+            messages.info(request, 'Saved.')
+            return redirect('fprule_detail', fprule.uuid)
 
     return render(request, 'fpr/fprule/form.html', locals())
 
@@ -375,22 +356,19 @@ def fptool_edit(request, slug=None):
     else:
         action = "Create"
         fptool = None
-    if request.method == 'POST':
-        form = fprforms.FPToolForm(request.POST, instance=fptool)
-        if form.is_valid():
-            new_fptool = form.save(commit=False)
-            if fptool:
-                old_fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
-                old_fptool.enabled = False
-                old_fptool.save()
-                new_fptool.replaces = old_fptool
-                new_fptool.uuid = None
-                new_fptool.pk = None
-            new_fptool.save()
-            messages.info(request, 'Saved.')
-            return redirect('fptool_detail', new_fptool.slug)
-    else:
-        form = fprforms.FPToolForm(instance=fptool)
+    form = fprforms.FPToolForm(request.POST or None, instance=fptool)
+    if form.is_valid():
+        new_fptool = form.save(commit=False)
+        if fptool:
+            old_fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
+            old_fptool.enabled = False
+            old_fptool.save()
+            new_fptool.replaces = old_fptool
+            new_fptool.uuid = None
+            new_fptool.pk = None
+        new_fptool.save()
+        messages.info(request, 'Saved.')
+        return redirect('fptool_detail', new_fptool.slug)
 
     return render(request, 'fpr/fptool/form.html', locals())
 
