@@ -287,6 +287,33 @@ def idrule_edit(request, uuid=None):
     return render(request, 'fpr/idrule/form.html', locals())
 
 
+############ ID COMMANDS ############
+
+def idcommand_list(request):
+    idcommands = fprmodels.IDCommand.active.all()
+    return render(request, 'fpr/idcommand/list.html', locals())
+
+def idcommand_detail(request, uuid):
+    idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
+    return render(request, 'fpr/idcommand/detail.html', locals())
+
+def idcommand_edit(request, uuid=None):
+    if uuid:
+        action = "Edit"
+        idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
+    else:
+        action = "Create"
+        idcommand = None
+    form = fprforms.IDCommandForm(request.POST or None, instance=idcommand)
+    if form.is_valid():
+        new_idcommand = form.save(commit=False)
+        old_idcommand = get_object_or_None(fprmodels.IDCommand, uuid=uuid, enabled=True)
+        new_idcommand.replaces = old_idcommand
+        new_idcommand.save()
+        messages.info(request, 'Saved.')
+        return redirect('idcommand_list')
+    return render(request, 'fpr/idcommand/form.html', locals())
+
 ############ FP RULES ############
 
 def fprule_list(request):

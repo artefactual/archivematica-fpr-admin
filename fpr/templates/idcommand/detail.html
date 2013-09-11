@@ -1,0 +1,46 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ idcommand.description }}{% endblock title %}
+
+{% block page_title %}
+{{ idcommand.description }} Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idcommand_list' %}">Identification Commands</a></li>
+<li>{{ idcommand.description }} Command</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+      <dl>
+        <dt>Description</dt>
+          <dd>{{ idcommand.description }}</dd>
+        <dt>Script</dt>
+          <dd>{{ idcommand.script }}</dd>
+        <dt>Script Type</dt>
+          <dd>{{ idcommand.script_type }}</dd>
+        <dt>Tool(s)</dt>
+          {% for tool in idcommand.tool.all %}
+            <li><a href="{% url 'idtool_detail' tool.slug %}">{{ tool.description }}</a></li>
+          {% endfor %}
+        <dt>Actions</dt>
+          <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
+      </dl>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

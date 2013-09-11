@@ -1,0 +1,54 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Identification Commands{% endblock title %}
+
+{% block page_title %}
+Identification Command Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Identification Commands</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+<p><a href="{% url 'idcommand_create' %}">Create New Command</a></p>
+
+{% if idcommands %}
+  <table class="datatable">
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Type</th>
+        <th>UUID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for idcommand in idcommands %}
+      <tr>
+        <td><a href="{% url 'idcommand_detail' idcommand.uuid %}">{{ idcommand.description }}</a></td>
+        <td>{{ idcommand.script_type }}</td>
+        <td>{{ idcommand.uuid }}</td>
+        <td><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No identification commands exist.</p>
+{% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

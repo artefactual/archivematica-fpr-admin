@@ -64,6 +64,16 @@ urlpatterns = patterns('fpr.views',
     url(r'^idrule/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'idrule_edit',
         name='idrule_edit'),
 
+    # ID Commands
+    url(r'^idcommand/$', 'idcommand_list',
+        name='idcommand_list'),
+    url(r'^idcommand/create/$', 'idcommand_edit',
+        name='idcommand_create'),
+    url(r'^idcommand/(?P<uuid>' + UUID_REGEX + ')/$', 'idcommand_detail',
+        name='idcommand_detail'),
+    url(r'^idcommand/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'idcommand_edit',
+        name='idcommand_edit'),
+
     # FP Rules
     url(r'^fprule/$', 'fprule_list',
         name='fprule_list'),
