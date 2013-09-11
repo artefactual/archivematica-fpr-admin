@@ -332,36 +332,36 @@ def fprule_edit(request, uuid=None):
 
 ############ NORMALIZATION TOOLS ############
 
-def normalizationtool_list(request):
-    normalizationtools = fprmodels.NormalizationTool.objects.filter(enabled=True)
-    return render(request, 'fpr/normalizationtool/list.html', locals())
+def fptool_list(request):
+    fptools = fprmodels.FPTool.objects.filter(enabled=True)
+    return render(request, 'fpr/fptool/list.html', locals())
 
-def normalizationtool_detail(request, slug):
-    normalizationtool = get_object_or_404(fprmodels.NormalizationTool, slug=slug, enabled=True)
-    return render(request, 'fpr/normalizationtool/detail.html', locals())
+def fptool_detail(request, slug):
+    fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
+    return render(request, 'fpr/fptool/detail.html', locals())
 
-def normalizationtool_edit(request, slug=None):
+def fptool_edit(request, slug=None):
     if slug:
         action = "Replace"
-        normalizationtool = get_object_or_404(fprmodels.NormalizationTool, slug=slug, enabled=True)
+        fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
     else:
         action = "Create"
-        normalizationtool = None
+        fptool = None
     if request.method == 'POST':
-        form = fprforms.NormalizationToolForm(request.POST, instance=normalizationtool)
+        form = fprforms.FPToolForm(request.POST, instance=fptool)
         if form.is_valid():
-            new_normalizationtool = form.save(commit=False)
-            if normalizationtool:
-                old_normalizationtool = get_object_or_404(fprmodels.NormalizationTool, slug=slug, enabled=True)
-                old_normalizationtool.enabled = False
-                old_normalizationtool.save()
-                new_normalizationtool.replaces = old_normalizationtool
-                new_normalizationtool.uuid = None
-                new_normalizationtool.pk = None
-            new_normalizationtool.save()
+            new_fptool = form.save(commit=False)
+            if fptool:
+                old_fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
+                old_fptool.enabled = False
+                old_fptool.save()
+                new_fptool.replaces = old_fptool
+                new_fptool.uuid = None
+                new_fptool.pk = None
+            new_fptool.save()
             messages.info(request, 'Saved.')
-            return redirect('normalizationtool_detail', new_normalizationtool.slug)
+            return redirect('fptool_detail', new_fptool.slug)
     else:
-        form = fprforms.NormalizationToolForm(instance=normalizationtool)
+        form = fprforms.FPToolForm(instance=fptool)
 
-    return render(request, 'fpr/normalizationtool/form.html', locals())
+    return render(request, 'fpr/fptool/form.html', locals())

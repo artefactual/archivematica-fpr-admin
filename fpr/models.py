@@ -114,10 +114,10 @@ class IDCommand(models.Model):
 class IDRule(models.Model):
     """ Mapping between an IDCommand output and a FormatVersion. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    script = models.ForeignKey('IDCommand', to_field='uuid')
+    command = models.ForeignKey('IDCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
-    # Output from IDToolConfig.script to match on that gives the format
-    script_output = models.TextField()
+    # Output from IDToolConfig.command to match on that gives the format
+    command_output = models.TextField()
 
     replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
@@ -130,7 +130,7 @@ class IDRule(models.Model):
     active = Enabled()
 
     def __unicode__(self):
-        return u"{script} with {output} is {format}".format(script=self.script,
+        return u"{command} with {output} is {format}".format(command=self.command,
             output=self.script_output,
             format=self.format)
 
@@ -208,7 +208,7 @@ class FPRule(models.Model):
         ('extract', 'Extract'),
     )
     purpose = models.CharField(max_length=16, choices=PURPOSE_CHOICES)
-    command = models.ForeignKey('NormalizationCommand')
+    command = models.ForeignKey('FPCommand')
     format = models.ForeignKey('FormatVersion')
 
     replaces = models.ForeignKey('self', null=True, blank=True)
@@ -227,10 +227,10 @@ class FPRule(models.Model):
             purpose=self.get_purpose_display(),
             command=self.command)
 
-class NormalizationCommand(models.Model):
+class FPCommand(models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
-    tool = models.ManyToManyField('NormalizationTool', related_name="commands")
+    tool = models.ManyToManyField('FPTool', related_name="commands")
     description = models.CharField(max_length=256)
     command = models.TextField()
     SCRIPT_TYPE_CHOICES = (
@@ -267,14 +267,14 @@ class NormalizationCommand(models.Model):
         return u"Converts to {output_file_format}".format(
             output_file_format=self.output_file_format)
 
-class NormalizationTool(models.Model):
+class FPTool(models.Model):
     """ Tool used to perform normalization.  Eg. convert, ffmpeg, ps2pdf. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     description = models.CharField(max_length=256, help_text="Name of tool")
     version = models.CharField(max_length=64)
     enabled = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='_slug')
-    # Many to many field is on NormalizationCommand
+    # Many to many field is on FPCommand
 
     class Meta:
         verbose_name = "Normalization Tool"

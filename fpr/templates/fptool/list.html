@@ -21,9 +21,9 @@ Normalization Tool Information
 
   <div class="span10">
 
-    <p><a href="{% url 'normalizationtool_create' %}">Create New Tool</a></p>
+    <p><a href="{% url 'fptool_create' %}">Create New Tool</a></p>
 
-    {% if normalizationtools %}
+    {% if fptools %}
       <table class="datatable">
         <thead>
           <tr>
@@ -33,11 +33,11 @@ Normalization Tool Information
           </tr>
         </thead>
         <tbody>
-        {% for normalizationtool in normalizationtools %}
+        {% for fptool in fptools %}
           <tr>
-            <td><a href="{% url 'normalizationtool_detail' normalizationtool.slug %}">{{ normalizationtool.description }}</a></td>
-            <td>{{ normalizationtool.version }}</td>
-            <td>{{ normalizationtool.uuid }}</td>
+            <td><a href="{% url 'fptool_detail' fptool.slug %}">{{ fptool.description }}</a></td>
+            <td>{{ fptool.version }}</td>
+            <td>{{ fptool.uuid }}</td>
           </tr>
         {% endfor %}
         </tbody>

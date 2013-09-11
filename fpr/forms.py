@@ -68,18 +68,18 @@ class IDRuleForm(forms.ModelForm):
 
     class Meta:
         model = fprmodels.IDRule
-        fields = ('format', 'script', 'script_output')
+        fields = ('format', 'command', 'command_output')
 
 ############ FP RULES ############
 
 class FPRuleForm(forms.ModelForm):
-    command = forms.ChoiceField(choices=fprmodels.NormalizationCommand.objects.all())
+    command = forms.ChoiceField(choices=fprmodels.FPCommand.objects.all())
 
     def __init__(self, *args, **kwargs):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
-        # Add 'create' option to the NormalizationCommand dropdown
-        choices = [(f.uuid, f.description) for f in fprmodels.NormalizationCommand.objects.all()]
+        # Add 'create' option to the FPCommand dropdown
+        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.objects.all()]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
@@ -90,16 +90,16 @@ class FPRuleForm(forms.ModelForm):
         model = fprmodels.FPRule
         fields = ('purpose','format')
 
-class NormalizationCommandForm(forms.ModelForm):
+class FPCommandForm(forms.ModelForm):
     class Meta:
-        model = fprmodels.NormalizationCommand
+        model = fprmodels.FPCommand
         fields = ('tool', 'description', 'command', 'script_type',
           'output_file_format', 'output_location', 'command_usage',
           'verification_command', 'event_detail_command', 'supported_by')
 
 ############ NORMALIZATION TOOLS ############
 
-class NormalizationToolForm(forms.ModelForm):
+class FPToolForm(forms.ModelForm):
     class Meta:
-        model = fprmodels.NormalizationTool
+        model = fprmodels.FPTool
         fields = ('description', 'version')

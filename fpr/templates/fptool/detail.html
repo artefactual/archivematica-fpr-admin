@@ -2,16 +2,16 @@
 {% load url from future %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ normalizationtool.description }} {{ normalizationtool.version }}{% endblock title %}
+{% block title %}Archivematica FPR Server - {{ fptool.description }} {{ fptool.version }}{% endblock title %}
 
 {% block page_title %}
-{{ normalizationtool.description }} Information
+{{ fptool.description }} Information
 {% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'normalizationtool_list' %}">Normalization Tools</a></li>
-<li>{{ normalizationtool.description }}</li>
+<li><a href="{% url 'fptool_list' %}">fp Tools</a></li>
+<li>{{ fptool.description }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -25,13 +25,13 @@
     <div class='format'>
       <dl>
         <dt>Description</dt>
-          <dd>{{ normalizationtool.description }}</dd>
+          <dd>{{ fptool.description }}</dd>
         <dt>Version</dt>
-          <dd>{{ normalizationtool.version }}</dd>
+          <dd>{{ fptool.version }}</dd>
         <dt>UUID</dt>
-          <dd>{{ normalizationtool.uuid }}</dd>
+          <dd>{{ fptool.uuid }}</dd>
         <dt>Actions</dt>
-          <dd><a href="{% url 'normalizationtool_edit' normalizationtool.slug %}">Replace</a></dd>
+          <dd><a href="{% url 'fptool_edit' fptool.slug %}">Replace</a></dd>
       </dl>
     </div>
 
@@ -39,7 +39,7 @@
 
     <p><a href="#">Create New Tool Configuration</a></p>
 
-    {% if normalizationtool_config %}
+    {% if fptool_config %}
       <table class="datatable">
         <thead>
           <tr>
@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-        {% for config in normalizationtool_config %}
+        {% for config in fptool_config %}
           <tr>
             <td>{{ config.config }}</td>
             <td>{{ config.uuid }}</td>
@@ -59,7 +59,7 @@
         </tbody>
       </table>
     {% else %}
-      <p>No configurations exist for {{ normalizationtool.description }}.</p>
+      <p>No configurations exist for {{ fptool.description }}.</p>
     {% endif %}
 
   </div> <!-- /span10 -->

@@ -6,7 +6,7 @@
 {% url 'fpr.views.idtool_list' as url_idtool %}
 {% url 'fpr.views.idrule_list' as url_idrule %}
 {% url 'fpr.views.fprule_list' as url_fprule %}
-{% url 'fpr.views.normalizationtool_list' as url_normalizationtool %}
+{% url 'fpr.views.fptool_list' as url_fptool %}
 
 <div class="sidebar span2">
   <ul>
@@ -18,7 +18,7 @@
     <li class="{% active request url_idrule %}">&nbsp;&nbsp;<a href="{{ url_idrule }}">Rules</a></li>
 
     <li style="margin-top: 20px">Normalization</li>
-    <li class="{% active request url_normalizationtool %}">&nbsp;&nbsp;<a href="{{  url_normalizationtool}}">Tools</a></li>
+    <li class="{% active request url_fptool %}">&nbsp;&nbsp;<a href="{{ url_fptool}}">Tools</a></li>
     <li class="{% active request url_fprule %}">&nbsp;&nbsp;<a href="{{ url_fprule }}">Rules</a></li>
   </ul>
 </div>

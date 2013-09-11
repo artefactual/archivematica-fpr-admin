@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'normalizationtool_list' %}">Normalization Tools</a></li>
+<li><a href="{% url 'fptool_list' %}">Normalization Tools</a></li>
 <li>{{ action }} Normalization Tool</li>
 {% endblock breadcrumbs %}
 
@@ -23,10 +23,10 @@
   <div class="span10">
 
     <div class='tool'>
-        {% if normalizationtool %}
-        <form action="{% url 'normalizationtool_edit' normalizationtool.slug %}" method="post">
+        {% if fptool %}
+        <form action="{% url 'fptool_edit' fptool.slug %}" method="post">
         {% else %}
-        <form action="{% url 'normalizationtool_create' %}" method="post">
+        <form action="{% url 'fptool_create' %}" method="post">
         {% endif %}
             {% csrf_token %}
             {{ form.as_p }}
