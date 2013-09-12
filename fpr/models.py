@@ -23,6 +23,22 @@ class Enabled(models.Manager):
     def get_query_set(self):
         return super(Enabled, self).get_query_set().filter(enabled=True)
 
+############ MIXINS ############
+
+class VersionedModel(models.Model):
+    def save(self, replacing=None, *args, **kwargs):
+        if replacing:
+            self.replaces = replacing
+            # Force it to create a new row
+            self.uuid = None
+            self.pk = None
+            replacing.enabled = False
+            replacing.save()
+        super(VersionedModel, self).save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
 ############ FORMATS ############
 
 class Format(models.Model):
@@ -57,7 +73,7 @@ class FormatGroup(models.Model):
         return u"{}".format(self.description)
 
 
-class FormatVersion(models.Model):
+class FormatVersion(VersionedModel, models.Model):
     """ Format that a tool identifies. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     format = models.ForeignKey('Format', to_field='uuid', related_name='version_set')

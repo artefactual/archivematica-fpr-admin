@@ -87,14 +87,8 @@ def format_version_edit(request, format_slug, slug=None):
         # If replacing, disable old one and set replaces info for new one
         new_version = form.save(commit=False)
         new_version.format = format
-        if version:
-            old_version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
-            old_version.enabled = False
-            old_version.save()
-            new_version.replaces = old_version
-            new_version.uuid = None
-            new_version.pk = None
-        new_version.save()
+        replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+        new_version.save(replacing=replacing)
         messages.info(request, 'Saved.')
         return redirect('format_detail', format.slug)
 
