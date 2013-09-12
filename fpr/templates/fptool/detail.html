@@ -35,31 +35,29 @@
       </dl>
     </div>
 
-    <h2>Tool Configurations</h2>
+    <h2>Tool Commands</h2>
 
-    <p><a href="#">Create New Tool Configuration</a></p>
+    <p><a href="{% url 'fpcommand_create' %}?parent={{ fptool.uuid }}">Create New Tool Command</a></p>
 
-    {% if fptool_config %}
+    {% if fpcommands %}
       <table class="datatable">
         <thead>
           <tr>
-            <th>Configuration</th>
-            <th>UUID</th>
             <th>Command</th>
+            <th>UUID</th>
           </tr>
         </thead>
         <tbody>
-        {% for config in fptool_config %}
+        {% for fpcommand in fpcommands %}
           <tr>
-            <td>{{ config.config }}</td>
-            <td>{{ config.uuid }}</td>
-            <td>{{ config.command.script }}</td>
+            <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
+            <td>{{ fpcommand.uuid }}</td>
           </tr>
         {% endfor %}
         </tbody>
       </table>
     {% else %}
-      <p>No configurations exist for {{ fptool.description }}.</p>
+      <p>No commands exist for {{ fptool.description }}.</p>
     {% endif %}
 
   </div> <!-- /span10 -->

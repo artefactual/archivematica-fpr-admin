@@ -273,9 +273,7 @@ class FPCommand(models.Model):
     normalization = NormalizationRules()
 
     def __unicode__(self):
-        # TODO better unicode display
-        return u"Converts to {output_file_format}".format(
-            output_file_format=self.output_file_format)
+        return u"{}".format(self.description)
 
 class FPTool(models.Model):
     """ Tool used to perform normalization.  Eg. convert, ffmpeg, ps2pdf. """

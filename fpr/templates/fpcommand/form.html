@@ -1,0 +1,43 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ action }} Format Policy Command{% endblock title %}
+
+{% block page_title %}
+{{ action }} Format Policy Command
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'fpcommand_list' %}">Format Policy Commands</a></li>
+<li>{{ action }} Format Policy Command</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='tool'>
+      {% if fpcommand %}
+        <form action="{% url 'fpcommand_edit' fpcommand.uuid %}" method="post">
+      {% else %}
+        <form action="{% url 'fpcommand_create' %}" method="post">
+      {% endif %}
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="{{ action }} Command" />
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

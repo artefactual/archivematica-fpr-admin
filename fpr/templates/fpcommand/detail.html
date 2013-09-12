@@ -1,0 +1,70 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - {{ fpcommand.description }}{% endblock title %}
+
+{% block page_title %}
+{{ fpcommand.description }} Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'fpcommand_list' %}">Format Policy Commands</a></li>
+<li>{{ fpcommand.description }} Command</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+      <dl>
+        <dt>Tool(s)</dt>
+          <dd>
+            <ul>
+              {% for tool in fpcommand.tool.all %}
+                <li><a href="{% url 'fptool_detail' tool.slug %}">{{ tool.description }}</a></li>
+              {% endfor %}
+            </ul>
+          </dd>
+        <dt>Description</dt>
+          <dd>{{ fpcommand.description }}</dd>
+        <dt>Command</dt>
+          <dd>{{ fpcommand.command }}</dd>
+        <dt>Script Type</dt>
+          <dd>{{ fpcommand.script_type }}</dd>
+        <dt>Output File Format</dt>
+          <dd>{{ fpcommand.output_file_format }}</dd>
+        <dt>Output Location</dt>
+          <dd>{{ fpcommand.output_location }}</dd>
+        <dt>Command usage</dt>
+          <dd>{{ fpcommand.command_usage }}</dd>
+        <dt>Verification Command</dt>
+          {% if fpcommand.verification_command %}
+            <dd><a href="{% url 'fpcommand_detail' fpcommand.verification_command.uuid %}">{{ fpcommand.verification_command.description }}</a></dd>
+          {% else %}
+            <dd>{{ fpcommand.verification_command }}</dd>
+          {% endif %}
+        <dt>Event Detail Command</dt>
+         {% if fpcommand.event_detail_command %}
+            <dd><a href="{% url 'fpcommand_detail' fpcommand.event_detail_command.uuid %}">{{ fpcommand.event_detail_command.description }}</a></dd>
+          {% else %}
+            <dd>{{ fpcommand.event_detail_command }}</dd>
+          {% endif %}
+        <dt>Supported By</dt>
+          <dd>{{ fpcommand.supported_by }}</dd>
+        <dt>Actions</dt>
+          <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
+      </dl>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

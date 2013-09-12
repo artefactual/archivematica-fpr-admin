@@ -338,6 +338,7 @@ def fptool_list(request):
 
 def fptool_detail(request, slug):
     fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
+    fpcommands = fprmodels.FPCommand.objects.filter(tool__uuid=fptool.uuid)
     return render(request, 'fpr/fptool/detail.html', locals())
 
 def fptool_edit(request, slug=None):
@@ -365,3 +366,44 @@ def fptool_edit(request, slug=None):
         form = fprforms.FPToolForm(instance=fptool)
 
     return render(request, 'fpr/fptool/form.html', locals())
+
+############ FP COMMANDS ############
+
+def fpcommand_list(request):
+    pass
+
+def fpcommand_detail(request, uuid):
+    fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)
+    return render(request, 'fpr/fpcommand/detail.html', locals())
+
+def fpcommand_edit(request, uuid=None):
+    if uuid:
+        action = "Replace"
+        fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)
+    else:
+        action = "Create"
+        fpcommand = None
+    if request.method == 'POST':
+        form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
+        if form.is_valid():
+            new_fpcommand = form.save(commit=False)
+            if fpcommand:
+                old_fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)
+                old_fpcommand.enabled = False
+                old_fpcommand.save()
+                new_fpcommand.replaces = old_fpcommand
+                new_fpcommand.uuid = None
+                new_fpcommand.pk = None
+            new_fpcommand.save()
+            form.save_m2m()
+            messages.info(request, 'Saved.')
+            return redirect('fpcommand_detail', new_fpcommand.uuid)
+    else:
+        if 'parent' in request.GET:
+            fptool = get_object_or_None(fprmodels.FPTool, uuid=request.GET.get('parent', ''), enabled=True)
+            initial = {'tool': [fptool]}
+        else:
+            initial = None
+        form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
+
+    return render(request, 'fpr/fpcommand/form.html', locals())

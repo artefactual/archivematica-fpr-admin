@@ -74,7 +74,7 @@ urlpatterns = patterns('fpr.views',
     url(r'^fprule/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'fprule_edit',
         name='fprule_edit'),
 
-    # Normalization Tools
+    # FP Tools
     url(r'^fptool/$', 'fptool_list',
         name='fptool_list'),
     url(r'^fptool/create/$', 'fptool_edit',
@@ -83,4 +83,14 @@ urlpatterns = patterns('fpr.views',
         name='fptool_detail'),
     url(r'^fptool/(?P<slug>[-\w]+)/edit/$', 'fptool_edit',
         name='fptool_edit'),
+
+    # FP Commands
+    url(r'^fpcommand/$', 'fpcommand_list',
+        name='fpcommand_list'),
+    url(r'^fpcommand/create/$', 'fpcommand_edit',
+        name='fpcommand_create'),
+    url(r'^fpcommand/(?P<uuid>' + UUID_REGEX + ')/$', 'fpcommand_detail',
+        name='fpcommand_detail'),
+    url(r'^fpcommand/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'fpcommand_edit',
+        name='fpcommand_edit'),
 )
