@@ -48,13 +48,13 @@
           </tr>
         </thead>
         <tbody>
-        {% for fv in format_versions %}
+        {% for version in format_versions %}
           <tr>
-            <td>{{ fv.description }}</td>
-            <td>{{ fv.access_format|yesno:"Yes, No" }}</td>
-            <td>{{ fv.preservation_format|yesno:"Yes, No" }}</td>
-            <td>{{ fv.uuid }}</td>
-            <td><a href="{% url 'format_version_edit' format.slug fv.slug %}">Replace</a> | <a href="{% url 'format_version_delete' format.slug fv.slug %}">Disable</a></td>
+            <td><a href="{% url 'format_version_detail' format.slug version.slug %}">{{ version.description }}</a></td>
+            <td>{{ version.access_format|yesno:"Yes, No" }}</td>
+            <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
+            <td>{{ version.uuid }}</td>
+            <td><a href="{% url 'format_version_edit' format.slug version.slug %}">Replace</a> | <a href="{% url 'format_version_delete' format.slug version.slug %}">Disable</a></td>
           </tr>
         {% endfor %}
         </tbody>

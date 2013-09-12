@@ -69,6 +69,11 @@ def format_edit(request, slug=None):
 
 ############ FORMAT VERSIONS ############
 
+def format_version_detail(request, format_slug, slug=None):
+    format = get_object_or_404(fprmodels.Format, slug=format_slug)
+    version = get_object_or_404(fprmodels.FormatVersion, slug=slug)
+    return render(request, 'fpr/format/version/detail.html', locals())
+
 def format_version_edit(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     if slug:

@@ -17,6 +17,8 @@ urlpatterns = patterns('fpr.views',
         name='format_edit'),
 
     # Format Versions
+    url(r'^format/(?P<format_slug>[-\w]+)/(?P<slug>[-\w]+)/$', 'format_version_detail',
+        name='format_version_detail'),
     url(r'^format/(?P<format_slug>[-\w]+)/create/$', 'format_version_edit',
         name='format_version_create'),
     url(r'^format/(?P<format_slug>[-\w]+)/(?P<slug>[-\w]+)/edit/$',
