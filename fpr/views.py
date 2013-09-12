@@ -2,11 +2,11 @@
 import os
 
 # Django core, alphabetical
-from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.core.urlresolvers import reverse
 
 # External dependencies, alphabetical
 from annoying.functions import get_object_or_None
