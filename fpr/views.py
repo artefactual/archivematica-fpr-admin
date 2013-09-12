@@ -370,7 +370,8 @@ def fptool_edit(request, slug=None):
 ############ FP COMMANDS ############
 
 def fpcommand_list(request):
-    pass
+    fpcommands = fprmodels.FPCommand.objects.filter(enabled=True)
+    return render(request, 'fpr/fpcommand/list.html', locals())
 
 def fpcommand_detail(request, uuid):
     fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)

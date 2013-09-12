@@ -1,0 +1,53 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Format Policy Commands{% endblock title %}
+
+{% block page_title %}
+Format Policy Command Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Format Policy Commands</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <p><a href="{% url 'fpcommand_create' %}">Create New Command</a></p>
+
+    {% if fpcommands %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>UUID</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for fpcommand in fpcommands %}
+          <tr>
+            <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
+            <td>{{ fpcommand.uuid }}</td>
+            <td>{{ fpcommand.command_usage }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No format policy commands exist.</p>
+    {% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}
