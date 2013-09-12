@@ -129,7 +129,7 @@ class IDCommand(models.Model):
         return u"{}".format(self.description)
 
 
-class IDRule(models.Model):
+class IDRule(VersionedModel, models.Model):
     """ Mapping between an IDCommand output and a FormatVersion. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     command = models.ForeignKey('IDCommand', to_field='uuid')
@@ -151,16 +151,6 @@ class IDRule(models.Model):
         return u"{command} with {output} is {format}".format(command=self.command,
             output=self.script_output,
             format=self.format)
-
-    def save(self, replacing=None, *args, **kwargs):
-        if replacing:
-            self.replaces = replacing
-            # Force it to create a new row
-            self.uuid = None
-            self.pk = None
-            replacing.enabled = False
-            replacing.save()
-        super(IDRule, self).save(*args, **kwargs)
 
 
 class IDTool(models.Model):
