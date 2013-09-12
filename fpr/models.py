@@ -99,7 +99,7 @@ class FormatVersion(VersionedModel, models.Model):
 
 ############ ID TOOLS ############
 
-class IDCommand(models.Model):
+class IDCommand(VersionedModel, models.Model):
     """ Command to run an IDToolConfig and parse the output.
 
     IDCommand runs 'script' (which runs an IDTool with a specific IDToolConfig)
@@ -242,7 +242,7 @@ class NormalizationRules(models.Manager):
         return super(NormalizationRules, self).get_query_set().filter(enabled=True)
 
 
-class FPCommand(models.Model):
+class FPCommand(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
     tool = models.ManyToManyField('FPTool', related_name="commands")
