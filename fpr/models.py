@@ -4,13 +4,15 @@
 Describes the data model for the FPR
 
 """
+import logging
+
 from django.db import models
-from django.contrib.auth.models import User    
 
-from django_extensions.db.fields import UUIDField
+from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
-from tastypie.models import create_api_key 
+from django_extensions.db.fields import UUIDField
 
+logger = logging.getLogger(__name__)
 
 ############################### API V2 MODELS ###############################
 
@@ -204,6 +206,29 @@ class IDToolConfig(models.Model):
         return u"{tool} {config} runs {command}".format(tool=self.tool, 
             config=self.get_config_display(),
             command=self.command)
+
+    def save(self, *args, **kwargs):
+        super(IDToolConfig, self).save(*args, **kwargs)
+        # TODO this might need to be moved/updated elsewhere
+        try:
+            from main.models import MicroServiceChoiceReplacementDic
+        except ImportError:
+            pass
+        else:
+            # Remove existing object
+            MicroServiceChoiceReplacementDic.objects.filter(id=self.uuid).delete()
+            if self.enabled:
+                # Add replacement to MicroServiceChoiceReplacementDic
+                at_link = 'f09847c2-ee51-429a-9478-a860477f6b8d'
+                # {"%IDCommand%": self.command.uuid}
+                replace = '{{"%IDCommand%":"{0}"}}'.format(self.command.uuid)
+                MicroServiceChoiceReplacementDic.objects.create(
+                    id=self.uuid,
+                    choiceavailableatlink=at_link,
+                    description=self.command.description,
+                    replacementdic=replace,
+                    )
+
 
 ############ NORMALIZATION ############
 
