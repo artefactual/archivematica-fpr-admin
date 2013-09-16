@@ -4,6 +4,8 @@ import os
 # Django core, alphabetical
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -69,12 +71,12 @@ def format_edit(request, slug=None):
 
 ############ FORMAT VERSIONS ############
 
-def format_version_detail(request, format_slug, slug=None):
+def formatversion_detail(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug)
     return render(request, 'fpr/format/version/detail.html', locals())
 
-def format_version_edit(request, format_slug, slug=None):
+def formatversion_edit(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     if slug:
         action = "Replace"
@@ -87,14 +89,17 @@ def format_version_edit(request, format_slug, slug=None):
         # If replacing, disable old one and set replaces info for new one
         new_version = form.save(commit=False)
         new_version.format = format
-        replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+        if version:
+            replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+        else:
+            replacing = None
         new_version.save(replacing=replacing)
         messages.info(request, 'Saved.')
         return redirect('format_detail', format.slug)
 
     return render(request, 'fpr/format/version/form.html', locals())
 
-def format_version_delete(request, format_slug, slug):
+def formatversion_delete(request, format_slug, slug):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
     dependent_objects = utils.dependent_objects(version)
@@ -111,11 +116,11 @@ def format_version_delete(request, format_slug, slug):
 
 ############ FORMAT GROUPS ############
 
-def format_group_list(request):
+def formatgroup_list(request):
     groups = fprmodels.FormatGroup.objects.all()
     return render(request, 'fpr/format/group/list.html', locals())
 
-def format_group_edit(request, slug=None):
+def formatgroup_edit(request, slug=None):
     if slug:
         action = "Edit"
         group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
@@ -127,11 +132,11 @@ def format_group_edit(request, slug=None):
     if form.is_valid():
         group = form.save()
         messages.info(request, 'Saved.')
-        return redirect('format_group_list')
+        return redirect('formatgroup_list')
 
     return render(request, 'fpr/format/group/form.html', locals())
 
-def format_group_delete(request, slug):
+def formatgroup_delete(request, slug):
     group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
     format_count = fprmodels.Format.objects.filter(group=group.uuid).count()
     other_groups = fprmodels.FormatGroup.objects.exclude(uuid=group.uuid)
@@ -152,10 +157,10 @@ def format_group_delete(request, slug):
                     messages.info(request, str(substitution_count) + ' subtitutions were performed.')
                 else:
                     messages.warning(request, 'Please select a group to substitute for this group in member formats.')
-                    return redirect('format_group_delete', slug)
+                    return redirect('formatgroup_delete', slug)
             group.delete()
             messages.info(request, 'Deleted.')
-        return redirect('format_group_list')
+        return redirect('formatgroup_list')
     else:
         return render(request, 'fpr/format/group/delete.html', locals())
 
@@ -197,8 +202,8 @@ def idtool_edit(request, slug=None):
 
 ############ ID TOOL CONFIGURATIONS ############
 
-def idtool_config_edit(request, idtool_slug, slug=None):
-    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug)
+def idtoolconfig_edit(request, idtool_slug, slug=None):
+    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug, enabled=True)
     if slug:
         action = "Replace"
         config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
@@ -231,7 +236,7 @@ def idtool_config_edit(request, idtool_slug, slug=None):
 
     return render(request, 'fpr/idtool/config/form.html', locals())
 
-def idtool_config_delete(request, idtool_slug, slug):
+def idtoolconfig_delete(request, idtool_slug, slug):
     idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug)
     config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
     dependent_objects = utils.dependent_objects(config)
@@ -328,7 +333,7 @@ def fprule_edit(request, uuid=None):
             return redirect('fprule_detail', fprule.uuid)
         elif form.cleaned_data['command'] != 'new':
             fprule = form.save(commit=False)
-            command = fprmodels.NormalizationCommand.objects.get(uuid=form.cleaned_data['command'])
+            command = fprmodels.FPCommand.objects.get(uuid=form.cleaned_data['command'])
             fprule.command = command
             fprule = form.save()
             messages.info(request, 'Saved.')
@@ -405,3 +410,67 @@ def fpcommand_edit(request, uuid=None):
         form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
 
     return render(request, 'fpr/fpcommand/form.html', locals())
+
+############ REVISIONS ############
+
+def get_revision_ancestors(model, uuid, ancestors):
+    revision = model.objects.get(uuid=uuid)
+    if revision.replaces:
+        ancestors.append(revision.replaces)
+        get_revision_ancestors(model, revision.replaces.uuid, ancestors)
+    return ancestors
+
+def get_revision_descendants(model, uuid, decendants):
+    revision = model.objects.get(uuid=uuid)
+    descendant = get_object_or_None(model, replaces=revision)
+    if descendant:
+        decendants.append(descendant)
+        get_revision_descendants(model, descendant.uuid, decendants)
+    return decendants
+
+def augment_revisions_with_detail_url(entity_name, model, revisions):
+    for revision in revisions:
+        detail_view_name = entity_name + '_edit'
+        try:
+            parent_key_value = None
+            if entity_name == 'formatversion':
+                parent_key_value = revision.format.slug
+
+            if parent_key_value:
+                revision.detail_url = reverse(detail_view_name, args=[parent_key_value, revision.slug])
+            else:
+                revision.detail_url = reverse(detail_view_name, args=[revision.slug])
+
+        except:
+            revision.detail_url = reverse(detail_view_name, args=[revision.uuid])
+
+def revision_list(request, entity_name, uuid):
+    # get model using entity name
+    available_models = models.get_models()
+    model = None
+    for model in available_models:
+        if model._meta.db_table == 'fpr_' + entity_name:
+            break
+    if model == None:
+        raise Http404
+
+    # restrict to models that are intended to have revisions
+    try:
+        getattr(model, 'replaces')
+ 
+        # get specific revision's data and augment with detail URL
+        revision = model.objects.get(uuid=uuid)
+        augment_revisions_with_detail_url(entity_name, model, [revision])
+
+        # get revision ancestor data and augment with detail URLs
+        ancestors = get_revision_ancestors(model, uuid, [])
+        augment_revisions_with_detail_url(entity_name, model, ancestors)
+
+        # get revision descendant data and augment with detail URLs
+        descendants = get_revision_descendants(model, uuid, [])
+        augment_revisions_with_detail_url(entity_name, model, descendants)
+        descendants.reverse()
+
+        return render(request, 'fpr/revisions/list.html', locals())
+    except:
+        raise Http404

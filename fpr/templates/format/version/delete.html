@@ -24,7 +24,7 @@ Disable {{ version.description }}
   <div class="span10">
 
     <div class='format_version'>
-      <form action="{% url 'format_version_delete' format.slug version.slug %}" method="post">{% csrf_token %}
+      <form action="{% url 'formatversion_delete' format.slug version.slug %}" method="post">{% csrf_token %}
         <p>Are you sure?  The following rules will also be disabled:</p>
 
         {% regroup dependent_objects by model as dependent_rules %}

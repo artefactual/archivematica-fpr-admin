@@ -24,7 +24,7 @@ Disable {{ version.description }}
   <div class="span10">
 
     <div class='idtool_config'>
-      <form action="{% url 'idtool_config_delete' idtool.slug config.slug %}" method="post">{% csrf_token %}
+      <form action="{% url 'idtoolconfig_delete' idtool.slug config.slug %}" method="post">{% csrf_token %}
         <p>Are you sure?  The following rules will also be disabled:</p>
 
         {% regroup dependent_objects by model as dependent_rules %}

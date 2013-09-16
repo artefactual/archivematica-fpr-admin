@@ -34,7 +34,7 @@
 
     <h2>Specific Versions</h2>
 
-    <p><a href="{% url 'format_version_create' format.slug %}">Create New Format Version</a></p>
+    <p><a href="{% url 'formatversion_create' format.slug %}">Create New Format Version</a></p>
 
     {% if format_versions %}
       <table class="datatable">
@@ -50,11 +50,11 @@
         <tbody>
         {% for version in format_versions %}
           <tr>
-            <td><a href="{% url 'format_version_detail' format.slug version.slug %}">{{ version.description }}</a></td>
+            <td><a href="{% url 'formatversion_detail' format.slug version.slug %}">{{ version.description }}</a></td>
             <td>{{ version.access_format|yesno:"Yes, No" }}</td>
             <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
             <td>{{ version.uuid }}</td>
-            <td><a href="{% url 'format_version_edit' format.slug version.slug %}">Replace</a> | <a href="{% url 'format_version_delete' format.slug version.slug %}">Disable</a></td>
+            <td><a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a> | <a href="{% url 'formatversion_delete' format.slug version.slug %}">Disable</a></td>
           </tr>
         {% endfor %}
         </tbody>

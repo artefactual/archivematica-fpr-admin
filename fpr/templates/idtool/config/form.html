@@ -33,9 +33,9 @@
 
     <div class='format'>
     {% if version %}
-      <form action="{% url 'idtool_config_edit' idtool.slug config.slug %}" method="post">
+      <form action="{% url 'idtoolconfig_edit' idtool.slug config.slug %}" method="post">
     {% else %}
-      <form action="{% url 'idtool_config_create' idtool.slug %}" method="post">
+      <form action="{% url 'idtoolconfig_create' idtool.slug %}" method="post">
     {% endif %}
         {% csrf_token %}
         <p>Format: {{ idtool.description }}</p>

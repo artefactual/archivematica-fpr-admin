@@ -10,8 +10,8 @@ Delete {{ group.description }}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'format_group_list' %}">Format Groupss</a></li>
-<li><a href="{% url 'format_group_edit' group.slug %}">{{ group.description }}</a></li>
+<li><a href="{% url 'formatgroup_list' %}">Format Groupss</a></li>
+<li><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></li>
 <li>Delete {{ group.description }}</li>
 {% endblock breadcrumbs %}
 
@@ -24,7 +24,7 @@ Delete {{ group.description }}
   <div class="span10">
 
     <div class='format_group'>
-      <form action="{% url 'format_group_delete' group.slug %}" method="post">{% csrf_token %}
+      <form action="{% url 'formatgroup_delete' group.slug %}" method="post">{% csrf_token %}
         <p>Are you sure?</p>
 
         {% if format_count > 0 %}
