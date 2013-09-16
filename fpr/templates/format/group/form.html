@@ -10,7 +10,7 @@
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'format_group_list' %}">Format Groups</a></li>
+<li><a href="{% url 'formatgroup_list' %}">Format Groups</a></li>
 <li>{{ action }} Format Group</li>
 {% endblock breadcrumbs %}
 
@@ -25,9 +25,9 @@
     <div class='format'>
 
       {% if group %}
-      <form action="{% url 'format_group_edit' group.slug %}" method="post" id='format_group_form'>
+      <form action="{% url 'formatgroup_edit' group.slug %}" method="post" id='format_group_form'>
       {% else %}
-      <form action="{% url 'format_group_create' %}" method="post" id='format_group_form'>
+      <form action="{% url 'formatgroup_create' %}" method="post" id='format_group_form'>
       {% endif %}
         {% csrf_token %}
         <p>

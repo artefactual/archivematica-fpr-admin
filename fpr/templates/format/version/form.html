@@ -25,9 +25,9 @@
 
     <div class='format'>
         {% if version %}
-        <form action="{% url 'format_version_edit' format.slug version.slug %}" method="post">
+        <form action="{% url 'formatversion_edit' format.slug version.slug %}" method="post">
         {% else %}
-        <form action="{% url 'format_version_create' format.slug %}" method="post">
+        <form action="{% url 'formatversion_create' format.slug %}" method="post">
         {% endif %}
             {% csrf_token %}
             <p>Format: {{ format.description }}</p>

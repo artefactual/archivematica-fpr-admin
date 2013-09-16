@@ -21,7 +21,7 @@ Format Group Information
 
   <div class="span10">
 
-    <p><a href="{% url 'format_group_create' %}">Create New Format Group</a></p>
+    <p><a href="{% url 'formatgroup_create' %}">Create New Format Group</a></p>
 
     {% if groups %}
       <table class="datatable">
@@ -35,9 +35,9 @@ Format Group Information
         <tbody>
         {% for group in groups %}
           <tr>
-            <td><a href="{% url 'format_group_edit' group.slug %}">{{ group.description }}</a></td>
+            <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></td>
             <td>{{ group.uuid }}</td>
-            <td><a href="{% url 'format_group_delete' group.slug %}">Delete</a></td>
+            <td><a href="{% url 'formatgroup_delete' group.slug %}">Delete</a></td>
           </tr>
         {% endfor %}
         </tbody>

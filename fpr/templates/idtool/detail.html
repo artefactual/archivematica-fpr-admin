@@ -37,7 +37,7 @@
 
     <h2>Tool Configurations</h2>
 
-    <p><a href="{% url 'idtool_config_create' idtool.slug %}">Create New Tool Configuration</a></p>
+    <p><a href="{% url 'idtoolconfig_create' idtool.slug %}">Create New Tool Configuration</a></p>
 
     {% if idtool_config %}
       <table class="datatable">
@@ -57,7 +57,7 @@
             <td>{{ config.command.description }}</td>
             <td>{{ config.command.script|truncatechars:100 }}</td>
             <td>{{ config.uuid }}</td>
-            <td><a href="{% url 'idtool_config_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtool_config_delete' idtool.slug config.slug %}">Disable</a></td>
+            <td><a href="{% url 'idtoolconfig_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtoolconfig_delete' idtool.slug config.slug %}">Disable</a></td>
           </tr>
         {% endfor %}
         </tbody>

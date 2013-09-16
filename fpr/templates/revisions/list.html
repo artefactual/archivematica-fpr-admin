@@ -1,0 +1,59 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Revisions{% endblock title %}
+
+{% block page_title %}
+Revision History
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>Revisions</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    {% if revision %}
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>UUID</th>
+            <th>Last Modified</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for descendant in descendants %}
+          <tr>
+            <td>D:{{ descendant.uuid }}</td>
+            <td>{{ descendant.lastmodified }}</td>
+          </tr>
+        {% endfor %}
+        <tr>
+          <td><b>{{ revision.uuid }}</b></td>
+          <td>{{ revision.lastmodified }}</td>
+        </tr>
+        {% for ancestor in ancestors %}
+          <tr>
+            <td>A:{{ ancestor.uuid }}</td>
+            <td>{{ ancestor.lastmodified }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No revisions exist.</p>
+    {% endif %}
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}
