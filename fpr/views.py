@@ -299,6 +299,7 @@ def idcommand_edit(request, uuid=None):
         new_idcommand = form.save(commit=False)
         old_idcommand = get_object_or_None(fprmodels.IDCommand, uuid=uuid, enabled=True)
         new_idcommand.save(replacing=old_idcommand)
+        utils.update_references_to_object(fprmodels.IDCommand, 'uuid', old_idcommand, new_idcommand)
         messages.info(request, 'Saved.')
         return redirect('idcommand_list')
     return render(request, 'fpr/idcommand/form.html', locals())
@@ -400,6 +401,7 @@ def fpcommand_edit(request, uuid=None):
             old_fpcommand = get_object_or_None(fprmodels.FPCommand, uuid=uuid, enabled=True)
             new_fpcommand.save(replacing=old_fpcommand)
             form.save_m2m()
+            utils.update_references_to_object(fprmodels.FPCommand, 'uuid', old_fpcommand, new_fpcommand)
             messages.info(request, 'Saved.')
             return redirect('fpcommand_detail', new_fpcommand.uuid)
     else:
