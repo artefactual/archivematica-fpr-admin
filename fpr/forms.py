@@ -79,7 +79,7 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.objects.all()]
+        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all()]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
