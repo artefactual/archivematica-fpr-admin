@@ -94,6 +94,7 @@ def formatversion_edit(request, format_slug, slug=None):
         else:
             replacing = None
         new_version.save(replacing=replacing)
+        utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replacing, new_version)
         messages.info(request, 'Saved.')
         return redirect('format_detail', format.slug)
 
