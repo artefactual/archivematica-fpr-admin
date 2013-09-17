@@ -328,7 +328,7 @@ def fprule_edit(request, uuid=None):
             return redirect('fprule_detail', fprule.uuid)
         elif form.cleaned_data['command'] != 'new':
             fprule = form.save(commit=False)
-            command = fprmodels.NormalizationCommand.objects.get(uuid=form.cleaned_data['command'])
+            command = fprmodels.FPCommand.objects.get(uuid=form.cleaned_data['command'])
             fprule.command = command
             fprule = form.save()
             messages.info(request, 'Saved.')

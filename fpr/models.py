@@ -83,7 +83,7 @@ class FormatVersion(VersionedModel, models.Model):
     access_format = models.BooleanField(default=False)
     preservation_format = models.BooleanField(default=False)
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='description', unique_with='format', always_update=True)
@@ -117,7 +117,7 @@ class IDCommand(VersionedModel, models.Model):
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
 
@@ -139,7 +139,7 @@ class IDRule(VersionedModel, models.Model):
     # Output from IDToolConfig.command to match on that gives the format
     command_output = models.TextField()
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
 
@@ -191,7 +191,7 @@ class IDToolConfig(models.Model):
     config = models.CharField(max_length=4, choices=CONFIG_CHOICES)
     command = models.ForeignKey('IDCommand', to_field='uuid')
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='config', unique_with='tool')
@@ -241,10 +241,10 @@ class FPRule(models.Model):
         ('extract', 'Extract'),
     )
     purpose = models.CharField(max_length=16, choices=PURPOSE_CHOICES)
-    command = models.ForeignKey('FPCommand')
-    format = models.ForeignKey('FormatVersion')
+    command = models.ForeignKey('FPCommand', to_field='uuid')
+    format = models.ForeignKey('FormatVersion', to_field='uuid')
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
 
@@ -288,11 +288,10 @@ class FPCommand(VersionedModel, models.Model):
         ('verification', 'Verification'),
     )
     command_usage = models.CharField(max_length=16, choices=COMMAND_USAGE_CHOICES)
-    verification_command = models.ForeignKey('self', null=True, blank=True, related_name='+')
-    event_detail_command = models.ForeignKey('self', null=True, blank=True, related_name='+')
-    supported_by = models.ForeignKey('CommandsSupportedBy', null=True, blank=True)
+    verification_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
+    event_detail_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
     enabled = models.BooleanField(default=True)
 
@@ -377,6 +376,9 @@ class CommandsSupportedBy(models.Model):
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
         db_table = u'CommandsSupportedBy'
+
+    def __unicode__(self):
+        return u'{}'.format(self.description)
 
 class FileIDType(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')

@@ -90,14 +90,7 @@ class FPRuleForm(forms.ModelForm):
         model = fprmodels.FPRule
         fields = ('purpose','format')
 
-class FPCommandForm(forms.ModelForm):
-    class Meta:
-        model = fprmodels.FPCommand
-        fields = ('tool', 'description', 'command', 'script_type',
-          'output_file_format', 'output_location', 'command_usage',
-          'verification_command', 'event_detail_command', 'supported_by')
-
-############ NORMALIZATION TOOLS ############
+############ FP TOOLS ############
 
 class FPToolForm(forms.ModelForm):
     class Meta:
