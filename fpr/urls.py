@@ -107,10 +107,6 @@ urlpatterns = patterns('fpr.views',
         name='fpcommand_edit'),
 
     # Revisions
-<<<<<<< HEAD
     url(r'^revisions/(?P<entity_name>[-\w]+)/(?P<uuid>' + UUID_REGEX + ')/$', 'revision_list',
-=======
-    url(r'^revisions/(?P<model_name>[-\w]+)/(?P<uuid>' + UUID_REGEX + ')/$', 'revision_list',
->>>>>>> f5ed9284799ac89ff53368549a776ba6bd961ad2
         name='revision_list'),
 )
