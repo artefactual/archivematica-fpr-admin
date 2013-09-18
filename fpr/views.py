@@ -455,6 +455,8 @@ def augment_revisions_with_detail_url(entity_name, model, revisions):
             parent_key_value = None
             if entity_name == 'formatversion':
                 parent_key_value = revision.format.slug
+            if entity_name == 'idtoolconfig':
+                parent_key_value = revision.tool.slug
 
             if parent_key_value:
                 revision.detail_url = reverse(detail_view_name, args=[parent_key_value, revision.slug])
