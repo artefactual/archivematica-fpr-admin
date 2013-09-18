@@ -28,7 +28,6 @@ Format Group Information
         <thead>
           <tr>
             <th>Description</th>
-            <th>UUID</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -36,8 +35,10 @@ Format Group Information
         {% for group in groups %}
           <tr>
             <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></td>
-            <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.uuid }}</a></td>
-            <td><a href="{% url 'formatgroup_delete' group.slug %}">Delete</a></td>
+            <td>
+              <a href="{% url 'formatgroup_edit' group.slug %}">Edit</a> |
+              <a href="{% url 'formatgroup_delete' group.slug %}">Delete</a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>

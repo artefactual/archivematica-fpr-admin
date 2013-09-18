@@ -27,17 +27,17 @@ Format Information
       <table class="datatable">
         <thead>
           <tr>
-            <th>Group</th>
             <th>Description</th>
-            <th>UUID</th>
+            <th>Group</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
         {% for format in formats %}
           <tr>
-            <td>{{ format.group }}</td>
             <td><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></td>
-            <td>{{ format.uuid }}</td>
+            <td><a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a></td>
+            <td><a href="{% url 'format_edit' format.slug %}">Edit</a></td>
           </tr>
         {% endfor %}
         </tbody>
