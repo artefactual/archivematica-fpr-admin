@@ -1,6 +1,7 @@
 {% extends "fpr/app_layout.html" %}
 {% load url from future %}
 {% load staticfiles %}
+{% load revisions_link %}
 
 {% block title %}Archivematica FPR Server - {{ fpcommand.description }}{% endblock title %}
 
@@ -17,6 +18,8 @@
 {% block app_content %}
 
 <div class="row">
+
+  {% revisions_link "fpcommand" fpcommand.uuid %}
 
   {% include 'fpr/_sidebar.html' %}
 
