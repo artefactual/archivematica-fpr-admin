@@ -187,17 +187,9 @@ def idtool_edit(request, slug=None):
 
     form = fprforms.IDToolForm(request.POST or None, instance=idtool)
     if form.is_valid():
-        new_idtool = form.save(commit=False)
-        if idtool:
-            old_idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
-            old_idtool.enabled = False
-            old_idtool.save()
-            new_idtool.replaces = old_idtool
-            new_idtool.uuid = None
-            new_idtool.pk = None
-        new_idtool.save()
+        idtool = form.save()
         messages.info(request, 'Saved.')
-        return redirect('idtool_detail', new_idtool.slug)
+        return redirect('idtool_detail', idtool.slug)
 
     return render(request, 'fpr/idtool/form.html', locals())
 
@@ -377,19 +369,9 @@ def fptool_edit(request, slug=None):
         fptool = None
     form = fprforms.FPToolForm(request.POST or None, instance=fptool)
     if form.is_valid():
-        new_fptool = form.save(commit=False)
-        if fptool:
-            old_fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
-            old_fptool.enabled = False
-            old_fptool.save()
-            new_fptool.replaces = old_fptool
-            new_fptool.uuid = None
-            new_fptool.pk = None
-        new_fptool.save()
-        if fptool:
-            utils.update_many_to_many_references(fprmodels.FPCommand, 'tool', old_fptool, new_fptool)
+        fptool = form.save()
         messages.info(request, 'Saved.')
-        return redirect('fptool_detail', new_fptool.slug)
+        return redirect('fptool_detail', fptool.slug)
 
     return render(request, 'fpr/fptool/form.html', locals())
 
