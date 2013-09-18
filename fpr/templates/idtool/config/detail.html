@@ -35,6 +35,8 @@ ID Tool Configuration Information
           <dd><a href="{% url 'idcommand_detail' config.command.uuid %}">{{ config.command.description }}</a></dd>
         <dt>UUID</dt>
           <dd>{{ config.uuid }}</dd>
+        <dt>Actions</dt>
+          <dd><a href="{% url 'idtoolconfig_edit' config.tool.slug config.slug %}">Replace</a></dd>
       </dl>
     </div>
 
