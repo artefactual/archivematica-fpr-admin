@@ -15,25 +15,26 @@ def revisions_link(parser, token):
 
 class RevisionLinkNode(template.Node):
     def __init__(self, revision_type, object_uuid):
-        if (revision_type[0] == '"'):
-            self.revision_type = revision_type[1:-1]
-        else:
-            self.revision_type = template.Variable(revision_type)
-
-        if (object_uuid[0] == '"'):
-            self.object_uuid = object_uuid[1:-1]
-        else:
-            self.object_uuid = template.Variable(object_uuid)
+        self.revision_type = self._convert_to_template_variable_if_not_in_quotes(revision_type)
+        self.object_uuid   = self._convert_to_template_variable_if_not_in_quotes(object_uuid)
 
     def render(self, context):
-        if (self.revision_type.__class__ == base.Variable):
-            revision_type = self.revision_type.resolve(context)
-        else:
-            revision_type = self.revision_type
-
-        if (self.object_uuid.__class__ == base.Variable):
-            object_uuid = self.object_uuid.resolve(context)
-        else:
-            object_uuid = self.object_uuid
+        revision_type = self._resolve_if_template_variable(self.revision_type, context)
+        object_uuid   = self._resolve_if_template_variable(self.object_uuid, context)
 
         return '<a class="revisions_link" href="/fpr/revisions/' + revision_type + '/' + object_uuid + '/">Revision History</a>'
+
+    def _convert_to_template_variable_if_not_in_quotes(self, value):
+        if (self._in_quotes(value)):
+            return value[1:-1]
+        else:
+            return template.Variable(value) 
+
+    def _in_quotes(self, value):
+        return value[0] == '"' or value[0] == "'"
+
+    def _resolve_if_template_variable(self, value, context):
+        if (value.__class__ == base.Variable):
+            return value.resolve(context)
+        else:
+            return value
