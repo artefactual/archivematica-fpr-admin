@@ -27,6 +27,12 @@ ID Tool Configuration Information
 
     <div class='format'>
       <dl>
+        <dt>Tool</dt>
+          <dd><a href="{% url 'idtool_detail' config.tool.slug %}">{{ config.tool.description }}</a></dd>
+        <dt>Configuration</dt>
+          <dd>{{ config.config|title }}</dd>
+        <dt>Command</dt>
+          <dd><a href="{% url 'idcommand_detail' config.command.uuid %}">{{ config.command.description }}</a></dd>
         <dt>UUID</dt>
           <dd>{{ config.uuid }}</dd>
       </dl>
