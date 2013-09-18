@@ -469,7 +469,7 @@ def revision_list(request, entity_name, uuid):
     # restrict to models that are intended to have revisions
     try:
         getattr(model, 'replaces')
- 
+
         # get specific revision's data and augment with detail URL
         revision = model.objects.get(uuid=uuid)
         augment_revisions_with_detail_url(entity_name, model, [revision])

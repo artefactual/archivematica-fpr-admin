@@ -140,7 +140,7 @@ class IDRule(VersionedModel, models.Model):
 
     def __unicode__(self):
         return u"{command} with {output} is {format}".format(command=self.command,
-            output=self.script_output,
+            output=self.command_output,
             format=self.format)
 
 
