@@ -32,7 +32,7 @@
   <div class="span10">
 
     <div class='format'>
-    {% if version %}
+    {% if config %}
       <form action="{% url 'idtoolconfig_edit' idtool.slug config.slug %}" method="post">
     {% else %}
       <form action="{% url 'idtoolconfig_create' idtool.slug %}" method="post">
