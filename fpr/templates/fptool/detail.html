@@ -49,7 +49,7 @@
         {% for fpcommand in fpcommands %}
           <tr>
             <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
-            <td>{{ fpcommand.uuid }}</td>
+            <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.uuid }}</a></td>
           </tr>
         {% endfor %}
         </tbody>

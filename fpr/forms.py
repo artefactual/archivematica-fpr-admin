@@ -95,6 +95,13 @@ class FPRuleForm(forms.ModelForm):
         if hasattr(self.instance, 'command'):
             self.fields['command'].initial = self.instance.command.uuid
 
+        # Show only active format versions in the FPCommand dropdown
+        choices = [(f.uuid, f.description) for f in fprmodels.FormatVersion.active.all()]
+        choices.insert(0, ('', '---------'))
+        self.fields['format'].choices = choices
+        if hasattr(self.instance, 'command'):
+            self.fields['format'].initial = self.instance.format.uuid
+
     class Meta:
         model = fprmodels.FPRule
         fields = ('purpose','format')
