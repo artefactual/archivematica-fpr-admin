@@ -27,9 +27,9 @@
         <dt>Purpose</dt>
           <dd>{{ fprule.purpose|title }} Rule</dd>
         <dt>Format</dt>
-          <dd>{{ fprule.format.description }}</dd>
+          <dd><a href="{% url 'formatversion_detail' fprule.format.format.slug fprule.format.slug %}">{{ fprule.format.description }}</a></dd>
         <dt>Command</dt>
-          <dd>{{ fprule.command.description }}</dd>
+          <dd><a href="{% url 'fpcommand_detail' fprule.command.uuid %}">{{ fprule.command.description }}</a></dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
       </dl>

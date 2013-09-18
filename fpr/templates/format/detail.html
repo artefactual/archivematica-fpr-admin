@@ -24,10 +24,12 @@
 
     <div class='format'>
         <dl>
-            <dt>Description</dt> <dd>{{ format.description }}</dd>
-            <dt>Group</dt> <dd>{{ format.group }}</dd>
+            <dt>Description</dt>
+              <dd>{{ format.description }}</dd>
+            <dt>Group</dt>
+              <dd><a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a></dd>
             <dt>Actions</dt>
-                <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
+              <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
         </dl>
     </div>
 

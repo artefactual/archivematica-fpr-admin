@@ -30,7 +30,7 @@ ID Rule Information
         <dt>Format Version</dt>
           <dd>{{ idrule.format.description }}</dd>
         <dt>Command</dt>
-          <dd>{{ idrule.command.description }}</dd>
+          <dd><a href="{% url 'idcommand_detail' idrule.command.uuid %}">{{ idrule.command.description }}</a></dd>
         <dt>Command Output</dt>
           <dd>{{ idrule.command_output }}</dd>
         <dt>Actions</dt>
