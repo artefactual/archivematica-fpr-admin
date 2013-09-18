@@ -65,6 +65,15 @@ class IDCommandForm(forms.ModelForm):
 ############ ID RULES ############
 
 class IDRuleForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(IDRuleForm, self).__init__(*args, **kwargs)
+
+        # Add 'create' option to the Format dropdown
+        choices = [(f.uuid, f.description) for f in fprmodels.FormatVersion.active.all()]
+        choices.insert(0, ('', '---------'))
+        self.fields['format'].choices = choices
+        if hasattr(self.instance, 'format'):
+            self.fields['format'].initial = self.instance.format.uuid
 
     class Meta:
         model = fprmodels.IDRule
