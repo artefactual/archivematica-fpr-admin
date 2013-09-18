@@ -45,7 +45,7 @@ Identification Rule Information
             <a href="{% url 'idtool_detail' tool.slug %}">{{ tool }}</a><br />
           {% endfor %}
         </td>
-        <td><a href="{% url 'idrule_edit' idrule.uuid %}">{{ idrule.uuid }}</a></td>
+        <td><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.uuid }}</a></td>
         <td><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></td>
       </tr>
     {% endfor %}
