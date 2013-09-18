@@ -1,6 +1,7 @@
 {% extends "app_layout.html" %}
 {% load url from future %}
 {% load staticfiles %}
+{% load revisions_link %}
 
 {% block title %}Archivematica FPR Server - Format Version {{format.description}}{% endblock title %}
 
@@ -18,6 +19,8 @@
 {% block app_content %}
 
 <div class="row">
+
+  {% revisions_link "formatversion" version.uuid %}
 
   {% include 'fpr/_sidebar.html' %}
 
