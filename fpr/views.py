@@ -372,7 +372,8 @@ def fptool_edit(request, slug=None):
             new_fptool.uuid = None
             new_fptool.pk = None
         new_fptool.save()
-        utils.update_many_to_many_references(fprmodels.FPCommand, 'tool', old_fptool, new_fptool)
+        if fptool:
+            utils.update_many_to_many_references(fprmodels.FPCommand, 'tool', old_fptool, new_fptool)
         messages.info(request, 'Saved.')
         return redirect('fptool_detail', new_fptool.slug)
 
