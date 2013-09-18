@@ -26,6 +26,9 @@ class Enabled(models.Manager):
 ############ MIXINS ############
 
 class VersionedModel(models.Model):
+    replaces = models.ForeignKey('self', null=True, blank=True)
+    enabled = models.BooleanField(default=True)
+
     def save(self, replacing=None, *args, **kwargs):
         if replacing:
             self.replaces = replacing
@@ -38,6 +41,9 @@ class VersionedModel(models.Model):
 
     class Meta:
         abstract = True
+
+    objects = models.Manager()
+    active = Enabled()
 
 ############ FORMATS ############
 
@@ -81,17 +87,12 @@ class FormatVersion(VersionedModel, models.Model):
     access_format = models.BooleanField(default=False)
     preservation_format = models.BooleanField(default=False)
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='description', unique_with='format', always_update=True)
 
     class Meta:
         verbose_name = "Format Version"
         ordering = ['format', 'description']
-
-    objects = models.Manager()
-    active = Enabled()
 
     def __unicode__(self):
         return u"{}: {}".format(self.format, self.description)
@@ -115,15 +116,10 @@ class IDCommand(VersionedModel, models.Model):
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Format Identification Command"
-
-    objects = models.Manager()
-    active = Enabled()
 
     def __unicode__(self):
         return u"{}".format(self.description)
@@ -137,15 +133,10 @@ class IDRule(VersionedModel, models.Model):
     # Output from IDToolConfig.command to match on that gives the format
     command_output = models.TextField()
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Format Identification Rule"
-
-    objects = models.Manager()
-    active = Enabled()
 
     def __unicode__(self):
         return u"{command} with {output} is {format}".format(command=self.command,
@@ -267,15 +258,11 @@ class FPCommand(VersionedModel, models.Model):
     event_detail_command = models.ForeignKey('self', null=True, blank=True, related_name='+')
     supported_by = models.ForeignKey('CommandsSupportedBy', null=True, blank=True)
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Format Policy Command"
 
-    objects = models.Manager()
-    active = Enabled()
     normalization = NormalizationRules()
 
     def __unicode__(self):
