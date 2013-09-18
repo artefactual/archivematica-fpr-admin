@@ -263,6 +263,9 @@ def idrule_list(request):
     idrules = fprmodels.IDRule.active.all()
     return render(request, 'fpr/idrule/list.html', locals())
 
+def idrule_detail(request, uuid=None):
+    idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
+    return render(request, 'fpr/idrule/detail.html', locals())
 
 def idrule_edit(request, uuid=None):
     if uuid:

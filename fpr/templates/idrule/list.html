@@ -38,14 +38,14 @@ Identification Rule Information
     {% for idrule in idrules %}
       <tr>
         <td><a href="{% url 'format_detail' idrule.format.format.slug %}">{{ idrule.format }}</a></td>
-        <td>{{ idrule.command.description }}</a></td>
-        <td>{{ idrule.command_output }}</td>
+        <td><a href="{% url 'idcommand_detail' idrule.command.uuid %}">{{ idrule.command.description }}</a></td>
+        <td><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.command_output }}</a></td>
         <td>
           {% for tool in idrule.command.tool.all %}
             <a href="{% url 'idtool_detail' tool.slug %}">{{ tool }}</a><br />
           {% endfor %}
         </td>
-        <td>{{ idrule.uuid }}</td>
+        <td><a href="{% url 'idrule_edit' idrule.uuid %}">{{ idrule.uuid }}</a></td>
         <td><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></td>
       </tr>
     {% endfor %}
