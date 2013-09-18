@@ -198,7 +198,7 @@ class IDToolConfig(models.Model):
 
 ############ NORMALIZATION ############
 
-class FPRule(models.Model):
+class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     PURPOSE_CHOICES = (
         ('access', 'Access'),
@@ -210,15 +210,10 @@ class FPRule(models.Model):
     command = models.ForeignKey('FPCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Format Policy Rule"
-
-    objects = models.Manager()
-    active = Enabled()
 
     def __unicode__(self):
         return u"Normalize {format} for {purpose} via {command}".format(

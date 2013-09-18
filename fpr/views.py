@@ -326,11 +326,12 @@ def fprule_edit(request, uuid=None):
     form = fprforms.FPRuleForm(request.POST or None, instance=fprule, prefix='f')
     fprule_command_form = fprforms.FPCommandForm(request.POST or None, instance=command, prefix='fc')
     if form.is_valid():
+        replaces = get_object_or_None(fprmodels.FPRule, uuid=uuid, enabled=True)
         if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
             fprule = form.save(commit=False)
             command = fprule_command_form.save()
             fprule.command = command
-            fprule.save()
+            fprule.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('fprule_detail', fprule.uuid)
         elif form.cleaned_data['command'] != 'new':
@@ -338,6 +339,7 @@ def fprule_edit(request, uuid=None):
             command = fprmodels.FPCommand.objects.get(uuid=form.cleaned_data['command'])
             fprule.command = command
             fprule = form.save()
+            fprule.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('fprule_detail', fprule.uuid)
 
