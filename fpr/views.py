@@ -458,6 +458,19 @@ def revision_list(request, entity_name, uuid):
     if model == None:
         raise Http404
 
+    # human-readable names
+    revision_type = entity_name
+    human_readable_names = {
+        'formatversion': 'Format Version',
+        'idtoolconfig': 'ID Tool Configuration',
+        'idrule': 'ID Rule',
+        'idcommand': 'Identification Command',
+        'fpcommand': 'FP Command',
+        'fprule': 'FP Rule'
+    }
+    if entity_name in human_readable_names:
+        revision_type = human_readable_names[entity_name]
+
     # restrict to models that are intended to have revisions
     try:
         getattr(model, 'replaces')
