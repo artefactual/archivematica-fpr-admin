@@ -402,6 +402,7 @@ def fpcommand_edit(request, uuid=None):
             new_fpcommand.save(replacing=old_fpcommand)
             form.save_m2m()
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', old_fpcommand, new_fpcommand)
+            utils.update_many_to_many_references(fprmodels.FPTool, 'commands', old_fpcommand, new_fpcommand)
             messages.info(request, 'Saved.')
             return redirect('fpcommand_detail', new_fpcommand.uuid)
     else:

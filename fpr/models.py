@@ -216,8 +216,8 @@ class FPRule(models.Model):
         ('extract', 'Extract'),
     )
     purpose = models.CharField(max_length=16, choices=PURPOSE_CHOICES)
-    command = models.ForeignKey('FPCommand')
-    format = models.ForeignKey('FormatVersion')
+    command = models.ForeignKey('FPCommand', to_field='uuid')
+    format = models.ForeignKey('FormatVersion', to_field='uuid')
 
     replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
