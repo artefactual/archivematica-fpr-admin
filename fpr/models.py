@@ -166,7 +166,7 @@ class IDTool(models.Model):
         return "{} {}".format(self.description, self.version)
 
 
-class IDToolConfig(models.Model):
+class IDToolConfig(VersionedModel, models.Model):
     """ Tool and configuration used to identify formats.
 
     Eg. DROID mime-type, DROID PUID, Jhove format. """
@@ -180,16 +180,11 @@ class IDToolConfig(models.Model):
     config = models.CharField(max_length=4, choices=CONFIG_CHOICES)
     command = models.ForeignKey('IDCommand', to_field='uuid')
 
-    replaces = models.ForeignKey('self', null=True, blank=True)
     lastmodified = models.DateTimeField(auto_now=True)
-    enabled = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='config', unique_with='tool')
 
     class Meta:
         verbose_name = "Format Identification Tool Configuration"
-
-    objects = models.Manager()
-    active = Enabled()
 
     def __unicode__(self):
         return u"{tool} {config} runs {command}".format(tool=self.tool, 

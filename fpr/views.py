@@ -218,12 +218,15 @@ def idtoolconfig_edit(request, idtool_slug, slug=None):
     config_command_form = fprforms.IDCommandForm(request.POST or None, instance=command, prefix='c')
 
     if form.is_valid():
+        replaces = None
+        if config:
+            replaces = get_object_or_None(fprmodels.IDToolConfig, uuid=config.uuid)
         if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
             config = form.save(commit=False)
             command = config_command_form.save()
             config.tool = idtool
             config.command = command
-            config.save()
+            config.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('idtool_detail', idtool.slug)
         elif form.cleaned_data['command'] != 'new':
@@ -232,6 +235,7 @@ def idtoolconfig_edit(request, idtool_slug, slug=None):
             command = fprmodels.IDCommand.objects.get(uuid=form.cleaned_data['command'])
             config.command = command
             config = form.save()
+            config.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('idtool_detail', idtool.slug)
 
