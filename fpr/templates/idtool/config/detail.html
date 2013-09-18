@@ -1,0 +1,39 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% load revisions_link %}
+
+{% block title %}Archivematica FPR Server - ID Tool Configuration{% endblock title %}
+
+{% block page_title %}
+ID Tool Configuration Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idtool_list' %}">ID Tools</a></li>
+<li>ID Tool Configuration</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% revisions_link "idtoolconfig" config.uuid %}
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+      <dl>
+        <dt>UUID</dt>
+          <dd>{{ config.uuid }}</dd>
+      </dl>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

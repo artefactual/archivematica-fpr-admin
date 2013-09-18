@@ -56,7 +56,7 @@
             <td>{{ config.config }}</td>
             <td>{{ config.command.description }}</td>
             <td>{{ config.command.script|truncatechars:100 }}</td>
-            <td>{{ config.uuid }}</td>
+            <td><a href="{% url 'idtoolconfig_detail' idtool.slug config.slug %}">{{ config.uuid }}</a></td>
             <td><a href="{% url 'idtoolconfig_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtoolconfig_delete' idtool.slug config.slug %}">Disable</a></td>
           </tr>
         {% endfor %}

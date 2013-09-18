@@ -203,6 +203,11 @@ def idtool_edit(request, slug=None):
 
 ############ ID TOOL CONFIGURATIONS ############
 
+def idtoolconfig_detail(request, idtool_slug, slug):
+    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug, enabled=True)
+    config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
+    return render(request, 'fpr/idtool/config/detail.html', locals())
+
 def idtoolconfig_edit(request, idtool_slug, slug=None):
     idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug, enabled=True)
     if slug:

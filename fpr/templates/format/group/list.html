@@ -36,7 +36,7 @@ Format Group Information
         {% for group in groups %}
           <tr>
             <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></td>
-            <td>{{ group.uuid }}</td>
+            <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.uuid }}</a></td>
             <td><a href="{% url 'formatgroup_delete' group.slug %}">Delete</a></td>
           </tr>
         {% endfor %}

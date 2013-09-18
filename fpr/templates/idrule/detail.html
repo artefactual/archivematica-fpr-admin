@@ -1,0 +1,45 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% load revisions_link %}
+
+{% block title %}Archivematica FPR Server - ID Rule{% endblock title %}
+
+{% block page_title %}
+ID Rule Information
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idrule_list' %}">ID Rules</a></li>
+<li>ID Rule</li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% revisions_link "idrule" idrule.uuid %}
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='format'>
+      <dl>
+        <dt>Format Version</dt>
+          <dd>{{ idrule.format.description }}</dd>
+        <dt>Command</dt>
+          <dd>{{ idrule.command.description }}</dd>
+        <dt>Command Output</dt>
+          <dd>{{ idrule.command_output }}</dd>
+        <dt>Actions</dt>
+          <dd><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></dd>
+      </dl>
+    </div>
+
+  </div> <!-- /span10 -->
+
+</div> <!-- /row -->
+
+{% endblock app_content %}

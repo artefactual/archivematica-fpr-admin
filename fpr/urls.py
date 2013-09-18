@@ -57,6 +57,9 @@ urlpatterns = patterns('fpr.views',
     url(r'^idtool/(?P<idtool_slug>[-\w]+)/(?P<slug>[-\w]+)/delete/$',
         'idtoolconfig_delete',
         name='idtoolconfig_delete'),
+    url(r'^idtool/(?P<idtool_slug>[-\w]+)/(?P<slug>[-\w]+)/$',
+        'idtoolconfig_detail',
+        name='idtoolconfig_detail'),
 
     # ID Rules
     url(r'^idrule/$', 'idrule_list',

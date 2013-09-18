@@ -36,8 +36,8 @@ Identification Tool Information
         {% for idtool in idtools %}
           <tr>
             <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></td>
-            <td>{{ idtool.version }}</td>
-            <td>{{ idtool.uuid }}</td>
+            <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.version }}</a></td>
+            <td><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.uuid }}</a></td>
           </tr>
         {% endfor %}
         </tbody>
