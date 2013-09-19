@@ -5,6 +5,7 @@ Describes the data model for the FPR
 
 """
 import logging
+import uuid
 
 from django.db import models
 
@@ -151,7 +152,7 @@ class IDRule(VersionedModel, models.Model):
 
     def __unicode__(self):
         return u"{command} with {output} is {format}".format(command=self.command,
-            output=self.script_output,
+            output=self.command_output,
             format=self.format)
 
 
@@ -210,6 +211,7 @@ class IDToolConfig(models.Model):
     def save(self, *args, **kwargs):
         super(IDToolConfig, self).save(*args, **kwargs)
         # TODO this might need to be moved/updated elsewhere
+        # If part of archivematica, create user choice replacement dict
         try:
             from main.models import MicroServiceChoiceReplacementDic
         except ImportError:
@@ -236,7 +238,7 @@ class FPRule(models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     PURPOSE_CHOICES = (
         ('access', 'Access'),
-        ('preserve', 'Preservation'),
+        ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
         ('extract', 'Extract'),
     )
@@ -259,6 +261,43 @@ class FPRule(models.Model):
             format=self.format,
             purpose=self.get_purpose_display(),
             command=self.command)
+
+    def save(self, *args, **kwargs):
+        super(FPRule, self).save(*args, **kwargs)
+        # TODO this might need to be moved/updated elsewhere
+        # If part of Archivematica, update chain link and task config
+        try:
+            from main.models import MicroServiceChainLink, TaskConfig
+        except ImportError:
+            pass
+        else:
+            # Remove existing object
+            tc = TaskConfig.objects.filter(tasktypepkreference=self.uuid)
+            MicroServiceChainLink.objects.filter(currenttask=tc).delete()
+            tc.delete()
+            if self.enabled:
+                transcode_task_type='5e70152a-9c5b-4c17-b823-c9298c546eeb'
+                task_config = TaskConfig.objects.create(
+                    id=str(uuid.uuid4()),
+                    tasktype=transcode_task_type,
+                    tasktypepkreference=self.uuid,
+                    description=unicode(self)
+                )
+                # Not sure why defaultnextchainlink is set this way, but
+                # mimicking existing CommandRelationship behaviour
+                if self.purpose == 'access':
+                    defaultnextchainlink='006f6fc3-5837-4333-8920-fefc977e7a76'
+                elif self.purpose == 'thumbnail':
+                    defaultnextchainlink='a7fe8db6-387c-4295-b488-56e1b55c57d9'
+                else:
+                    defaultnextchainlink=None
+                MicroServiceChainLink.objects.create(
+                    id=str(uuid.uuid4()),
+                    currenttask=task_config.id,
+                    defaultnextchainlink=defaultnextchainlink,
+                    defaultplaysound=None,
+                    microservicegroup="Normalize",
+                )
 
 
 class NormalizationRules(models.Manager):
