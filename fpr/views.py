@@ -289,6 +289,7 @@ def idcommand_list(request):
 
 def idcommand_detail(request, uuid):
     idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
+    idtoolconfigs = fprmodels.IDToolConfig.active.filter(command=idcommand)
     return render(request, 'fpr/idcommand/detail.html', locals())
 
 def idcommand_edit(request, uuid=None):
