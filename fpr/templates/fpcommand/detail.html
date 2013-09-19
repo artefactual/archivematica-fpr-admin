@@ -61,6 +61,8 @@
           {% endif %}
         <dt>Supported By</dt>
           <dd>{{ fpcommand.supported_by }}</dd>
+        <dt>UUID</dt>
+          <dd>{{ fpcommand.uuid }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
       </dl>

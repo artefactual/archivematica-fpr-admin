@@ -52,7 +52,7 @@
             <td><a href="{% url 'formatversion_detail' format.slug version.slug %}">{{ version.description }}</a></td>
             <td>{{ version.access_format|yesno:"Yes, No" }}</td>
             <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
-            <td>{{ version.uuid }}</td>
+            <td><a href="{% url 'formatversion_detail' format.slug version.slug %}">{{ version.uuid }}</a></td>
             <td><a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a> | <a href="{% url 'formatversion_delete' format.slug version.slug %}">Disable</a></td>
           </tr>
         {% endfor %}
