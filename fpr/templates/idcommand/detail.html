@@ -31,8 +31,10 @@
         <dt>Script Type</dt>
           <dd>{{ idcommand.script_type }}</dd>
         <dt>Tool(s)</dt>
-          {% for tool in idcommand.tool.all %}
-            <li><a href="{% url 'idtool_detail' tool.slug %}">{{ tool.description }}</a></li>
+          {% for config in idtoolconfigs %}
+            {% if config.enabled %}
+              <li><a href="{% url 'idtool_detail' config.tool.slug %}">{{ config.tool.description }}</a></li>
+            {% endif %}
           {% endfor %}
         <dt>Actions</dt>
           <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
