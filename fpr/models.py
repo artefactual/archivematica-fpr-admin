@@ -35,6 +35,7 @@ class VersionedModel(models.Model):
             # Force it to create a new row
             self.uuid = None
             self.pk = None
+            self.enabled = True # in case the version was created using an older version
             replacing.enabled = False
             replacing.save()
         super(VersionedModel, self).save(*args, **kwargs)
