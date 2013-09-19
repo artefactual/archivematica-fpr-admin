@@ -90,7 +90,11 @@ def formatversion_edit(request, format_slug, slug=None):
         new_version = form.save(commit=False)
         new_version.format = format
         if version:
-            replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+            # if replacing the latest version or base on old version
+            if version.enabled:
+                replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+            else:
+                replacing = get_current_revision_using_ancestor(fprmodels.FormatVersion, version.uuid)
         else:
             replacing = None
         new_version.save(replacing=replacing)
@@ -419,6 +423,7 @@ def fpcommand_edit(request, uuid=None):
 def get_revision_ancestors(model, uuid, ancestors):
     revision = model.objects.get(uuid=uuid)
     if revision.replaces:
+        print 'REP:' + str(revision.replaces)
         ancestors.append(revision.replaces)
         get_revision_ancestors(model, revision.replaces.uuid, ancestors)
     return ancestors
@@ -430,6 +435,11 @@ def get_revision_descendants(model, uuid, decendants):
         decendants.append(descendant)
         get_revision_descendants(model, descendant.uuid, decendants)
     return decendants
+
+def get_current_revision_using_ancestor(model, ancestor_uuid):
+    descendants = get_revision_descendants(model, ancestor_uuid, [])
+    descendants.reverse()
+    return descendants[0]
 
 def augment_revisions_with_detail_url(entity_name, model, revisions):
     for revision in revisions:
