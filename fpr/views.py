@@ -89,14 +89,7 @@ def formatversion_edit(request, format_slug, slug=None):
         # If replacing, disable old one and set replaces info for new one
         new_version = form.save(commit=False)
         new_version.format = format
-        if version:
-            # if replacing the latest version or base on old version
-            if version.enabled:
-                replaces = fprmodels.FormatVersion.objects.get(pk=version.pk)
-            else:
-                replaces = get_current_revision_using_ancestor(fprmodels.FormatVersion, version.uuid)
-        else:
-            replaces = None
+        replaces = determine_what_replaces_model_instance(fprmodels.FormatVersion, version)
         new_version.save(replacing=replaces)
         utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replaces, new_version)
         messages.info(request, 'Saved.')
@@ -219,9 +212,7 @@ def idtoolconfig_edit(request, idtool_slug, slug=None):
     config_command_form = fprforms.IDCommandForm(request.POST or None, instance=command, prefix='c')
 
     if form.is_valid():
-        replaces = None
-        if config:
-            replaces = get_object_or_None(fprmodels.IDToolConfig, uuid=config.uuid)
+        replaces = determine_what_replaces_model_instance(fprmodels.IDToolConfig, config)
         if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
             config = form.save(commit=False)
             command = config_command_form.save()
@@ -278,7 +269,7 @@ def idrule_edit(request, uuid=None):
     form = fprforms.IDRuleForm(request.POST or None, instance=idrule)
     if form.is_valid():
         new_idrule = form.save(commit=False)
-        replaces = get_object_or_None(fprmodels.IDRule, uuid=uuid, enabled=True)
+        replaces = determine_what_replaces_model_instance(fprmodels.IDRule, idrule)
         new_idrule.save(replacing=replaces)
         messages.info(request, 'Saved.')
         return redirect('idrule_list')
@@ -335,7 +326,7 @@ def fprule_edit(request, uuid=None):
     form = fprforms.FPRuleForm(request.POST or None, instance=fprule, prefix='f')
     fprule_command_form = fprforms.FPCommandForm(request.POST or None, instance=command, prefix='fc')
     if form.is_valid():
-        replaces = get_object_or_None(fprmodels.FPRule, uuid=uuid, enabled=True)
+        replaces = determine_what_replaces_model_instance(fprmodels.FPRule, fprule)
         if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
             fprule = form.save(commit=False)
             command = fprule_command_form.save()
@@ -393,7 +384,7 @@ def fpcommand_detail(request, uuid):
 def fpcommand_edit(request, uuid=None):
     if uuid:
         action = "Replace"
-        fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)
+        fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid)
     else:
         action = "Create"
         fpcommand = None
@@ -401,7 +392,7 @@ def fpcommand_edit(request, uuid=None):
         form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
         if form.is_valid():
             new_fpcommand = form.save(commit=False)
-            replaces = get_object_or_None(fprmodels.FPCommand, uuid=uuid, enabled=True)
+            replaces = determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
             form.save_m2m()
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
@@ -419,6 +410,18 @@ def fpcommand_edit(request, uuid=None):
     return render(request, 'fpr/fpcommand/form.html', locals())
 
 ############ REVISIONS ############
+
+def determine_what_replaces_model_instance(model, instance): 
+    if instance:
+        # if replacing the latest version or base on old version
+        if instance.enabled:
+            replaces = model.objects.get(pk=instance.pk)
+        else:
+            replaces = get_current_revision_using_ancestor(model, instance.uuid)
+    else:
+        replaces = None
+
+    return replaces
 
 def get_revision_ancestors(model, uuid, ancestors):
     revision = model.objects.get(uuid=uuid)
