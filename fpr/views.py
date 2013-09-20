@@ -89,7 +89,7 @@ def formatversion_edit(request, format_slug, slug=None):
         # If replacing, disable old one and set replaces info for new one
         new_version = form.save(commit=False)
         new_version.format = format
-        replaces = determine_what_replaces_model_instance(fprmodels.FormatVersion, version)
+        replaces = utils.determine_what_replaces_model_instance(fprmodels.FormatVersion, version)
         new_version.save(replacing=replaces)
         utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replaces, new_version)
         messages.info(request, 'Saved.')
@@ -212,7 +212,7 @@ def idtoolconfig_edit(request, idtool_slug, slug=None):
     config_command_form = fprforms.IDCommandForm(request.POST or None, instance=command, prefix='c')
 
     if form.is_valid():
-        replaces = determine_what_replaces_model_instance(fprmodels.IDToolConfig, config)
+        replaces = utils.determine_what_replaces_model_instance(fprmodels.IDToolConfig, config)
         if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
             config = form.save(commit=False)
             command = config_command_form.save()
@@ -269,7 +269,7 @@ def idrule_edit(request, uuid=None):
     form = fprforms.IDRuleForm(request.POST or None, instance=idrule)
     if form.is_valid():
         new_idrule = form.save(commit=False)
-        replaces = determine_what_replaces_model_instance(fprmodels.IDRule, idrule)
+        replaces = utils.determine_what_replaces_model_instance(fprmodels.IDRule, idrule)
         new_idrule.save(replacing=replaces)
         messages.info(request, 'Saved.')
         return redirect('idrule_list')
@@ -326,7 +326,7 @@ def fprule_edit(request, uuid=None):
     form = fprforms.FPRuleForm(request.POST or None, instance=fprule, prefix='f')
     fprule_command_form = fprforms.FPCommandForm(request.POST or None, instance=command, prefix='fc')
     if form.is_valid():
-        replaces = determine_what_replaces_model_instance(fprmodels.FPRule, fprule)
+        replaces = utils.determine_what_replaces_model_instance(fprmodels.FPRule, fprule)
         if form.cleaned_data['command'] == 'new' and fprule_command_form.is_valid():
             fprule = form.save(commit=False)
             command = fprule_command_form.save()
@@ -392,7 +392,7 @@ def fpcommand_edit(request, uuid=None):
         form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
         if form.is_valid():
             new_fpcommand = form.save(commit=False)
-            replaces = determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
+            replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
             form.save_m2m()
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
@@ -410,57 +410,6 @@ def fpcommand_edit(request, uuid=None):
     return render(request, 'fpr/fpcommand/form.html', locals())
 
 ############ REVISIONS ############
-
-def determine_what_replaces_model_instance(model, instance): 
-    if instance:
-        # if replacing the latest version or base on old version
-        if instance.enabled:
-            replaces = model.objects.get(pk=instance.pk)
-        else:
-            replaces = get_current_revision_using_ancestor(model, instance.uuid)
-    else:
-        replaces = None
-
-    return replaces
-
-def get_revision_ancestors(model, uuid, ancestors):
-    revision = model.objects.get(uuid=uuid)
-    if revision.replaces:
-        print 'REP:' + str(revision.replaces)
-        ancestors.append(revision.replaces)
-        get_revision_ancestors(model, revision.replaces.uuid, ancestors)
-    return ancestors
-
-def get_revision_descendants(model, uuid, decendants):
-    revision = model.objects.get(uuid=uuid)
-    descendant = get_object_or_None(model, replaces=revision)
-    if descendant:
-        decendants.append(descendant)
-        get_revision_descendants(model, descendant.uuid, decendants)
-    return decendants
-
-def get_current_revision_using_ancestor(model, ancestor_uuid):
-    descendants = get_revision_descendants(model, ancestor_uuid, [])
-    descendants.reverse()
-    return descendants[0]
-
-def augment_revisions_with_detail_url(entity_name, model, revisions):
-    for revision in revisions:
-        detail_view_name = entity_name + '_edit'
-        try:
-            parent_key_value = None
-            if entity_name == 'formatversion':
-                parent_key_value = revision.format.slug
-            if entity_name == 'idtoolconfig':
-                parent_key_value = revision.tool.slug
-
-            if parent_key_value:
-                revision.detail_url = reverse(detail_view_name, args=[parent_key_value, revision.slug])
-            else:
-                revision.detail_url = reverse(detail_view_name, args=[revision.slug])
-
-        except:
-            revision.detail_url = reverse(detail_view_name, args=[revision.uuid])
 
 def revision_list(request, entity_name, uuid):
     # get model using entity name
@@ -491,17 +440,35 @@ def revision_list(request, entity_name, uuid):
 
         # get specific revision's data and augment with detail URL
         revision = model.objects.get(uuid=uuid)
-        augment_revisions_with_detail_url(entity_name, model, [revision])
+        _augment_revisions_with_detail_url(entity_name, model, [revision])
 
         # get revision ancestor data and augment with detail URLs
-        ancestors = get_revision_ancestors(model, uuid, [])
-        augment_revisions_with_detail_url(entity_name, model, ancestors)
+        ancestors = utils.get_revision_ancestors(model, uuid, [])
+        _augment_revisions_with_detail_url(entity_name, model, ancestors)
 
         # get revision descendant data and augment with detail URLs
-        descendants = get_revision_descendants(model, uuid, [])
-        augment_revisions_with_detail_url(entity_name, model, descendants)
+        descendants = utils.get_revision_descendants(model, uuid, [])
+        _augment_revisions_with_detail_url(entity_name, model, descendants)
         descendants.reverse()
 
         return render(request, 'fpr/revisions/list.html', locals())
-    except:
+    except AttributeError:
         raise Http404
+
+def _augment_revisions_with_detail_url(entity_name, model, revisions):
+    for revision in revisions:
+        detail_view_name = entity_name + '_edit'
+        try:
+            parent_key_value = None
+            if entity_name == 'formatversion':
+                parent_key_value = revision.format.slug
+            if entity_name == 'idtoolconfig':
+                parent_key_value = revision.tool.slug
+
+            if parent_key_value:
+                revision.detail_url = reverse(detail_view_name, args=[parent_key_value, revision.slug])
+            else:
+                revision.detail_url = reverse(detail_view_name, args=[revision.slug])
+
+        except:
+            revision.detail_url = reverse(detail_view_name, args=[revision.uuid])
