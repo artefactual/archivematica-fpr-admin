@@ -94,6 +94,8 @@ def formatversion_edit(request, format_slug, slug=None):
         utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replaces, new_version)
         messages.info(request, 'Saved.')
         return redirect('format_detail', format.slug)
+    else:
+        utils.warn_if_replacing_with_old_revision(request, version)
 
     return render(request, 'fpr/format/version/form.html', locals())
 
@@ -230,6 +232,8 @@ def idtoolconfig_edit(request, idtool_slug, slug=None):
             config.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('idtool_detail', idtool.slug)
+    else:
+        utils.warn_if_replacing_with_old_revision(request, config)
 
     return render(request, 'fpr/idtool/config/form.html', locals())
 
@@ -273,6 +277,9 @@ def idrule_edit(request, uuid=None):
         new_idrule.save(replacing=replaces)
         messages.info(request, 'Saved.')
         return redirect('idrule_list')
+    else:
+        utils.warn_if_replacing_with_old_revision(request, idrule)
+
     return render(request, 'fpr/idrule/form.html', locals())
 
 
@@ -302,6 +309,9 @@ def idcommand_edit(request, uuid=None):
         utils.update_references_to_object(fprmodels.IDCommand, 'uuid', replaces, new_idcommand)
         messages.info(request, 'Saved.')
         return redirect('idcommand_list')
+    else:
+        utils.warn_if_replacing_with_old_revision(request, idcommand)
+
     return render(request, 'fpr/idcommand/form.html', locals())
 
 ############ FP RULES ############
@@ -342,6 +352,8 @@ def fprule_edit(request, uuid=None):
             fprule.save(replacing=replaces)
             messages.info(request, 'Saved.')
             return redirect('fprule_detail', fprule.uuid)
+    else:
+        utils.warn_if_replacing_with_old_revision(request, fprule)
 
     return render(request, 'fpr/fprule/form.html', locals())
 
@@ -406,6 +418,7 @@ def fpcommand_edit(request, uuid=None):
         else:
             initial = None
         form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
+        utils.warn_if_replacing_with_old_revision(request, fpcommand)
 
     return render(request, 'fpr/fpcommand/form.html', locals())
 
