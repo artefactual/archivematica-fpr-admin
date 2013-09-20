@@ -4,13 +4,16 @@
 Describes the data model for the FPR
 
 """
+import logging
+import uuid
+
 from django.db import models
-from django.contrib.auth.models import User    
 
-from django_extensions.db.fields import UUIDField
+from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
-from tastypie.models import create_api_key 
+from django_extensions.db.fields import UUIDField
 
+logger = logging.getLogger(__name__)
 
 ############################### API V2 MODELS ###############################
 
@@ -199,13 +202,37 @@ class IDToolConfig(VersionedModel, models.Model):
             config=self.get_config_display(),
             command=self.command)
 
+    def save(self, *args, **kwargs):
+        super(IDToolConfig, self).save(*args, **kwargs)
+        # TODO this might need to be moved/updated elsewhere
+        # If part of archivematica, create user choice replacement dict
+        try:
+            from main.models import MicroServiceChoiceReplacementDic
+        except ImportError:
+            pass
+        else:
+            # Remove existing object
+            MicroServiceChoiceReplacementDic.objects.filter(id=self.uuid).delete()
+            if self.enabled:
+                # Add replacement to MicroServiceChoiceReplacementDic
+                at_link = 'f09847c2-ee51-429a-9478-a860477f6b8d'
+                # {"%IDCommand%": self.command.uuid}
+                replace = '{{"%IDCommand%":"{0}"}}'.format(self.command.uuid)
+                MicroServiceChoiceReplacementDic.objects.create(
+                    id=self.uuid,
+                    choiceavailableatlink=at_link,
+                    description=self.command.description,
+                    replacementdic=replace,
+                    )
+
+
 ############ NORMALIZATION ############
 
 class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     PURPOSE_CHOICES = (
         ('access', 'Access'),
-        ('preserve', 'Preservation'),
+        ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
         ('extract', 'Extract'),
     )
@@ -223,6 +250,53 @@ class FPRule(VersionedModel, models.Model):
             format=self.format,
             purpose=self.get_purpose_display(),
             command=self.command)
+
+    def save(self, *args, **kwargs):
+        super(FPRule, self).save(*args, **kwargs)
+        # TODO this might need to be moved/updated elsewhere
+        # If part of Archivematica, update chain link and task config
+        try:
+            from main.models import MicroServiceChainLink, MicroServiceChainLinkExitCode, TaskConfig
+        except ImportError:
+            pass
+        else:
+            # Remove existing object
+            tc = TaskConfig.objects.filter(tasktypepkreference=self.uuid)
+            MicroServiceChainLink.objects.filter(currenttask=tc).delete()
+            tc.delete()
+            if self.enabled:
+                # Create new TaskConfig
+                transcode_task_type='5e70152a-9c5b-4c17-b823-c9298c546eeb'
+                task_config = TaskConfig.objects.create(
+                    id=str(uuid.uuid4()),
+                    tasktype=transcode_task_type,
+                    tasktypepkreference=self.uuid,
+                    description=unicode(self)
+                )
+                # Create new MicroServiceChainLink
+                # defaultnextchainlink should point at the default action for
+                # that purpose, in case the FPRule fails.
+                # TODO need to set up default rules for FPR v2 API
+                if self.purpose == 'access':
+                    defaultnextchainlink='006f6fc3-5837-4333-8920-fefc977e7a76'
+                elif self.purpose == 'thumbnail':
+                    defaultnextchainlink='a7fe8db6-387c-4295-b488-56e1b55c57d9'
+                else:
+                    defaultnextchainlink=None
+                mscl = MicroServiceChainLink.objects.create(
+                    id=str(uuid.uuid4()),
+                    currenttask=task_config.id,
+                    defaultnextchainlink=defaultnextchainlink,
+                    defaultplaysound=None,
+                    microservicegroup="Normalize",
+                )
+                # Create new MicroServiceChainLinkExitCode
+                MicroServiceChainLinkExitCode.objects.create(
+                    id=str(uuid.uuid4()),
+                    microservicechainlink=mscl.id,
+                    exitcode=0,  # default
+                    nextmicroservicechainlink=None,  # default
+                )
 
 
 class FPCommand(VersionedModel, models.Model):
@@ -246,9 +320,8 @@ class FPCommand(VersionedModel, models.Model):
         ('verification', 'Verification'),
     )
     command_usage = models.CharField(max_length=16, choices=COMMAND_USAGE_CHOICES)
-    verification_command = models.ForeignKey('self', null=True, blank=True, related_name='+')
-    event_detail_command = models.ForeignKey('self', null=True, blank=True, related_name='+')
-    supported_by = models.ForeignKey('CommandsSupportedBy', null=True, blank=True)
+    verification_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
+    event_detail_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
 
     lastmodified = models.DateTimeField(auto_now=True)
 
@@ -329,6 +402,9 @@ class CommandsSupportedBy(models.Model):
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
         db_table = u'CommandsSupportedBy'
+
+    def __unicode__(self):
+        return u'{}'.format(self.description)
 
 class FileIDType(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')
