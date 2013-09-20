@@ -351,7 +351,7 @@ def fprule_edit(request, uuid=None):
             fprule = form.save()
             fprule.save(replacing=replaces)
             messages.info(request, 'Saved.')
-            return redirect('fprule_detail', fprule.uuid)
+            return redirect('fprule_list')
     else:
         utils.warn_if_replacing_with_old_revision(request, fprule)
 
@@ -410,7 +410,7 @@ def fpcommand_edit(request, uuid=None):
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
             utils.update_many_to_many_references(fprmodels.FPTool, 'commands', replaces, new_fpcommand)
             messages.info(request, 'Saved.')
-            return redirect('fpcommand_detail', new_fpcommand.uuid)
+            return redirect('fpcommand_list')
     else:
         if 'parent' in request.GET:
             fptool = get_object_or_None(fprmodels.FPTool, uuid=request.GET.get('parent', ''), enabled=True)
