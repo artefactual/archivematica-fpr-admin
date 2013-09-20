@@ -23,6 +23,12 @@ class Enabled(models.Manager):
     def get_query_set(self):
         return super(Enabled, self).get_query_set().filter(enabled=True)
 
+class NormalizationRules(models.Manager):
+    """ Manager to only return normalization FPCommands.  """
+    def get_query_set(self):
+        return super(NormalizationRules, self).get_query_set().filter(enabled=True)
+
+
 ############ MIXINS ############
 
 class VersionedModel(models.Model):
@@ -45,6 +51,7 @@ class VersionedModel(models.Model):
 
     objects = models.Manager()
     active = Enabled()
+    normalization = NormalizationRules()
 
 ############ FORMATS ############
 
@@ -218,12 +225,6 @@ class FPRule(VersionedModel, models.Model):
             command=self.command)
 
 
-class NormalizationRules(models.Manager):
-    """ Manager to only return normalization FPCommands.  """
-    def get_query_set(self):
-        return super(NormalizationRules, self).get_query_set().filter(enabled=True)
-
-
 class FPCommand(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
@@ -253,8 +254,6 @@ class FPCommand(VersionedModel, models.Model):
 
     class Meta:
         verbose_name = "Format Policy Command"
-
-    normalization = NormalizationRules()
 
     def __unicode__(self):
         return u"{}".format(self.description)
