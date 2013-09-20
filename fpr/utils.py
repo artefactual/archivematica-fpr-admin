@@ -4,6 +4,8 @@ from django.db import models
 # External dependencies, alphabetical
 from annoying.functions import get_object_or_None
 
+############ DEPENDENCIES ############
+
 def dependent_objects(object_):
     """ Returns all the objects that rely on 'object_'. """
     links = [rel.get_accessor_name() for rel in object_._meta.get_all_related_objects()]
@@ -17,6 +19,8 @@ def dependent_objects(object_):
     return dependent_objects
 
 def update_references_to_object(model_referenced, key_field_name, old_object, new_object):
+    """ Update references to an object, introspecting models, finding foreign
+    key relations to the referenced model, and updating the references. """
     for model in models.get_models():
         for field in model._meta.fields:
             type = field.get_internal_type()
@@ -29,15 +33,21 @@ def update_references_to_object(model_referenced, key_field_name, old_object, ne
                     parent.save()
 
 def update_many_to_many_references(to_model, set_name, old_object, new_object):
-  filter_criteria = {set_name: old_object}
-  parent_objects = to_model.objects.filter(**filter_criteria)
-  for parent in parent_objects:
-     manager = getattr(parent, set_name)
-     manager.remove(old_object)
-     manager.add(new_object)
-     parent.save()
+    """ Update many-to-many references to a model instance. """
+    filter_criteria = {set_name: old_object}
+    parent_objects = to_model.objects.filter(**filter_criteria)
+    for parent in parent_objects:
+        manager = getattr(parent, set_name)
+        manager.remove(old_object)
+        manager.add(new_object)
+        parent.save()
+
+
+############ REVISIONS ############
 
 def determine_what_replaces_model_instance(model, instance):
+    """ Determine what object, if any, will be replaced by creating a new
+    revision. """
     if instance:
         # if replacing the latest version or base on old version
         if instance.enabled:
@@ -50,14 +60,15 @@ def determine_what_replaces_model_instance(model, instance):
     return replaces
 
 def get_revision_ancestors(model, uuid, ancestors):
+    """ Get revisions that a given revision has replaced. """
     revision = model.objects.get(uuid=uuid)
     if revision.replaces:
-        print 'REP:' + str(revision.replaces)
         ancestors.append(revision.replaces)
         get_revision_ancestors(model, revision.replaces.uuid, ancestors)
     return ancestors
 
 def get_revision_descendants(model, uuid, decendants):
+    """ Get revisions that have replaces a given revision. """
     revision = model.objects.get(uuid=uuid)
     descendant = get_object_or_None(model, replaces=revision)
     if descendant:
@@ -66,6 +77,7 @@ def get_revision_descendants(model, uuid, decendants):
     return decendants
 
 def get_current_revision_using_ancestor(model, ancestor_uuid):
+    """ Get the final (active) revision replacing a given revision. """
     descendants = get_revision_descendants(model, ancestor_uuid, [])
     descendants.reverse()
     return descendants[0]
