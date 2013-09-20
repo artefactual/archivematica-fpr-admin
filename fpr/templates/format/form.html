@@ -8,6 +8,15 @@
 {{ action }} Format
 {% endblock page_title %}
 
+{% block extra_css %}
+{{ block.super }}
+<style type="text/css">
+#format_group_form {
+  margin-left: 2em;
+}
+</style>
+{% endblock extra_css %}
+
 {% block breadcrumbs %}
 {{ block.super }}
 <li><a href="{% url 'format_list' %}">Formats</a></li>
