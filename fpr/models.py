@@ -267,7 +267,7 @@ class FPRule(models.Model):
         # TODO this might need to be moved/updated elsewhere
         # If part of Archivematica, update chain link and task config
         try:
-            from main.models import MicroServiceChainLink, TaskConfig
+            from main.models import MicroServiceChainLink, MicroServiceChainLinkExitCode, TaskConfig
         except ImportError:
             pass
         else:
@@ -276,6 +276,7 @@ class FPRule(models.Model):
             MicroServiceChainLink.objects.filter(currenttask=tc).delete()
             tc.delete()
             if self.enabled:
+                # Create new TaskConfig
                 transcode_task_type='5e70152a-9c5b-4c17-b823-c9298c546eeb'
                 task_config = TaskConfig.objects.create(
                     id=str(uuid.uuid4()),
@@ -283,20 +284,29 @@ class FPRule(models.Model):
                     tasktypepkreference=self.uuid,
                     description=unicode(self)
                 )
-                # Not sure why defaultnextchainlink is set this way, but
-                # mimicking existing CommandRelationship behaviour
+                # Create new MicroServiceChainLink
+                # defaultnextchainlink should point at the default action for
+                # that purpose, in case the FPRule fails.
+                # TODO need to set up default rules for FPR v2 API
                 if self.purpose == 'access':
                     defaultnextchainlink='006f6fc3-5837-4333-8920-fefc977e7a76'
                 elif self.purpose == 'thumbnail':
                     defaultnextchainlink='a7fe8db6-387c-4295-b488-56e1b55c57d9'
                 else:
                     defaultnextchainlink=None
-                MicroServiceChainLink.objects.create(
+                mscl = MicroServiceChainLink.objects.create(
                     id=str(uuid.uuid4()),
                     currenttask=task_config.id,
                     defaultnextchainlink=defaultnextchainlink,
                     defaultplaysound=None,
                     microservicegroup="Normalize",
+                )
+                # Create new MicroServiceChainLinkExitCode
+                MicroServiceChainLinkExitCode.objects.create(
+                    id=str(uuid.uuid4()),
+                    microservicechainlink=mscl.id,
+                    exitcode=0,  # default
+                    nextmicroservicechainlink=None,  # default
                 )
 
 
