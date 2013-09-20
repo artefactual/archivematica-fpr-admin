@@ -92,13 +92,13 @@ def formatversion_edit(request, format_slug, slug=None):
         if version:
             # if replacing the latest version or base on old version
             if version.enabled:
-                replacing = fprmodels.FormatVersion.objects.get(pk=version.pk)
+                replaces = fprmodels.FormatVersion.objects.get(pk=version.pk)
             else:
-                replacing = get_current_revision_using_ancestor(fprmodels.FormatVersion, version.uuid)
+                replaces = get_current_revision_using_ancestor(fprmodels.FormatVersion, version.uuid)
         else:
-            replacing = None
-        new_version.save(replacing=replacing)
-        utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replacing, new_version)
+            replaces = None
+        new_version.save(replacing=replaces)
+        utils.update_references_to_object(fprmodels.FormatVersion, 'uuid', replaces, new_version)
         messages.info(request, 'Saved.')
         return redirect('format_detail', format.slug)
 
@@ -278,8 +278,8 @@ def idrule_edit(request, uuid=None):
     form = fprforms.IDRuleForm(request.POST or None, instance=idrule)
     if form.is_valid():
         new_idrule = form.save(commit=False)
-        old_idrule = get_object_or_None(fprmodels.IDRule, uuid=uuid, enabled=True)
-        new_idrule.save(replacing=old_idrule)
+        replaces = get_object_or_None(fprmodels.IDRule, uuid=uuid, enabled=True)
+        new_idrule.save(replacing=replaces)
         messages.info(request, 'Saved.')
         return redirect('idrule_list')
     return render(request, 'fpr/idrule/form.html', locals())
@@ -306,9 +306,9 @@ def idcommand_edit(request, uuid=None):
     form = fprforms.IDCommandForm(request.POST or None, instance=idcommand)
     if form.is_valid():
         new_idcommand = form.save(commit=False)
-        old_idcommand = get_object_or_None(fprmodels.IDCommand, uuid=uuid, enabled=True)
-        new_idcommand.save(replacing=old_idcommand)
-        utils.update_references_to_object(fprmodels.IDCommand, 'uuid', old_idcommand, new_idcommand)
+        replaces = get_object_or_None(fprmodels.IDCommand, uuid=uuid, enabled=True)
+        new_idcommand.save(replacing=replaces)
+        utils.update_references_to_object(fprmodels.IDCommand, 'uuid', replaces, new_idcommand)
         messages.info(request, 'Saved.')
         return redirect('idcommand_list')
     return render(request, 'fpr/idcommand/form.html', locals())
@@ -401,11 +401,11 @@ def fpcommand_edit(request, uuid=None):
         form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
         if form.is_valid():
             new_fpcommand = form.save(commit=False)
-            old_fpcommand = get_object_or_None(fprmodels.FPCommand, uuid=uuid, enabled=True)
-            new_fpcommand.save(replacing=old_fpcommand)
+            replaces = get_object_or_None(fprmodels.FPCommand, uuid=uuid, enabled=True)
+            new_fpcommand.save(replacing=replaces)
             form.save_m2m()
-            utils.update_references_to_object(fprmodels.FPCommand, 'uuid', old_fpcommand, new_fpcommand)
-            utils.update_many_to_many_references(fprmodels.FPTool, 'commands', old_fpcommand, new_fpcommand)
+            utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
+            utils.update_many_to_many_references(fprmodels.FPTool, 'commands', replaces, new_fpcommand)
             messages.info(request, 'Saved.')
             return redirect('fpcommand_detail', new_fpcommand.uuid)
     else:
