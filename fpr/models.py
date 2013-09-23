@@ -35,7 +35,7 @@ class NormalizationRules(models.Manager):
 ############ MIXINS ############
 
 class VersionedModel(models.Model):
-    replaces = models.ForeignKey('self', null=True, blank=True)
+    replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     enabled = models.BooleanField(default=True)
 
     def save(self, replacing=None, *args, **kwargs):
@@ -217,11 +217,11 @@ class IDToolConfig(VersionedModel, models.Model):
                 # Add replacement to MicroServiceChoiceReplacementDic
                 at_link = 'f09847c2-ee51-429a-9478-a860477f6b8d'
                 # {"%IDCommand%": self.command.uuid}
-                replace = '{{"%IDCommand%":"{0}"}}'.format(self.command.uuid)
+                replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
                 MicroServiceChoiceReplacementDic.objects.create(
                     id=self.uuid,
                     choiceavailableatlink=at_link,
-                    description=self.command.description,
+                    description=str(self),
                     replacementdic=replace,
                     )
 
@@ -260,10 +260,6 @@ class FPRule(VersionedModel, models.Model):
         except ImportError:
             pass
         else:
-            # Remove existing object
-            tc = TaskConfig.objects.filter(tasktypepkreference=self.uuid)
-            MicroServiceChainLink.objects.filter(currenttask=tc).delete()
-            tc.delete()
             if self.enabled:
                 # Create new TaskConfig
                 transcode_task_type='5e70152a-9c5b-4c17-b823-c9298c546eeb'
@@ -312,8 +308,8 @@ class FPCommand(VersionedModel, models.Model):
         ('as_is', 'No shebang (#!/path/to/interpreter) needed')
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
-    output_file_format = models.CharField(max_length=256, null=True, blank=True)
     output_location = models.TextField(null=True, blank=True)
+    output_format = models.ForeignKey('FormatVersion', to_field='uuid', )
     COMMAND_USAGE_CHOICES = (
         ('normalization', 'Normalization'),
         ('event_detail', 'Event Detail'),
@@ -330,6 +326,7 @@ class FPCommand(VersionedModel, models.Model):
 
     def __unicode__(self):
         return u"{}".format(self.description)
+
 
 class FPTool(models.Model):
     """ Tool used to perform normalization.  Eg. convert, ffmpeg, ps2pdf. """

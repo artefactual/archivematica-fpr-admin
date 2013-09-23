@@ -152,4 +152,4 @@ class FPCommandForm(forms.ModelForm):
 
     class Meta:
         model = fprmodels.FPCommand
-        fields = ('tool', 'description', 'command', 'script_type', 'output_file_format', 'output_location', 'command_usage', 'verification_command', 'event_detail_command')
+        fields = ('tool', 'description', 'command', 'script_type', 'output_format', 'output_location', 'command_usage', 'verification_command', 'event_detail_command')
