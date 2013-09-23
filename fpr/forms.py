@@ -1,5 +1,10 @@
+# Django core, alphabetical
 from django import forms
 
+# External dependencies, alphabetical
+from annoying.functions import get_object_or_None
+
+# This project, alphabetical
 from fpr import models as fprmodels
 
 ############ FORMATS ############
@@ -35,6 +40,23 @@ class FormatGroupForm(forms.ModelForm):
 ############ ID TOOLS ############
 
 class IDToolForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super(IDToolForm, self).clean()
+        if self.instance.pk == None:
+            submitted_description = cleaned_data.get('description') # request.POST.get('description', '')
+            submitted_version = cleaned_data.get('version') #request.POST.get('version', '')
+
+            existing_idtool = get_object_or_None(
+                fprmodels.IDTool,
+                description=submitted_description,
+                version=submitted_version
+            )
+
+            if existing_idtool != None:
+                raise forms.ValidationError('An ID tool with this description and version already exists')
+
+        return cleaned_data
+
     class Meta:
         model = fprmodels.IDTool
         fields = ('description', 'version')
