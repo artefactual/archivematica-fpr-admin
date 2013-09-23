@@ -88,4 +88,7 @@ def get_current_revision_using_ancestor(model, ancestor_uuid):
     """ Get the final (active) revision replacing a given revision. """
     descendants = get_revision_descendants(model, ancestor_uuid, [])
     descendants.reverse()
-    return descendants[0]
+    if len(descendants):
+        return descendants[0]
+    else:
+        return None
