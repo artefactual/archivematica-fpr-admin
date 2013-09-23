@@ -304,7 +304,7 @@ def idcommand_edit(request, uuid=None):
     form = fprforms.IDCommandForm(request.POST or None, instance=idcommand)
     if form.is_valid():
         new_idcommand = form.save(commit=False)
-        replaces = get_object_or_None(fprmodels.IDCommand, uuid=uuid, enabled=True)
+        replaces = utils.determine_what_replaces_model_instance(fprmodels.IDCommand, idcommand)
         new_idcommand.save(replacing=replaces)
         utils.update_references_to_object(fprmodels.IDCommand, 'uuid', replaces, new_idcommand)
         messages.info(request, 'Saved.')
