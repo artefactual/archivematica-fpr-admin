@@ -29,7 +29,7 @@ def update_references_to_object(model_referenced, key_field_name, old_object, ne
             for field in model._meta.fields:
                 type = field.get_internal_type()
                 # update each foreign key reference to the target model
-                if type == 'ForeignKey' and field.rel != None and field.rel.to == model_referenced and field.rel.field_name == key_field_name:
+                if field.name != 'replaces' and type == 'ForeignKey' and field.rel != None and field.rel.to == model_referenced and field.rel.field_name == key_field_name:
                     filter_criteria = {field.name: old_object}
                     parent_objects = model.objects.filter(**filter_criteria)
                     for parent in parent_objects:
