@@ -240,6 +240,10 @@ class FPRule(VersionedModel, models.Model):
     command = models.ForeignKey('FPCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
 
+    count_attempts = models.IntegerField(default=0)
+    count_okay = models.IntegerField(default=0)
+    count_not_okay = models.IntegerField(default=0)
+
     lastmodified = models.DateTimeField(auto_now=True)
 
     class Meta:

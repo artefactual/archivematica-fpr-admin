@@ -33,6 +33,10 @@
           <dd><a href="{% url 'formatversion_detail' fprule.format.format.slug fprule.format.slug %}">{{ fprule.format.description }}</a></dd>
         <dt>Command</dt>
           <dd><a href="{% url 'fpcommand_detail' fprule.command.uuid %}">{{ fprule.command.description }}</a></dd>
+        <dt>Stats</dt>
+          <dd>Success: {{ fprule.count_okay }}</dd>
+          <dd>Failure: {{ fprule.count_not_okay }}</dd>
+          <dd>Total: {{ fprule.count_attempts }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
       </dl>
