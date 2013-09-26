@@ -107,7 +107,7 @@ class FormatVersion(VersionedModel, models.Model):
     class Meta:
         verbose_name = "Format Version"
         ordering = ['format', 'description']
-
+       
     def __unicode__(self):
         return u"{}: {}".format(self.format, self.description)
 
@@ -151,6 +151,7 @@ class IDRule(VersionedModel, models.Model):
 
     class Meta:
         verbose_name = "Format Identification Rule"
+        unique_together = ('command','command_output') 
 
     def __unicode__(self):
         return u"{command} with {output} is {format}".format(command=self.command,
