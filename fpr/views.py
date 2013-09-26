@@ -127,6 +127,7 @@ def formatgroup_edit(request, slug=None):
     else:
         action = "Create"
         group = None
+    group_formats = fprmodels.Format.objects.filter(group=group.uuid)
 
     form = fprforms.FormatGroupForm(request.POST or None, instance=group)
     if form.is_valid():

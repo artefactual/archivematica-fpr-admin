@@ -38,8 +38,36 @@
       </form>
     </div>
 
+    <h2>Formats</h2>
+
+    <p><a href="{% url 'format_create' %}">Create New Format</a></p>
+
+    {% if group_formats %}
+      <table class="datatable">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for format in group_formats %}
+          <tr>
+            <td><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></td>
+            <td><a href="{% url 'format_edit' format.slug %}">Edit</a> </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No formats exist for {{ group.description }}.</p>
+    {% endif %}
+
+
   </div> <!-- /span10 -->
 
+
 </div> <!-- /row -->
+
 
 {% endblock app_content %}
