@@ -13,6 +13,10 @@ from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
 from django_extensions.db.fields import UUIDField
 
+from django.db.models import Q, Model
+from django.core.validators import ValidationError
+from django.core.exceptions import NON_FIELD_ERRORS
+
 logger = logging.getLogger(__name__)
 
 ############################### API V2 MODELS ###############################
@@ -151,7 +155,24 @@ class IDRule(VersionedModel, models.Model):
 
     class Meta:
         verbose_name = "Format Identification Rule"
-        unique_together = ('command','command_output') 
+        unique_together = ('command','command_output','enabled') 
+
+
+    def validate_unique(self, *args, **kwargs):
+        super(IDRule, self).validate_unique(*args, **kwargs)
+
+        qs = self.__class__._default_manager.filter(
+            command=self.command,
+            command_output=self.command_output,
+            enabled=1
+        )
+
+        if not self._state.adding and self.pk is not None:
+            qs = qs.exclude(pk=self.pk)
+
+        if qs.exists():
+            raise ValidationError( {
+                    NON_FIELD_ERRORS:('Unable to save, a rule with this output already exists for this command.',)})
 
     def __unicode__(self):
         return u"{command} with {output} is {format}".format(command=self.command,
