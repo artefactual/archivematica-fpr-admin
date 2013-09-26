@@ -208,26 +208,31 @@ class IDToolConfig(VersionedModel, models.Model):
 
     def save(self, *args, **kwargs):
         super(IDToolConfig, self).save(*args, **kwargs)
-        # TODO this might need to be moved/updated elsewhere
         # If part of archivematica, create user choice replacement dict
         try:
             from main.models import MicroServiceChoiceReplacementDic
         except ImportError:
-            pass
-        else:
-            # Remove existing object
-            MicroServiceChoiceReplacementDic.objects.filter(id=self.uuid).delete()
-            if self.enabled:
-                # Add replacement to MicroServiceChoiceReplacementDic
-                at_link = 'f09847c2-ee51-429a-9478-a860477f6b8d'
-                # {"%IDCommand%": self.command.uuid}
-                replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
-                MicroServiceChoiceReplacementDic.objects.create(
-                    id=self.uuid,
-                    choiceavailableatlink=at_link,
-                    description=str(self),
-                    replacementdic=replace,
-                    )
+            return
+        # Remove existing object
+        MicroServiceChoiceReplacementDic.objects.filter(replacementdic__contains=self.uuid).delete()
+        if self.enabled:
+            # Add replacement to MicroServiceChoiceReplacementDic
+            at_link_transfer = 'f09847c2-ee51-429a-9478-a860477f6b8d'
+            at_link_ingest = '7a024896-c4f7-4808-a240-44c87c762bc5'
+            # {"%IDCommand%": self.command.uuid}
+            replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
+            MicroServiceChoiceReplacementDic.objects.create(
+                id=str(uuid.uuid4()),
+                choiceavailableatlink=at_link_transfer,
+                description=str(self),
+                replacementdic=replace,
+            )
+            MicroServiceChoiceReplacementDic.objects.create(
+                id=str(uuid.uuid4()),
+                choiceavailableatlink=at_link_ingest,
+                description=str(self),
+                replacementdic=replace,
+            )
 
 
 ############ NORMALIZATION ############
