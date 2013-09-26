@@ -29,6 +29,8 @@
     <div class='format'>
         <dl>
             <dt>Description</dt> <dd>{{ version.description }}</dd>
+            <dt>Version</dt> <dd>{{ version.version }}</dd>
+            <dt>Pronom ID</dt> <dd>{{ version.pronom_id }}</dd>
             <dt>Format</dt> <dd><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></dd>
             <dt>Access?</dt> <dd>{{ version.access_format }}</dd>
             <dt>Preservation?</dt> <dd>{{ version.preservation_format }}</dd>

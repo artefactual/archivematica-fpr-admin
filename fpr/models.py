@@ -94,6 +94,8 @@ class FormatVersion(VersionedModel, models.Model):
     """ Format that a tool identifies. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     format = models.ForeignKey('Format', to_field='uuid', related_name='version_set')
+    version = models.CharField(max_length=10, null=True, blank=True)
+    pronom_id = models.CharField(max_length=16, null=True, blank=True)
     description = models.CharField(max_length=128, null=True, blank=True)
     access_format = models.BooleanField(default=False)
     preservation_format = models.BooleanField(default=False)

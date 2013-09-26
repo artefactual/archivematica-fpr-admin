@@ -30,7 +30,7 @@ class FormatForm(forms.ModelForm):
 class FormatVersionForm(forms.ModelForm):
     class Meta:
         model = fprmodels.FormatVersion
-        fields = ('description', 'access_format', 'preservation_format')
+        fields = ('description', 'version', 'pronom_id', 'access_format', 'preservation_format')
 
 class FormatGroupForm(forms.ModelForm):
     class Meta:
