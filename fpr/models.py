@@ -99,7 +99,7 @@ class FormatVersion(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     format = models.ForeignKey('Format', to_field='uuid', related_name='version_set')
     version = models.CharField(max_length=10, null=True, blank=True)
-    pronom_id = models.CharField(max_length=16, null=True, blank=True, unique=True)
+    pronom_id = models.CharField(max_length=16, null=True, blank=True)
     description = models.CharField(max_length=128, null=True, blank=True,
         help_text='Formal name to go in the METS file.')
     access_format = models.BooleanField(default=False)
@@ -111,7 +111,23 @@ class FormatVersion(VersionedModel, models.Model):
     class Meta:
         verbose_name = "Format Version"
         ordering = ['format', 'description']
-       
+      
+    def validate_unique(self, *args, **kwargs):
+        super(FormatVersion, self).validate_unique(*args, **kwargs)
+
+        qs = self.__class__._default_manager.filter(
+            pronom_id=self.pronom_id,
+            enabled=1
+        )
+
+        if not self._state.adding and self.pk is not None:
+            qs = qs.exclude(pk=self.pk)
+
+        if qs.exists():
+            raise ValidationError( {
+                    NON_FIELD_ERRORS:('Unable to save, an active Format Version  with this pronom id already exists.',)})
+
+ 
     def __unicode__(self):
         return u"{}: {}".format(self.format, self.description)
 
