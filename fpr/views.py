@@ -398,7 +398,7 @@ def fptool_edit(request, slug=None):
 ############ FP COMMANDS ############
 
 def fpcommand_list(request):
-    fpcommands = fprmodels.FPCommand.objects.filter(enabled=True)
+    fpcommands = fprmodels.FPCommand.objects.filter(enabled=True).filter(~Q(command_usage='Characterization'))
     return render(request, 'fpr/fpcommand/list.html', locals())
 
 def fpcommand_detail(request, uuid):
