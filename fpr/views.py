@@ -5,10 +5,12 @@ import os
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
+
 
 # External dependencies, alphabetical
 from annoying.functions import get_object_or_None
@@ -327,7 +329,7 @@ def idcommand_edit(request, uuid=None):
 ############ FP RULES ############
 
 def fprule_list(request):
-    fprules = fprmodels.FPRule.objects.filter(enabled=True)
+    fprules = fprmodels.FPRule.objects.filter(enabled=True).filter(~Q(purpose='Characterize'))
     return render(request, 'fpr/fprule/list.html', locals())
 
 def fprule_detail(request, uuid):
