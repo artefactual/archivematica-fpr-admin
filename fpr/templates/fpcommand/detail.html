@@ -27,6 +27,8 @@
 
     <div class='format'>
       <dl>
+        <dt>UUID</dt>
+          <dd>{{ fpcommand.uuid }} Rule</dd>
         <dt>Tool(s)</dt>
           <dd>
             <ul>
@@ -59,8 +61,6 @@
           {% else %}
             <dd>{{ fpcommand.event_detail_command }}</dd>
           {% endif %}
-        <dt>UUID</dt>
-          <dd>{{ fpcommand.uuid }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
       </dl>
