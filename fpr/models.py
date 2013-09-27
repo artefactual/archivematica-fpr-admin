@@ -347,7 +347,7 @@ class FPRule(VersionedModel, models.Model):
 class FPCommand(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
-    tool = models.ManyToManyField('FPTool', related_name="commands")
+    tool = models.ManyToManyField('FPTool', related_name="commands", through='FPCommandTool')
     description = models.CharField(max_length=256)
     command = models.TextField()
     SCRIPT_TYPE_CHOICES = (
@@ -395,6 +395,15 @@ class FPTool(models.Model):
     def _slug(self):
         """ Returns string to be slugified. """
         return "{} {}".format(self.description, self.version)
+
+
+class FPCommandTool(models.Model):
+    """ Many-to-many relationship between FPcommand and FPTool. """
+    # Needs to set to_field='uuid' which cannot be done with M2M field
+    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    command = models.ForeignKey('FPCommand', to_field='uuid')
+    tool = models.ForeignKey('FPTool', to_field='uuid')
+
 
 ############################### API V1 MODELS ###############################
 
