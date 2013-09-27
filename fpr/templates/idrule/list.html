@@ -30,7 +30,6 @@ Identification Rule Information
         <th>Command</th>
         <th>Output</th>
         <th>Tools</th>
-        <th>UUID</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -45,8 +44,11 @@ Identification Rule Information
             <a href="{% url 'idtool_detail' tool.slug %}">{{ tool }}</a><br />
           {% endfor %}
         </td>
-        <td><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.uuid }}</a></td>
-        <td><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a> | <a href="{% url 'idrule_delete' idrule.uuid %}">Disable</a></td>
+        <td>
+          <a href="{% url 'idrule_detail' idrule.uuid %}">View</a> |
+          <a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a> |
+          <a href="{% url 'idrule_delete' idrule.uuid %}">Disable</a>
+        </td>
       </tr>
     {% endfor %}
     </tbody>

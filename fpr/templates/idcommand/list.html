@@ -28,7 +28,6 @@ Identification Command Information
       <tr>
         <th>Command</th>
         <th>Type</th>
-        <th>UUID</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -37,8 +36,10 @@ Identification Command Information
       <tr>
         <td><a href="{% url 'idcommand_detail' idcommand.uuid %}">{{ idcommand.description }}</a></td>
         <td>{{ idcommand.script_type }}</td>
-        <td><a href="{% url 'idcommand_detail' idcommand.uuid %}">{{ idcommand.uuid }}</a></td>
-        <td><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></td>
+        <td>
+          <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a> |
+          <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a>
+        </td>
       </tr>
     {% endfor %}
     </tbody>

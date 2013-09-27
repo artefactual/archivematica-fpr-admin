@@ -28,7 +28,6 @@ Format Policy Command Information
         <thead>
           <tr>
             <th>Description</th>
-            <th>UUID</th>
             <th>Usage</th>
             <th>Actions</th>
           </tr>
@@ -37,9 +36,11 @@ Format Policy Command Information
         {% for fpcommand in fpcommands %}
           <tr>
             <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
-            <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.uuid }}</a></td>
             <td>{{ fpcommand.command_usage|title }}</td>
-            <td><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></td>
+            <td>
+              <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a> |
+              <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>

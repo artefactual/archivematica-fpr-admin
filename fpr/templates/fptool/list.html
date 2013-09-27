@@ -37,7 +37,10 @@ Normalization Tool Information
           <tr>
             <td><a href="{% url 'fptool_detail' fptool.slug %}">{{ fptool.description }}</a></td>
             <td>{{ fptool.version }}</td>
-            <td><a href="{% url 'fptool_edit' fptool.slug %}">Edit</a></td>
+            <td>
+               <a href="{% url 'fptool_detail' fptool.slug %}">View</a> |
+              <a href="{% url 'fptool_edit' fptool.slug %}">Edit</a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>

@@ -31,7 +31,6 @@ Format Policy Rule Information
             <th>Format</th>
             <th>Command</th>
             <th>Success</th>
-            <th>UUID</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -42,8 +41,10 @@ Format Policy Rule Information
             <td>{{ fprule.format.description }}</td>
             <td>{{ fprule.command.description }}</td>
             <td>{{ fprule.count_okay }} out of {{ fprule.count_attempts }}</td>
-            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.uuid }}</a></td>
-            <td><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></td>
+            <td>
+              <a href="{% url 'fprule_detail' fprule.uuid %}">View</a> |
+              <a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>
