@@ -19,3 +19,11 @@
   {% endblock app_content %}
 
 {% endblock content %}
+
+{% block extra_js %}
+  <script>
+  $(document).ready(function() {
+    $('th').css('resize', 'both').css('overflow', 'auto');
+  });
+  </script>
+{% endblock extra_js %}
