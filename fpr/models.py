@@ -171,8 +171,6 @@ class IDRule(VersionedModel, models.Model):
 
     class Meta:
         verbose_name = "Format Identification Rule"
-        unique_together = ('command','command_output','enabled') 
-
 
     def validate_unique(self, *args, **kwargs):
         super(IDRule, self).validate_unique(*args, **kwargs)
