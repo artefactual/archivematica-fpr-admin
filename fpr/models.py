@@ -424,7 +424,7 @@ class FPCommandTool(models.Model):
     tool = models.ForeignKey('FPTool', to_field='uuid')
 
 
-############################### API V1 MODELS ###############################
+############################# API V1 & V2 MODELS #############################
 
 class Agent(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='uuid')
@@ -435,6 +435,9 @@ class Agent(models.Model):
     clientIP = models.CharField(max_length=100)
     class Meta:
         db_table=u'Agent'
+
+
+############################### API V1 MODELS ###############################
 
 class CommandType(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')
