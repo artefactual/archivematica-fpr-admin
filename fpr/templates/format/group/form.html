@@ -38,11 +38,12 @@
       </form>
     </div>
 
+    {% if group %}
     <h2>Formats</h2>
 
     <p><a href="{% url 'format_create' %}">Create New Format</a></p>
 
-    {% if group_formats %}
+      {% if group_formats %}
       <table class="datatable">
         <thead>
           <tr>
@@ -59,10 +60,10 @@
         {% endfor %}
         </tbody>
       </table>
-    {% else %}
+      {% else %}
       <p>No formats exist for {{ group.description }}.</p>
+      {% endif %}
     {% endif %}
-
 
   </div> <!-- /span10 -->
 

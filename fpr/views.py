@@ -124,10 +124,10 @@ def formatgroup_edit(request, slug=None):
     if slug:
         action = "Edit"
         group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
+        group_formats = fprmodels.Format.objects.filter(group=group.uuid)
     else:
         action = "Create"
         group = None
-    group_formats = fprmodels.Format.objects.filter(group=group.uuid)
 
     form = fprforms.FormatGroupForm(request.POST or None, instance=group)
     if form.is_valid():
@@ -283,6 +283,15 @@ def idrule_edit(request, uuid=None):
 
     return render(request, 'fpr/idrule/form.html', locals())
 
+def idrule_delete(request, uuid):
+    idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            idrule.enabled = False
+            idrule.save()
+            messages.info(request, 'Disabled.')
+        return redirect('idrule_detail', idrule.uuid)
+    return render(request, 'fpr/idrule/delete.html', locals())
 
 ############ ID COMMANDS ############
 

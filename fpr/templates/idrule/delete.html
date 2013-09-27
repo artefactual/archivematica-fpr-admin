@@ -1,0 +1,37 @@
+{% extends "fpr/app_layout.html" %}
+{% load url from future %}
+{% load staticfiles %}
+
+{% block title %}Archivematica FPR Server - Disable Format Version{% endblock title %}
+
+{% block page_title %}
+Disable {{ idrule.description }}
+{% endblock page_title %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li><a href="{% url 'idrule_list' %}">Rules</a></li>
+<li><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.description }}</a></li>
+{% endblock breadcrumbs %}
+
+{% block app_content %}
+
+<div class="row">
+
+  {% include 'fpr/_sidebar.html' %}
+
+  <div class="span10">
+
+    <div class='idtool_config'>
+      <form action="{% url 'idrule_delete' idrule.uuid %}" method="post">{% csrf_token %}
+        <p>Are you sure? 
+
+        <input type="submit" name="delete" value="Disable ID Rule" />
+        <input type="submit" name="cancel" value="Cancel, change nothing" />
+      </form>
+    </div>
+
+  </div> <!-- /span10 -->
+</div> <!-- /row -->
+
+{% endblock app_content %}

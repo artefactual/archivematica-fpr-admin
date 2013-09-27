@@ -14,8 +14,8 @@ class FormatForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(FormatForm, self).__init__(*args, **kwargs)
-
-        # Add 'create' option to the FormatGroup dropdown
+        
+        # add 'create' option to the FormatGroup dropdown
         choices = [(f.uuid, f.description) for f in fprmodels.FormatGroup.objects.all()]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))

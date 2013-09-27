@@ -70,6 +70,11 @@ urlpatterns = patterns('fpr.views',
         name='idrule_edit'),
     url(r'^idrule/(?P<uuid>' + UUID_REGEX + ')/$', 'idrule_detail',
         name='idrule_detail'),
+    url(r'^idrule/(?P<uuid>' + UUID_REGEX + ')/delete/$',
+        'idrule_delete',
+        name='idrule_delete'),
+
+
 
     # ID Commands
     url(r'^idcommand/$', 'idcommand_list',
