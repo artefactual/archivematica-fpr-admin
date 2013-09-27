@@ -4,6 +4,15 @@
 
 {% block title %}Archivematica FPR Server - Format {{format.description}}{% endblock title %}
 
+{% block extra_css %}
+<style type="text/css">
+th {
+  resize: both;
+  overflow: auto;
+}
+</style>
+{% endblock extra_css %}
+
 {% block content %}
 
   <ul class="breadcrumb">
@@ -19,11 +28,3 @@
   {% endblock app_content %}
 
 {% endblock content %}
-
-{% block extra_js %}
-  <script>
-  $(document).ready(function() {
-    $('th').css('resize', 'both').css('overflow', 'auto');
-  });
-  </script>
-{% endblock extra_js %}
