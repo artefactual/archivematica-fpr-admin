@@ -39,6 +39,8 @@
           <dd>Success: {{ fprule.count_okay }}</dd>
           <dd>Failure: {{ fprule.count_not_okay }}</dd>
           <dd>Total: {{ fprule.count_attempts }}</dd>
+        <dt>Enabled</dt>
+          <dd>{{ fprule.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
       </dl>

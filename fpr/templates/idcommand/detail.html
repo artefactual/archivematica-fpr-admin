@@ -41,6 +41,8 @@
               <li><a href="{% url 'idtool_detail' config.tool.slug %}">{{ config.tool.description }}</a></li>
             {% endif %}
           {% endfor %}
+        <dt>Enabled</dt>
+          <dd>{{ idcommand.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
       </dl>

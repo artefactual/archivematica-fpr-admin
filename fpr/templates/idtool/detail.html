@@ -30,6 +30,8 @@
           <dd>{{ idtool.description }}</dd>
         <dt>Version</dt>
           <dd>{{ idtool.version }}</dd>
+        <dt>Enabled</dt>
+          <dd>{{ idtool.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'idtool_edit' idtool.slug %}">Edit</a></dd>
       </dl>
@@ -46,7 +48,6 @@
             <th>Configuration</th>
             <th>Identifier</th>
             <th>Command</th>
-            <th>UUID</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -56,8 +57,11 @@
             <td>{{ config.config }}</td>
             <td>{{ config.command.description }}</td>
             <td>{{ config.command.script|truncatechars:100 }}</td>
-            <td><a href="{% url 'idtoolconfig_detail' idtool.slug config.slug %}">{{ config.uuid }}</a></td>
-            <td><a href="{% url 'idtoolconfig_edit' idtool.slug config.slug %}">Replace</a> | <a href="{% url 'idtoolconfig_delete' idtool.slug config.slug %}">Disable</a></td>
+            <td>
+              <a href="{% url 'idtoolconfig_detail' idtool.slug config.slug %}">View</a> |
+              <a href="{% url 'idtoolconfig_edit' idtool.slug config.slug %}">Replace</a> |
+              <a href="{% url 'idtoolconfig_delete' idtool.slug config.slug %}">Disable</a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>

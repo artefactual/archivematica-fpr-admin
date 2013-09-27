@@ -35,6 +35,8 @@ ID Rule Information
           <dd><a href="{% url 'idcommand_detail' idrule.command.uuid %}">{{ idrule.command.description }}</a></dd>
         <dt>Command Output</dt>
           <dd>{{ idrule.command_output }}</dd>
+        <dt>Enabled</dt>
+          <dd>{{ idrule.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></dd>
       </dl>

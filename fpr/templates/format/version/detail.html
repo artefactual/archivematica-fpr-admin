@@ -35,6 +35,7 @@
             <dt>Format</dt> <dd><a href="{% url 'format_detail' format.slug %}">{{ format.description }}</a></dd>
             <dt>Access?</dt> <dd>{{ version.access_format }}</dd>
             <dt>Preservation?</dt> <dd>{{ version.preservation_format }}</dd>
+            <dt>Enabled</dt> <dd>{{ version.enabled }}</dd>
             <dt>Actions</dt>
               <dd><a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a></dd>
         </dl>

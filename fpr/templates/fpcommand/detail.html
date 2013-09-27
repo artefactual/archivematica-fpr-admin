@@ -61,6 +61,8 @@
           {% else %}
             <dd>{{ fpcommand.event_detail_command }}</dd>
           {% endif %}
+        <dt>Enabled</dt>
+          <dd>{{ fpcommand.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
       </dl>
