@@ -294,7 +294,7 @@ class FPRule(VersionedModel, models.Model):
     class Meta:
         verbose_name = "Format Policy Rule"
 
-     def validate_unique(self, *args, **kwargs):
+    def validate_unique(self, *args, **kwargs):
         super(FPRule, self).validate_unique(*args, **kwargs)
 
         if len(self.pronom_id) > 0:
