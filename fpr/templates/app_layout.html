@@ -14,9 +14,7 @@ th {
 </style>
 
     <!-- Le styles -->
-    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="{{STATIC_URL}}css/jquery.dataTables.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}vendor/datatables/jquery.dataTables.css" rel="stylesheet">
     
 {% endblock extra_css %}
 
@@ -40,9 +38,7 @@ th {
   <!-- Le javascript
   ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{STATIC_URL}}vendor/jquery-1.10.2.min.js"></script>
-    <script src="{{STATIC_URL}}vendor/jquery.dataTables.min.js"></script>
-    <script src="{{STATIC_URL}}vendor/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}vendor/datatables/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function() {
       $('.datatable').dataTable();
