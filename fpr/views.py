@@ -420,12 +420,13 @@ def fpcommand_edit(request, uuid=None):
             for commandtool in commandtools:
                 commandtool.delete()
 
+            # save command
             new_fpcommand = form.save(commit=False)
             replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
-            # TODO: add many to many reference updating
 
+            # create relations to tool
             for tool_id in request.POST.getlist('tool'):
                 tool = fprmodels.FPCommandTool(
                     command=new_fpcommand,
