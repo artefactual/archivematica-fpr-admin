@@ -70,7 +70,7 @@ class Format(models.Model):
     Eg. GIF, Word file."""
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     description = models.CharField(max_length=128, help_text="Common name of format")
-    group = models.ForeignKey('FormatGroup', to_field='uuid')
+    group = models.ForeignKey('FormatGroup', to_field='uuid', null=True)
     slug = AutoSlugField(populate_from='description')
 
     class Meta:
@@ -97,7 +97,7 @@ class FormatGroup(models.Model):
 class FormatVersion(VersionedModel, models.Model):
     """ Format that a tool identifies. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    format = models.ForeignKey('Format', to_field='uuid', related_name='version_set')
+    format = models.ForeignKey('Format', to_field='uuid', related_name='version_set', null=True)
     version = models.CharField(max_length=10, null=True, blank=True)
     pronom_id = models.CharField(max_length=16, blank=True)
     description = models.CharField(max_length=128, null=True, blank=True,

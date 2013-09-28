@@ -20,7 +20,7 @@ class FormatForm(forms.ModelForm):
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['group'].choices = choices
-        if hasattr(self.instance, 'group'):
+        if hasattr(self.instance, 'group') and self.instance.group:
             self.fields['group'].initial = self.instance.group.uuid
 
     class Meta:
