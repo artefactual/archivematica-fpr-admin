@@ -415,12 +415,24 @@ def fpcommand_edit(request, uuid=None):
     if request.method == 'POST':
         form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
         if form.is_valid():
+            # remove existing relations
+            commandtools = fprmodels.FPCommandTool.objects.filter(command=fpcommand)
+            for commandtool in commandtools:
+                commandtool.delete()
+
             new_fpcommand = form.save(commit=False)
             replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
-            form.save_m2m()
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
-            utils.update_many_to_many_references(fprmodels.FPTool, 'commands', replaces, new_fpcommand)
+            # TODO: add many to many reference updating
+
+            for tool_id in request.POST.getlist('tool'):
+                tool = fprmodels.FPCommandTool(
+                    command=new_fpcommand,
+                    tool=fprmodels.FPTool.objects.get(pk=tool_id)
+                )
+                tool.save()
+
             messages.info(request, 'Saved.')
             return redirect('fpcommand_list')
     else:
