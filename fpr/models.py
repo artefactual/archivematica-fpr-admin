@@ -377,7 +377,7 @@ class FPCommand(VersionedModel, models.Model):
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     output_location = models.TextField(null=True, blank=True)
-    output_format = models.ForeignKey('FormatVersion', to_field='uuid', )
+    output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, )
     COMMAND_USAGE_CHOICES = (
         ('normalization', 'Normalization'),
         ('event_detail', 'Event Detail'),
