@@ -106,7 +106,7 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all()]
+        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(command_usage='normalization')]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
@@ -115,6 +115,8 @@ class FPRuleForm(forms.ModelForm):
 
         # Show only active format versions in the format dropdown
         self.fields['format'].queryset = fprmodels.FormatVersion.active.all()
+        
+    
 
     class Meta:
         model = fprmodels.FPRule
