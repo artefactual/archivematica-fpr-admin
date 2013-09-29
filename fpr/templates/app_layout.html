@@ -12,6 +12,12 @@ th {
   overflow: auto;
 }
 </style>
+
+    <!-- Le styles -->
+    <link href="{{STATIC_URL}}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}css/jquery.dataTables.css" rel="stylesheet">
+    
 {% endblock extra_css %}
 
 {% block content %}
@@ -28,4 +34,13 @@ th {
   {% block app_content %}
   {% endblock app_content %}
 
-{% endblock content %}
+  {% endblock content %}
+
+  {% block extra_js %}
+  <!-- Le javascript
+  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/js/jquery.dataTables.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  {% endblock extra_js %}
