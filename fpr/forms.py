@@ -116,7 +116,24 @@ class FPRuleForm(forms.ModelForm):
         # Show only active format versions in the format dropdown
         self.fields['format'].queryset = fprmodels.FormatVersion.active.all()
         
-    
+    def clean(self):
+        cleaned_data = super(FPRuleForm, self).clean()
+        if self.instance.pk == None:
+            submitted_purpose = cleaned_data.get('purpose')
+            submitted_format = cleaned_data.get('format')
+            submitted_command = cleaned_data.get('command')
+
+            existing_fprule = get_object_or_None(
+                fprmodels.FPRule,
+                purpose=submitted_purpose,
+                format=submitted_format,
+                command=submitted_command
+            )
+
+            if existing_fprule != None:
+                raise forms.ValidationError('An indentifcal FP rule already exists')
+
+        return cleaned_data    
 
     class Meta:
         model = fprmodels.FPRule

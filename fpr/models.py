@@ -286,6 +286,7 @@ class FPRule(VersionedModel, models.Model):
     class Meta:
         verbose_name = "Format Policy Rule"
 
+    """
     def validate_unique(self, *args, **kwargs):
         super(FPRule, self).validate_unique(*args, **kwargs)
         
@@ -302,7 +303,7 @@ class FPRule(VersionedModel, models.Model):
         if qs.exists():
             raise ValidationError( {
                 NON_FIELD_ERRORS:('Unable to save, an active Rule for this purpose and format and command already exists.',)})
-
+    """
 
     def __unicode__(self):
         return u"Normalize {format} for {purpose} via {command}".format(
