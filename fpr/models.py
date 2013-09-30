@@ -9,11 +9,9 @@ import uuid
 
 from django.db import models
 
-from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
 from django_extensions.db.fields import UUIDField
 
-from django.db.models import Q, Model
 from django.core.validators import ValidationError
 from django.core.exceptions import NON_FIELD_ERRORS
 
@@ -41,6 +39,7 @@ class NormalizationRules(models.Manager):
 class VersionedModel(models.Model):
     replaces = models.ForeignKey('self', to_field='uuid', null=True, blank=True)
     enabled = models.BooleanField(default=True)
+    lastmodified = models.DateTimeField(auto_now_add=True)
 
     def save(self, replacing=None, *args, **kwargs):
         if replacing:
@@ -105,7 +104,6 @@ class FormatVersion(VersionedModel, models.Model):
     access_format = models.BooleanField(default=False)
     preservation_format = models.BooleanField(default=False)
 
-    lastmodified = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from='description', unique_with='format', always_update=True)
 
     class Meta:
@@ -151,7 +149,6 @@ class IDCommand(VersionedModel, models.Model):
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
-    lastmodified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Format Identification Command"
@@ -167,8 +164,6 @@ class IDRule(VersionedModel, models.Model):
     format = models.ForeignKey('FormatVersion', to_field='uuid')
     # Output from IDToolConfig.command to match on that gives the format
     command_output = models.TextField()
-
-    lastmodified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Format Identification Rule"
@@ -231,7 +226,6 @@ class IDToolConfig(VersionedModel, models.Model):
     config = models.CharField(max_length=4, choices=CONFIG_CHOICES)
     command = models.ForeignKey('IDCommand', to_field='uuid')
 
-    lastmodified = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from='config', unique_with='tool')
 
     class Meta:
@@ -288,8 +282,6 @@ class FPRule(VersionedModel, models.Model):
     count_attempts = models.IntegerField(default=0)
     count_okay = models.IntegerField(default=0)
     count_not_okay = models.IntegerField(default=0)
-
-    lastmodified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Format Policy Rule"
@@ -386,8 +378,6 @@ class FPCommand(VersionedModel, models.Model):
     verification_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
     event_detail_command = models.ForeignKey('self', to_field='uuid', null=True, blank=True, related_name='+')
 
-    lastmodified = models.DateTimeField(auto_now=True)
-
     class Meta:
         verbose_name = "Format Policy Command"
 
@@ -443,7 +433,7 @@ class Agent(models.Model):
 
 class CommandType(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')
-    replaces = models.CharField(null=True, max_length=50, db_column='replaces')
+    replaces = models.CharField(null=True, max_length=36, db_column='replaces')
     type = models.TextField(db_column='type')
     lastmodified = models.DateTimeField(db_column='lastModified')
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
@@ -488,7 +478,7 @@ class CommandsSupportedBy(models.Model):
 class FileIDType(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')
     description = models.TextField(null=True, db_column='description')
-    replaces = models.CharField(null=True, max_length=50, db_column='replaces')
+    replaces = models.CharField(null=True, max_length=36, db_column='replaces')
     lastmodified = models.DateTimeField(db_column='lastModified')
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
@@ -514,7 +504,7 @@ class FileID(models.Model):
 class CommandClassification(models.Model):
     uuid = models.CharField(max_length=36, primary_key=True, db_column='pk')
     classification = models.TextField(null=True, db_column='classification')
-    replaces = models.CharField(null=True, max_length=50, db_column='replaces')
+    replaces = models.CharField(null=True, max_length=36, db_column='replaces')
     lastmodified = models.DateTimeField(db_column='lastModified')
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
@@ -526,7 +516,7 @@ class CommandRelationship(models.Model):
     commandClassification = models.CharField(max_length=36)
     #command = models.ForeignKey(Command, null=True, db_column='command')
     #fileID = models.ForeignKey(FileID, db_column='fileID')
-    #replaces = models.CharField(null=True, max_length=50, db_column='replaces')
+    #replaces = models.CharField(null=True, max_length=36, db_column='replaces')
     command = models.CharField(max_length=36, null=True)
     fileID = models.CharField(max_length=36, null=True)
     replaces = models.CharField(max_length=36, null=True)
@@ -542,7 +532,7 @@ class FileIDsBySingleID(models.Model):
     id = models.TextField(db_column='id')
     tool = models.TextField(db_column='tool')
     toolVersion = models.TextField(db_column='toolVersion', null=True)
-    replaces = models.CharField(null=True, max_length=50, db_column='replaces')
+    replaces = models.CharField(null=True, max_length=36, db_column='replaces')
     lastmodified = models.DateTimeField(db_column='lastModified')
     enabled = models.IntegerField(null=True, db_column='enabled', default=1)
     class Meta:
