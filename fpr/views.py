@@ -429,7 +429,7 @@ def fpcommand_edit(request, uuid=None):
 
             # create relations to tool
             for tool_id in request.POST.getlist('tool'):
-                tool = fprmodels.FPTool.objects.get(id=entry)
+                tool = fprmodels.FPTool.objects.get(id=tool_id)
                 fprmodels.FPCommandTool.objects.get_or_create(
                     command=new_fpcommand,
                     tool=tool)
