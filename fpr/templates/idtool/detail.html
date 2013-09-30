@@ -54,7 +54,7 @@
         <tbody>
         {% for config in idtool_config %}
           <tr>
-            <td>{{ config.config }}</td>
+            <td>{{ config.get_config_display }}</td>
             <td>{{ config.command.description }}</td>
             <td>{{ config.command.script|truncatechars:100 }}</td>
             <td>

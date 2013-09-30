@@ -36,7 +36,7 @@ Format Policy Command Information
         {% for fpcommand in fpcommands %}
           <tr>
             <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
-            <td>{{ fpcommand.command_usage|title }}</td>
+            <td>{{ fpcommand.get_command_usage_display }}</td>
             <td>
               <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a> |
               <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>

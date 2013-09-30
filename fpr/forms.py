@@ -141,8 +141,8 @@ class FPCommandForm(forms.ModelForm):
             verification_commands = verification_commands.exclude(uuid=self.instance.uuid)
             event_detail_commands = event_detail_commands.exclude(uuid=self.instance.uuid)
 
-        self.fields['verification_command'] = forms.ModelChoiceField(queryset=verification_commands, required=False)
-        self.fields['event_detail_command'] = forms.ModelChoiceField(queryset=event_detail_commands, required=False)
+        self.fields['verification_command'].queryset = verification_commands
+        self.fields['event_detail_command'].queryset = event_detail_commands
 
     class Meta:
         model = fprmodels.FPCommand

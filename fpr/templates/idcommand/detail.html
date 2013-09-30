@@ -34,7 +34,7 @@
         <dt>Script</dt>
           <dd><pre>{{ idcommand.script }}</pre></dd>
         <dt>Script Type</dt>
-          <dd>{{ idcommand.script_type }}</dd>
+          <dd>{{ idcommand.get_script_type_display }}</dd>
         <dt>Tool(s)</dt>
           {% for config in idtoolconfigs %}
             {% if config.enabled %}

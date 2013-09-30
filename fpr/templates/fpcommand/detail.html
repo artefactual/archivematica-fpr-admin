@@ -42,13 +42,13 @@
         <dt>Command</dt>
           <dd><pre>{{ fpcommand.command }}</pre></dd>
         <dt>Script Type</dt>
-          <dd>{{ fpcommand.script_type }}</dd>
+          <dd>{{ fpcommand.get_script_type_display }}</dd>
         <dt>Output File Format</dt>
-          <dd>{{ fpcommand.output_format.description }}</dd>
+          <dd>{{ fpcommand.output_format.description|default:"None" }}</dd>
         <dt>Output Location</dt>
-          <dd>{{ fpcommand.output_location }}</dd>
+          <dd>{{ fpcommand.output_location|default:"None" }}</dd>
         <dt>Command usage</dt>
-          <dd>{{ fpcommand.command_usage }}</dd>
+          <dd>{{ fpcommand.get_command_usage_display }}</dd>
         <dt>Verification Command</dt>
           {% if fpcommand.verification_command %}
             <dd><a href="{% url 'fpcommand_detail' fpcommand.verification_command.uuid %}">{{ fpcommand.verification_command.description }}</a></dd>
