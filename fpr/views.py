@@ -422,18 +422,17 @@ def fpcommand_edit(request, uuid=None):
 
             # save command
             new_fpcommand = form.save(commit=False)
+            # Handle replacing previous rule and setting enabled/disabled
             replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
 
             # create relations to tool
             for tool_id in request.POST.getlist('tool'):
-                tool = fprmodels.FPCommandTool(
+                tool = fprmodels.FPTool.objects.get(id=entry)
+                fprmodels.FPCommandTool.objects.get_or_create(
                     command=new_fpcommand,
-                    tool=fprmodels.FPTool.objects.get(pk=tool_id)
-                )
-                tool.save()
-
+                    tool=tool)
             messages.info(request, 'Saved.')
             return redirect('fpcommand_list')
     else:

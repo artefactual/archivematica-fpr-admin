@@ -36,16 +36,6 @@ def update_references_to_object(model_referenced, key_field_name, old_object, ne
                         setattr(parent, field.name, new_object)
                         parent.save()
 
-def update_many_to_many_references(to_model, set_name, old_object, new_object):
-    """ Update many-to-many references to a model instance. """
-    filter_criteria = {set_name: old_object}
-    parent_objects = to_model.objects.filter(**filter_criteria)
-    for parent in parent_objects:
-        manager = getattr(parent, set_name)
-        manager.remove(old_object)
-        manager.add(new_object)
-        parent.save()
-
 
 ############ REVISIONS ############
 

@@ -422,6 +422,9 @@ class FPCommandTool(models.Model):
     command = models.ForeignKey('FPCommand', to_field='uuid')
     tool = models.ForeignKey('FPTool', to_field='uuid')
 
+    def __unicode__(self):
+        return u'Relationship between {} and {}'.format(self.command, self.tool)
+
 
 ############################# API V1 & V2 MODELS #############################
 
