@@ -39,9 +39,9 @@
 
     <h2>Tool Configurations</h2>
 
-    <p><a href="{% url 'idtoolconfig_create' idtool.slug %}">Create New Tool Configuration</a></p>
+    <p><a href="{% url 'idcommand_create' %}?parent={{ idtool.uuid }}">Create New Command</a></p>
 
-    {% if idtool_config %}
+    {% if idcommands %}
       <table class="datatable">
         <thead>
           <tr>
@@ -52,22 +52,22 @@
           </tr>
         </thead>
         <tbody>
-        {% for config in idtool_config %}
+        {% for command in idcommands %}
           <tr>
-            <td>{{ config.get_config_display }}</td>
-            <td>{{ config.command.description }}</td>
-            <td>{{ config.command.script|truncatechars:100 }}</td>
+            <td>{{ command.get_config_display }}</td>
+            <td>{{ command.description }}</td>
+            <td>{{ command.script|truncatechars:100 }}</td>
             <td>
-              <a href="{% url 'idtoolconfig_detail' idtool.slug config.slug %}">View</a> |
-              <a href="{% url 'idtoolconfig_edit' idtool.slug config.slug %}">Replace</a> |
-              <a href="{% url 'idtoolconfig_delete' idtool.slug config.slug %}">Disable</a>
+              <a href="{% url 'idcommand_detail' command.uuid  %}">View</a> |
+              <a href="{% url 'idcommand_edit' command.uuid %}">Replace</a> |
+              <a href="{% url 'idcommand_delete' command.uuid %}">Disable</a>
             </td>
           </tr>
         {% endfor %}
         </tbody>
       </table>
     {% else %}
-      <p>No configurations exist for {{ idtool.description }}.</p>
+      <p>No commands exist for {{ idtool.description }}.</p>
     {% endif %}
 
   </div> <!-- /span10 -->

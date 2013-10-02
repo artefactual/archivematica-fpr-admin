@@ -29,22 +29,19 @@
       <dl>
         <dt>UUID</dt>
           <dd>{{ idcommand.uuid }}</dd>
+        <dt>Tool</dt>
+          <dd>{{ idcommand.tool }}
         <dt>Description</dt>
           <dd>{{ idcommand.description }}</dd>
         <dt>Script</dt>
           <dd><pre>{{ idcommand.script }}</pre></dd>
         <dt>Script Type</dt>
           <dd>{{ idcommand.get_script_type_display }}</dd>
-        <dt>Tool(s)</dt>
-          {% for config in idtoolconfigs %}
-            {% if config.enabled %}
-              <li><a href="{% url 'idtool_detail' config.tool.slug %}">{{ config.tool.description }}</a></li>
-            {% endif %}
-          {% endfor %}
         <dt>Enabled</dt>
           <dd>{{ idcommand.enabled }}</dd>
         <dt>Actions</dt>
           <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
+          <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a></dd>
       </dl>
     </div>
 

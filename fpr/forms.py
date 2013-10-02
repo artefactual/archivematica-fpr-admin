@@ -43,8 +43,8 @@ class IDToolForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(IDToolForm, self).clean()
         if self.instance.pk == None:
-            submitted_description = cleaned_data.get('description') # request.POST.get('description', '')
-            submitted_version = cleaned_data.get('version') #request.POST.get('version', '')
+            submitted_description = cleaned_data.get('description')
+            submitted_version = cleaned_data.get('version')
 
             existing_idtool = get_object_or_None(
                 fprmodels.IDTool,
@@ -52,7 +52,7 @@ class IDToolForm(forms.ModelForm):
                 version=submitted_version
             )
 
-            if existing_idtool != None:
+            if existing_idtool:
                 raise forms.ValidationError('An ID tool with this description and version already exists')
 
         return cleaned_data
@@ -61,28 +61,11 @@ class IDToolForm(forms.ModelForm):
         model = fprmodels.IDTool
         fields = ('description', 'version')
 
-class IDToolConfigForm(forms.ModelForm):
-    command = forms.ChoiceField(choices=fprmodels.IDCommand.objects.all())
-
-    def __init__(self, *args, **kwargs):
-        super(IDToolConfigForm, self).__init__(*args, **kwargs)
-
-        # Add 'create' option to the IDCommand dropdown
-        choices = [(f.uuid, f.description) for f in fprmodels.IDCommand.active.all()]
-        choices.insert(0, ('', '---------'))
-        choices.append(('new', 'Create New'))
-        self.fields['command'].choices = choices
-        if hasattr(self.instance, 'command'):
-            self.fields['command'].initial = self.instance.command.uuid
-
-    class Meta:
-        model = fprmodels.IDToolConfig
-        fields = ('config',) #TODO: Add more fields
 
 class IDCommandForm(forms.ModelForm):
     class Meta:
         model = fprmodels.IDCommand
-        fields = ('description', 'script_type', 'script',)
+        fields = ('tool', 'description', 'config', 'script_type', 'script',)
 
 ############ ID RULES ############
 

@@ -10,9 +10,8 @@ Disable {{ version.description }}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'idtool_list' %}">Formats</a></li>
-<li><a href="{% url 'idtool_detail' idtool.slug %}">{{ idtool.description }}</a></li>
-<li>Disable {{ config.description }}</li>
+<li><a href="{% url 'idtool_list' %}">Identification Commands</a></li>
+<li>Disable {{ command.description }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -24,7 +23,7 @@ Disable {{ version.description }}
   <div class="span10">
 
     <div class='idtool_config'>
-      <form action="{% url 'idtoolconfig_delete' idtool.slug config.slug %}" method="post">{% csrf_token %}
+      <form action="{% url 'idcommand_delete' command.uuid %}" method="post">{% csrf_token %}
         <p>Are you sure?  The following rules will also be disabled:</p>
 
         {% regroup dependent_objects by model as dependent_rules %}
@@ -37,7 +36,7 @@ Disable {{ version.description }}
             {% endfor %}
         </dl>
 
-        <input type="submit" name="delete" value="Disable ID Tool Config" />
+        <input type="submit" name="delete" value="Disable ID Command" />
         <input type="submit" name="cancel" value="Cancel, change nothing" />
       </form>
     </div>

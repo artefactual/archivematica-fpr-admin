@@ -28,6 +28,7 @@ Identification Command Information
       <tr>
         <th>Command</th>
         <th>Type</th>
+        <th>Tool</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -36,9 +37,11 @@ Identification Command Information
       <tr>
         <td><a href="{% url 'idcommand_detail' idcommand.uuid %}">{{ idcommand.description }}</a></td>
         <td>{{ idcommand.get_script_type_display }}</td>
+        <td><a href="{% url 'idtool_detail' idcommand.tool.slug %}">{{ idcommand.tool }}</a></td>
         <td>
           <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a> |
-          <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a>
+          <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a> |
+          <a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a>
         </td>
       </tr>
     {% endfor %}

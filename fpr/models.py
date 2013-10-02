@@ -74,7 +74,7 @@ class Format(models.Model):
 
     class Meta:
         verbose_name = "Format"
-        ordering = ['group']
+        ordering = ['group', 'description']
 
     def __unicode__(self):
         return u"{}: {}".format(self.group.description, self.description)
@@ -88,6 +88,7 @@ class FormatGroup(models.Model):
 
     class Meta:
         verbose_name = "Format Group"
+        ordering = ['description']
 
     def __unicode__(self):
         return u"{}".format(self.description)
@@ -140,6 +141,13 @@ class IDCommand(VersionedModel, models.Model):
     and parses the output. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     description = models.CharField(max_length=256, verbose_name='Identifier', help_text="Name to identify script")
+    CONFIG_CHOICES = (
+        ('PUID', 'PUID'),
+        ('MIME', 'mime-type'),
+        ('ext', 'file extension')
+    )
+    config = models.CharField(max_length=4, choices=CONFIG_CHOICES)
+
     script = models.TextField(help_text="Script to be executed.")
     SCRIPT_TYPE_CHOICES = (
         ('bashScript', 'Bash Script'),
@@ -148,13 +156,45 @@ class IDCommand(VersionedModel, models.Model):
         ('as_is', 'No shebang (#!/path/to/interpreter) needed')
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
-    tool = models.ManyToManyField('IDTool', through='IDToolConfig', related_name='command', null=True, blank=True)
+    tool = models.ForeignKey('IDTool', to_field='uuid', null=True, blank=True)
 
     class Meta:
         verbose_name = "Format Identification Command"
+        ordering = ['description']
 
     def __unicode__(self):
-        return u"{}".format(self.description)
+        return u"{tool} {config} runs {command}".format(
+            tool=self.tool,
+            config=self.get_config_display(),
+            command=self.description)
+
+    def save(self, *args, **kwargs):
+        super(IDCommand, self).save(*args, **kwargs)
+        # If part of archivematica, create user choice replacement dict
+        try:
+            from main.models import MicroServiceChoiceReplacementDic
+        except ImportError:
+            return
+        # Remove existing object
+        MicroServiceChoiceReplacementDic.objects.filter(replacementdic__contains=self.uuid).delete()
+        if self.enabled:
+            # Add replacement to MicroServiceChoiceReplacementDic
+            at_link_transfer = 'f09847c2-ee51-429a-9478-a860477f6b8d'
+            at_link_ingest = '7a024896-c4f7-4808-a240-44c87c762bc5'
+            # {"%IDCommand%": self.command.uuid}
+            replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
+            MicroServiceChoiceReplacementDic.objects.create(
+                id=str(uuid.uuid4()),
+                choiceavailableatlink=at_link_transfer,
+                description=str(self),
+                replacementdic=replace,
+            )
+            MicroServiceChoiceReplacementDic.objects.create(
+                id=str(uuid.uuid4()),
+                choiceavailableatlink=at_link_ingest,
+                description=str(self),
+                replacementdic=replace,
+            )
 
 
 class IDRule(VersionedModel, models.Model):
@@ -210,59 +250,6 @@ class IDTool(models.Model):
     def _slug(self):
         """ Returns string to be slugified. """
         return "{} {}".format(self.description, self.version)
-
-
-class IDToolConfig(VersionedModel, models.Model):
-    """ Tool and configuration used to identify formats.
-
-    Eg. DROID mime-type, DROID PUID, Jhove format. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    tool = models.ForeignKey('IDTool', to_field='uuid', related_name='config_set')
-    CONFIG_CHOICES = (
-        ('PUID', 'PUID'),
-        ('MIME', 'mime-type'),
-        ('ext', 'file extension')
-    )
-    config = models.CharField(max_length=4, choices=CONFIG_CHOICES)
-    command = models.ForeignKey('IDCommand', to_field='uuid')
-
-    slug = AutoSlugField(populate_from='config', unique_with='tool')
-
-    class Meta:
-        verbose_name = "Format Identification Tool Configuration"
-
-    def __unicode__(self):
-        return u"{tool} {config} runs {command}".format(tool=self.tool, 
-            config=self.get_config_display(),
-            command=self.command)
-
-    def save(self, *args, **kwargs):
-        super(IDToolConfig, self).save(*args, **kwargs)
-        # If part of archivematica, create user choice replacement dict
-        try:
-            from main.models import MicroServiceChoiceReplacementDic
-        except ImportError:
-            return
-        # Remove existing object
-        MicroServiceChoiceReplacementDic.objects.filter(replacementdic__contains=self.uuid).delete()
-        if self.enabled:
-            # Add replacement to MicroServiceChoiceReplacementDic
-            at_link_transfer = 'f09847c2-ee51-429a-9478-a860477f6b8d'
-            at_link_ingest = '7a024896-c4f7-4808-a240-44c87c762bc5'
-            # {"%IDCommand%": self.command.uuid}
-            replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
-            MicroServiceChoiceReplacementDic.objects.create(
-                id=str(uuid.uuid4()),
-                choiceavailableatlink=at_link_transfer,
-                description=str(self),
-                replacementdic=replace,
-            )
-            MicroServiceChoiceReplacementDic.objects.create(
-                id=str(uuid.uuid4()),
-                choiceavailableatlink=at_link_ingest,
-                description=str(self),
-                replacementdic=replace,
-            )
 
 
 ############ NORMALIZATION ############
@@ -358,7 +345,7 @@ class FPRule(VersionedModel, models.Model):
 class FPCommand(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
-    tool = models.ManyToManyField('FPTool', related_name="commands", through='FPCommandTool')
+    tool = models.ForeignKey('FPTool', to_field='uuid')
     description = models.CharField(max_length=256)
     command = models.TextField()
     SCRIPT_TYPE_CHOICES = (
@@ -369,7 +356,7 @@ class FPCommand(VersionedModel, models.Model):
     )
     script_type = models.CharField(max_length=16, choices=SCRIPT_TYPE_CHOICES)
     output_location = models.TextField(null=True, blank=True)
-    output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, )
+    output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, blank=True)
     COMMAND_USAGE_CHOICES = (
         ('normalization', 'Normalization'),
         ('event_detail', 'Event Detail'),
@@ -381,6 +368,7 @@ class FPCommand(VersionedModel, models.Model):
 
     class Meta:
         verbose_name = "Format Policy Command"
+        ordering = ['description']
 
     def __unicode__(self):
         return u"{}".format(self.description)
@@ -404,17 +392,6 @@ class FPTool(models.Model):
     def _slug(self):
         """ Returns string to be slugified. """
         return "{} {}".format(self.description, self.version)
-
-
-class FPCommandTool(models.Model):
-    """ Many-to-many relationship between FPcommand and FPTool. """
-    # Needs to set to_field='uuid' which cannot be done with M2M field
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    command = models.ForeignKey('FPCommand', to_field='uuid')
-    tool = models.ForeignKey('FPTool', to_field='uuid')
-
-    def __unicode__(self):
-        return u'Relationship between {} and {}'.format(self.command, self.tool)
 
 
 ############################# API V1 & V2 MODELS #############################

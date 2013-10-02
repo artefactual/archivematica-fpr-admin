@@ -171,12 +171,11 @@ def formatgroup_delete(request, slug):
 
 def idtool_list(request):
     idtools = fprmodels.IDTool.objects.filter(enabled=True)
-    # TODO Add IDToolConfig info??
     return render(request, 'fpr/idtool/list.html', locals())
 
 def idtool_detail(request, slug):
     idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
-    idtool_config = fprmodels.IDToolConfig.active.filter(tool=idtool)
+    idcommands = fprmodels.IDCommand.active.filter(tool=idtool)
     return render(request, 'fpr/idtool/detail.html', locals())
 
 def idtool_edit(request, slug=None):
@@ -194,66 +193,6 @@ def idtool_edit(request, slug=None):
         return redirect('idtool_detail', idtool.slug)
 
     return render(request, 'fpr/idtool/form.html', locals())
-
-############ ID TOOL CONFIGURATIONS ############
-
-def idtoolconfig_detail(request, idtool_slug, slug):
-    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug, enabled=True)
-    config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
-    return render(request, 'fpr/idtool/config/detail.html', locals())
-
-def idtoolconfig_edit(request, idtool_slug, slug=None):
-    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug, enabled=True)
-    if slug:
-        action = "Replace"
-        config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
-        command = config.command
-    else:
-        action = "Create"
-        config = None
-        command = None
-
-    form = fprforms.IDToolConfigForm(request.POST or None, instance=config)
-    config_command_form = fprforms.IDCommandForm(request.POST or None, instance=command, prefix='c')
-
-    if form.is_valid():
-        replaces = utils.determine_what_replaces_model_instance(fprmodels.IDToolConfig, config)
-        if form.cleaned_data['command'] == 'new' and config_command_form.is_valid():
-            config = form.save(commit=False)
-            command = config_command_form.save()
-            config.tool = idtool
-            config.command = command
-            config.save(replacing=replaces)
-            messages.info(request, 'Saved.')
-            return redirect('idtool_detail', idtool.slug)
-        elif form.cleaned_data['command'] != 'new':
-            config = form.save(commit=False)
-            config.tool = idtool
-            command = fprmodels.IDCommand.objects.get(uuid=form.cleaned_data['command'])
-            config.command = command
-            config = form.save()
-            config.save(replacing=replaces)
-            messages.info(request, 'Saved.')
-            return redirect('idtool_detail', idtool.slug)
-    else:
-        utils.warn_if_replacing_with_old_revision(request, config)
-
-    return render(request, 'fpr/idtool/config/form.html', locals())
-
-def idtoolconfig_delete(request, idtool_slug, slug):
-    idtool = get_object_or_404(fprmodels.IDTool, slug=idtool_slug)
-    config = get_object_or_404(fprmodels.IDToolConfig, slug=slug, tool=idtool)
-    dependent_objects = utils.dependent_objects(config)
-    if request.method == 'POST':
-        if 'delete' in request.POST:
-            config.enabled = False
-            config.save()
-            messages.info(request, 'Disabled.')
-            for obj in dependent_objects:
-                obj['value'].enabled = False
-                obj['value'].save()
-        return redirect('idtool_detail', idtool.slug)
-    return render(request, 'fpr/idtool/config/delete.html', locals())
 
 
 ############ ID RULES ############
@@ -303,7 +242,6 @@ def idcommand_list(request):
 
 def idcommand_detail(request, uuid):
     idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
-    idtoolconfigs = fprmodels.IDToolConfig.active.filter(command=idcommand)
     return render(request, 'fpr/idcommand/detail.html', locals())
 
 def idcommand_edit(request, uuid=None):
@@ -313,7 +251,14 @@ def idcommand_edit(request, uuid=None):
     else:
         action = "Create"
         idcommand = None
-    form = fprforms.IDCommandForm(request.POST or None, instance=idcommand)
+    # Set tool to parent if it exists
+    initial = {}
+    if 'parent' in request.GET:
+        tool_uuid = request.GET['parent']
+        tool = get_object_or_None(fprmodels.IDTool, uuid=tool_uuid, enabled=True)
+        initial = {'tool': tool}
+
+    form = fprforms.IDCommandForm(request.POST or None, instance=idcommand, initial=initial)
     if form.is_valid():
         new_idcommand = form.save(commit=False)
         replaces = utils.determine_what_replaces_model_instance(fprmodels.IDCommand, idcommand)
@@ -325,6 +270,21 @@ def idcommand_edit(request, uuid=None):
         utils.warn_if_replacing_with_old_revision(request, idcommand)
 
     return render(request, 'fpr/idcommand/form.html', locals())
+
+def idcommand_delete(request, uuid):
+    command = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
+    dependent_objects = utils.dependent_objects(command)
+    print 'dependent_objects', dependent_objects
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            command.enabled = False
+            command.save()
+            messages.info(request, 'Disabled.')
+            for obj in dependent_objects:
+                obj['value'].enabled = False
+                obj['value'].save()
+        return redirect('idtool_detail', command.tool.slug)
+    return render(request, 'fpr/idcommand/delete.html', locals())
 
 ############ FP RULES ############
 
@@ -415,32 +375,21 @@ def fpcommand_edit(request, uuid=None):
     if request.method == 'POST':
         form = fprforms.FPCommandForm(request.POST, instance=fpcommand)
         if form.is_valid():
-            # remove existing relations
-            commandtools = fprmodels.FPCommandTool.objects.filter(command=fpcommand)
-            for commandtool in commandtools:
-                commandtool.delete()
-
             # save command
             new_fpcommand = form.save(commit=False)
             # Handle replacing previous rule and setting enabled/disabled
             replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
-
-            # create relations to tool
-            for tool_id in request.POST.getlist('tool'):
-                tool = fprmodels.FPTool.objects.get(id=tool_id)
-                fprmodels.FPCommandTool.objects.get_or_create(
-                    command=new_fpcommand,
-                    tool=tool)
             messages.info(request, 'Saved.')
             return redirect('fpcommand_list')
     else:
+        # Set tool to parent if it exists
+        initial = {}
         if 'parent' in request.GET:
-            fptool = get_object_or_None(fprmodels.FPTool, uuid=request.GET.get('parent', ''), enabled=True)
-            initial = {'tool': [fptool]}
-        else:
-            initial = None
+            tool_uuid = request.GET['parent']
+            fptool = get_object_or_None(fprmodels.FPTool, uuid=tool_uuid, enabled=True)
+            initial = {'tool': fptool}
         form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
         utils.warn_if_replacing_with_old_revision(request, fpcommand)
 

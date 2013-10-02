@@ -48,19 +48,6 @@ urlpatterns = patterns('fpr.views',
     url(r'^idtool/(?P<slug>[-\w]+)/edit/$', 'idtool_edit',
         name='idtool_edit'),
 
-    # ID Tool Configurations
-    url(r'^idtool/(?P<idtool_slug>[-\w]+)/create/$', 'idtoolconfig_edit',
-        name='idtoolconfig_create'),
-    url(r'^idtool/(?P<idtool_slug>[-\w]+)/(?P<slug>[-\w]+)/edit/$',
-        'idtoolconfig_edit',
-        name='idtoolconfig_edit'),
-    url(r'^idtool/(?P<idtool_slug>[-\w]+)/(?P<slug>[-\w]+)/delete/$',
-        'idtoolconfig_delete',
-        name='idtoolconfig_delete'),
-    url(r'^idtool/(?P<idtool_slug>[-\w]+)/(?P<slug>[-\w]+)/$',
-        'idtoolconfig_detail',
-        name='idtoolconfig_detail'),
-
     # ID Rules
     url(r'^idrule/$', 'idrule_list',
         name='idrule_list'),
@@ -74,8 +61,6 @@ urlpatterns = patterns('fpr.views',
         'idrule_delete',
         name='idrule_delete'),
 
-
-
     # ID Commands
     url(r'^idcommand/$', 'idcommand_list',
         name='idcommand_list'),
@@ -85,6 +70,8 @@ urlpatterns = patterns('fpr.views',
         name='idcommand_detail'),
     url(r'^idcommand/(?P<uuid>' + UUID_REGEX + ')/edit/$', 'idcommand_edit',
         name='idcommand_edit'),
+    url(r'^idcommand/(?P<uuid>' + UUID_REGEX + ')/delete/$', 'idcommand_delete',
+        name='idcommand_delete'),
 
     # FP Rules
     url(r'^fprule/$', 'fprule_list',
