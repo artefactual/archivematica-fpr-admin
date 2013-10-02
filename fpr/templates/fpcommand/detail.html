@@ -29,18 +29,10 @@
       <dl>
         <dt>UUID</dt>
           <dd>{{ fpcommand.uuid }} Rule</dd>
-        <dt>Tool(s)</dt>
-          <dd>
-            <ul>
-              {% for tool in fpcommand.tool.all %}
-                <li><a href="{% url 'fptool_detail' tool.slug %}">{{ tool.description }}</a></li>
-              {% endfor %}
-            </ul>
-          </dd>
         <dt>Description</dt>
           <dd>{{ fpcommand.description }}</dd>
         <dt>Tool</dt>
-          <dd>{{ fpcommand.tool.description }}</dd>
+          <dd><a href="{% url 'fpcommand_detail' fpcommand.tool %}">{{ fpcommand.tool.description }}</a></dd>
         <dt>Command</dt>
           <dd><pre>{{ fpcommand.command }}</pre></dd>
         <dt>Script Type</dt>
