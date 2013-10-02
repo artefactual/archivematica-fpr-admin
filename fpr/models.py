@@ -345,7 +345,7 @@ class FPRule(VersionedModel, models.Model):
 class FPCommand(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     # ManyToManyField may not be the best choice here
-    tool = models.ForeignKey('FPTool', to_field='uuid')
+    tool = models.ForeignKey('FPTool', to_field='uuid', null=True)
     description = models.CharField(max_length=256)
     command = models.TextField()
     SCRIPT_TYPE_CHOICES = (
