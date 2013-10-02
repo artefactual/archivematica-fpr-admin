@@ -99,7 +99,7 @@ class FormatVersion(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     format = models.ForeignKey('Format', to_field='uuid', related_name='version_set', null=True)
     version = models.CharField(max_length=10, null=True, blank=True)
-    pronom_id = models.CharField(max_length=32, blank=True)
+    pronom_id = models.CharField(max_length=32, null=True, blank=True)
     description = models.CharField(max_length=128, null=True, blank=True,
         help_text='Formal name to go in the METS file.')
     access_format = models.BooleanField(default=False)
@@ -326,6 +326,9 @@ class FPRule(VersionedModel, models.Model):
                     defaultnextchainlink='a7fe8db6-387c-4295-b488-56e1b55c57d9'
                 else:
                     defaultnextchainlink=None
+                # FIXME update the defaultnextchainlink to be the corret
+                # MicroServiceChainLink once default commands work
+                defaultnextchainlink = None
                 mscl = MicroServiceChainLink.objects.create(
                     id=str(uuid.uuid4()),
                     currenttask=task_config.id,
