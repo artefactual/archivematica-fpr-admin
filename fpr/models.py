@@ -9,6 +9,7 @@ import uuid
 
 from django.db import models
 
+from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
 from django_extensions.db.fields import UUIDField
 
@@ -258,11 +259,13 @@ class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     PURPOSE_CHOICES = (
         ('access', 'Access'),
+        ('default_access', 'Default Access'),
         ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
+        ('default_thumbnail', 'Thumbnail'),
         ('extract', 'Extract'),
     )
-    purpose = models.CharField(max_length=16, choices=PURPOSE_CHOICES)
+    purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
     command = models.ForeignKey('FPCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
 
@@ -319,16 +322,14 @@ class FPRule(VersionedModel, models.Model):
                 # Create new MicroServiceChainLink
                 # defaultnextchainlink should point at the default action for
                 # that purpose, in case the FPRule fails.
-                # TODO need to set up default rules for FPR v2 API
-                if self.purpose == 'access':
-                    defaultnextchainlink='006f6fc3-5837-4333-8920-fefc977e7a76'
-                elif self.purpose == 'thumbnail':
-                    defaultnextchainlink='a7fe8db6-387c-4295-b488-56e1b55c57d9'
+                default_purpose = "default_{}".format(self.purpose)
+                default_fprule = get_object_or_None(FPRule.active, purpose=default_purpose)
+                if default_fprule:
+                    default_task_config = TaskConfig.objects.get(tasktypepkreference=default_fprule.uuid)
+                    default_mscl = MicroServiceChainLink.objects.get(currenttask=default_task_config.id)
+                    defaultnextchainlink = default_mscl.id
                 else:
                     defaultnextchainlink=None
-                # FIXME update the defaultnextchainlink to be the corret
-                # MicroServiceChainLink once default commands work
-                defaultnextchainlink = None
                 mscl = MicroServiceChainLink.objects.create(
                     id=str(uuid.uuid4()),
                     currenttask=task_config.id,
