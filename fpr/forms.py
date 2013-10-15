@@ -1,5 +1,6 @@
 # Django core, alphabetical
 from django import forms
+from django.db.models import Q
 
 # External dependencies, alphabetical
 from annoying.functions import get_object_or_None
@@ -89,7 +90,8 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(command_usage='normalization')]
+        query = Q(command_usage='normalization') | Q(command_usage='extraction')
+        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(query)]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
