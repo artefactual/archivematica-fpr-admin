@@ -98,6 +98,8 @@ class FPRuleForm(forms.ModelForm):
 
         # Show only active format versions in the format dropdown
         self.fields['format'].queryset = fprmodels.FormatVersion.active.all()
+        # Purpose choices restricted
+        self.fields['purpose'].choices = fprmodels.FPRule.PURPOSE_CHOICES_DISPLAY
         
     def clean(self):
         cleaned_data = super(FPRuleForm, self).clean()

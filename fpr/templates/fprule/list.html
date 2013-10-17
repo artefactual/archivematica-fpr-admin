@@ -37,7 +37,7 @@ Format Policy Rule Information
         <tbody>
         {% for fprule in fprules %}
           <tr>
-            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.purpose|title }}</a></td>
+            <td><a href="{% url 'fprule_detail' fprule.uuid %}">{{ fprule.get_purpose_display }}</a></td>
             <td>{{ fprule.format.description }}</td>
             <td>{{ fprule.command.description }}</td>
             <td>{{ fprule.count_okay }} out of {{ fprule.count_attempts }}</td>

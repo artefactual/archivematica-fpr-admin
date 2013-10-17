@@ -29,11 +29,6 @@ class Enabled(models.Manager):
     def get_query_set(self):
         return super(Enabled, self).get_query_set().filter(enabled=True)
 
-class NormalizationRules(models.Manager):
-    """ Manager to only return normalization FPCommands.  """
-    def get_query_set(self):
-        return super(NormalizationRules, self).get_query_set().filter(enabled=True)
-
 
 ############ MIXINS ############
 
@@ -58,7 +53,6 @@ class VersionedModel(models.Model):
 
     objects = models.Manager()
     active = Enabled()
-    normalization = NormalizationRules()
 
 ############ FORMATS ############
 
@@ -257,14 +251,17 @@ class IDTool(models.Model):
 
 class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    PURPOSE_CHOICES = (
+    NORMALIZATION_CHOICES_DISPLAY = (
         ('access', 'Access'),
-        ('default_access', 'Default Access'),
         ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
-        ('default_thumbnail', 'Thumbnail'),
         ('extract', 'Extract'),
     )
+    HIDDEN_CHOICES = (
+        ('default_access', 'Default Access'),
+        ('default_thumbnail', 'Default Thumbnail'),
+    )
+    PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
     command = models.ForeignKey('FPCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
