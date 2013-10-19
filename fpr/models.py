@@ -360,6 +360,7 @@ class FPCommand(VersionedModel, models.Model):
     output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, blank=True)
     COMMAND_USAGE_CHOICES = (
         ('normalization', 'Normalization'),
+        ('extraction', 'Extraction'),
         ('event_detail', 'Event Detail'),
         ('verification', 'Verification'),
     )
