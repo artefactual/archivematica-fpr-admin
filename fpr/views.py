@@ -289,7 +289,7 @@ def idcommand_delete(request, uuid):
 ############ FP RULES ############
 
 def fprule_list(request):
-    fprules = fprmodels.FPRule.objects.filter(enabled=True).filter(~Q(purpose='Characterize'))
+    fprules = fprmodels.FPRule.active.filter(purpose__in=dict(fprmodels.FPRule.NORMALIZATION_CHOICES_DISPLAY))
     return render(request, 'fpr/fprule/list.html', locals())
 
 def fprule_detail(request, uuid):

@@ -30,7 +30,7 @@
         <dt>UUID</dt>
           <dd>{{ fprule.uuid }}</dd>
         <dt>Purpose</dt>
-          <dd>{{ fprule.purpose|title }} Rule</dd>
+          <dd>{{ fprule.get_purpose_display }} Rule</dd>
         <dt>Format</dt>
           <dd><a href="{% url 'formatversion_detail' fprule.format.format.slug fprule.format.slug %}">{{ fprule.format.description }}</a></dd>
         <dt>Command</dt>
