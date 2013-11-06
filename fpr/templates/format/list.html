@@ -21,7 +21,9 @@ Format Information
 
   <div class="span10">
 
-    {% include '_fpr_update_button.html' %}
+    {% if request.user.is_superuser %}
+      {% include '_fpr_update_button.html' %}
+    {% endif %}
 
     {% if request.user.is_superuser %}
     <p><a href="{% url 'format_create' %}">Create New Format</a></p>
