@@ -21,7 +21,9 @@ Format Policy Rule Information
 
   <div class="span10">
 
+    {% if request.user.is_superuser %}
     <p><a href="{% url 'fprule_create' %}">Create New Rule</a></p>
+    {% endif %}
 
     {% if fprules %}
       <table class="datatable">
@@ -42,8 +44,11 @@ Format Policy Rule Information
             <td>{{ fprule.command.description }}</td>
             <td>{{ fprule.count_okay }} out of {{ fprule.count_attempts }}</td>
             <td>
-              <a href="{% url 'fprule_detail' fprule.uuid %}">View</a> |
-              <a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a>
+              <a href="{% url 'fprule_detail' fprule.uuid %}">View</a>
+              {% if request.user.is_superuser %}
+                |
+                <a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}

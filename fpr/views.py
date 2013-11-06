@@ -2,6 +2,7 @@
 import os
 
 # Django core, alphabetical
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -42,6 +43,7 @@ def format_detail(request, slug):
     format_versions = fprmodels.FormatVersion.active.filter(format=format)
     return render(request, 'fpr/format/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def format_edit(request, slug=None):
     if slug:
         action = "Edit"
@@ -76,8 +78,10 @@ def format_edit(request, slug=None):
 def formatversion_detail(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug)
+    utils.warn_if_viewing_old_revision(request, version)
     return render(request, 'fpr/format/version/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatversion_edit(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     if slug:
@@ -101,6 +105,7 @@ def formatversion_edit(request, format_slug, slug=None):
 
     return render(request, 'fpr/format/version/form.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatversion_delete(request, format_slug, slug):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
@@ -122,6 +127,7 @@ def formatgroup_list(request):
     groups = fprmodels.FormatGroup.objects.all()
     return render(request, 'fpr/format/group/list.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatgroup_edit(request, slug=None):
     if slug:
         action = "Edit"
@@ -139,6 +145,7 @@ def formatgroup_edit(request, slug=None):
 
     return render(request, 'fpr/format/group/form.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatgroup_delete(request, slug):
     group = get_object_or_404(fprmodels.FormatGroup, slug=slug)
     format_count = fprmodels.Format.objects.filter(group=group.uuid).count()
@@ -178,6 +185,7 @@ def idtool_detail(request, slug):
     idcommands = fprmodels.IDCommand.active.filter(tool=idtool)
     return render(request, 'fpr/idtool/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idtool_edit(request, slug=None):
     if slug:
         action = "Replace"
@@ -203,8 +211,10 @@ def idrule_list(request):
 
 def idrule_detail(request, uuid=None):
     idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
+    utils.warn_if_viewing_old_revision(request, idrule)
     return render(request, 'fpr/idrule/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idrule_edit(request, uuid=None):
     if uuid:
         action = "Edit"
@@ -224,6 +234,7 @@ def idrule_edit(request, uuid=None):
 
     return render(request, 'fpr/idrule/form.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idrule_delete(request, uuid):
     idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
     if request.method == 'POST':
@@ -242,8 +253,10 @@ def idcommand_list(request):
 
 def idcommand_detail(request, uuid):
     idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
+    utils.warn_if_viewing_old_revision(request, idcommand)
     return render(request, 'fpr/idcommand/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idcommand_edit(request, uuid=None):
     if uuid:
         action = "Edit"
@@ -271,6 +284,7 @@ def idcommand_edit(request, uuid=None):
 
     return render(request, 'fpr/idcommand/form.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idcommand_delete(request, uuid):
     command = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
     dependent_objects = utils.dependent_objects(command)
@@ -294,8 +308,10 @@ def fprule_list(request):
 
 def fprule_detail(request, uuid):
     fprule = get_object_or_404(fprmodels.FPRule, uuid=uuid)
+    utils.warn_if_viewing_old_revision(request, fprule)
     return render(request, 'fpr/fprule/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fprule_edit(request, uuid=None):
     if uuid:
         action = "Edit"
@@ -340,6 +356,7 @@ def fptool_detail(request, slug):
     fpcommands = fprmodels.FPCommand.objects.filter(tool__uuid=fptool.uuid)
     return render(request, 'fpr/fptool/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fptool_edit(request, slug=None):
     if slug:
         action = "Replace"
@@ -362,9 +379,11 @@ def fpcommand_list(request):
     return render(request, 'fpr/fpcommand/list.html', locals())
 
 def fpcommand_detail(request, uuid):
-    fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid, enabled=True)
+    fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid)
+    utils.warn_if_viewing_old_revision(request, fpcommand)
     return render(request, 'fpr/fpcommand/detail.html', locals())
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fpcommand_edit(request, uuid=None):
     if uuid:
         action = "Replace"
@@ -426,24 +445,28 @@ def revision_list(request, entity_name, uuid):
 
         # get specific revision's data and augment with detail URL
         revision = model.objects.get(uuid=uuid)
-        _augment_revisions_with_detail_url(entity_name, model, [revision])
+        _augment_revisions_with_detail_url(request, entity_name, model, [revision])
 
         # get revision ancestor data and augment with detail URLs
         ancestors = utils.get_revision_ancestors(model, uuid, [])
-        _augment_revisions_with_detail_url(entity_name, model, ancestors)
+        _augment_revisions_with_detail_url(request, entity_name, model, ancestors)
 
         # get revision descendant data and augment with detail URLs
         descendants = utils.get_revision_descendants(model, uuid, [])
-        _augment_revisions_with_detail_url(entity_name, model, descendants)
+        _augment_revisions_with_detail_url(request, entity_name, model, descendants)
         descendants.reverse()
 
         return render(request, 'fpr/revisions/list.html', locals())
     except AttributeError:
         raise Http404
 
-def _augment_revisions_with_detail_url(entity_name, model, revisions):
+def _augment_revisions_with_detail_url(request, entity_name, model, revisions):
     for revision in revisions:
-        detail_view_name = entity_name + '_edit'
+        if request.user.is_superuser:
+            detail_view_name = entity_name + '_edit'
+        else:
+            detail_view_name = entity_name + '_detail'
+
         try:
             parent_key_value = None
             if entity_name == 'formatversion':

@@ -30,14 +30,18 @@
               <dd>{{ format.description }}</dd>
             <dt>Group</dt>
               <dd><a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a></dd>
+            {% if request.user.is_superuser %}
             <dt>Actions</dt>
               <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
+            {% endif %}
         </dl>
     </div>
 
     <h2>Specific Versions</h2>
 
+    {% if request.user.is_superuser %}
     <p><a href="{% url 'formatversion_create' format.slug %}">Create New Format Version</a></p>
+    {% endif %}
 
     {% if format_versions %}
       <table class="datatable">
@@ -60,9 +64,11 @@
             <td>{{ version.access_format|yesno:"Yes, No" }}</td>
             <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
             <td>
-              <a href="{% url 'formatversion_detail' format.slug version.slug %}">View</a> |
-              <a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a> |
-              <a href="{% url 'formatversion_delete' format.slug version.slug %}">Disable</a></td>
+              <a href="{% url 'formatversion_detail' format.slug version.slug %}">View</a>
+              {% if request.user.is_superuser %}
+                | <a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a>
+                | <a href="{% url 'formatversion_delete' format.slug version.slug %}">Disable</a></td>
+              {% endif %}
           </tr>
         {% endfor %}
         </tbody>

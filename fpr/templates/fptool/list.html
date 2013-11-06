@@ -21,7 +21,9 @@ Normalization Tool Information
 
   <div class="span10">
 
+    {% if request.user.is_superuser %}
     <p><a href="{% url 'fptool_create' %}">Create New Tool</a></p>
+    {% endif %}
 
     {% if fptools %}
       <table class="datatable">
@@ -38,8 +40,10 @@ Normalization Tool Information
             <td><a href="{% url 'fptool_detail' fptool.slug %}">{{ fptool.description }}</a></td>
             <td>{{ fptool.version }}</td>
             <td>
-               <a href="{% url 'fptool_detail' fptool.slug %}">View</a> |
-              <a href="{% url 'fptool_edit' fptool.slug %}">Edit</a>
+               <a href="{% url 'fptool_detail' fptool.slug %}">View</a>
+               {% if request.user.is_superuser %}
+                 | <a href="{% url 'fptool_edit' fptool.slug %}">Edit</a>
+               {% endif %}
             </td>
           </tr>
         {% endfor %}

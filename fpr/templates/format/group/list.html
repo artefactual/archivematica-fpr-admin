@@ -21,7 +21,9 @@ Format Group Information
 
   <div class="span10">
 
+    {% if request.user.is_superuser %}
     <p><a href="{% url 'formatgroup_create' %}">Create New Format Group</a></p>
+    {% endif %}
 
     {% if groups %}
       <table class="datatable">
@@ -36,8 +38,11 @@ Format Group Information
           <tr>
             <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></td>
             <td>
-              <a href="{% url 'formatgroup_edit' group.slug %}">Edit</a> |
-              <a href="{% url 'formatgroup_delete' group.slug %}">Delete</a>
+              <a href="{% url 'formatgroup_edit' group.slug %}">Edit</a>
+              {% if request.user.is_superuser %}
+                |
+                <a href="{% url 'formatgroup_delete' group.slug %}">Delete</a>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}
