@@ -30,13 +30,22 @@ Format Group Information
         <thead>
           <tr>
             <th>Description</th>
-            <th>Actions</th>
+            {% if request.user.is_superuser %}
+              <th>Actions</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
         {% for group in groups %}
           <tr>
-            <td><a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a></td>
+            <td>
+              {% if request.user.is_superuser %}
+                <a href="{% url 'formatgroup_edit' group.slug %}">{{ group.description }}</a>
+              {% else %}
+                {{ group.description }}
+              {% endif %}
+            </td>
+            {% if request.user.is_superuser %}
             <td>
               <a href="{% url 'formatgroup_edit' group.slug %}">Edit</a>
               {% if request.user.is_superuser %}
@@ -44,6 +53,7 @@ Format Group Information
                 <a href="{% url 'formatgroup_delete' group.slug %}">Delete</a>
               {% endif %}
             </td>
+            {% endif %}
           </tr>
         {% endfor %}
         </tbody>

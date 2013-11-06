@@ -29,7 +29,13 @@
             <dt>Description</dt>
               <dd>{{ format.description }}</dd>
             <dt>Group</dt>
-              <dd><a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a></dd>
+              <dd>
+                {% if request.user.is_superuser %}
+                  <a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a>
+                {% else %}
+                  {{ format.group }}
+                {% endif %}
+              </dd>
             {% if request.user.is_superuser %}
             <dt>Actions</dt>
               <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
