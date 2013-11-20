@@ -253,12 +253,14 @@ class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
     NORMALIZATION_CHOICES_DISPLAY = (
         ('access', 'Access'),
+        ('characterization', 'Characterization'),
         ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
         ('extract', 'Extract'),
     )
     HIDDEN_CHOICES = (
         ('default_access', 'Default Access'),
+        ('default_characterization', 'Default Characterization'),
         ('default_thumbnail', 'Default Thumbnail'),
     )
     PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
@@ -314,6 +316,7 @@ class FPCommand(VersionedModel, models.Model):
     output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, blank=True)
     COMMAND_USAGE_CHOICES = (
         ('normalization', 'Normalization'),
+        ('characterization', 'Characterization'),
         ('extraction', 'Extraction'),
         ('event_detail', 'Event Detail'),
         ('verification', 'Verification'),

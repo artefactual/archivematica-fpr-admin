@@ -90,7 +90,7 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        query = Q(command_usage='normalization') | Q(command_usage='extraction')
+        query = Q(command_usage='normalization') | Q(command_usage='extraction') | Q(command_usage='characterization')
         choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(query)]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
