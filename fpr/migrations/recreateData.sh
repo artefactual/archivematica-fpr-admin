@@ -36,20 +36,20 @@ fi
 cd "$currentDir"
 set +e
 echo "Removing existing entries"
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM Command;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandClassification;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandRelationship;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandType;" $database
-#mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandsSupportedBy;" $database
-#mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM DefaultCommandsForClassification;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileID;" $database
-#mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDGroupMember;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDType;" $database
-mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDsBySingleID;" $database
-#mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM $database.Group;" $database
-#mysql -h $dbhost -u $username "${dbpassword}" --execute="DELETE FROM SubGroup;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM Command;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandClassification;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandRelationship;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandType;" $database
+#mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM CommandsSupportedBy;" $database
+#mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM DefaultCommandsForClassification;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileID;" $database
+#mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDGroupMember;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDType;" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM FileIDsBySingleID;" $database
+#mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM $database.Group;" $database
+#mysql $dbhost -u $username "${dbpassword}" --execute="DELETE FROM SubGroup;" $database
 set -e
-mysql -h $dbhost -u $username "${dbpassword}" --execute="source ./rawdump.sql" $database
+mysql $dbhost -u $username "${dbpassword}" --execute="source ./rawdump.sql" $database
 
 cd "$origDir"
 dbpassword=""
