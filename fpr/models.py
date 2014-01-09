@@ -273,74 +273,28 @@ class FPRule(VersionedModel, models.Model):
     class Meta:
         verbose_name = "Format Policy Rule"
 
-    """
-    def validate_unique(self, *args, **kwargs):
-        super(FPRule, self).validate_unique(*args, **kwargs)
+    # def validate_unique(self, *args, **kwargs):
+    #     super(FPRule, self).validate_unique(*args, **kwargs)
         
-        qs = self.__class__._default_manager.filter(
-            purpose=self.purpose,
-            command=self.command,
-            format=self.format,
-            enabled=1
-        )
+    #     qs = self.__class__._default_manager.filter(
+    #         purpose=self.purpose,
+    #         command=self.command,
+    #         format=self.format,
+    #         enabled=1
+    #     )
 
-        if not self._state.adding and self.pk is not None:
-            qs = qs.exclude(pk=self.pk)
+    #     if not self._state.adding and self.pk is not None:
+    #         qs = qs.exclude(pk=self.pk)
 
-        if qs.exists():
-            raise ValidationError( {
-                NON_FIELD_ERRORS:('Unable to save, an active Rule for this purpose and format and command already exists.',)})
-    """
+    #     if qs.exists():
+    #         raise ValidationError( {
+    #             NON_FIELD_ERRORS:('Unable to save, an active Rule for this purpose and format and command already exists.',)})
 
     def __unicode__(self):
         return u"Normalize {format} for {purpose} via {command}".format(
             format=self.format,
             purpose=self.get_purpose_display(),
             command=self.command)
-
-    def save(self, *args, **kwargs):
-        super(FPRule, self).save(*args, **kwargs)
-        # TODO this might need to be moved/updated elsewhere
-        # If part of Archivematica, update chain link and task config
-        try:
-            from main.models import MicroServiceChainLink, MicroServiceChainLinkExitCode, TaskConfig
-        except ImportError:
-            pass
-        else:
-            if self.enabled:
-                # Create new TaskConfig
-                transcode_task_type='5e70152a-9c5b-4c17-b823-c9298c546eeb'
-                task_config = TaskConfig.objects.create(
-                    id=str(uuid.uuid4()),
-                    tasktype=transcode_task_type,
-                    tasktypepkreference=self.uuid,
-                    description=unicode(self)
-                )
-                # Create new MicroServiceChainLink
-                # defaultnextchainlink should point at the default action for
-                # that purpose, in case the FPRule fails.
-                default_purpose = "default_{}".format(self.purpose)
-                default_fprule = get_object_or_None(FPRule.active, purpose=default_purpose)
-                if default_fprule:
-                    default_task_config = TaskConfig.objects.get(tasktypepkreference=default_fprule.uuid)
-                    default_mscl = MicroServiceChainLink.objects.get(currenttask=default_task_config.id)
-                    defaultnextchainlink = default_mscl.id
-                else:
-                    defaultnextchainlink=None
-                mscl = MicroServiceChainLink.objects.create(
-                    id=str(uuid.uuid4()),
-                    currenttask=task_config.id,
-                    defaultnextchainlink=defaultnextchainlink,
-                    defaultplaysound=None,
-                    microservicegroup="Normalize",
-                )
-                # Create new MicroServiceChainLinkExitCode
-                MicroServiceChainLinkExitCode.objects.create(
-                    id=str(uuid.uuid4()),
-                    microservicechainlink=mscl.id,
-                    exitcode=0,  # default
-                    nextmicroservicechainlink=None,  # default
-                )
 
 
 class FPCommand(VersionedModel, models.Model):
