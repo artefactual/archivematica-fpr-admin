@@ -41,8 +41,10 @@
           <dd>Total: {{ fprule.count_attempts }}</dd>
         <dt>Enabled</dt>
           <dd>{{ fprule.enabled }}</dd>
+        {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
+        {% endif %}
       </dl>
     </div>
 

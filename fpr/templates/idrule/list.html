@@ -20,7 +20,9 @@ Identification Rule Information
 
   <div class="span10">
 
-<p><a href="{% url 'idrule_create' %}">Create New Rule</a></p>
+  {% if request.user.is_superuser %}
+  <p><a href="{% url 'idrule_create' %}">Create New Rule</a></p>
+  {% endif %}
 
 {% if idrules %}
   <table class="datatable">
@@ -45,9 +47,11 @@ Identification Rule Information
           {% endfor %}
         </td>
         <td>
-          <a href="{% url 'idrule_detail' idrule.uuid %}">View</a> |
-          <a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a> |
-          <a href="{% url 'idrule_delete' idrule.uuid %}">Disable</a>
+          <a href="{% url 'idrule_detail' idrule.uuid %}">View</a>
+          {% if request.user.is_superuser %}
+            | <a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a>
+            | <a href="{% url 'idrule_delete' idrule.uuid %}">Disable</a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

@@ -36,8 +36,10 @@
             <dt>Access?</dt> <dd>{{ version.access_format }}</dd>
             <dt>Preservation?</dt> <dd>{{ version.preservation_format }}</dd>
             <dt>Enabled</dt> <dd>{{ version.enabled }}</dd>
+            {% if request.user.is_superuser %}
             <dt>Actions</dt>
               <dd><a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a></dd>
+            {% endif %}
         </dl>
     </div>
 
