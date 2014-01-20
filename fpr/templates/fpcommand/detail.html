@@ -57,8 +57,10 @@
           {% endif %}
         <dt>Enabled</dt>
           <dd>{{ fpcommand.enabled }}</dd>
+        {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
+        {% endif %}
       </dl>
     </div>
 

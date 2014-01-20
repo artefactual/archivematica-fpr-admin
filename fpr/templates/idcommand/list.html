@@ -20,7 +20,9 @@ Identification Command Information
 
   <div class="span10">
 
-<p><a href="{% url 'idcommand_create' %}">Create New Command</a></p>
+  {% if request.user.is_superuser %}
+  <p><a href="{% url 'idcommand_create' %}">Create New Command</a></p>
+  {% endif %}
 
 {% if idcommands %}
   <table class="datatable">
@@ -41,9 +43,11 @@ Identification Command Information
         <td><a href="{% url 'idtool_detail' idcommand.tool.slug %}">{{ idcommand.tool }}</a></td>
         <td>{{ idcommand.config }}</td>
         <td>
-          <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a> |
-          <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a> |
-          <a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a>
+          <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a>
+          {% if request.user.is_superuser %}
+            | <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a>
+            | <a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a>
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

@@ -21,7 +21,9 @@ Format Policy Command Information
 
   <div class="span10">
 
+    {% if request.user.is_superuser %}
     <p><a href="{% url 'fpcommand_create' %}">Create New Command</a></p>
+    {% endif %}
 
     {% if fpcommands %}
       <table class="datatable">
@@ -39,8 +41,10 @@ Format Policy Command Information
             <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
             <td>{{ fpcommand.get_command_usage_display }}</td>
             <td>{{ fpcommand.tool.description }}</td>
-            <td> <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a> |
-              <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>
+            <td> <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a>
+              {% if request.user.is_superuser %}
+                | <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>
+              {% endif %}
             </td>
           </tr>
         {% endfor %}

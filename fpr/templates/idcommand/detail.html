@@ -41,9 +41,11 @@
           <dd>{{ idcommand.get_script_type_display }}</dd>
         <dt>Enabled</dt>
           <dd>{{ idcommand.enabled }}</dd>
+        {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
           <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a></dd>
+        {% endif %}
       </dl>
     </div>
 
