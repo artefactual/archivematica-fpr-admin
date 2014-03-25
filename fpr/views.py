@@ -396,6 +396,7 @@ def fpcommand_edit(request, uuid=None):
         if form.is_valid():
             # save command
             new_fpcommand = form.save(commit=False)
+            new_fpcommand.command = new_fpcommand.command.replace('\r\n', '\n')
             # Handle replacing previous rule and setting enabled/disabled
             replaces = utils.determine_what_replaces_model_instance(fprmodels.FPCommand, fpcommand)
             new_fpcommand.save(replacing=replaces)
