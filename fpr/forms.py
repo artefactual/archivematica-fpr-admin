@@ -137,8 +137,8 @@ class FPCommandForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FPCommandForm, self).__init__(*args, **kwargs)
 
-        verification_commands = fprmodels.FPCommand.objects.filter(command_usage='verification')
-        event_detail_commands = fprmodels.FPCommand.objects.filter(command_usage='event_detail')
+        verification_commands = fprmodels.FPCommand.active.filter(command_usage='verification')
+        event_detail_commands = fprmodels.FPCommand.active.filter(command_usage='event_detail')
 
         # don't allow self-relation
         if hasattr(self.instance, 'uuid'):
