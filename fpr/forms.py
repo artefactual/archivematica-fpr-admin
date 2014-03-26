@@ -90,7 +90,7 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        query = Q(command_usage='normalization') | Q(command_usage='extraction')
+        query = Q(command_usage='normalization') | Q(command_usage='extraction') | Q(command_usage='characterization')
         choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(query)]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
@@ -137,8 +137,8 @@ class FPCommandForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FPCommandForm, self).__init__(*args, **kwargs)
 
-        verification_commands = fprmodels.FPCommand.objects.filter(command_usage='verification')
-        event_detail_commands = fprmodels.FPCommand.objects.filter(command_usage='event_detail')
+        verification_commands = fprmodels.FPCommand.objects.filter(command_usage='verification', enabled=1)
+        event_detail_commands = fprmodels.FPCommand.objects.filter(command_usage='event_detail', enabled=1)
 
         # don't allow self-relation
         if hasattr(self.instance, 'uuid'):
