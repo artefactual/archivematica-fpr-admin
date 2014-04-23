@@ -22,6 +22,22 @@ from fpr import models as fprmodels
 from fpr import utils
 
 
+def context(variables):
+    """
+    This wraps a variables dict, allowing a standard set of values to be
+    included in any view without explicitly defining them there.
+    Any new default variables should be added to the `default` dict within
+    this function.
+    """
+    # The categories of commands are used to populate separate browse links for
+    # each category.
+    default = {
+        'categories': fprmodels.FPCommand.COMMAND_USAGE_CHOICES
+    }
+    default.update(variables)
+    return default
+
+
 def home(request):
     # once per session, display the welcome text
     if not 'welcome_message_shown' in request.session: # or not request.session['welcome_message_shown']:
@@ -36,12 +52,12 @@ def home(request):
 def format_list(request):
     formats = fprmodels.Format.objects.filter()
     # TODO Formats grouped by FormatGroup for better display in template
-    return render(request, 'fpr/format/list.html', locals())
+    return render(request, 'fpr/format/list.html', context(locals()))
 
 def format_detail(request, slug):
     format = get_object_or_404(fprmodels.Format, slug=slug)
     format_versions = fprmodels.FormatVersion.active.filter(format=format)
-    return render(request, 'fpr/format/detail.html', locals())
+    return render(request, 'fpr/format/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def format_edit(request, slug=None):
@@ -71,7 +87,7 @@ def format_edit(request, slug=None):
             messages.info(request, 'Saved.')
             return redirect('format_detail', format.slug)
 
-    return render(request, 'fpr/format/form.html', locals())
+    return render(request, 'fpr/format/form.html', context(locals()))
 
 ############ FORMAT VERSIONS ############
 
@@ -79,7 +95,7 @@ def formatversion_detail(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug)
     utils.warn_if_viewing_old_revision(request, version)
-    return render(request, 'fpr/format/version/detail.html', locals())
+    return render(request, 'fpr/format/version/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatversion_edit(request, format_slug, slug=None):
@@ -103,7 +119,7 @@ def formatversion_edit(request, format_slug, slug=None):
     else:
         utils.warn_if_replacing_with_old_revision(request, version)
 
-    return render(request, 'fpr/format/version/form.html', locals())
+    return render(request, 'fpr/format/version/form.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatversion_delete(request, format_slug, slug):
@@ -119,13 +135,13 @@ def formatversion_delete(request, format_slug, slug):
                 obj['value'].enabled = False
                 obj['value'].save()
         return redirect('format_detail', format.slug)
-    return render(request, 'fpr/format/version/delete.html', locals())
+    return render(request, 'fpr/format/version/delete.html', context(locals()))
 
 ############ FORMAT GROUPS ############
 
 def formatgroup_list(request):
     groups = fprmodels.FormatGroup.objects.all()
-    return render(request, 'fpr/format/group/list.html', locals())
+    return render(request, 'fpr/format/group/list.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatgroup_edit(request, slug=None):
@@ -143,7 +159,7 @@ def formatgroup_edit(request, slug=None):
         messages.info(request, 'Saved.')
         return redirect('formatgroup_list')
 
-    return render(request, 'fpr/format/group/form.html', locals())
+    return render(request, 'fpr/format/group/form.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def formatgroup_delete(request, slug):
@@ -172,18 +188,18 @@ def formatgroup_delete(request, slug):
             messages.info(request, 'Deleted.')
         return redirect('formatgroup_list')
     else:
-        return render(request, 'fpr/format/group/delete.html', locals())
+        return render(request, 'fpr/format/group/delete.html', context(locals()))
 
 ############ ID TOOLS ############
 
 def idtool_list(request):
     idtools = fprmodels.IDTool.objects.filter(enabled=True)
-    return render(request, 'fpr/idtool/list.html', locals())
+    return render(request, 'fpr/idtool/list.html', context(locals()))
 
 def idtool_detail(request, slug):
     idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
     idcommands = fprmodels.IDCommand.active.filter(tool=idtool)
-    return render(request, 'fpr/idtool/detail.html', locals())
+    return render(request, 'fpr/idtool/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idtool_edit(request, slug=None):
@@ -200,19 +216,19 @@ def idtool_edit(request, slug=None):
         messages.info(request, 'Saved.')
         return redirect('idtool_detail', idtool.slug)
 
-    return render(request, 'fpr/idtool/form.html', locals())
+    return render(request, 'fpr/idtool/form.html', context(locals()))
 
 
 ############ ID RULES ############
 
 def idrule_list(request):
     idrules = fprmodels.IDRule.active.all()
-    return render(request, 'fpr/idrule/list.html', locals())
+    return render(request, 'fpr/idrule/list.html', context(locals()))
 
 def idrule_detail(request, uuid=None):
     idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
     utils.warn_if_viewing_old_revision(request, idrule)
-    return render(request, 'fpr/idrule/detail.html', locals())
+    return render(request, 'fpr/idrule/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idrule_edit(request, uuid=None):
@@ -232,7 +248,7 @@ def idrule_edit(request, uuid=None):
     else:
         utils.warn_if_replacing_with_old_revision(request, idrule)
 
-    return render(request, 'fpr/idrule/form.html', locals())
+    return render(request, 'fpr/idrule/form.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idrule_delete(request, uuid):
@@ -243,18 +259,18 @@ def idrule_delete(request, uuid):
             idrule.save()
             messages.info(request, 'Disabled.')
         return redirect('idrule_detail', idrule.uuid)
-    return render(request, 'fpr/idrule/delete.html', locals())
+    return render(request, 'fpr/idrule/delete.html', context(locals()))
 
 ############ ID COMMANDS ############
 
 def idcommand_list(request):
     idcommands = fprmodels.IDCommand.active.all()
-    return render(request, 'fpr/idcommand/list.html', locals())
+    return render(request, 'fpr/idcommand/list.html', context(locals()))
 
 def idcommand_detail(request, uuid):
     idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
     utils.warn_if_viewing_old_revision(request, idcommand)
-    return render(request, 'fpr/idcommand/detail.html', locals())
+    return render(request, 'fpr/idcommand/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idcommand_edit(request, uuid=None):
@@ -282,7 +298,7 @@ def idcommand_edit(request, uuid=None):
     else:
         utils.warn_if_replacing_with_old_revision(request, idcommand)
 
-    return render(request, 'fpr/idcommand/form.html', locals())
+    return render(request, 'fpr/idcommand/form.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idcommand_delete(request, uuid):
@@ -298,18 +314,26 @@ def idcommand_delete(request, uuid):
                 obj['value'].enabled = False
                 obj['value'].save()
         return redirect('idtool_detail', command.tool.slug)
-    return render(request, 'fpr/idcommand/delete.html', locals())
+    return render(request, 'fpr/idcommand/delete.html', context(locals()))
 
 ############ FP RULES ############
 
-def fprule_list(request):
-    fprules = fprmodels.FPRule.active.filter(purpose__in=dict(fprmodels.FPRule.NORMALIZATION_CHOICES_DISPLAY))
-    return render(request, 'fpr/fprule/list.html', locals())
+def fprule_list(request, usage=None):
+    # Some usage types map to multiple categories of rules,
+    # while others have different names between the two models.
+    if usage:
+        purpose = fprmodels.FPRule.USAGE_MAP.get(usage, (usage,))
+        opts = {'purpose__in': purpose}
+    else:
+        opts = {}
+    fprules = fprmodels.FPRule.active.filter(**opts)
+    return render(request, 'fpr/fprule/list.html', context(locals()))
 
 def fprule_detail(request, uuid):
     fprule = get_object_or_404(fprmodels.FPRule, uuid=uuid)
+    usage = fprule.command.command_usage
     utils.warn_if_viewing_old_revision(request, fprule)
-    return render(request, 'fpr/fprule/detail.html', locals())
+    return render(request, 'fpr/fprule/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fprule_edit(request, uuid=None):
@@ -343,18 +367,18 @@ def fprule_edit(request, uuid=None):
     else:
         utils.warn_if_replacing_with_old_revision(request, fprule)
 
-    return render(request, 'fpr/fprule/form.html', locals())
+    return render(request, 'fpr/fprule/form.html', context(locals()))
 
 ############ FP TOOLS ############
 
 def fptool_list(request):
     fptools = fprmodels.FPTool.objects.filter(enabled=True)
-    return render(request, 'fpr/fptool/list.html', locals())
+    return render(request, 'fpr/fptool/list.html', context(locals()))
 
 def fptool_detail(request, slug):
     fptool = get_object_or_404(fprmodels.FPTool, slug=slug, enabled=True)
     fpcommands = fprmodels.FPCommand.objects.filter(tool__uuid=fptool.uuid)
-    return render(request, 'fpr/fptool/detail.html', locals())
+    return render(request, 'fpr/fptool/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fptool_edit(request, slug=None):
@@ -370,18 +394,22 @@ def fptool_edit(request, slug=None):
         messages.info(request, 'Saved.')
         return redirect('fptool_detail', fptool.slug)
 
-    return render(request, 'fpr/fptool/form.html', locals())
+    return render(request, 'fpr/fptool/form.html', context(locals()))
 
 ############ FP COMMANDS ############
 
-def fpcommand_list(request):
-    fpcommands = fprmodels.FPCommand.objects.filter(enabled=True)
-    return render(request, 'fpr/fpcommand/list.html', locals())
+def fpcommand_list(request, usage=None):
+    opts = {'enabled': True}
+    if usage:
+        opts['command_usage'] = usage
+    fpcommands = fprmodels.FPCommand.objects.filter(**opts)
+    return render(request, 'fpr/fpcommand/list.html', context(locals()))
 
 def fpcommand_detail(request, uuid):
     fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid)
+    usage = fpcommand.command_usage
     utils.warn_if_viewing_old_revision(request, fpcommand)
-    return render(request, 'fpr/fpcommand/detail.html', locals())
+    return render(request, 'fpr/fpcommand/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def fpcommand_edit(request, uuid=None):
@@ -402,7 +430,7 @@ def fpcommand_edit(request, uuid=None):
             new_fpcommand.save(replacing=replaces)
             utils.update_references_to_object(fprmodels.FPCommand, 'uuid', replaces, new_fpcommand)
             messages.info(request, 'Saved.')
-            return redirect('fpcommand_list')
+            return redirect('fpcommand_list', new_fpcommand.command_usage)
     else:
         # Set tool to parent if it exists
         initial = {}
@@ -413,7 +441,7 @@ def fpcommand_edit(request, uuid=None):
         form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
         utils.warn_if_replacing_with_old_revision(request, fpcommand)
 
-    return render(request, 'fpr/fpcommand/form.html', locals())
+    return render(request, 'fpr/fpcommand/form.html', context(locals()))
 
 ############ REVISIONS ############
 
@@ -457,7 +485,7 @@ def revision_list(request, entity_name, uuid):
         _augment_revisions_with_detail_url(request, entity_name, model, descendants)
         descendants.reverse()
 
-        return render(request, 'fpr/revisions/list.html', locals())
+        return render(request, 'fpr/revisions/list.html', context(locals()))
     except AttributeError:
         raise Http404
 

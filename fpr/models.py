@@ -176,20 +176,16 @@ class IDCommand(VersionedModel, models.Model):
             # Add replacement to MicroServiceChoiceReplacementDic
             at_link_transfer = 'f09847c2-ee51-429a-9478-a860477f6b8d'
             at_link_ingest = '7a024896-c4f7-4808-a240-44c87c762bc5'
+            at_link_submissiondocs = '087d27be-c719-47d8-9bbb-9a7d8b609c44'
             # {"%IDCommand%": self.command.uuid}
             replace = '{{"%IDCommand%":"{0}"}}'.format(self.uuid)
-            MicroServiceChoiceReplacementDic.objects.create(
-                id=str(uuid.uuid4()),
-                choiceavailableatlink=at_link_transfer,
-                description=str(self),
-                replacementdic=replace,
-            )
-            MicroServiceChoiceReplacementDic.objects.create(
-                id=str(uuid.uuid4()),
-                choiceavailableatlink=at_link_ingest,
-                description=str(self),
-                replacementdic=replace,
-            )
+            for link in (at_link_transfer, at_link_ingest, at_link_submissiondocs):
+                MicroServiceChoiceReplacementDic.objects.create(
+                    id=str(uuid.uuid4()),
+                    choiceavailableatlink=link,
+                    description=str(self),
+                    replacementdic=replace,
+                )
 
 
 class IDRule(VersionedModel, models.Model):
@@ -256,6 +252,7 @@ class FPRule(VersionedModel, models.Model):
         ('characterization', 'Characterization'),
         ('preservation', 'Preservation'),
         ('thumbnail', 'Thumbnail'),
+        ('transcription', 'Transcription'),
         ('extract', 'Extract'),
     )
     HIDDEN_CHOICES = (
@@ -263,6 +260,12 @@ class FPRule(VersionedModel, models.Model):
         ('default_characterization', 'Default Characterization'),
         ('default_thumbnail', 'Default Thumbnail'),
     )
+    # There are three categories of Normalization we want to group together,
+    # and 'extraction' has a different FPRule name.
+    USAGE_MAP = {
+        'normalization': ('access', 'preservation', 'thumbnail'),
+        'extraction': ('extract',),
+    }
     PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
     command = models.ForeignKey('FPCommand', to_field='uuid')
@@ -318,6 +321,7 @@ class FPCommand(VersionedModel, models.Model):
         ('normalization', 'Normalization'),
         ('characterization', 'Characterization'),
         ('extraction', 'Extraction'),
+        ('transcription', 'Transcription'),
         ('event_detail', 'Event Detail'),
         ('verification', 'Verification'),
     )

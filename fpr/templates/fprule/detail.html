@@ -11,7 +11,7 @@
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'fprule_list' %}">Format Policy Rules</a></li>
+<li><a href="{% url 'fprule_list' usage %}">Format Policy Rules</a></li>
 <li>{{ fprule.purpose|title }} Rule</li>
 {% endblock breadcrumbs %}
 
