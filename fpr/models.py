@@ -247,24 +247,36 @@ class IDTool(models.Model):
 
 class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    ACCESS = 'access'
+    PRESERVATION = 'preservation'
+    THUMBNAIL = 'thumbnail'
+    CHARACTERIZATION = 'characterization'
+    TRANSCRIPTION = 'transcription'
+    EXTRACT = 'extract'
+    DEFAULT_ACCESS = 'default_access'
+    DEFAULT_CHARACTERIZATION = 'default_characterization'
+    DEFAULT_THUMBNAIL = 'default_thumbnail'
+    USAGES = (ACCESS, PRESERVATION, THUMBNAIL, CHARACTERIZATION, TRANSCRIPTION,
+              EXTRACT, DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
+
     NORMALIZATION_CHOICES_DISPLAY = (
-        ('access', 'Access'),
-        ('characterization', 'Characterization'),
-        ('preservation', 'Preservation'),
-        ('thumbnail', 'Thumbnail'),
-        ('transcription', 'Transcription'),
-        ('extract', 'Extract'),
+        (ACCESS, 'Access'),
+        (CHARACTERIZATION, 'Characterization'),
+        (PRESERVATION, 'Preservation'),
+        (THUMBNAIL, 'Thumbnail'),
+        (TRANSCRIPTION, 'Transcription'),
+        (EXTRACT, 'Extract'),
     )
     HIDDEN_CHOICES = (
-        ('default_access', 'Default Access'),
-        ('default_characterization', 'Default Characterization'),
-        ('default_thumbnail', 'Default Thumbnail'),
+        (DEFAULT_ACCESS, 'Default Access'),
+        (DEFAULT_CHARACTERIZATION, 'Default Characterization'),
+        (DEFAULT_THUMBNAIL, 'Default Thumbnail'),
     )
     # There are three categories of Normalization we want to group together,
     # and 'extraction' has a different FPRule name.
     USAGE_MAP = {
-        'normalization': ('access', 'preservation', 'thumbnail'),
-        'extraction': ('extract',),
+        'normalization': (ACCESS, PRESERVATION, THUMBNAIL),
+        'extraction': (EXTRACT,),
     }
     PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
