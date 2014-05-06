@@ -247,17 +247,18 @@ class IDTool(models.Model):
 
 class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    NORMALIZATION = 'normalization'
     ACCESS = 'access'
     PRESERVATION = 'preservation'
     THUMBNAIL = 'thumbnail'
     CHARACTERIZATION = 'characterization'
     TRANSCRIPTION = 'transcription'
-    EXTRACT = 'extract'
+    EXTRACTION = 'extract'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
     USAGES = (ACCESS, PRESERVATION, THUMBNAIL, CHARACTERIZATION, TRANSCRIPTION,
-              EXTRACT, DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
+              EXTRACTION, DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
 
     NORMALIZATION_CHOICES_DISPLAY = (
         (ACCESS, 'Access'),
@@ -265,7 +266,7 @@ class FPRule(VersionedModel, models.Model):
         (PRESERVATION, 'Preservation'),
         (THUMBNAIL, 'Thumbnail'),
         (TRANSCRIPTION, 'Transcription'),
-        (EXTRACT, 'Extract'),
+        (EXTRACTION, 'Extract'),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, 'Default Access'),
@@ -276,7 +277,7 @@ class FPRule(VersionedModel, models.Model):
     # and 'extraction' has a different FPRule name.
     USAGE_MAP = {
         'normalization': (ACCESS, PRESERVATION, THUMBNAIL),
-        'extraction': (EXTRACT,),
+        'extraction': (EXTRACTION,),
     }
     PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
