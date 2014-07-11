@@ -276,7 +276,8 @@ class FPRule(VersionedModel, models.Model):
     # There are three categories of Normalization we want to group together,
     # and 'extraction' has a different FPRule name.
     USAGE_MAP = {
-        'normalization': (ACCESS, PRESERVATION, THUMBNAIL),
+        'normalization': (DEFAULT_ACCESS, ACCESS, PRESERVATION, THUMBNAIL),
+        'characterization': (CHARACTERIZATION, DEFAULT_CHARACTERIZATION),
         'extraction': (EXTRACTION,),
     }
     PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
