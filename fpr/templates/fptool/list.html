@@ -2,15 +2,15 @@
 {% load url from future %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - Normalization Tools{% endblock title %}
+{% block title %}Archivematica FPR Server - Tools{% endblock title %}
 
 {% block page_title %}
-Normalization Tool Information
+Format Policy Registry Tool Information
 {% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li>Normalization Tools</li>
+<li>Format Policy Registry Tools</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -50,7 +50,7 @@ Normalization Tool Information
         </tbody>
       </table>
     {% else %}
-      <p>No normalization tools exist.</p>
+      <p>No tools exist.</p>
     {% endif %}
 
   </div> <!-- /span10 -->

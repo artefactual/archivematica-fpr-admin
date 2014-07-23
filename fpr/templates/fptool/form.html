@@ -2,16 +2,16 @@
 {% load url from future %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ action }} Normalization Tool{% endblock title %}
+{% block title %}Archivematica FPR Server - {{ action }} Tool{% endblock title %}
 
 {% block page_title %}
-{{ action }} Normalization Tool
+{{ action }} Tool
 {% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'fptool_list' %}">Normalization Tools</a></li>
-<li>{{ action }} Normalization Tool</li>
+<li><a href="{% url 'fptool_list' %}">Format Policy Registry Tools</a></li>
+<li>{{ action }} Tool</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
