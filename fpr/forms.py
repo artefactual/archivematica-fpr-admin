@@ -90,8 +90,10 @@ class FPRuleForm(forms.ModelForm):
         super(FPRuleForm, self).__init__(*args, **kwargs)
 
         # Add 'create' option to the FPCommand dropdown
-        query = Q(command_usage=fprmodels.FPRule.NORMALIZATION) | Q(command_usage=fprmodels.FPRule.EXTRACTION) | Q(command_usage=fprmodels.FPRule.CHARACTERIZATION) | Q(command_usage=fprmodels.FPRule.TRANSCRIPTION)
-        choices = [(f.uuid, f.description) for f in fprmodels.FPCommand.active.all().filter(query)]
+        # Do not include event detail or verification, since those are not run
+        # through FPRules normally
+        commands = fprmodels.FPCommand.active.exclude(command_usage='event_detail').exclude(command_usage='verification')
+        choices = [(f.uuid, f.description) for f in commands]
         choices.insert(0, ('', '---------'))
         choices.append(('new', 'Create New'))
         self.fields['command'].choices = choices
@@ -100,8 +102,6 @@ class FPRuleForm(forms.ModelForm):
 
         # Show only active format versions in the format dropdown
         self.fields['format'].queryset = fprmodels.FormatVersion.active.all()
-        # Purpose choices restricted
-        self.fields['purpose'].choices = fprmodels.FPRule.PURPOSE_CHOICES
         
     def clean(self):
         cleaned_data = super(FPRuleForm, self).clean()

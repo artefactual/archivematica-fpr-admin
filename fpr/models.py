@@ -247,26 +247,26 @@ class IDTool(models.Model):
 
 class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
-    NORMALIZATION = 'normalization'
+
     ACCESS = 'access'
+    CHARACTERIZATION = 'characterize'
+    EXTRACTION = 'extract'
     PRESERVATION = 'preservation'
     THUMBNAIL = 'thumbnail'
-    CHARACTERIZATION = 'characterization'
     TRANSCRIPTION = 'transcription'
-    EXTRACTION = 'extract'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
-    USAGES = (ACCESS, PRESERVATION, THUMBNAIL, CHARACTERIZATION, TRANSCRIPTION,
-              EXTRACTION, DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
+    USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL, TRANSCRIPTION,
+        DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
 
-    NORMALIZATION_CHOICES_DISPLAY = (
+    DISPLAY_CHOICES = (
         (ACCESS, 'Access'),
         (CHARACTERIZATION, 'Characterization'),
+        (EXTRACTION, 'Extract'),
         (PRESERVATION, 'Preservation'),
         (THUMBNAIL, 'Thumbnail'),
         (TRANSCRIPTION, 'Transcription'),
-        (EXTRACTION, 'Extract'),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, 'Default Access'),
@@ -280,7 +280,7 @@ class FPRule(VersionedModel, models.Model):
         'characterization': (CHARACTERIZATION, DEFAULT_CHARACTERIZATION),
         'extraction': (EXTRACTION,),
     }
-    PURPOSE_CHOICES = NORMALIZATION_CHOICES_DISPLAY + HIDDEN_CHOICES
+    PURPOSE_CHOICES = DISPLAY_CHOICES + HIDDEN_CHOICES
     purpose = models.CharField(max_length=32, choices=PURPOSE_CHOICES)
     command = models.ForeignKey('FPCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
@@ -332,11 +332,11 @@ class FPCommand(VersionedModel, models.Model):
     output_location = models.TextField(null=True, blank=True)
     output_format = models.ForeignKey('FormatVersion', to_field='uuid', null=True, blank=True)
     COMMAND_USAGE_CHOICES = (
-        ('normalization', 'Normalization'),
         ('characterization', 'Characterization'),
-        ('extraction', 'Extraction'),
-        ('transcription', 'Transcription'),
         ('event_detail', 'Event Detail'),
+        ('extraction', 'Extraction'),
+        ('normalization', 'Normalization'),
+        ('transcription', 'Transcription'),
         ('verification', 'Verification'),
     )
     command_usage = models.CharField(max_length=16, choices=COMMAND_USAGE_CHOICES)
