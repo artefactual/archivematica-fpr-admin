@@ -254,10 +254,12 @@ class FPRule(VersionedModel, models.Model):
     PRESERVATION = 'preservation'
     THUMBNAIL = 'thumbnail'
     TRANSCRIPTION = 'transcription'
+    VALIDATION = 'validation'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
-    USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL, TRANSCRIPTION,
+    USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL,
+        TRANSCRIPTION, VALIDATION,
         DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
 
     DISPLAY_CHOICES = (
@@ -267,6 +269,7 @@ class FPRule(VersionedModel, models.Model):
         (PRESERVATION, 'Preservation'),
         (THUMBNAIL, 'Thumbnail'),
         (TRANSCRIPTION, 'Transcription'),
+        (VALIDATION, 'Validation'),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, 'Default Access'),
@@ -337,6 +340,7 @@ class FPCommand(VersionedModel, models.Model):
         ('extraction', 'Extraction'),
         ('normalization', 'Normalization'),
         ('transcription', 'Transcription'),
+        ('validation', 'Validation'),
         ('verification', 'Verification'),
     )
     command_usage = models.CharField(max_length=16, choices=COMMAND_USAGE_CHOICES)
