@@ -14,6 +14,8 @@
 
 import sys
 import os
+import json
+import urllib2
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -29,14 +31,23 @@ import os
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
+    'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
 ]
+
+# Obtain intersphinx_mapping
+inventory = 'https://gist.githubusercontent.com/qubot/2dd2f7f96e51121061d4/raw/sphinxdoc-inventory.json'
+response = urllib2.urlopen(inventory)
+intersphinx_mapping = json.load(response)
+for item in intersphinx_mapping:
+    intersphinx_mapping[item] = tuple(intersphinx_mapping[item])
+
+# Obtain extlinks dictionary
+inventory = 'https://gist.githubusercontent.com/qubot/3969ebadc9c48574d16a/raw/sphinxdoc-extlinks.json'
+response = urllib2.urlopen(inventory)
+extlinks = json.load(response)
+for item in extlinks:
+    extlinks[item] = tuple(extlinks[item])
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -48,11 +59,11 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'contents'
 
 # General information about the project.
 project = u'archivematica-fpr-admin'
-copyright = u'2014, Holly Becker, Misty De Meo, Sarah Romkey, Justin Simpson, Courtney Mumma'
+copyright = u'2014, Artefactual Systems Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -75,7 +86,7 @@ release = '0.1'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = []
+exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -205,7 +216,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'archivematica-fpr-admin.tex', u'archivematica-fpr-admin Documentation',
-   u'Holly Becker, Misty De Meo, Sarah Romkey, Justin Simpson, Courtney Mumma', 'manual'),
+   u'Artefactual Systems Inc.', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -235,7 +246,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'archivematica-fpr-admin', u'archivematica-fpr-admin Documentation',
-     [u'Holly Becker, Misty De Meo, Sarah Romkey, Justin Simpson, Courtney Mumma'], 1)
+     [u'Artefactual Systems Inc.'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -249,7 +260,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'archivematica-fpr-admin', u'archivematica-fpr-admin Documentation',
-   u'Holly Becker, Misty De Meo, Sarah Romkey, Justin Simpson, Courtney Mumma', 'archivematica-fpr-admin', 'One line description of project.',
+   u'Artefactual Systems Inc.', 'archivematica-fpr-admin', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -264,7 +275,3 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
-
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'http://docs.python.org/': None}
