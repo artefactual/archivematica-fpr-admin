@@ -26,8 +26,8 @@ class Enabled(models.Manager):
     """ Manager to only return enabled objects.
 
     Filters by enabled=True.  """
-    def get_query_set(self):
-        return super(Enabled, self).get_query_set().filter(enabled=True)
+    def get_queryset(self):
+        return super(Enabled, self).get_queryset().filter(enabled=True)
 
 
 ############ MIXINS ############
