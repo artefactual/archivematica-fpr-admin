@@ -3,6 +3,11 @@
 Format Policy Registry (FPR)
 ============================
 
+.. toctree::
+   :hidden:
+
+   index
+
 *Contents*
 
 * :ref:`Introduction <intro>`
