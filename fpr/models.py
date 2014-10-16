@@ -249,7 +249,7 @@ class FPRule(VersionedModel, models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
 
     ACCESS = 'access'
-    CHARACTERIZATION = 'characterize'
+    CHARACTERIZATION = 'characterization'
     EXTRACTION = 'extract'
     PRESERVATION = 'preservation'
     THUMBNAIL = 'thumbnail'
