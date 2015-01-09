@@ -21,6 +21,15 @@ from fpr import forms as fprforms
 from fpr import models as fprmodels
 from fpr import utils
 
+CLASS_CATEGORY_MAP = {
+    'format': fprmodels.Format,
+    'formatgroup': fprmodels.FormatGroup,
+    'idrule': fprmodels.IDRule,
+    'idcommand': fprmodels.IDCommand,
+    'fprule': fprmodels.FPRule,
+    'fpcommand': fprmodels.FPCommand,
+}
+
 
 def context(variables):
     """
@@ -40,6 +49,16 @@ def context(variables):
 
 def home(request):
     return redirect('format_list')
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
+def toggle_enabled(request, category, uuid):
+    klass = CLASS_CATEGORY_MAP[category]
+    obj = get_object_or_404(klass, uuid=uuid)
+    obj.enabled = not obj.enabled
+    obj.save()
+
+    return redirect(category + '_list')
 
 ############ FORMATS ############
 
@@ -362,6 +381,7 @@ def fprule_edit(request, uuid=None):
         utils.warn_if_replacing_with_old_revision(request, fprule)
 
     return render(request, 'fpr/fprule/form.html', context(locals()))
+
 
 ############ FP TOOLS ############
 
