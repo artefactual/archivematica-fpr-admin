@@ -57,9 +57,9 @@ def warn_if_replacing_with_old_revision(request, replaces):
     if replaces != None and not replaces.enabled:
         messages.warning(request, 'You are replacing the current revision with data from an older revision.')
 
-def warn_if_viewing_old_revision(request, revision):
+def warn_if_viewing_disabled_revision(request, revision):
     if not revision.enabled:
-        messages.warning(request, 'You are not viewing the current revision.')
+        messages.warning(request, 'You are viewing a disabled revision.')
 
 def get_revision_ancestors(model, uuid, ancestors):
     """ Get revisions that a given revision has replaced. """

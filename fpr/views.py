@@ -107,7 +107,7 @@ def format_edit(request, slug=None):
 def formatversion_detail(request, format_slug, slug=None):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug)
-    utils.warn_if_viewing_old_revision(request, version)
+    utils.warn_if_viewing_disabled_revision(request, version)
     return render(request, 'fpr/format/version/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -240,7 +240,7 @@ def idrule_list(request):
 
 def idrule_detail(request, uuid=None):
     idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
-    utils.warn_if_viewing_old_revision(request, idrule)
+    utils.warn_if_viewing_disabled_revision(request, idrule)
     return render(request, 'fpr/idrule/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -282,7 +282,7 @@ def idcommand_list(request):
 
 def idcommand_detail(request, uuid):
     idcommand = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
-    utils.warn_if_viewing_old_revision(request, idcommand)
+    utils.warn_if_viewing_disabled_revision(request, idcommand)
     return render(request, 'fpr/idcommand/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -345,7 +345,7 @@ def fprule_list(request, usage=None):
 def fprule_detail(request, uuid):
     fprule = get_object_or_404(fprmodels.FPRule, uuid=uuid)
     usage = fprule.command.command_usage
-    utils.warn_if_viewing_old_revision(request, fprule)
+    utils.warn_if_viewing_disabled_revision(request, fprule)
     return render(request, 'fpr/fprule/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -422,7 +422,7 @@ def fpcommand_list(request, usage=None):
 def fpcommand_detail(request, uuid):
     fpcommand = get_object_or_404(fprmodels.FPCommand, uuid=uuid)
     usage = fpcommand.command_usage
-    utils.warn_if_viewing_old_revision(request, fpcommand)
+    utils.warn_if_viewing_disabled_revision(request, fpcommand)
     return render(request, 'fpr/fpcommand/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
