@@ -32,6 +32,7 @@ Format Policy Rule Information
             <th>Format</th>
             <th>Command</th>
             <th>Success</th>
+            <th>Enabled</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -42,6 +43,7 @@ Format Policy Rule Information
             <td>{{ fprule.format.description }}</td>
             <td>{{ fprule.command.description }}</td>
             <td>{{ fprule.count_okay }} out of {{ fprule.count_attempts }}</td>
+            <td>{{ fprule.enabled }}</td>
             <td>
               <a href="{% url 'fprule_detail' fprule.uuid %}">View</a>
               {% if request.user.is_superuser %}

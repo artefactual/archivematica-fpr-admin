@@ -334,12 +334,15 @@ def idcommand_delete(request, uuid):
 def fprule_list(request, usage=None):
     # Some usage types map to multiple categories of rules,
     # while others have different names between the two models.
+    replacing_rules = [r[0] for r in fprmodels.FPRule.objects.filter(replaces__isnull=False).values_list('replaces_id')]
+
     if usage:
         purpose = fprmodels.FPRule.USAGE_MAP.get(usage, (usage,))
         opts = {'purpose__in': purpose}
     else:
         opts = {}
-    fprules = fprmodels.FPRule.active.filter(**opts)
+    # Display disabled rules as long as they aren't replaced by another rule
+    fprules = fprmodels.FPRule.objects.filter(**opts).exclude(uuid__in=replacing_rules)
     return render(request, 'fpr/fprule/list.html', context(locals()))
 
 def fprule_detail(request, uuid):
