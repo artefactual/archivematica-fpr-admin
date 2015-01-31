@@ -649,6 +649,31 @@ command scripts.
 | Name (bashScript       |  Commandline option         |  Description                               |  Sample value                                           |
 | and command)           |  (pythonScript and asIs)    |                                            |                                                         |
 +========================+=============================+============================================+=========================================================+
+| %SIPUUID%              |  --sipuuid=                 |  The UUID of the SIP or transfer being     |  4941c1e7-722b-41dc-900a-a17f7cfd32a9                   |
+|                        |                             |  processed.                                |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %sipName%              |  --sip-name=                |  The name of the SIP or transfer being     |  this-is-a-sip                                          |
+|                        |                             |  processed, parsed from its path.          |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %SIPDirectory%         |  --sip-directory=           |  The full path of the SIP or transfer.     |  /dir/this-is-a-sip-4941c1e7-722b-41dc-900a-a17f7cfd32a9|
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %SIPDirectoryBasename% |  --sip-directory-basename=  |  The basename of the SIP or transfer.      |  this-is-a-sip-4941c1e7-722b-41dc-900a-a17f7cfd32a9     |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %SIPLogsDirectory%     |  --sip-logs-directory=      |  The full path of the SIP or transfer's    |  /dir/sip-4941c1e7-722b-41dc-900a-a17f7cfd32a9/logs     |
+|                        |                             |  logs directory.                           |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %SIPObjectsDirectory%  |  --sip-objects-directory=   |  The full path of the SIP or transfer's    |  /dir/sip-4941c1e7-722b-41dc-900a-a17f7cfd32a9/objects  |
+|                        |                             |  objects directory.                        |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %fileUUID%             |  --file-uuid=               |  The UUID of the file being processed.     |  baa67175-f04d-4df6-8615-d05d0651eae2                   |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %originalLocation%     |  --original-location=       |  The original path of the file, as first   |  /dir/sip-4941c1e7-722b-41dc-900a-a17f7cfd32a9/objects/ |
+|                        |                             |  recorded by Archivematica. Note that the  |  .../file name unsanitized.jpeg                         |
+|                        |                             |  filename component of this path is        |                                                         |
+|                        |                             |  unsanitized, so it is possible for this   |                                                         |
+|                        |                             |  string to contain data in arbitrary text  |                                                         |
+|                        |                             |  encodings, including mixed encodings.     |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
 | %fileName%             |  --input-file=              |  The filename of the file to process.      |  video.mov                                              |
 |                        |                             |  This variable holds the file's basename,  |                                                         |
 |                        |                             |  not the whole path.                       |                                                         |
@@ -662,9 +687,6 @@ command scripts.
 +------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
 | %fileExtensionWithDot% |  --file-extension-with-dot= |  As above, without stripping the period.   |  .mov                                                   |
 +------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
-| %outputDirectory%      |  --output-directory=        |  The directory to which the output file    |  /path/to/access/copies                                 |
-|                        |                             |  should be saved.                          |                                                         |
-+------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
 | %outputFileUUID%       |  --output-file-uuid=        |  The unique identifier assigned by         |  1abedf3e-3a4b-46d7-97da-bd9ae13859f5                   |
 |                        |                             |  Archivematica to the output file.         |                                                         |
 +------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
@@ -673,6 +695,17 @@ command scripts.
 +------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
 | %outputFileName%       |  --output-file-name=        |  The fully-qualified path to the output    | /path/to/access/copies/video-uuid                       |
 |                        |                             |  file, minus the file extension.           |                                                         |
++------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
+| %fileGrpUse%           |  --file-grp-use=            |  The file grouping for this file. Possible |  original                                               |
+|                        |                             |  values are:                               |                                                         |
+|                        |                             |  * original                                |                                                         |
+|                        |                             |  * submissionDocumentation                 |                                                         |
+|                        |                             |  * preservation                            |                                                         |
+|                        |                             |  * access                                  |                                                         |
+|                        |                             |  * service                                 |                                                         |
+|                        |                             |  * license                                 |                                                         |
+|                        |                             |  * text/ocr                                |                                                         |
+|                        |                             |  * metadata                                |                                                         |
 +------------------------+-----------------------------+--------------------------------------------+---------------------------------------------------------+
 
 :ref:`Back to the top <index>`
