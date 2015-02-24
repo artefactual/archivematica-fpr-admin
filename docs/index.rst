@@ -42,13 +42,22 @@ indicates the actions, tools and settings to apply to a file of a particular
 file format (e.g. conversion to preservation format, conversion to access
 format). Format policies will change as community standards, practices and
 tools evolve. Format policies are maintained by Artefactual, who provides a
-freely-available FPR server hosted at fpr.archivematica.org. This server
+freely-available FPR server hosted at fpr.archivematica.org (**Note:** At the
+present time, there is no public user interface for the FPR server). This server
 stores structured information about normalization format policies for
 preservation and access. You can update your local FPR from the FPR server
 using the UPDATE button in the preservation planning tab of the dashboard. In
 addition, you can maintain local rules to add new formats or customize the
 behaviour of Archivematica. The Archivematica dashboard communicates with the
 FPR server via a REST API.
+
+.. Tip::
+
+   If you wish the view the FPR rules in a user interface without installing
+   Archivematica, at this time another access point is through the Preservation
+   Planning tab of the demonstration installation hosted at
+   http://sandbox.archivematica.org . Login is `` demo@example.com ``, password
+   ``demodemo``.
 
 
 .. _config:
