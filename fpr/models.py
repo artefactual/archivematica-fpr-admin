@@ -182,7 +182,7 @@ class IDCommand(VersionedModel, models.Model):
             for link in (at_link_transfer, at_link_ingest, at_link_submissiondocs):
                 MicroServiceChoiceReplacementDic.objects.create(
                     id=str(uuid.uuid4()),
-                    choiceavailableatlink=link,
+                    choiceavailableatlink_id=link,
                     description=str(self),
                     replacementdic=replace,
                 )
