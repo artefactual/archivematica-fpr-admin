@@ -56,7 +56,7 @@ FPR server via a REST API.
    If you wish the view the FPR rules in a user interface without installing
    Archivematica, at this time another access point is through the Preservation
    Planning tab of the demonstration installation hosted at
-   http://sandbox.archivematica.org . Login is `` demo@example.com ``, password
+   http://sandbox.archivematica.org . Login is ``demo@example.com``, password
    ``demodemo``.
 
 
