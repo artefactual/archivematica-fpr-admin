@@ -40,11 +40,7 @@ Identification Rule Information
         <td><a href="{% url 'format_detail' idrule.format.format.slug %}">{{ idrule.format }}</a></td>
         <td><a href="{% url 'idcommand_detail' idrule.command.uuid %}">{{ idrule.command.description }}</a></td>
         <td><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.command_output }}</a></td>
-        <td>
-          {% for tool in idrule.command.tool.all %}
-            <a href="{% url 'idtool_detail' tool.slug %}">{{ tool }}</a><br />
-          {% endfor %}
-        </td>
+        <td><a href="{% url 'idtool_detail' idrule.command.tool.slug %}">{{ idrule.command.tool }}</a></td>
         <td>
           <a href="{% url 'idrule_detail' idrule.uuid %}">View</a>
           {% if request.user.is_superuser %}
