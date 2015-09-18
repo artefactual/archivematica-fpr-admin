@@ -31,6 +31,7 @@ Identification Command Information
         <th>Type</th>
         <th>Tool</th>
         <th>Mode</th>
+        <th>Enabled</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -41,6 +42,7 @@ Identification Command Information
         <td>{{ idcommand.get_script_type_display }}</td>
         <td><a href="{% url 'idtool_detail' idcommand.tool.slug %}">{{ idcommand.tool }}</a></td>
         <td>{{ idcommand.config }}</td>
+        <td>{{ idcommand.enabled }}</td>
         <td>
           <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a>
           {% if request.user.is_superuser %}

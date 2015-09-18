@@ -31,6 +31,7 @@ Format Policy Command Information
             <th>Description</th>
             <th>Usage</th>
             <th>Tool</th>
+            <th>Enabled</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -40,6 +41,7 @@ Format Policy Command Information
             <td><a href="{% url 'fpcommand_detail' fpcommand.uuid %}">{{ fpcommand.description }}</a></td>
             <td>{{ fpcommand.get_command_usage_display }}</td>
             <td>{{ fpcommand.tool.description }}</td>
+            <td>{{ fpcommand.enabled }}</td>
             <td> <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a>
               {% if request.user.is_superuser %}
                 | <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>

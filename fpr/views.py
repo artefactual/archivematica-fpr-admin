@@ -69,7 +69,8 @@ def format_list(request):
 
 def format_detail(request, slug):
     format = get_object_or_404(fprmodels.Format, slug=slug)
-    format_versions = fprmodels.FormatVersion.active.filter(format=format)
+    replacing_versions = [r[0] for r in fprmodels.FormatVersion.objects.filter(replaces__isnull=False, format=format).values_list('replaces_id')]
+    format_versions = fprmodels.FormatVersion.objects.filter(format=format).exclude(uuid__in=replacing_versions)
     return render(request, 'fpr/format/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -211,7 +212,8 @@ def idtool_list(request):
 
 def idtool_detail(request, slug):
     idtool = get_object_or_404(fprmodels.IDTool, slug=slug, enabled=True)
-    idcommands = fprmodels.IDCommand.active.filter(tool=idtool)
+    replacing_commands = [r[0] for r in fprmodels.IDCommand.objects.filter(replaces__isnull=False, tool=idtool).values_list('replaces_id')]
+    idcommands = fprmodels.IDCommand.objects.filter(tool=idtool).exclude(uuid__in=replacing_commands)
     return render(request, 'fpr/idtool/detail.html', context(locals()))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
@@ -235,7 +237,8 @@ def idtool_edit(request, slug=None):
 ############ ID RULES ############
 
 def idrule_list(request):
-    idrules = fprmodels.IDRule.active.all()
+    replacing_rules = [r[0] for r in fprmodels.IDRule.objects.filter(replaces__isnull=False).values_list('replaces_id')]
+    idrules = fprmodels.IDRule.objects.exclude(uuid__in=replacing_rules)
     return render(request, 'fpr/idrule/list.html', context(locals()))
 
 def idrule_detail(request, uuid=None):
@@ -277,7 +280,8 @@ def idrule_delete(request, uuid):
 ############ ID COMMANDS ############
 
 def idcommand_list(request):
-    idcommands = fprmodels.IDCommand.active.all()
+    replacing_commands = [r[0] for r in fprmodels.IDCommand.objects.filter(replaces__isnull=False).values_list('replaces_id')]
+    idcommands = fprmodels.IDCommand.objects.exclude(uuid__in=replacing_commands)
     return render(request, 'fpr/idcommand/list.html', context(locals()))
 
 def idcommand_detail(request, uuid):
@@ -416,10 +420,11 @@ def fptool_edit(request, slug=None):
 ############ FP COMMANDS ############
 
 def fpcommand_list(request, usage=None):
-    opts = {'enabled': True}
+    opts = {}
     if usage:
         opts['command_usage'] = usage
-    fpcommands = fprmodels.FPCommand.objects.filter(**opts)
+    replacing_commands = [r[0] for r in fprmodels.FPCommand.objects.filter(replaces__isnull=False).values_list('replaces_id')]
+    fpcommands = fprmodels.FPCommand.objects.filter(**opts).exclude(uuid__in=replacing_commands)
     return render(request, 'fpr/fpcommand/list.html', context(locals()))
 
 def fpcommand_detail(request, uuid):

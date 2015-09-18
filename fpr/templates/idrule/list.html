@@ -31,6 +31,7 @@ Identification Rule Information
         <th>Command</th>
         <th>Output</th>
         <th>Tools</th>
+        <th>Enabled</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -41,6 +42,7 @@ Identification Rule Information
         <td><a href="{% url 'idcommand_detail' idrule.command.uuid %}">{{ idrule.command.description }}</a></td>
         <td><a href="{% url 'idrule_detail' idrule.uuid %}">{{ idrule.command_output }}</a></td>
         <td><a href="{% url 'idtool_detail' idrule.command.tool.slug %}">{{ idrule.command.tool }}</a></td>
+        <td>{{ idrule.enabled }}</td>
         <td>
           <a href="{% url 'idrule_detail' idrule.uuid %}">View</a>
           {% if request.user.is_superuser %}

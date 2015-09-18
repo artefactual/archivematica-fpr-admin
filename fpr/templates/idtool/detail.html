@@ -51,6 +51,7 @@
             <th>Configuration</th>
             <th>Identifier</th>
             <th>Command</th>
+            <th>Enabled</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -60,6 +61,7 @@
             <td>{{ command.get_config_display }}</td>
             <td>{{ command.description }}</td>
             <td>{{ command.script|truncatechars:100 }}</td>
+            <td>{{ command.enabled }}</td>
             <td>
               <a href="{% url 'idcommand_detail' command.uuid  %}">View</a>
               {% if request.user.is_superuser %}

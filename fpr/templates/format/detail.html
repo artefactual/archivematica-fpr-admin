@@ -57,6 +57,7 @@
             <th>Pronom ID</th>
             <th>Access format?</th>
             <th>Preservation format?</th>
+            <th>Enabled</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -68,6 +69,7 @@
             <td>{% if version.pronom_id %}<a href="http://www.nationalarchives.gov.uk/PRONOM/{{ version.pronom_id }}" target=_blank>{{ version.pronom_id}}</a>{% endif %}</td> 
             <td>{{ version.access_format|yesno:"Yes, No" }}</td>
             <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
+            <td>{{ version.enabled }}</td>
             <td>
               <a href="{% url 'formatversion_detail' format.slug version.slug %}">View</a>
               {% if request.user.is_superuser %}
