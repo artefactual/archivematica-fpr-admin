@@ -19,7 +19,7 @@ Identification Tool Information
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     {% if request.user.is_superuser %}
     <p><a href="{% url 'idtool_create' %}">Create New Tool</a></p>
@@ -54,7 +54,7 @@ Identification Tool Information
       <p>No identification tools exist.</p>
     {% endif %}
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 
 </div> <!-- /row -->
 

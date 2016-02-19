@@ -20,7 +20,7 @@ Disable {{ version.description }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='idtool_config'>
       <form action="{% url 'idcommand_delete' command.uuid %}" method="post">{% csrf_token %}
@@ -41,7 +41,7 @@ Disable {{ version.description }}
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}
