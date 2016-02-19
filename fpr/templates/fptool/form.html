@@ -1,4 +1,5 @@
 {% extends "fpr/app_layout.html" %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Tool{% endblock title %}
@@ -28,7 +29,7 @@
         <form action="{% url 'fptool_create' %}" method="post">
         {% endif %}
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|as_bootstrap }}
             <input type="submit" value="{{ action }}" />
         </form>
     </div>
