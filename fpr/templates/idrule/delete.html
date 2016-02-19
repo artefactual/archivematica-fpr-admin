@@ -20,7 +20,7 @@ Disable {{ idrule.description }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='idtool_config'>
       <form action="{% url 'idrule_delete' idrule.uuid %}" method="post">{% csrf_token %}
@@ -31,7 +31,7 @@ Disable {{ idrule.description }}
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}

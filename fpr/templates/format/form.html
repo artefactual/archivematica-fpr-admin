@@ -1,5 +1,6 @@
 {% extends "fpr/app_layout.html" %}
 {% load url from future %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Format{% endblock title %}
@@ -29,7 +30,7 @@
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='format'>
 
@@ -44,7 +45,7 @@
           {{ form.group.label_tag }} {{ form.group }}
         </p>
         <div id='format_group_form'>
-          {{ format_group_form.as_p }}
+          {{ format_group_form|as_bootstrap }}
         </div>
         <p>
           {{ form.description.errors }}
@@ -54,7 +55,7 @@
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 
 </div> <!-- /row -->
 

@@ -1,5 +1,6 @@
 {% extends "fpr/app_layout.html" %}
 {% load url from future %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Identication Command{% endblock title %}
@@ -20,7 +21,7 @@
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='tool'>
       {% if idcommand %}
@@ -30,13 +31,13 @@
       {% endif %}
 
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|as_bootstrap }}
 
         <input type="submit" value="{{ action }} Command" />
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 
 </div> <!-- /row -->
 

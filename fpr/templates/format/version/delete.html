@@ -21,7 +21,7 @@ Disable {{ version.description }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='format_version'>
       <form action="{% url 'formatversion_delete' format.slug version.slug %}" method="post">{% csrf_token %}
@@ -42,7 +42,7 @@ Disable {{ version.description }}
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}
