@@ -1,4 +1,5 @@
 {% extends "fpr/app_layout.html" %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Format{% endblock title %}
@@ -43,7 +44,7 @@
           {{ form.group.label_tag }} {{ form.group }}
         </p>
         <div id='format_group_form'>
-          {{ format_group_form.as_p }}
+          {{ format_group_form|as_bootstrap }}
         </div>
         <p>
           {{ form.description.errors }}
