@@ -20,7 +20,7 @@ Disable {{ model_name }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-md-10">
 
     <div class='config'>
       <form action="{{ form_url }}" method="post">{% csrf_token %}
@@ -45,7 +45,7 @@ Disable {{ model_name }}
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-md-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}
