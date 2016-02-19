@@ -1,5 +1,6 @@
 {% extends "fpr/app_layout.html" %}
 {% load url from future %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Format Policy Command{% endblock title %}
@@ -30,7 +31,7 @@
       {% endif %}
 
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|as_bootstrap }}
 
         <input type="submit" value="{{ action }} Command" />
       </form>
