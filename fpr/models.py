@@ -29,6 +29,9 @@ class Enabled(models.Manager):
     def get_queryset(self):
         return super(Enabled, self).get_queryset().filter(enabled=True)
 
+    def get_query_set(self):
+        return super(Enabled, self).get_query_set().filter(enabled=True)
+
 
 ############ MIXINS ############
 
