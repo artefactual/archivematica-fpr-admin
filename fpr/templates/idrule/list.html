@@ -47,7 +47,7 @@ Identification Rule Information
           <a href="{% url 'idrule_detail' idrule.uuid %}">View</a>
           {% if request.user.is_superuser %}
             | <a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a>
-            | <a href="{% url 'idrule_delete' idrule.uuid %}">Disable</a>
+            | <a href="{% url 'idrule_delete' idrule.uuid %}">{{ idrule.enabled|yesno:"Disable,Enable" }}</a>
           {% endif %}
         </td>
       </tr>

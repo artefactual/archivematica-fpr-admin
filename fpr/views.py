@@ -53,6 +53,7 @@ def home(request):
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def toggle_enabled(request, category, uuid):
+    # TODO fix this and use it to genericize deleting things
     klass = CLASS_CATEGORY_MAP[category]
     obj = get_object_or_404(klass, uuid=uuid)
     obj.enabled = not obj.enabled
@@ -140,16 +141,31 @@ def formatversion_delete(request, format_slug, slug):
     format = get_object_or_404(fprmodels.Format, slug=format_slug)
     version = get_object_or_404(fprmodels.FormatVersion, slug=slug, format=format)
     dependent_objects = utils.dependent_objects(version)
+    breadcrumbs = [
+        {'text': 'Formats', 'link': reverse('format_list')},
+        {'text': format.description, 'link': reverse('format_detail', args=[format.slug])},
+    ]
     if request.method == 'POST':
-        if 'delete' in request.POST:
+        if 'disable' in request.POST:
             version.enabled = False
-            version.save()
             messages.info(request, 'Disabled.')
             for obj in dependent_objects:
                 obj['value'].enabled = False
                 obj['value'].save()
+        if 'enable' in request.POST:
+            version.enabled = True
+            messages.info(request, 'Enabled.')
+        version.save()
         return redirect('format_detail', format.slug)
-    return render(request, 'fpr/format/version/delete.html', context(locals()))
+    return render(request, 'fpr/disable.html',
+        context({
+            'breadcrumbs': breadcrumbs,
+            'dependent_objects': dependent_objects,
+            'form_url': reverse('formatversion_delete', args=[format.slug, version.slug]),
+            'model_name': 'Format Version',
+            'object': version,
+        }))
+
 
 ############ FORMAT GROUPS ############
 
@@ -269,13 +285,27 @@ def idrule_edit(request, uuid=None):
 @user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
 def idrule_delete(request, uuid):
     idrule = get_object_or_404(fprmodels.IDRule, uuid=uuid)
+    breadcrumbs = [
+        {'text': 'Rules', 'link': reverse('idrule_list')},
+        {'text': str(idrule), 'link': reverse('idrule_detail', args=[idrule.uuid])},
+    ]
     if request.method == 'POST':
-        if 'delete' in request.POST:
+        if 'disable' in request.POST:
             idrule.enabled = False
-            idrule.save()
             messages.info(request, 'Disabled.')
+        if 'enable' in request.POST:
+            idrule.enabled = True
+            messages.info(request, 'Enabled.')
+        idrule.save()
         return redirect('idrule_detail', idrule.uuid)
-    return render(request, 'fpr/idrule/delete.html', context(locals()))
+    return render(request, 'fpr/disable.html',
+        context({
+            'breadcrumbs': breadcrumbs,
+            'dependent_objects': None,
+            'form_url': reverse('idrule_delete', args=[idrule.uuid]),
+            'model_name': 'ID Rule',
+            'object': idrule,
+        }))
 
 ############ ID COMMANDS ############
 
@@ -321,17 +351,31 @@ def idcommand_edit(request, uuid=None):
 def idcommand_delete(request, uuid):
     command = get_object_or_404(fprmodels.IDCommand, uuid=uuid)
     dependent_objects = utils.dependent_objects(command)
-    print 'dependent_objects', dependent_objects
+    breadcrumbs = [
+        {'text': 'Commands', 'link': reverse('idcommand_list')},
+        {'text': command.description, 'link': reverse('idcommand_detail', args=[command.uuid])},
+    ]
     if request.method == 'POST':
-        if 'delete' in request.POST:
+        if 'disable' in request.POST:
             command.enabled = False
-            command.save()
             messages.info(request, 'Disabled.')
             for obj in dependent_objects:
                 obj['value'].enabled = False
                 obj['value'].save()
-        return redirect('idtool_detail', command.tool.slug)
-    return render(request, 'fpr/idcommand/delete.html', context(locals()))
+        if 'enable' in request.POST:
+            command.enabled = True
+            messages.info(request, 'Enabled.')
+        command.save()
+        return redirect('idcommand_detail', command.uuid)
+    return render(request, 'fpr/disable.html',
+        context({
+            'breadcrumbs': breadcrumbs,
+            'dependent_objects': dependent_objects,
+            'form_url': reverse('idcommand_delete', args=[command.uuid]),
+            'model_name': 'ID Command',
+            'object': command,
+        }))
+
 
 ############ FP RULES ############
 
@@ -389,6 +433,31 @@ def fprule_edit(request, uuid=None):
 
     return render(request, 'fpr/fprule/form.html', context(locals()))
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
+def fprule_delete(request, uuid):
+    fprule = get_object_or_404(fprmodels.FPRule, uuid=uuid)
+    breadcrumbs = [
+        {'text': 'Rules', 'link': reverse('fprule_list')},
+        {'text': str(fprule), 'link': reverse('fprule_detail', args=[fprule.uuid])},
+    ]
+
+    if request.method == 'POST':
+        if 'disable' in request.POST:
+            fprule.enabled = False
+            messages.info(request, 'Disabled.')
+        if 'enable' in request.POST:
+            fprule.enabled = True
+            messages.info(request, 'Enabled.')
+        fprule.save()
+        return redirect('fprule_detail', fprule.uuid)
+    return render(request, 'fpr/disable.html',
+        context({
+            'breadcrumbs': breadcrumbs,
+            'dependent_objects': None,
+            'form_url': reverse('fprule_delete', args=[fprule.uuid]),
+            'model_name': 'FPR Rule',
+            'object': fprule,
+        }))
 
 ############ FP TOOLS ############
 
@@ -464,6 +533,35 @@ def fpcommand_edit(request, uuid=None):
         utils.warn_if_replacing_with_old_revision(request, fpcommand)
 
     return render(request, 'fpr/fpcommand/form.html', context(locals()))
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/forbidden/')
+def fpcommand_delete(request, uuid):
+    command = get_object_or_404(fprmodels.FPCommand, uuid=uuid)
+    dependent_objects = utils.dependent_objects(command)
+    breadcrumbs = [
+        {'text': 'Commands', 'link': reverse('fpcommand_list')},
+        {'text': command.description, 'link': reverse('fpcommand_detail', args=[command.uuid])},
+    ]
+    if request.method == 'POST':
+        if 'disable' in request.POST:
+            command.enabled = False
+            messages.info(request, 'Disabled.')
+            for obj in dependent_objects:
+                obj['value'].enabled = False
+                obj['value'].save()
+        if 'enable' in request.POST:
+            command.enabled = True
+            messages.info(request, 'Enabled.')
+        command.save()
+        return redirect('fpcommand_detail', command.uuid)
+    return render(request, 'fpr/disable.html',
+        context({
+            'breadcrumbs': breadcrumbs,
+            'dependent_objects': dependent_objects,
+            'form_url': reverse('fpcommand_delete', args=[command.uuid]),
+            'model_name': 'FP Command',
+            'object': command,
+        }))
 
 ############ REVISIONS ############
 

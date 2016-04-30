@@ -86,6 +86,8 @@ urlpatterns = [
         name='fprule_list'),
     url(r'^fprule/(?P<uuid>' + UUID_REGEX + ')/edit/$', views.fprule_edit,
         name='fprule_edit'),
+    url(r'^fprule/(?P<uuid>' + UUID_REGEX + ')/delete/$', views.fprule_delete,
+        name='fprule_delete'),
 
     # FP Tools
     url(r'^fptool/$', views.fptool_list,
@@ -108,6 +110,8 @@ urlpatterns = [
         name='fpcommand_list'),
     url(r'^fpcommand/(?P<uuid>' + UUID_REGEX + ')/edit/$', views.fpcommand_edit,
         name='fpcommand_edit'),
+    url(r'^fpcommand/(?P<uuid>' + UUID_REGEX + ')/delete/$', views.fpcommand_delete,
+        name='fpcommand_delete'),
 
     # Revisions
     url(r'^revisions/(?P<entity_name>[-\w]+)/(?P<uuid>' + UUID_REGEX + ')/$', views.revision_list,

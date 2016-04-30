@@ -43,7 +43,7 @@
         {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
-          <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a></dd>
+          <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:"Disable,Enable" }}</a></dd>
         {% endif %}
       </dl>
     </div>

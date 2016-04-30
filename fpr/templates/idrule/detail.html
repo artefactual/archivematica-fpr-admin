@@ -39,6 +39,7 @@ ID Rule Information
         {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'idrule_edit' idrule.uuid %}">Replace</a></dd>
+          <dd><a href="{% url 'idrule_delete' idrule.uuid %}">{{ idrule.enabled|yesno:"Disable,Enable" }}</a></dd>
         {% endif %}
       </dl>
     </div>

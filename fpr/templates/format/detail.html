@@ -74,7 +74,7 @@
               <a href="{% url 'formatversion_detail' format.slug version.slug %}">View</a>
               {% if request.user.is_superuser %}
                 | <a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a>
-                | <a href="{% url 'formatversion_delete' format.slug version.slug %}">Disable</a></td>
+                | <a href="{% url 'formatversion_delete' format.slug version.slug %}">{{ version.enabled|yesno:"Disable,Enable" }}</a></td>
               {% endif %}
           </tr>
         {% endfor %}

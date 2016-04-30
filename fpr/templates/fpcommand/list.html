@@ -45,6 +45,7 @@ Format Policy Command Information
             <td> <a href="{% url 'fpcommand_detail' fpcommand.uuid %}">View</a>
               {% if request.user.is_superuser %}
                 | <a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a>
+                | <a href="{% url 'fpcommand_delete' fpcommand.uuid %}">{{ fpcommand.enabled|yesno:"Disable,Enable" }}</a>
               {% endif %}
             </td>
           </tr>

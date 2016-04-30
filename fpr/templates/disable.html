@@ -1,16 +1,17 @@
 {% extends "fpr/app_layout.html" %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - Disable Format Version{% endblock title %}
+{% block title %}Archivematica FPR Server - Disable {{ model_name }}{% endblock title %}
 
 {% block page_title %}
-Disable {{ version.description }}
+Disable {{ model_name }}
 {% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'idtool_list' %}">Identification Commands</a></li>
-<li>Disable {{ command.description }}</li>
+{% for crumb in breadcrumbs %}
+    <li>{% if crumb.link %}<a href="{{ crumb.link }}">{% endif %}{{ crumb.text }}{% if crumb.link %}</a>{% endif %}</li>
+{% endfor %}
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -21,9 +22,12 @@ Disable {{ version.description }}
 
   <div class="span10">
 
-    <div class='idtool_config'>
-      <form action="{% url 'idcommand_delete' command.uuid %}" method="post">{% csrf_token %}
-        <p>Are you sure?  The following rules will also be disabled:</p>
+    <div class='config'>
+      <form action="{{ form_url }}" method="post">{% csrf_token %}
+        <p>Are you sure?</p>
+
+        {% if object.enabled and dependent_objects %}
+        <p>The following rules will also be disabled:</p>
 
         {% regroup dependent_objects by model as dependent_rules %}
         <dl>
@@ -34,8 +38,9 @@ Disable {{ version.description }}
                 {% endfor %}
             {% endfor %}
         </dl>
+        {% endif %}
 
-        <input type="submit" name="delete" value="Disable ID Command" />
+        <input type="submit" name="{{ object.enabled|yesno:"disable,enable" }}" value="{{ object.enabled|yesno:"Disable,Enable" }} {{ model_name }}" />
         <input type="submit" name="cancel" value="Cancel, change nothing" />
       </form>
     </div>

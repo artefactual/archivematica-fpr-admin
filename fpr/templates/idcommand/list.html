@@ -47,7 +47,7 @@ Identification Command Information
           <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a>
           {% if request.user.is_superuser %}
             | <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a>
-            | <a href="{% url 'idcommand_delete' idcommand.uuid %}">Disable</a>
+            | <a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:"Disable,Enable" }}</a>
           {% endif %}
         </td>
       </tr>

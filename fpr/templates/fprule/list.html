@@ -49,6 +49,8 @@ Format Policy Rule Information
               {% if request.user.is_superuser %}
                 |
                 <a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a>
+                |
+                <a href="{% url 'fprule_delete' fprule.uuid %}">{{ fprule.enabled|yesno:"Disable,Enable" }}</a>
               {% endif %}
             </td>
           </tr>

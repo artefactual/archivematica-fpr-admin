@@ -43,7 +43,7 @@
         {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'fprule_edit' fprule.uuid %}">Replace</a></dd>
-          <dd><a href="{% url 'toggle_enabled' 'fprule' fprule.uuid %}">{% if fprule.enabled %}Disable{% else %}Enable{% endif %}</a></dd>
+          <dd><a href="{% url 'fprule_delete' fprule.uuid %}">{{ fprule.enabled|yesno:"Disable,Enable" }}</a></dd>
         {% endif %}
       </dl>
     </div>

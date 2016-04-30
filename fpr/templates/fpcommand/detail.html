@@ -59,6 +59,8 @@
         {% if request.user.is_superuser %}
         <dt>Actions</dt>
           <dd><a href="{% url 'fpcommand_edit' fpcommand.uuid %}">Replace</a></dd>
+          <dd><a href="{% url 'fpcommand_delete' fpcommand.uuid %}">{{ fpcommand.enabled|yesno:"Disable,Enable" }}</a></dd>
+
         {% endif %}
       </dl>
     </div>
