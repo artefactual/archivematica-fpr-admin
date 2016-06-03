@@ -50,7 +50,7 @@
       "uuid": "8cc792b4-362d-4002-8981-a4e808c04b24",
       "script": "from __future__ import print_function\r\n\r\nimport json\r\nimport subprocess\r\nimport sys\r\n\r\n\r\nclass IdToolError(Exception):\r\n    pass\r\n\r\n\r\nclass ParseError(IdToolError):\r\n    def __init__(self, message=None):\r\n        IdToolError.__init__(self, message or 'Siegfried returned unexpected output')\r\n\r\n\r\ndef sf_tool(path):\r\n    return subprocess.check_output(['sf', '-json', path])\r\n\r\n\r\ndef file_tool(path):\r\n    return subprocess.check_output(['file', path]).strip()\r\n\r\n\r\ndef file_fallback(path):\r\n    if 'text' in file_tool(path):\r\n        return 'x-fmt/111'\r\n    raise Exception('No format was found.')\r\n\r\n\r\ndef find_puid(sf_output):\r\n    result = json.loads(sf_output)\r\n    try:\r\n        matches = result['files'][0]['matches']\r\n    except KeyError as e:\r\n        raise ParseError('Siegfried returned unexpected output. KeyError: {}.'.format(e))\r\n\r\n    if len(matches) == 0:\r\n        raise ParseError('No matches found.')\r\n\r\n    match = matches[0]\r\n    puid = None\r\n\r\n    if 'puid' in match:\r\n        puid = match['puid']\r\n    elif 'id' in match:\r\n        puid = match['id']\r\n    else:\r\n        raise ParseError\r\n\r\n    if puid == 'UNKNOWN':\r\n        raise IdToolError('Siegfried determined that the file format is UNKNOWN.')\r\n\r\n    return puid\r\n\r\n\r\ndef main(path):\r\n    try:\r\n        print(find_puid(sf_tool(path)))\r\n    except IdToolError:\r\n        print(file_fallback(path))\r\n\r\n\r\nif __name__ == '__main__':\r\n    sys.exit(main(sys.argv[1]))\r\n",
       "lastmodified": "2015-04-16T17:36:22Z",
-      "tool": "454df69d-5cc0-49fc-93e4-6fbb6ac659e7",
+      "tool": "ea5274a2-9866-439c-a68c-5c8aadf6d3cd",
       "enabled": false,
       "script_type": "pythonScript",
       "config": "PUID",
@@ -58,5 +58,20 @@
     },
     "model": "fpr.idcommand",
     "pk": 4
+  },
+  {
+    "fields": {
+      "replaces": "8cc792b4-362d-4002-8981-a4e808c04b24",
+      "uuid": "9d2cefc1-2bd2-44e4-8d55-6cf8151eecff",
+      "script": "from __future__ import print_function\r\n\r\nimport json\r\nimport subprocess\r\nimport sys\r\n\r\n\r\nclass IdToolError(Exception):\r\n    pass\r\n\r\n\r\nclass ParseError(IdToolError):\r\n    PREFIX = 'The output produced by siegfried could not be parsed'\r\n    def __init__(self, message=None):\r\n        message = self.PREFIX if message is None else '{}: {}'.format(self.PREFIX, message)\r\n        Exception.__init__(self, message)\r\n\r\n\r\ndef sf_tool(path):\r\n    return subprocess.check_output(['sf', '-json', path])\r\n\r\n\r\ndef find_puid(sf_output):\r\n    result = json.loads(sf_output)\r\n    try:\r\n        matches = result['files'][0]['matches']\r\n    except KeyError as e:\r\n        raise ParseError('error matching key {}'.format(e))\r\n\r\n    if len(matches) == 0:\r\n        raise ParseError('no matches found')\r\n\r\n    match = matches[0]\r\n    puid = None\r\n\r\n    if 'puid' in match:\r\n        puid = match['puid']\r\n    elif 'id' in match:\r\n        puid = match['id']\r\n    else:\r\n        raise ParseError\r\n\r\n    if puid == 'UNKNOWN':\r\n        raise IdToolError('siegfried determined that the file format is UNKNOWN')\r\n\r\n    return puid\r\n\r\n\r\ndef main(path):\r\n    try:\r\n        print(find_puid(sf_tool(path)))\r\n    except IdToolError as e:\r\n        print(e, file=sys.stderr)\r\n        return 1\r\n    return 0\r\n\r\n\r\nif __name__ == '__main__':\r\n    sys.exit(main(sys.argv[1]))\r\n",
+      "lastmodified": "2016-06-02T10:02:42Z",
+      "tool": "454df69d-5cc0-49fc-93e4-6fbb6ac659e7",
+      "enabled": false,
+      "script_type": "pythonScript",
+      "config": "PUID",
+      "description": "Identify using Siegfried"
+    },
+    "model": "fpr.idcommand",
+    "pk": 5
   }
 ]
