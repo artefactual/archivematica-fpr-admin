@@ -5,7 +5,7 @@ UUID_REGEX = '[\w]{8}(-[\w]{4}){3}-[\w]{12}'
 
 urlpatterns = [
     url(r'^$', views.home, name='fpr_index'),
-    url(r'^(?P<category>format|formatgroup|idrule|idcommand|fprule|fpcommand)/(?P<uuid>' + UUID_REGEX + ')/toggle_enabled/$', 'toggle_enabled',
+    url(r'^(?P<category>format|formatgroup|idrule|idcommand|fprule|fpcommand)/(?P<uuid>' + UUID_REGEX + ')/toggle_enabled/$', views.toggle_enabled,
         name='toggle_enabled'),
 
     # Formats
