@@ -35,7 +35,7 @@ Delete {{ group.description }}
             <p>Substitute formats that are a member of this group with the following group:</p>
 
             <p>
-            <select name="substitute">
+            <select name="substitute" class="form-control">
               <option value="">--select--</option>
               {% for other_group in other_groups %}
                 <option value="{{ other_group.uuid }}">{{ other_group.description }}</option>
