@@ -30,7 +30,7 @@
         {% endif %}
             {% csrf_token %}
             {{ form|as_bootstrap }}
-            <input type="submit" value="{{ action }}" />
+            <input type="submit" value="{{ action }}" class="btn btn-default" />
         </form>
     </div>
 

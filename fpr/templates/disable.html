@@ -40,8 +40,8 @@ Disable {{ model_name }}
         </dl>
         {% endif %}
 
-        <input type="submit" name="{{ object.enabled|yesno:"disable,enable" }}" value="{{ object.enabled|yesno:"Disable,Enable" }} {{ model_name }}" />
-        <input type="submit" name="cancel" value="Cancel, change nothing" />
+        <input type="submit" name="{{ object.enabled|yesno:"disable,enable" }}" value="{{ object.enabled|yesno:"Disable,Enable" }} {{ model_name }}" class="btn btn-{{ object.enabled|yesno:"danger,primary" }}" />
+        <input type="submit" name="cancel" value="Cancel, change nothing" class="btn btn-default" />
       </form>
     </div>
 
