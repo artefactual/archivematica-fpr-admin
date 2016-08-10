@@ -20,7 +20,7 @@ Delete {{ group.description }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="col-md-10">
+  <div class="col-xs-10">
 
     <div class='format_group'>
       <form action="{% url 'formatgroup_delete' group.slug %}" method="post">{% csrf_token %}
@@ -50,7 +50,7 @@ Delete {{ group.description }}
       </form>
     </div>
 
-  </div> <!-- /col-md-10 -->
+  </div> <!-- /col-xs-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}
