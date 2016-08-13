@@ -11,7 +11,10 @@ from fpr import models as fprmodels
 ############ FORMATS ############
 
 class FormatForm(forms.ModelForm):
-    group = forms.ChoiceField(choices=fprmodels.FormatGroup.objects.all())
+    group = forms.ChoiceField(
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        choices=fprmodels.FormatGroup.objects.all()
+    )
 
     def __init__(self, *args, **kwargs):
         super(FormatForm, self).__init__(*args, **kwargs)
@@ -23,6 +26,8 @@ class FormatForm(forms.ModelForm):
         self.fields['group'].choices = choices
         if hasattr(self.instance, 'group') and self.instance.group:
             self.fields['group'].initial = self.instance.group.uuid
+        # add Bootstrap class to description field
+        self.fields['description'].widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = fprmodels.Format

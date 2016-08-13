@@ -1,4 +1,5 @@
 {% extends "fpr/app_layout.html" %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Format Group{% endblock title %}
@@ -19,7 +20,7 @@
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
     <div class='format'>
 
@@ -29,11 +30,8 @@
       <form action="{% url 'formatgroup_create' %}" method="post" id='format_group_form'>
       {% endif %}
         {% csrf_token %}
-        <p>
-          {{ form.errors }}
-          {{ form.label_tag }} {{ form.description }}
-        </p>
-        <input type="submit" value="{{ action }} Format Group" />
+        {{ form|as_bootstrap }}
+        <input type="submit" value="{{ action }} Format Group" class="btn btn-primary" />
       </form>
     </div>
 
@@ -64,7 +62,7 @@
       {% endif %}
     {% endif %}
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 
 
 </div> <!-- /row -->

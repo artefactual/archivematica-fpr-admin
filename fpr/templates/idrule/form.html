@@ -1,4 +1,5 @@
 {% extends "fpr/app_layout.html" %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Identification Rule{% endblock title %}
@@ -18,7 +19,7 @@
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
 <div class='form'>
     {% if idrule %}
@@ -27,12 +28,12 @@
     <form action="{% url 'idrule_create' %}" method="post">
     {% endif %}
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="{{ action }} Rule" />
+        {{ form|as_bootstrap }}
+        <input type="submit" value="{{ action }} Rule" class="btn btn-primary" />
     </form>
 </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 
 </div> <!-- /row -->
 

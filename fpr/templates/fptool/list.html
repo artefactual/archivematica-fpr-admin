@@ -18,7 +18,7 @@ Format Policy Registry Tool Information
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
     {% if request.user.is_superuser %}
     <p><a href="{% url 'fptool_create' %}">Create New Tool</a></p>
@@ -52,7 +52,7 @@ Format Policy Registry Tool Information
       <p>No tools exist.</p>
     {% endif %}
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 
 </div> <!-- /row -->
 

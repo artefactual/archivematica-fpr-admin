@@ -1,4 +1,5 @@
 {% extends "fpr/app_layout.html" %}
+{% load bootstrap_tags %}
 {% load staticfiles %}
 
 {% block title %}Archivematica FPR Server - {{ action }} Format Policy Rule{% endblock title %}
@@ -19,7 +20,7 @@
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
     <div class='tool'>
       {% if fprule %}
@@ -29,7 +30,7 @@
       {% endif %}
 
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form|as_bootstrap }}
 
       {% if fprule %}
       <form action="{% url 'fprule_edit' fprule.uuid %}" method="post" id='fprule_form'>
@@ -46,17 +47,17 @@
         </p>
         -->
         <div id='fprule_command_form'>
-          {{ fprule_command_form.as_p }}
+          {{ fprule_command_form|as_bootstrap }}
         </div>
         <p>
           {{ form.description.errors }}
           {{ form.description.label_tag }} {{ form.description }}
         </p>
-        <input type="submit" value="{{ action }} Rule" />
+        <input type="submit" value="{{ action }} Rule" class="btn btn-primary" />
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 
 </div> <!-- /row -->
 

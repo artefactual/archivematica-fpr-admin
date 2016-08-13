@@ -18,7 +18,7 @@ Format Policy Command Information
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
     {% if request.user.is_superuser %}
     <p><a href="{% url 'fpcommand_create' %}">Create New Command</a></p>
@@ -56,7 +56,7 @@ Format Policy Command Information
       <p>No format policy commands exist.</p>
     {% endif %}
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 
 </div> <!-- /row -->
 

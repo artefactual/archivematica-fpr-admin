@@ -20,7 +20,7 @@ Disable {{ model_name }}
 
   {% include 'fpr/_sidebar.html' %}
 
-  <div class="span10">
+  <div class="col-xs-10">
 
     <div class='config'>
       <form action="{{ form_url }}" method="post">{% csrf_token %}
@@ -40,12 +40,12 @@ Disable {{ model_name }}
         </dl>
         {% endif %}
 
-        <input type="submit" name="{{ object.enabled|yesno:"disable,enable" }}" value="{{ object.enabled|yesno:"Disable,Enable" }} {{ model_name }}" />
-        <input type="submit" name="cancel" value="Cancel, change nothing" />
+        <input type="submit" name="{{ object.enabled|yesno:"disable,enable" }}" value="{{ object.enabled|yesno:"Disable,Enable" }} {{ model_name }}" class="btn btn-{{ object.enabled|yesno:"danger,primary" }}" />
+        <input type="submit" name="cancel" value="Cancel, change nothing" class="btn btn-default" />
       </form>
     </div>
 
-  </div> <!-- /span10 -->
+  </div> <!-- /col-xs-10 -->
 </div> <!-- /row -->
 
 {% endblock app_content %}
