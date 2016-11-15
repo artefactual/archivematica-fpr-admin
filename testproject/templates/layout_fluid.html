@@ -1,0 +1,105 @@
+{% load active %}
+{% load i18n %}
+
+{% comment %}
+
+  This template is used only for development purposes.
+
+{% endcomment %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Archivematica Dashboard - {% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    {% block extra_css %}{% endblock %}
+    {% block js %}{% endblock %}
+    <style type="text/css">
+      body { margin: 40px; color: #333; }
+      h1 { font-size: 1.8em; font-weight: normal; border-bottom: 1px solid #999; }
+      ul, li { margin: 0; padding: 0; }
+      a { text-decoration: none; }
+      a:link, a:visited { color: blue; }
+      a:hover { background-color: lightgreen; }
+      header h1 { background-color: lightblue; font-size: 2em; padding: 10px; border: 2px outset #999; }
+      header > nav { list-style; none; margin-bottom: -10px; text-align: center; }
+      header > nav li { display: inline-block; }
+      header > nav li a { padding: 8px; display: inline; }
+      header > nav li + li:before { content: '|\00a0'; }
+      header > nav form { display: inline-block; padding: 5px 10px; background-color: #f0f0f0; border-radius: 4px; margin-right: 2px; }
+      .messages { background-color: #f0f0f0; list-style: none; color: red; margin-bottom: 10px; border: 4px solid red; }
+      .messages li { padding: 10px; }
+      dt { font-weight: bold; margin-top: 10px; }
+      dd { margin: 4px 0 0 0; }
+      .breadcrumb ul { padding: 8px 15px; margin-bottom: 10px; list-style: none; background-color: #f5f5f5; border-radius: 4px; }
+      .breadcrumb li { display: inline-block; }
+      .breadcrumb li + li:before { content: '»\00a0'; padding: 0 5px; color: #999; }
+      .breadcrumb li.active { color: red; }
+      .sidebar ul { padding-right: 10px; font-weight: bold; }
+      .sidebar li { list-style-type: none; padding: 4px; }
+      .sidebar li a { font-weight: normal; }
+      .sidebar .active { background-color: lightgreen; }
+      .col-xs-2 { float: left; width: 20%; }
+      .col-xs-10 { float: left; width: 80%; }
+      pre { background-color: #666; color: #ddd; padding: 10px; }
+      dd pre { margin: 0; }
+      .datatable { width: 100%; }
+      .datatable th, .datatable td { background-color: #eee; padding: 4px; }
+    </style>
+  </head>
+  <body id="page-{% block page_id %}default{% endblock %}">
+
+    {% block header %}
+      <header>
+        <nav>
+          <ul>
+            <li><a href="{% url "fpr_index" %}">Home</a></li>
+            <li class="language-menu">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{% url 'fpr_index' %}"/>
+                <select name="language">
+                  {% for language in languages %}
+                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                      {{ language.name_local|capfirst }} ({{ language.code }})
+                    </option>
+                  {% endfor %}
+                </select>
+                <input type="submit" value="Change"/>
+              </form>
+            </li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url "logout" %}">Log out</a></li>
+            {% else %}
+              <li><a href="{% url "login" %}">Log in</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <h1>Archivematica FPR</h1>
+      </header>
+    {% endblock %}
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+            {{ message }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block body %}
+      <section class="content" role="main">
+        {% block content %}{% endblock %}
+      </section>
+    {% endblock %}
+
+    {% block extra_js %}{% endblock extra_js %}
+
+  </body>
+</html>

@@ -1,1 +1,3 @@
 *.py[co]
+/.env
+/testproject/db.sqlite3
