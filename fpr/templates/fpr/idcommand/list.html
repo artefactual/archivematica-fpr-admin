@@ -1,15 +1,14 @@
 {% extends "fpr/app_layout.html" %}
+{% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - Identification Commands{% endblock title %}
-
-{% block page_title %}
-Identification Command Information
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {% trans "Identification commands" %}{% endblock title %}
+{% block page_title %}{% trans "Identification commands" %}{% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li>Identification Commands</li>
+<li>{% trans "Identification commands" %}</li>
+<li>{% trans "List" %}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -20,19 +19,19 @@ Identification Command Information
   <div class="col-xs-10">
 
   {% if request.user.is_superuser %}
-  <p><a href="{% url 'idcommand_create' %}">Create New Command</a></p>
+  <p><a href="{% url 'idcommand_create' %}">{% trans "Create new command" %}</a></p>
   {% endif %}
 
 {% if idcommands %}
   <table class="datatable">
     <thead>
       <tr>
-        <th>Command</th>
-        <th>Type</th>
-        <th>Tool</th>
-        <th>Mode</th>
-        <th>Enabled</th>
-        <th>Actions</th>
+        <th>{% trans 'Command' %}</th>
+        <th>{% trans 'Type' %}</th>
+        <th>{% trans 'Tool' %}</th>
+        <th>{% trans 'Mode' %}</th>
+        <th>{% trans 'Enabled' %}</th>
+        <th>{% trans 'Actions' %}</th>
       </tr>
     </thead>
     <tbody>
@@ -42,12 +41,12 @@ Identification Command Information
         <td>{{ idcommand.get_script_type_display }}</td>
         <td><a href="{% url 'idtool_detail' idcommand.tool.slug %}">{{ idcommand.tool }}</a></td>
         <td>{{ idcommand.config }}</td>
-        <td>{{ idcommand.enabled }}</td>
+        <td>{{ idcommand.enabled|yesno:_("Yes,No") }}</td>
         <td>
-          <a href="{% url 'idcommand_detail' idcommand.uuid %}">View</a>
+          <a href="{% url 'idcommand_detail' idcommand.uuid %}">{% trans "View" %}</a>
           {% if request.user.is_superuser %}
-            | <a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a>
-            | <a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:"Disable,Enable" }}</a>
+            | <a href="{% url 'idcommand_edit' idcommand.uuid %}">{% trans "Replace" %}</a>
+            | <a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:_("Disable,Enable") }}</a>
           {% endif %}
         </td>
       </tr>
@@ -55,7 +54,7 @@ Identification Command Information
     </tbody>
   </table>
 {% else %}
-  <p>No identification commands exist.</p>
+  <p>{% trans "No identification commands exist." %}</p>
 {% endif %}
 
   </div> <!-- /col-xs-10 -->

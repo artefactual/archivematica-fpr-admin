@@ -1,17 +1,15 @@
 {% extends "fpr/app_layout.html" %}
 {% load bootstrap_tags %}
+{% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ action }} Format Policy Command{% endblock title %}
-
-{% block page_title %}
-{{ action }} Format Policy Command
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {{ title }}{% endblock title %}
+{% block page_title %}{{ title }}{% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'fpcommand_list' %}">Format Policy Commands</a></li>
-<li>{{ action }} Format Policy Command</li>
+<li><a href="{% url 'fpcommand_list' %}">{% trans "Format policy commands" %}</a></li>
+<li>{{ title }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -32,7 +30,7 @@
         {% csrf_token %}
         {{ form|as_bootstrap }}
 
-        <input type="submit" value="{{ action }} Command" class="btn btn-primary" />
+        <input type="submit" value="{% trans 'Save' %}" class="btn btn-primary" />
       </form>
     </div>
 

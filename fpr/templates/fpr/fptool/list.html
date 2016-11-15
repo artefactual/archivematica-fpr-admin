@@ -1,15 +1,14 @@
 {% extends "fpr/app_layout.html" %}
+{% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - Tools{% endblock title %}
-
-{% block page_title %}
-Format Policy Registry Tool Information
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {% trans "Format policy registry tools" %}{% endblock title %}
+{% block page_title %}{% trans "Format policy registry tools" %}{% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li>Format Policy Registry Tools</li>
+<li>{% trans "Format policy registry tools" %}</li>
+<li>{% trans "List" %}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -21,16 +20,16 @@ Format Policy Registry Tool Information
   <div class="col-xs-10">
 
     {% if request.user.is_superuser %}
-    <p><a href="{% url 'fptool_create' %}">Create New Tool</a></p>
+    <p><a href="{% url 'fptool_create' %}">{% trans "Create new tool" %}</a></p>
     {% endif %}
 
     {% if fptools %}
       <table class="datatable">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Version</th>
-            <th>Actions</th>
+            <th>{% trans "Description" %}</th>
+            <th>{% trans "Version" %}</th>
+            <th>{% trans "Actions" %}</th>
           </tr>
         </thead>
         <tbody>
@@ -39,9 +38,9 @@ Format Policy Registry Tool Information
             <td><a href="{% url 'fptool_detail' fptool.slug %}">{{ fptool.description }}</a></td>
             <td>{{ fptool.version }}</td>
             <td>
-               <a href="{% url 'fptool_detail' fptool.slug %}">View</a>
+               <a href="{% url 'fptool_detail' fptool.slug %}">{% trans "View" %}</a>
                {% if request.user.is_superuser %}
-                 | <a href="{% url 'fptool_edit' fptool.slug %}">Edit</a>
+                 | <a href="{% url 'fptool_edit' fptool.slug %}">{% trans "Edit" %}</a>
                {% endif %}
             </td>
           </tr>
@@ -49,7 +48,7 @@ Format Policy Registry Tool Information
         </tbody>
       </table>
     {% else %}
-      <p>No tools exist.</p>
+      <p>{% trans "No tools exist." %}</p>
     {% endif %}
 
   </div> <!-- /col-xs-10 -->

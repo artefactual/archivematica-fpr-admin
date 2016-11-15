@@ -1,12 +1,10 @@
 {% extends "fpr/app_layout.html" %}
 {% load bootstrap_tags %}
+{% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ action }} Format{% endblock title %}
-
-{% block page_title %}
-{{ action }} Format
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {{ title }}{% endblock title %}
+{% block page_title %}{{ title }}{% endblock page_title %}
 
 {% block extra_css %}
 {{ block.super }}
@@ -19,12 +17,11 @@
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'format_list' %}">Formats</a></li>
-<li>{{ action }} Format</li>
+<li><a href="{% url 'format_list' %}">{% trans "Formats" %}</a></li>
+<li>{{ title }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
-
 <div class="row">
 
   {% include 'fpr/_sidebar.html' %}
@@ -50,7 +47,7 @@
           {{ form.description.errors }}
           {{ form.description.label_tag }} {{ form.description }}
         </p>
-        <input type="submit" value="{{ action }} Format" class="btn btn-primary" />
+        <input type="submit" value="{% trans 'Save' %}" class="btn btn-primary" />
       </form>
     </div>
 

@@ -1,17 +1,15 @@
 {% extends "fpr/app_layout.html" %}
-{% load staticfiles %}
+{% load i18n %}
 {% load revisions_link %}
+{% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - {{ idcommand.description }}{% endblock title %}
-
-{% block page_title %}
-{{ idcommand.description }} Information
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {% blocktrans with description=idcommand.description %}Identification command {{ description }}{% endblocktrans %}{% endblock title %}
+{% block page_title %}{% blocktrans with description=idcommand.description %}Identification command {{ description }}{% endblocktrans %}{% endblock page_title %}
 
 {% block breadcrumbs %}
 {{ block.super }}
-<li><a href="{% url 'idcommand_list' %}">Identification Commands</a></li>
-<li>{{ idcommand.description }} Command</li>
+<li><a href="{% url 'idcommand_list' %}">{% trans "Identification commands" %}</a></li>
+<li>{{ idcommand.description }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -26,24 +24,24 @@
 
     <div class='format'>
       <dl>
-        <dt>UUID</dt>
+        <dt>{% trans "UUID" %}</dt>
           <dd>{{ idcommand.uuid }}</dd>
-        <dt>Tool</dt>
+        <dt>{% trans "Tool" %}</dt>
           <dd>{{ idcommand.tool }}
-        <dt>Description</dt>
+        <dt>{% trans "Description" %}</dt>
           <dd>{{ idcommand.description }}</dd>
-        <dt>Mode</dt>
+        <dt>{% trans "Mode" %}</dt>
           <dd>{{ idcommand.config }}</dd>
-        <dt>Script</dt>
+        <dt>{% trans "Script" %}</dt>
           <dd><pre>{{ idcommand.script }}</pre></dd>
-        <dt>Script Type</dt>
+        <dt>{% trans "Script type" %}</dt>
           <dd>{{ idcommand.get_script_type_display }}</dd>
-        <dt>Enabled</dt>
-          <dd>{{ idcommand.enabled }}</dd>
+        <dt>{% trans "Enabled" %}</dt>
+          <dd>{{ idcommand.enabled|yesno:_('Yes,No') }}</dd>
         {% if request.user.is_superuser %}
-        <dt>Actions</dt>
-          <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">Replace</a></dd>
-          <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:"Disable,Enable" }}</a></dd>
+        <dt>{% trans "Actions" %}</dt>
+          <dd><a href="{% url 'idcommand_edit' idcommand.uuid %}">{% trans "Replace" %}</a></dd>
+          <dd><a href="{% url 'idcommand_delete' idcommand.uuid %}">{{ idcommand.enabled|yesno:_("Disable,Enable") }}</a></dd>
         {% endif %}
       </dl>
     </div>

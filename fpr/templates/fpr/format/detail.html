@@ -1,16 +1,14 @@
-{% extends "app_layout.html" %}
+{% extends "fpr/app_layout.html" %}
+{% load i18n %}
 {% load staticfiles %}
 
-{% block title %}Archivematica FPR Server - Format {{format.description}}{% endblock title %}
-
-{% block page_title %}
-{{format}} Format Information
-{% endblock page_title %}
+{% block title %}{{ block.super }} - {% blocktrans with description=format.description %}Format {{ description }}{% endblocktrans %}{% endblock title %}
+{% block page_title %}{% blocktrans with description=format.description %}Format {{ description }}{% endblocktrans %}{% endblock page_title %}
 
 {% block breadcrumbs %}
-{{ block.super }}
-<li><a href="{% url 'format_list' %}">Formats</a></li>
-<li>{{ format.description }}</li>
+  {{ block.super }}
+  <li><a href="{% url 'format_list' %}">{% trans "Formats" %}</a></li>
+  <li>{{ format.description }}</li>
 {% endblock breadcrumbs %}
 
 {% block app_content %}
@@ -23,11 +21,11 @@
 
     <div class='format'>
         <dl>
-            <dt>UUID</dt>
+            <dt>{% trans "UUID" %}</dt>
               <dd>{{ format.uuid }}</dd>
-            <dt>Description</dt>
+            <dt>{% trans "Description" %}</dt>
               <dd>{{ format.description }}</dd>
-            <dt>Group</dt>
+            <dt>{% trans "Group" %}</dt>
               <dd>
                 {% if request.user.is_superuser %}
                   <a href="{% url 'formatgroup_edit' format.group.slug %}">{{ format.group }}</a>
@@ -36,29 +34,29 @@
                 {% endif %}
               </dd>
             {% if request.user.is_superuser %}
-            <dt>Actions</dt>
-              <dd><a href="{% url 'format_edit' format.slug %}">Edit</a></dd>
+            <dt>{% trans "Actions" %}</dt>
+              <dd><a href="{% url 'format_edit' format.slug %}">{% trans "Edit" %}</a></dd>
             {% endif %}
         </dl>
     </div>
 
-    <h2>Specific Versions</h2>
+    <h2>{% trans "Specific versions" %}</h2>
 
     {% if request.user.is_superuser %}
-    <p><a href="{% url 'formatversion_create' format.slug %}">Create New Format Version</a></p>
+    <p><a href="{% url 'formatversion_create' format.slug %}">{% trans "Create new format version" %}</a></p>
     {% endif %}
 
     {% if format_versions %}
       <table class="datatable">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Version</th>
-            <th>Pronom ID</th>
-            <th>Access format?</th>
-            <th>Preservation format?</th>
-            <th>Enabled</th>
-            <th>Actions</th>
+            <th>{% trans "Description" %}</th>
+            <th>{% trans "Version" %}</th>
+            <th>{% trans "Pronom ID" %}</th>
+            <th>{% trans "Access format?" %}</th>
+            <th>{% trans "Preservation format?" %}</th>
+            <th>{% trans "Enabled" %}</th>
+            <th>{% trans "Actions" %}</th>
           </tr>
         </thead>
         <tbody>
@@ -66,22 +64,26 @@
           <tr>
             <td><a href="{% url 'formatversion_detail' format.slug version.slug %}">{{ version.description }}</a></td>
             <td>{% if version.version  %}{{ version.version }}{% endif %}</td>
-            <td>{% if version.pronom_id %}<a href="http://www.nationalarchives.gov.uk/PRONOM/{{ version.pronom_id }}" target=_blank>{{ version.pronom_id}}</a>{% endif %}</td> 
-            <td>{{ version.access_format|yesno:"Yes, No" }}</td>
-            <td>{{ version.preservation_format|yesno:"Yes, No" }}</td>
+            <td>{% if version.pronom_id %}<a href="http://www.nationalarchives.gov.uk/PRONOM/{{ version.pronom_id }}" target=_blank>{{ version.pronom_id}}</a>{% endif %}</td>
+            <td>{{ version.access_format|yesno:_("Yes,No") }}</td>
+            <td>{{ version.preservation_format|yesno:_("Yes,No") }}</td>
             <td>{{ version.enabled }}</td>
             <td>
-              <a href="{% url 'formatversion_detail' format.slug version.slug %}">View</a>
+              <a href="{% url 'formatversion_detail' format.slug version.slug %}">{% trans "View" %}</a>
               {% if request.user.is_superuser %}
-                | <a href="{% url 'formatversion_edit' format.slug version.slug %}">Replace</a>
-                | <a href="{% url 'formatversion_delete' format.slug version.slug %}">{{ version.enabled|yesno:"Disable,Enable" }}</a></td>
+                | <a href="{% url 'formatversion_edit' format.slug version.slug %}">{% trans "Replace" %}</a>
+                | <a href="{% url 'formatversion_delete' format.slug version.slug %}">{{ version.enabled|yesno:_("Disable,Enable") }}</a></td>
               {% endif %}
           </tr>
         {% endfor %}
         </tbody>
       </table>
     {% else %}
-      <p>No versions exist for {{ format.description }}.</p>
+      <p>
+        {% blocktrans with description=format.description %}
+          No versions exist for {{ description }}.
+        {% endblocktrans %}
+      </p>
     {% endif %}
 
   </div> <!-- /col-xs-10 -->
