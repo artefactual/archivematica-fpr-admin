@@ -1,6 +1,5 @@
 {% extends "fpr/app_layout.html" %}
 {% load i18n %}
-{% load staticfiles %}
 
 {% block title %}{{ block.super }} - {% blocktrans with description=idtool.description %}Identification tool {{ description }}{% endblocktrans %}{% endblock title %}
 {% block page_title %}{% blocktrans with description=idtool.description %}Identification tool {{ description }}{% endblocktrans %}{% endblock page_title %}

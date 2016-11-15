@@ -1,7 +1,6 @@
 {% extends "fpr/app_layout.html" %}
 {% load i18n %}
 {% load revisions_link %}
-{% load staticfiles %}
 
 {% block title %}{{ block.super }} - {% blocktrans with description=fprule.purpose|title %}Rule {{ description }}{% endblocktrans %}{% endblock title %}
 {% block page_title %}{% blocktrans with description=fprule.purpose|title %}Rule {{ description }}{% endblocktrans %}{% endblock page_title %}
