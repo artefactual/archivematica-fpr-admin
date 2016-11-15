@@ -1,12 +1,10 @@
 # stdlib, alphabetical
-import os
 
 # Django core, alphabetical
+from django.apps import apps
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.db import models
-from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -567,7 +565,7 @@ def fpcommand_delete(request, uuid):
 
 def revision_list(request, entity_name, uuid):
     # get model using entity name
-    available_models = models.get_models()
+    available_models = apps.get_models()
     model = None
     for model in available_models:
         if model._meta.db_table == 'fpr_' + entity_name:
