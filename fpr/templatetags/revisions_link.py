@@ -1,7 +1,10 @@
 from django import template
 import django.template.base as base
+from django.core.urlresolvers import reverse
+
 
 register = template.Library()
+
 
 @register.tag(name='revisions_link')
 def revisions_link(parser, token):
@@ -13,6 +16,7 @@ def revisions_link(parser, token):
 
     return RevisionLinkNode(revision_type, object_uuid)
 
+
 class RevisionLinkNode(template.Node):
     def __init__(self, revision_type, object_uuid):
         self.revision_type = self._convert_to_template_variable_if_not_in_quotes(revision_type)
@@ -22,7 +26,7 @@ class RevisionLinkNode(template.Node):
         revision_type = self._resolve_if_template_variable(self.revision_type, context)
         object_uuid   = self._resolve_if_template_variable(self.object_uuid, context)
 
-        return '<a class="revisions_link" href="/fpr/revisions/' + revision_type + '/' + object_uuid + '/">Revision History</a>'
+        return '<a class="revisions_link" href="{}">Revision history</a>'.format(reverse('revision_list', kwargs={'entity_name': revision_type, 'uuid': object_uuid}))
 
     def _convert_to_template_variable_if_not_in_quotes(self, value):
         if (self._in_quotes(value)):
