@@ -222,6 +222,9 @@ class IDRule(VersionedModel, models.Model):
             })
 
     def __unicode__(self):
+        return _('Format identification rule %(uuid)s') % {'uuid': self.uuid}
+
+    def long_name(self):
         return _('%(command)s with %(output)s is %(format)s') % {
             'command': self.command,
             'output': self.command_output,
@@ -322,6 +325,9 @@ class FPRule(VersionedModel, models.Model):
     #             NON_FIELD_ERRORS:('Unable to save, an active Rule for this purpose and format and command already exists.',)})
 
     def __unicode__(self):
+        return _('Format policy rule %(uuid)s') % {'uuid': self.uuid}
+
+    def long_name(self):
         return _('Normalize %(format)s for %(purpose)s via %(command)s') % {
             'format': self.format,
             'purpose': self.get_purpose_display(),
@@ -443,7 +449,7 @@ class CommandsSupportedBy(models.Model):
     replaces = models.CharField(_('replaces'), max_length=36, null=True, db_column='replaces')
     lastmodified = models.DateTimeField(_('last modified'), db_column='lastModified')
     enabled = models.IntegerField(_('enabled'), null=True, db_column='enabled', default=1)
-    
+
     class Meta:
         db_table = u'CommandsSupportedBy'
 
