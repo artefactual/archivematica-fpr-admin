@@ -9,9 +9,7 @@ import uuid
 
 from django.db import models
 
-from annoying.functions import get_object_or_None
 from autoslug import AutoSlugField
-from django_extensions.db.fields import UUIDField
 
 from django.core.validators import ValidationError
 from django.core.exceptions import NON_FIELD_ERRORS
@@ -19,6 +17,15 @@ from django.core.exceptions import NON_FIELD_ERRORS
 logger = logging.getLogger(__name__)
 
 ############################### API V2 MODELS ###############################
+
+class DefaultUUIDField(models.UUIDField):
+    def __init__(self, *args, **kwargs):
+        kwargs['editable'] = False
+        kwargs['unique'] = True
+        kwargs['default'] = uuid.uuid4
+        kwargs['help_text'] = kwargs.get('help_text', "Unique identifier")
+        super(DefaultUUIDField, self).__init__(*args, **kwargs)
+
 
 ############ MANAGERS ############
 
@@ -65,7 +72,7 @@ class Format(models.Model):
     Collects multiple related FormatVersions to one conceptual version.
 
     Eg. GIF, Word file."""
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     description = models.CharField(max_length=128, help_text="Common name of format")
     group = models.ForeignKey('FormatGroup', to_field='uuid', null=True)
     slug = AutoSlugField(populate_from='description')
@@ -80,7 +87,7 @@ class Format(models.Model):
 
 class FormatGroup(models.Model):
     """ Group/classification for formats.  Eg. image, video, audio. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     description = models.CharField(max_length=128, verbose_name='Format Group')
     slug = AutoSlugField(populate_from='description')
 
@@ -94,7 +101,7 @@ class FormatGroup(models.Model):
 
 class FormatVersion(VersionedModel, models.Model):
     """ Format that a tool identifies. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     format = models.ForeignKey('Format', to_field='uuid', related_name='version_set', null=True)
     version = models.CharField(max_length=10, null=True, blank=True)
     pronom_id = models.CharField(max_length=32, null=True, blank=True)
@@ -137,7 +144,7 @@ class IDCommand(VersionedModel, models.Model):
 
     IDCommand runs 'script' (which runs an IDTool with a specific IDToolConfig)
     and parses the output. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     description = models.CharField(max_length=256, verbose_name='Identifier', help_text="Name to identify script")
     CONFIG_CHOICES = (
         ('PUID', 'PUID'),
@@ -193,7 +200,7 @@ class IDCommand(VersionedModel, models.Model):
 
 class IDRule(VersionedModel, models.Model):
     """ Mapping between an IDCommand output and a FormatVersion. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     command = models.ForeignKey('IDCommand', to_field='uuid')
     format = models.ForeignKey('FormatVersion', to_field='uuid')
     # Output from IDToolConfig.command to match on that gives the format
@@ -226,7 +233,7 @@ class IDRule(VersionedModel, models.Model):
 
 class IDTool(models.Model):
     """ Tool used to identify formats.  Eg. DROID """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     description = models.CharField(max_length=256, help_text="Name of tool")
     version = models.CharField(max_length=64)
     enabled = models.BooleanField(default=True)
@@ -249,7 +256,7 @@ class IDTool(models.Model):
 ############ NORMALIZATION ############
 
 class FPRule(VersionedModel, models.Model):
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
 
     ACCESS = 'access'
     CHARACTERIZATION = 'characterization'
@@ -323,7 +330,7 @@ class FPRule(VersionedModel, models.Model):
 
 
 class FPCommand(VersionedModel, models.Model):
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     # ManyToManyField may not be the best choice here
     tool = models.ForeignKey('FPTool', to_field='uuid', null=True)
     description = models.CharField(max_length=256)
@@ -360,7 +367,7 @@ class FPCommand(VersionedModel, models.Model):
 
 class FPTool(models.Model):
     """ Tool used to perform normalization.  Eg. convert, ffmpeg, ps2pdf. """
-    uuid = UUIDField(editable=False, unique=True, version=4, help_text="Unique identifier")
+    uuid = DefaultUUIDField()
     description = models.CharField(max_length=256, help_text="Name of tool")
     version = models.CharField(max_length=64)
     enabled = models.BooleanField(default=True)
