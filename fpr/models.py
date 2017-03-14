@@ -266,20 +266,13 @@ class FPRule(VersionedModel, models.Model):
     THUMBNAIL = 'thumbnail'
     TRANSCRIPTION = 'transcription'
     VALIDATION = 'validation'
-    VALIDATION_PRESERVATION_DERIVATIVE = 'validatePreservationDerivative'
-    VALIDATION_ACCESS_DERIVATIVE = 'validateAccessDerivative'
-    VALIDATION_PRESERVATION_DERIVATIVE_POLICY = 'checkingPresDerivativePolicy'
-    VALIDATION_ACCESS_DERIVATIVE_POLICY = 'checkingAccessDerivativePolicy'
-    VALIDATION_ORIGINAL_POLICY = 'checkingOriginalPolicy'
+    POLICY = 'policy_check'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
     USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL,
-              TRANSCRIPTION, VALIDATION, VALIDATION_PRESERVATION_DERIVATIVE,
-              VALIDATION_ACCESS_DERIVATIVE,
-              VALIDATION_PRESERVATION_DERIVATIVE_POLICY,
-              VALIDATION_ACCESS_DERIVATIVE_POLICY, VALIDATION_ORIGINAL_POLICY,
-              DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
+              TRANSCRIPTION, VALIDATION, POLICY, DEFAULT_ACCESS,
+              DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
     DISPLAY_CHOICES = (
         (ACCESS, _('Access')),
         (CHARACTERIZATION, _('Characterization')),
@@ -288,11 +281,7 @@ class FPRule(VersionedModel, models.Model):
         (THUMBNAIL, _('Thumbnail')),
         (TRANSCRIPTION, _('Transcription')),
         (VALIDATION, _('Validation')),
-        (VALIDATION_PRESERVATION_DERIVATIVE, _('Validation of Preservation Derivatives')),
-        (VALIDATION_ACCESS_DERIVATIVE, _('Validation of Access Derivatives')),
-        (VALIDATION_PRESERVATION_DERIVATIVE_POLICY, _('Validation of Preservation Derivatives against a Policy')),
-        (VALIDATION_ACCESS_DERIVATIVE_POLICY, _('Validation of Access Derivatives against a Policy')),
-        (VALIDATION_ORIGINAL_POLICY, _('Validation of Originals against a Policy')),
+        (POLICY, _('Validation against a Policy')),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, _('Default access')),
@@ -305,12 +294,7 @@ class FPRule(VersionedModel, models.Model):
         'normalization': (DEFAULT_ACCESS, ACCESS, PRESERVATION, THUMBNAIL),
         'characterization': (CHARACTERIZATION, DEFAULT_CHARACTERIZATION),
         'extraction': (EXTRACTION,),
-        'validation': (VALIDATION,
-                       VALIDATION_PRESERVATION_DERIVATIVE,
-                       VALIDATION_ACCESS_DERIVATIVE,
-                       VALIDATION_PRESERVATION_DERIVATIVE_POLICY,
-                       VALIDATION_ACCESS_DERIVATIVE_POLICY,
-                       VALIDATION_ORIGINAL_POLICY)
+        'validation': (VALIDATION, POLICY)
     }
     PURPOSE_CHOICES = DISPLAY_CHOICES + HIDDEN_CHOICES
     purpose = models.CharField(_('purpose'), max_length=32, choices=PURPOSE_CHOICES)

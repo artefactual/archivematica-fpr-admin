@@ -57,7 +57,7 @@ def data_migration(apps, schema_editor):
     policy_check_preservation_rule_pk = 'aaaf34ef-c00f-4bb9-85c1-01c0ad5f3a8c'
     FPRule.objects.create(
         uuid=policy_check_preservation_rule_pk,
-        purpose='checkingPresDerivativePolicy',
+        purpose='policy_check',
         command=mediaconch_policy_check_command,
         format=mkv_format,
         enabled=False
@@ -78,11 +78,7 @@ class Migration(migrations.Migration):
         (b'thumbnail', b'Thumbnail'),
         (b'transcription', b'Transcription'),
         (b'validation', b'Validation'),
-        (b'validatePreservationDerivative', b'Validation of Preservation Derivatives'),
-        (b'validateAccessDerivative', b'Validation of Access Derivatives'),
-        (b'checkingPresDerivativePolicy', b'Validation of Preservation Derivatives against a Policy'),
-        (b'checkingAccessDerivativePolicy', b'Validation of Access Derivatives against a Policy'),
-        (b'checkingOriginalPolicy', b'Validation of Originals against a Policy'),
+        (b'policy_check', b'Validation against a Policy'),
         (b'default_access', b'Default Access'),
         (b'default_characterization', b'Default Characterization'),
         (b'default_thumbnail', b'Default Thumbnail')
