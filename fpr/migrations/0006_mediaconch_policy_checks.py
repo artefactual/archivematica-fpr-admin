@@ -5,9 +5,29 @@ import os
 from django.db import migrations, models
 
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-MIGR_DATA = os.path.join(os.path.dirname(HERE), 'migrations-data')
-POLICY_CHECK_CMD_FNM = os.path.join(MIGR_DATA, 'mc_policy_check_cmd.py')
+# All MediaConch policy check commands in the FPR should follow the template in
+# the following constant. They depend on the ammcpc module / command-line tool
+# https://github.com/artefactual-labs/ammcpc being installed, which is a simple
+# wrapper around the MediaConch command-line tool. Real policy check commands
+# must contain values for the ``POLICY`` and ``POLICY_NAME`` constants.
+POLICY_CHECK_CMD = '''
+import sys
+from ammcpc import MediaConchPolicyCheckerCommand
+
+# Valuate this constant with the text (XML) of the policy.
+POLICY = """
+""".strip()
+
+# Valuate this constant with the name of the policy.
+POLICY_NAME = ''
+
+if __name__ == '__main__':
+    target = sys.argv[1]
+    policy_checker = MediaConchPolicyCheckerCommand(
+        policy=POLICY,
+        policy_file_name=POLICY_NAME)
+    sys.exit(policy_checker.check(target))
+'''
 
 
 def data_migration(apps, schema_editor):
@@ -15,8 +35,7 @@ def data_migration(apps, schema_editor):
 
     Creates the following:
 
-    - MediaConch FPCommand for policy checks (using
-        migrations-data/mc_policy_check_cmd.py)
+    - MediaConch FPCommand for policy checks
     - MediaConch FPRule for checking .mkv preservation derivatives against a
         policy
     """
@@ -31,10 +50,8 @@ def data_migration(apps, schema_editor):
     mediaconch_tool = FPTool.objects.get(description='MediaConch')
 
     # MediaConch Policy Check Command
-    # NOTE: this command is disabled by default because it references a
-    # dummy/non-existent policy file.
-    with open(POLICY_CHECK_CMD_FNM) as filei:
-        mediaconch_policy_check_command_script = filei.read()
+    # NOTE: this command is disabled by default because it contains no policy
+    # file.
     mediaconch_policy_check_command_uuid = \
         '9ef290f7-5320-4d69-821a-3156fc184b4e'
     mediaconch_policy_check_command = FPCommand.objects.create(
@@ -42,7 +59,7 @@ def data_migration(apps, schema_editor):
         tool=mediaconch_tool,
         description=('Check against policy PLACEHOLDER_FOR_POLICY_FILE_NAME'
                      ' using MediaConch'),
-        command=mediaconch_policy_check_command_script,
+        command=POLICY_CHECK_CMD,
         script_type='pythonScript',
         command_usage='validation',
         enabled=False
