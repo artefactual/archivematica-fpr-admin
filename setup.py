@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='archivematica-fpr-admin',
-    version='1.6.0rc1',
+    version='1.6.0',
     packages=find_packages(exclude=['testproject']),
     include_package_data=True,
     license='AGPL',
