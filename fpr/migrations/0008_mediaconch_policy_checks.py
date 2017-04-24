@@ -88,24 +88,24 @@ class Migration(migrations.Migration):
     ]
 
     FPRULE_CHOICES = [
-        (b'access', b'Access'),
-        (b'characterization', b'Characterization'),
-        (b'extract', b'Extract'),
-        (b'preservation', b'Preservation'),
-        (b'thumbnail', b'Thumbnail'),
-        (b'transcription', b'Transcription'),
-        (b'validation', b'Validation'),
-        (b'policy_check', b'Validation against a Policy'),
-        (b'default_access', b'Default Access'),
-        (b'default_characterization', b'Default Characterization'),
-        (b'default_thumbnail', b'Default Thumbnail')
+        (b'access', 'Access'),
+        (b'characterization', 'Characterization'),
+        (b'extract', 'Extract'),
+        (b'preservation', 'Preservation'),
+        (b'thumbnail', 'Thumbnail'),
+        (b'transcription', 'Transcription'),
+        (b'validation', 'Validation'),
+        (b'policy_check', 'Validation against a Policy'),
+        (b'default_access', 'Default access'),
+        (b'default_characterization', 'Default characterization'),
+        (b'default_thumbnail', 'Default thumbnail')
     ]
 
     operations = [
         migrations.AlterField(
             model_name='fprule',
             name='purpose',
-            field=models.CharField(max_length=32, choices=FPRULE_CHOICES)
+            field=models.CharField(max_length=32, verbose_name='purpose', choices=FPRULE_CHOICES)
         ),
         migrations.RunPython(data_migration),
     ]
