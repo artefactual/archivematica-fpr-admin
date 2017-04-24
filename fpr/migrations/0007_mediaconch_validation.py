@@ -64,7 +64,7 @@ def data_migration(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fpr', '0004_pronom_88'),
+        ('fpr', '0006_i18n_models'),
     ]
 
     operations = [
