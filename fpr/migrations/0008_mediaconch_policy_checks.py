@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
-import os
 
 from django.db import migrations, models
 
@@ -95,7 +94,7 @@ class Migration(migrations.Migration):
         (b'thumbnail', 'Thumbnail'),
         (b'transcription', 'Transcription'),
         (b'validation', 'Validation'),
-        (b'policy_check', 'Validation against a Policy'),
+        (b'policy_check', 'Validation against a policy'),
         (b'default_access', 'Default access'),
         (b'default_characterization', 'Default characterization'),
         (b'default_thumbnail', 'Default thumbnail')

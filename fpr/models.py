@@ -281,7 +281,7 @@ class FPRule(VersionedModel, models.Model):
         (THUMBNAIL, _('Thumbnail')),
         (TRANSCRIPTION, _('Transcription')),
         (VALIDATION, _('Validation')),
-        (POLICY, _('Validation against a Policy')),
+        (POLICY, _('Validation against a policy')),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, _('Default access')),
