@@ -2,5 +2,6 @@ include LICENSE
 include README.md
 recursive-include fpr/locale *
 recursive-include fpr/migrations *
+recursive-include fpr/migrations-data *
 recursive-include fpr/static *
 recursive-include fpr/templates *
