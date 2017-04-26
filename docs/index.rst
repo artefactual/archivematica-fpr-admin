@@ -17,6 +17,7 @@ Format Policy Registry (FPR)
 * :ref:`Extraction <extraction>`
 * :ref:`Transcription <transcription>`
 * :ref:`Identification <identification>`
+* :ref:`Validation <validation>`
 * :ref:`Format Policy tools <tools>`
 * :ref:`Format Policy commands <commands>`
 * :ref:`Format Policy rules <rules>`
@@ -322,12 +323,14 @@ Identification
 
 The identification tool properties in Archivematica control the ways in which
 Archivematica identifies files and associates them with the FPR's version
-records. The current version of the FPR server contains two tools: a script
+records. The current version of the FPR server contains three tools: a script
 based on the `Open Planets Foundation's <http://www.openplanetsfoundation.org/>`_
 `FIDO <https://github.com/openplanets/fido>`_ tool, which identifies based on
-the IDs in PRONOM, and a simple script which identifies files by their file
-extension. You can use the identification tools portion of FPR to customize
-the behaviour of the existing tools, or to write your own.
+the IDs in PRONOM, Richard Lehane's
+`Siegfried <http://www.itforarchivists.com/siegfried>`_ and a simple script
+which identifies files by their file extension. You can use the identification
+tools portion of FPR to customize the behaviour of the existing tools,
+or to write your own.
 
 **Identification Commands**
 
@@ -355,18 +358,15 @@ monitoring tool results. On failure, the tool should exit non-zero.
 
 **Identification Rules**
 
-These identification rules allow you to define the relationship between the
+Identification rules allow you to define the relationship between the
 output created by an identification tool, and one of the formats which exists
-in the FPR. This must be done for the format to be tracked internally by
-Archivematica, and for it to be used by normalization later on. For instance,
-if you created a FIDO configuration which returns MIME types, you could create
-a rule which associates the output "image/jpeg" with the "Generic JPEG" format
-in the FPR.
+in the FPR. This must be done **only for formats being identified by extension,**
+for the format to be tracked internally by Archivematica, and for it to be used
+by normalization later on.
 
-Identification rules are necessary only when a tool is configured to return
-file extensions or MIME types. Because PUIDs are universal, Archivematica will
-always look these up for you without requiring any rules to be created,
-regardless of what tool is being used.
+Both Fido and Siegfried identify files using their PUID. Because PUIDs are
+universal, Archivematica will always look these up for you without requiring
+any rules to be created, regardless of what tool is being used.
 
 When creating an identification rule, the following mandatory fields must be
 filled out:
@@ -378,6 +378,53 @@ filled out:
 
 * Output - The text which is written to standard output by the specified
   command, such as "image/jpeg"
+
+.. _validation:
+
+Validation
+----------
+
+**Validation tools**
+
+In Archivematica 1.6 and earlier, validation has been performed on some file
+formats by `JHOVE <http://openpreservation.org/technology/products/jhove/>`_. In
+Archivematica 1.7, `MediaConch <https://mediaarea.net/MediaConch/>`_ was
+introduced as a more media-specific validation tool, opening up the possibilities
+for more specialized tools in future releases.
+
+**Validation commands**
+
+The default FPR commands for validation include validation by JHOVE, validation
+by MediaConch, and validation by MediaConch against a policy. MediaConch
+introduces the possibility of validing files both against the format's
+published specification (in the case of MediaConch, Matroska format) as well
+as an internal policy used by the organization. The latter can be created by
+MediaConch for any file format which can be characterized by
+`MediaInfo <https://mediaarea.net/en/MediaInfo>`_ and then used as a command
+within Archivematica. The FPR has a placeholder policy command for users to
+reference. Policy checks can include a wide range of media characteristics,
+such as aspect ratio, channel information, duration, etc. If desired,
+policies can be created without installing MediaConch by using
+`MediaConch online <https://mediaarea.net/MediaConchOnline/>`_.
+
+**Validation rules**
+
+Most of the default FPR rules for validation enact the Validate using JHOVE
+command. Validation of mkv (Matroska) files by default uses MediaConch as
+of Archivematica 1.7.
+
+If creating MediaConch policies (see Validation commands, above) then users
+should create rules to envoke the policy checking command for the format to
+which the command applies.
+
+When validation rules exist, they are enacted in several micro-services:
+
+- in Transfer, in Validation micro-service (including Validate format job and
+Policy check for originals job)
+- in Ingest, in Normalize micro-service, Validate access derivatives and
+Validate preservation derivatives (as of Archivematica 1.7)
+- in Ingest, in Policy checks for derivatives micro-service (as of Archivematica
+1.7).
 
 .. _tools:
 
@@ -400,7 +447,7 @@ Archivematica uses the following kinds of format policy rules:
 * Event detail - Extracts information about a given tool in order to be inserted
   into a generated METS file.
 * Transcription
-* Verification - Validates a file produced by another command. For instance, a
+* Validation - Validates a file produced by another command. For instance, a
   tool could use Exiftool or JHOVE to determine whether a thumbnail produced by
   a normalization command was valid and well-formed.
 
