@@ -101,20 +101,19 @@ def get_event_outcome_information_detail(impl_checks):
       the passed check names; if it failed, just return the failed ones.
 
     """
-
     info = 'pass'
     failed_impl_checks = []
     passed_impl_checks = []
     for impl_check, checks in impl_checks.items():
-        passed_checks = []
-        failed_checks = []
+        passed_checks = set()
+        failed_checks = set()
         for check, outcomes in checks.items():
             for outcome in outcomes:
                 if outcome == 'pass':
-                    passed_checks.append(check)
+                    passed_checks.add(check)
                 else:
                     info = 'fail'
-                    failed_checks.append(check)
+                    failed_checks.add(check)
         if failed_checks:
             failed_impl_checks.append(
                 'The implementation check %s returned'
