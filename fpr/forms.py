@@ -107,7 +107,7 @@ class FPRuleForm(forms.ModelForm):
 
         # Show only active format versions in the format dropdown
         self.fields['format'].queryset = fprmodels.FormatVersion.active.all()
-        
+
     def clean(self):
         cleaned_data = super(FPRuleForm, self).clean()
         if self.instance.pk == None:
@@ -122,8 +122,23 @@ class FPRuleForm(forms.ModelForm):
                 command=submitted_command
             )
 
+            # If there is an existing matching rule, the error message should
+            # give its UUID so that the user can reasonably track it down.
             if existing_fprule != None:
-                raise forms.ValidationError('An indentifcal FP rule already exists')
+                msg = ('An identical FP rule already exists. See rule'
+                       ' {}.'.format(existing_fprule.uuid))
+                if not existing_fprule.enabled:
+                    replacers = fprmodels.FPRule.objects.filter(
+                        replaces=existing_fprule.uuid).all()
+                    if replacers:
+                        msg += (' Rule {} is disabled and has been replaced'
+                                ' by the following rule(s): {}'.format(
+                                    existing_fprule.uuid,
+                                    ', '.join([r.uuid for r in replacers])))
+                    else:
+                        msg += ' Rule {} is disabled.'.format(
+                            existing_fprule.uuid)
+                raise forms.ValidationError(msg)
 
         return cleaned_data    
 
