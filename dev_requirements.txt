@@ -1,0 +1,4 @@
+-r requirements.txt
+
+frozendict==1.2
+lxml==3.8.0
