@@ -1,16 +1,32 @@
+import codecs
 import os
+import re
+
 from setuptools import find_packages, setup
 
 
-with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
-    README = readme.read()
+def read(*parts):
+    path = os.path.join(os.path.dirname(__file__), *parts)
+    with codecs.open(path, encoding='utf-8') as fobj:
+        return fobj.read()
+
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
+
+README = read(os.path.join(os.path.dirname(__file__), 'README.md'))
 
 # Allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='archivematica-fpr-admin',
-    version='1.6.0',
+    version=find_version('fpr', '__init__.py'),
     packages=find_packages(exclude=['testproject']),
     include_package_data=True,
     license='AGPL',

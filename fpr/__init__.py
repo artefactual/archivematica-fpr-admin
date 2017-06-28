@@ -7,3 +7,5 @@
 .. moduleauthor:: Joseph Perry <joseph@artefactual.com>
 .. moduleauthor:: Justin Simpson <jsimpson@artefactual.com>
 """
+
+__version__ = '1.6.1'
