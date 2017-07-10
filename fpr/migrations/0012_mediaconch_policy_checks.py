@@ -83,7 +83,7 @@ def data_migration(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fpr', '0007_mediaconch_validation'),
+        ('fpr', '0011_mediaconch_validation'),
     ]
 
     FPRULE_CHOICES = [
