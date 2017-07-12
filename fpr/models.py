@@ -266,14 +266,13 @@ class FPRule(VersionedModel, models.Model):
     THUMBNAIL = 'thumbnail'
     TRANSCRIPTION = 'transcription'
     VALIDATION = 'validation'
+    POLICY = 'policy_check'
     DEFAULT_ACCESS = 'default_access'
     DEFAULT_CHARACTERIZATION = 'default_characterization'
     DEFAULT_THUMBNAIL = 'default_thumbnail'
-    USAGES = (
-        ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL,
-        TRANSCRIPTION, VALIDATION,
-        DEFAULT_ACCESS, DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL
-    )
+    USAGES = (ACCESS, CHARACTERIZATION, EXTRACTION, PRESERVATION, THUMBNAIL,
+              TRANSCRIPTION, VALIDATION, POLICY, DEFAULT_ACCESS,
+              DEFAULT_CHARACTERIZATION, DEFAULT_THUMBNAIL)
     DISPLAY_CHOICES = (
         (ACCESS, _('Access')),
         (CHARACTERIZATION, _('Characterization')),
@@ -282,6 +281,7 @@ class FPRule(VersionedModel, models.Model):
         (THUMBNAIL, _('Thumbnail')),
         (TRANSCRIPTION, _('Transcription')),
         (VALIDATION, _('Validation')),
+        (POLICY, _('Validation against a policy')),
     )
     HIDDEN_CHOICES = (
         (DEFAULT_ACCESS, _('Default access')),
@@ -294,6 +294,7 @@ class FPRule(VersionedModel, models.Model):
         'normalization': (DEFAULT_ACCESS, ACCESS, PRESERVATION, THUMBNAIL),
         'characterization': (CHARACTERIZATION, DEFAULT_CHARACTERIZATION),
         'extraction': (EXTRACTION,),
+        'validation': (VALIDATION, POLICY)
     }
     PURPOSE_CHOICES = DISPLAY_CHOICES + HIDDEN_CHOICES
     purpose = models.CharField(_('purpose'), max_length=32, choices=PURPOSE_CHOICES)
