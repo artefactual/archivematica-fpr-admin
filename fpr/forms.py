@@ -130,19 +130,19 @@ class FPRuleForm(forms.ModelForm):
             if existing_fprule != None:
                 ex_fpr_uuid = existing_fprule.uuid
                 msg = _('An identical FP rule already exists. See rule'
-                        ' %(uuid).') % {'uuid': ex_fpr_uuid}
+                        ' %(uuid)s.') % {'uuid': ex_fpr_uuid}
                 if not existing_fprule.enabled:
                     replacers = fprmodels.FPRule.objects.filter(
                         replaces=existing_fprule.uuid).all()
                     if replacers:
-                        msg += _(' Rule %(uuid) is disabled and has been'
+                        msg += _(' Rule %(uuid)s is disabled and has been'
                                  ' replaced by the following rule(s):'
-                                 ' %(repl_uuids)') % {
+                                 ' %(repl_uuids)s') % {
                                      'uuid': ex_fpr_uuid,
                                      'repl_uuids': ', '.join([r.uuid for r in
                                                               replacers])}
                     else:
-                        msg += _(' Rule %(uuid) is disabled.') % {
+                        msg += _(' Rule %(uuid)s is disabled.') % {
                             'uuid': ex_fpr_uuid}
                 raise forms.ValidationError(msg)
         return cleaned_data
