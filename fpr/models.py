@@ -124,7 +124,7 @@ class FormatVersion(VersionedModel, models.Model):
 
             if qs.exists():
                 raise ValidationError({
-                    NON_FIELD_ERRORS: tuple(_('Unable to save, an active Format Version  with this pronom id already exists.'))
+                    NON_FIELD_ERRORS: [_('Unable to save, an active Format Version  with this pronom id already exists.')]
                 })
 
     def __unicode__(self):
@@ -218,7 +218,7 @@ class IDRule(VersionedModel, models.Model):
 
         if qs.exists():
             raise ValidationError({
-                NON_FIELD_ERRORS: tuple(_('Unable to save, a rule with this output already exists for this command.'))
+                NON_FIELD_ERRORS: [_('Unable to save, a rule with this output already exists for this command.')]
             })
 
     def __unicode__(self):
