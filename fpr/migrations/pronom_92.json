@@ -1,93 +1,12 @@
 [
     {
         "fields": {
-            "slug": "wordperfect-graphics-metafile",
-            "group": "fdf9e267-a18c-46a4-a162-b81bcba6322f",
-            "uuid": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "description": "WordPerfect Graphics Metafile"
-        },
-        "model": "fpr.format",
-        "pk": 342
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-stop-list",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "d4bfbd9b-15fc-4992-98cb-7cea13879307",
-            "description": "Verity Collection Stop List"
-        },
-        "model": "fpr.format",
-        "pk": 535
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-index-about-file",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "204309aa-fd1a-47a3-9759-cc5dd5e5a5cc",
-            "description": "Verity Collection Index About File"
-        },
-        "model": "fpr.format",
-        "pk": 536
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-index-pending-transaction-file",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "51cc4e02-c7ef-404e-b8e7-025f60f3efea",
-            "description": "Verity Collection Index Pending Transaction File"
-        },
-        "model": "fpr.format",
-        "pk": 537
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-document-dataset-descriptor-styl",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "082c3b92-4940-4b77-8df2-d04be20f3a9b",
-            "description": "Verity Collection Document Dataset Descriptor Style Set"
-        },
-        "model": "fpr.format",
-        "pk": 539
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-document-index-descriptor-style-",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "996b0720-d6a5-47b5-acaa-3acab09e0a5c",
-            "description": "Verity Collection Document Index Descriptor Style Set"
-        },
-        "model": "fpr.format",
-        "pk": 540
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-partition-definition-descriptor-",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "651911e6-0ff3-40a4-ad37-ec5149367c6e",
-            "description": "Verity Collection Partition Definition Descriptor Style Set"
-        },
-        "model": "fpr.format",
-        "pk": 542
-    },
-    {
-        "fields": {
-            "slug": "verity-collection-index-descriptor-file",
-            "group": "57361413-1c3b-405d-a9c0-7d3ea381090e",
-            "uuid": "20e28493-e0d2-4413-b431-6626f14c3763",
-            "description": "Verity Collection Index Descriptor File"
-        },
-        "model": "fpr.format",
-        "pk": 543
-    },
-    {
-        "fields": {
             "slug": "hdf",
             "group": "9c183a8f-89b7-47cc-a6ba-4ed038cf63d5",
             "uuid": "047edfb6-f85e-41d6-9d0f-8b48aa92d7e4",
             "description": "HDF"
         },
-        "model": "fpr.format",
-        "pk": 1173
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -96,8 +15,7 @@
             "uuid": "fe82092a-2d87-4e3a-b4d6-02fa394a261a",
             "description": "Microsoft PRX File"
         },
-        "model": "fpr.format",
-        "pk": 1174
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -106,8 +24,7 @@
             "uuid": "9a21e188-c69c-48df-ab83-2698d0c865c5",
             "description": "AutoShade Rendering Slide"
         },
-        "model": "fpr.format",
-        "pk": 1175
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -116,8 +33,7 @@
             "uuid": "5c45da5f-3e87-4edd-99bf-1d7a2778d2d8",
             "description": "Q&A Word Processor Document"
         },
-        "model": "fpr.format",
-        "pk": 1176
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -126,8 +42,7 @@
             "uuid": "3519dd00-481a-4b8d-90b1-6defe365ac33",
             "description": "Draco File Format"
         },
-        "model": "fpr.format",
-        "pk": 1177
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -136,8 +51,7 @@
             "uuid": "949ca049-a6f7-4190-9b7a-49727e8d09cd",
             "description": "OGR GFS File"
         },
-        "model": "fpr.format",
-        "pk": 1178
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -146,8 +60,7 @@
             "uuid": "bbbe0611-0c38-4567-9bcf-30cb746bde84",
             "description": "QuickDraw 3D Metafile (ASCII)"
         },
-        "model": "fpr.format",
-        "pk": 1179
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -156,8 +69,7 @@
             "uuid": "8878c629-2c22-44a0-ab2e-03c4addaf178",
             "description": "QuickDraw 3D Metafile (Binary)"
         },
-        "model": "fpr.format",
-        "pk": 1180
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -166,8 +78,7 @@
             "uuid": "30dd63f1-9974-42c2-8e22-1bc3d782360a",
             "description": "Windows Journal Format"
         },
-        "model": "fpr.format",
-        "pk": 1181
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -176,8 +87,7 @@
             "uuid": "57809984-fdd4-4b8a-a45f-8b12d4016a93",
             "description": "BKNAS Seismic Data Format"
         },
-        "model": "fpr.format",
-        "pk": 1182
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -186,8 +96,7 @@
             "uuid": "6d66819a-6ad7-4f6e-a96d-95d319bf038a",
             "description": "Adobe Audio Waveform"
         },
-        "model": "fpr.format",
-        "pk": 1183
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -196,8 +105,7 @@
             "uuid": "c45fc923-2743-41ad-8fb1-703533ee04fa",
             "description": "AVCHD Clip Information File"
         },
-        "model": "fpr.format",
-        "pk": 1184
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -206,8 +114,7 @@
             "uuid": "9d2f5dcd-ccc3-4e54-b9eb-38682b3d29d7",
             "description": "M2TS"
         },
-        "model": "fpr.format",
-        "pk": 1185
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -216,8 +123,7 @@
             "uuid": "94a005c2-8437-4d9f-adb3-c65d7b968a66",
             "description": "SNAP Main Data File"
         },
-        "model": "fpr.format",
-        "pk": 1186
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -226,8 +132,7 @@
             "uuid": "374cffbe-7bc8-4fc7-b96b-68b53b422651",
             "description": "SNAP Archive Data File"
         },
-        "model": "fpr.format",
-        "pk": 1187
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -236,8 +141,7 @@
             "uuid": "a960c6dc-8959-4de9-b14d-92eb540dd963",
             "description": "SNAP Processed Data File"
         },
-        "model": "fpr.format",
-        "pk": 1188
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -246,8 +150,7 @@
             "uuid": "35692ae4-ae93-41dd-82d9-476b8e38dd49",
             "description": "Phase One Raw Image"
         },
-        "model": "fpr.format",
-        "pk": 1189
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -256,8 +159,7 @@
             "uuid": "53cd1ce7-610e-4b2e-89c2-4a42c302fc20",
             "description": "Phase One IIQ Raw Image"
         },
-        "model": "fpr.format",
-        "pk": 1190
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -266,8 +168,7 @@
             "uuid": "757a61e0-b82d-4a24-b765-36f6dcd01cda",
             "description": "Hasselblad 3FR Raw Image"
         },
-        "model": "fpr.format",
-        "pk": 1191
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -276,8 +177,7 @@
             "uuid": "9c6e2f60-6ed1-442c-9a2b-befed38ea22b",
             "description": "Leaf Mosaic Raw Image"
         },
-        "model": "fpr.format",
-        "pk": 1192
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -286,8 +186,7 @@
             "uuid": "58393f57-f266-4ba5-83ab-8f1d0fe3f2a7",
             "description": "Portable Database"
         },
-        "model": "fpr.format",
-        "pk": 1193
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -296,8 +195,7 @@
             "uuid": "a6d8f765-9fe0-4ea9-ab1c-b6eee4894573",
             "description": "Silo"
         },
-        "model": "fpr.format",
-        "pk": 1194
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -306,8 +204,7 @@
             "uuid": "1d1cc0ba-0624-44a7-be2e-bd0e343be84c",
             "description": "Cue Sheet"
         },
-        "model": "fpr.format",
-        "pk": 1195
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -316,8 +213,7 @@
             "uuid": "38f38ac3-c985-4864-974d-0ed239ec3fc6",
             "description": "Preferred Executable Format"
         },
-        "model": "fpr.format",
-        "pk": 1196
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -326,8 +222,7 @@
             "uuid": "335e1b35-ecb2-44a7-8ed1-dd0acf329673",
             "description": "Apple Disk Image"
         },
-        "model": "fpr.format",
-        "pk": 1197
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -336,8 +231,7 @@
             "uuid": "545dac6f-60cc-4325-b161-b5c49fb9d22d",
             "description": "Google Document Link File"
         },
-        "model": "fpr.format",
-        "pk": 1198
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -346,8 +240,7 @@
             "uuid": "a92cb474-bc96-46f8-9a9f-076d1c59e96c",
             "description": "AVCHD Playlist File"
         },
-        "model": "fpr.format",
-        "pk": 1199
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -356,8 +249,7 @@
             "uuid": "8bf48c82-0970-488a-88de-f4aa7cfee94e",
             "description": "AVCHD Movie Object File"
         },
-        "model": "fpr.format",
-        "pk": 1200
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -366,8 +258,7 @@
             "uuid": "e6377fa8-eb0c-41f7-85e9-d8eda731e717",
             "description": "AVCHD Index File"
         },
-        "model": "fpr.format",
-        "pk": 1201
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -376,8 +267,7 @@
             "uuid": "e0e6764c-616e-44da-9a5e-a5162c1eb641",
             "description": "AVCHD Thumbnail Index File"
         },
-        "model": "fpr.format",
-        "pk": 1202
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -386,8 +276,7 @@
             "uuid": "233ea0bf-4b04-4cbc-b3d4-fd9b37504de8",
             "description": "Microsoft Program Database"
         },
-        "model": "fpr.format",
-        "pk": 1203
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -396,8 +285,7 @@
             "uuid": "1537816a-27d6-4571-80f0-60cbf554b911",
             "description": "ASP Application Directive File"
         },
-        "model": "fpr.format",
-        "pk": 1204
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -406,8 +294,7 @@
             "uuid": "cc36487f-a23d-4cbb-af02-205a6a2cfe47",
             "description": "ASP Control Directive File"
         },
-        "model": "fpr.format",
-        "pk": 1205
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -416,8 +303,7 @@
             "uuid": "71748eca-75e8-4810-8b74-b5949692bba7",
             "description": "ASP WebService Directive File"
         },
-        "model": "fpr.format",
-        "pk": 1206
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -426,8 +312,7 @@
             "uuid": "1a91d8c5-7bfb-47b1-9e4c-8dd934f33cda",
             "description": "Hangul Word Processor Document"
         },
-        "model": "fpr.format",
-        "pk": 1207
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -436,8 +321,7 @@
             "uuid": "6f792e7f-0e96-4d87-9588-85e14fd4d25e",
             "description": "TRIM Context Reference File"
         },
-        "model": "fpr.format",
-        "pk": 1208
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -446,8 +330,7 @@
             "uuid": "cebeecd6-ce04-46c3-af92-43e3a4d08ca2",
             "description": "Monkey's Audio File"
         },
-        "model": "fpr.format",
-        "pk": 1209
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -456,8 +339,7 @@
             "uuid": "576a0e0b-a01f-4bec-bd28-8b21105fe07b",
             "description": "FAT Disk Image"
         },
-        "model": "fpr.format",
-        "pk": 1210
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -466,8 +348,7 @@
             "uuid": "dfe40dbb-5a58-45c3-bc5a-f5533161e1f9",
             "description": "Visual Basic (VB) File"
         },
-        "model": "fpr.format",
-        "pk": 1211
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -476,8 +357,7 @@
             "uuid": "7362fe48-3f60-4185-82b6-ea28de54f6d2",
             "description": "VBScript (VBS) File"
         },
-        "model": "fpr.format",
-        "pk": 1212
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -486,8 +366,7 @@
             "uuid": "3be95ba5-581f-4002-924b-18b502e2a5f1",
             "description": "Exclude File"
         },
-        "model": "fpr.format",
-        "pk": 1213
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -496,8 +375,7 @@
             "uuid": "cfc197b4-c039-4ea3-9fc2-d7cdbaa53140",
             "description": "Scribus Document"
         },
-        "model": "fpr.format",
-        "pk": 1214
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -506,8 +384,7 @@
             "uuid": "e86fab63-2d29-4035-a11f-1f5b9aaaf5a9",
             "description": "Alias Pix Image File"
         },
-        "model": "fpr.format",
-        "pk": 1215
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -516,8 +393,7 @@
             "uuid": "cb51a1dc-3fd7-4ebe-90b1-e1bbecca7ee7",
             "description": "Alias Scene Description Language"
         },
-        "model": "fpr.format",
-        "pk": 1216
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -526,8 +402,7 @@
             "uuid": "42b7510a-e4af-4a76-8702-d3eb9910e8dd",
             "description": "The Neuroimaging Informatics Technology Initiative File Format"
         },
-        "model": "fpr.format",
-        "pk": 1217
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -536,8 +411,7 @@
             "uuid": "f18c7e97-f753-404a-9669-266193f82d0d",
             "description": "PEA Archive Format"
         },
-        "model": "fpr.format",
-        "pk": 1218
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -546,8 +420,7 @@
             "uuid": "c6f71d37-39a3-4112-a0bd-4e19eeda8cdd",
             "description": "FreeArc Archive Format"
         },
-        "model": "fpr.format",
-        "pk": 1219
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -556,8 +429,7 @@
             "uuid": "39d287c8-f55e-4a41-8f5c-c48452cc1d9b",
             "description": "ZPAQ Archive Format"
         },
-        "model": "fpr.format",
-        "pk": 1220
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -566,8 +438,7 @@
             "uuid": "47628c18-73ab-4086-9c87-d1e0b107f80f",
             "description": "TCR eBook"
         },
-        "model": "fpr.format",
-        "pk": 1221
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -576,8 +447,7 @@
             "uuid": "5f1ab6e3-33ff-43da-a491-45cd83fff57a",
             "description": "XZ File Format"
         },
-        "model": "fpr.format",
-        "pk": 1222
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -586,25 +456,7 @@
             "uuid": "ff257a80-d2ae-49e0-8a69-1bb3544e46ec",
             "description": "yEnc Encoded File"
         },
-        "model": "fpr.format",
-        "pk": 1223
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "e2534186-ed8d-4da1-9639-2a80028a2469",
-            "format": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "lastmodified": "2014-07-10T00:01:13Z",
-            "enabled": false,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "1.0",
-            "slug": "wordperfect-graphics-2",
-            "pronom_id": "x-fmt/395",
-            "description": "WordPerfect Graphics "
-        },
-        "model": "fpr.formatversion",
-        "pk": 675
+        "model": "fpr.format"
     },
     {
         "fields": {
@@ -620,8 +472,7 @@
             "pronom_id": "fmt/1041",
             "description": "HDF 1-4"
         },
-        "model": "fpr.formatversion",
-        "pk": 1553
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -637,8 +488,7 @@
             "pronom_id": "fmt/1042",
             "description": "WordPerfect Graphics 2.0"
         },
-        "model": "fpr.formatversion",
-        "pk": 1554
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -654,8 +504,7 @@
             "pronom_id": "fmt/1043",
             "description": "Microsoft PRX"
         },
-        "model": "fpr.formatversion",
-        "pk": 1555
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -671,8 +520,7 @@
             "pronom_id": "fmt/1044",
             "description": "AutoShade RND"
         },
-        "model": "fpr.formatversion",
-        "pk": 1556
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -688,8 +536,7 @@
             "pronom_id": "fmt/1045",
             "description": "Q&A Write Word Processor (WP)"
         },
-        "model": "fpr.formatversion",
-        "pk": 1557
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -705,8 +552,7 @@
             "pronom_id": "fmt/1046",
             "description": "Draco"
         },
-        "model": "fpr.formatversion",
-        "pk": 1558
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -722,8 +568,7 @@
             "pronom_id": "fmt/1047",
             "description": "Geography Markup Language 3.2"
         },
-        "model": "fpr.formatversion",
-        "pk": 1559
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -739,8 +584,7 @@
             "pronom_id": "fmt/1048",
             "description": "OGR GFS File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1560
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -756,8 +600,7 @@
             "pronom_id": "fmt/1049",
             "description": "3DMF ASCII"
         },
-        "model": "fpr.formatversion",
-        "pk": 1561
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -773,8 +616,7 @@
             "pronom_id": "fmt/1050",
             "description": "3DMF Binary"
         },
-        "model": "fpr.formatversion",
-        "pk": 1562
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -790,8 +632,7 @@
             "pronom_id": "fmt/1051",
             "description": "Windows Journal"
         },
-        "model": "fpr.formatversion",
-        "pk": 1563
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -807,8 +648,7 @@
             "pronom_id": "fmt/1052",
             "description": "BKNAS"
         },
-        "model": "fpr.formatversion",
-        "pk": 1564
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -824,8 +664,7 @@
             "pronom_id": "fmt/1053",
             "description": "Adobe .pek"
         },
-        "model": "fpr.formatversion",
-        "pk": 1565
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -841,8 +680,7 @@
             "pronom_id": "fmt/1054",
             "description": "AVCHD Clip Information File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1566
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -858,8 +696,7 @@
             "pronom_id": "fmt/1055",
             "description": "M2TS"
         },
-        "model": "fpr.formatversion",
-        "pk": 1567
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -875,8 +712,7 @@
             "pronom_id": "fmt/1056",
             "description": "SNAP Main data file"
         },
-        "model": "fpr.formatversion",
-        "pk": 1568
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -892,8 +728,7 @@
             "pronom_id": "fmt/1057",
             "description": "SNAP Archive data file"
         },
-        "model": "fpr.formatversion",
-        "pk": 1569
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -909,8 +744,7 @@
             "pronom_id": "fmt/1058",
             "description": "SNAP Processed data file"
         },
-        "model": "fpr.formatversion",
-        "pk": 1570
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -926,8 +760,7 @@
             "pronom_id": "fmt/1059",
             "description": "FileMaker Pro 2"
         },
-        "model": "fpr.formatversion",
-        "pk": 1571
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -943,8 +776,7 @@
             "pronom_id": "fmt/1060",
             "description": "Phase One Raw big endian"
         },
-        "model": "fpr.formatversion",
-        "pk": 1572
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -960,8 +792,7 @@
             "pronom_id": "fmt/1061",
             "description": "Phase One IIQ Raw"
         },
-        "model": "fpr.formatversion",
-        "pk": 1573
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -977,8 +808,7 @@
             "pronom_id": "fmt/1062",
             "description": "Hasselblad 3FR"
         },
-        "model": "fpr.formatversion",
-        "pk": 1574
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -994,8 +824,7 @@
             "pronom_id": "fmt/1063",
             "description": "Leaf Mosaic Raw"
         },
-        "model": "fpr.formatversion",
-        "pk": 1575
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1011,8 +840,7 @@
             "pronom_id": "fmt/1064",
             "description": "Portable Database 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1576
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1028,8 +856,7 @@
             "pronom_id": "fmt/1065",
             "description": "Portable Database 2"
         },
-        "model": "fpr.formatversion",
-        "pk": 1577
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1045,8 +872,7 @@
             "pronom_id": "fmt/1066",
             "description": "Portable Database 3"
         },
-        "model": "fpr.formatversion",
-        "pk": 1578
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1062,8 +888,7 @@
             "pronom_id": "fmt/1067",
             "description": "SILO PDB 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1579
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1079,8 +904,7 @@
             "pronom_id": "fmt/1068",
             "description": "SILO HDF5"
         },
-        "model": "fpr.formatversion",
-        "pk": 1580
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1096,8 +920,7 @@
             "pronom_id": "fmt/1069",
             "description": "CUE Sheet"
         },
-        "model": "fpr.formatversion",
-        "pk": 1581
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1113,8 +936,7 @@
             "pronom_id": "fmt/1070",
             "description": "Preferred Executable Format"
         },
-        "model": "fpr.formatversion",
-        "pk": 1582
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1130,8 +952,7 @@
             "pronom_id": "fmt/1071",
             "description": "Apple Disk Image"
         },
-        "model": "fpr.formatversion",
-        "pk": 1583
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1147,8 +968,7 @@
             "pronom_id": "fmt/1072",
             "description": "FileMaker Pro 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1584
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1164,8 +984,7 @@
             "pronom_id": "fmt/1073",
             "description": "Google Document Link File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1585
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1181,8 +1000,7 @@
             "pronom_id": "fmt/1074",
             "description": "AVCHD Playlist File 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1586
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1198,8 +1016,7 @@
             "pronom_id": "fmt/1075",
             "description": "AVCHD Movie Object File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1587
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1215,8 +1032,7 @@
             "pronom_id": "fmt/1076",
             "description": "AVCHD Index File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1588
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1232,8 +1048,7 @@
             "pronom_id": "fmt/1077",
             "description": "AVCHD Thumbnail Index File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1589
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1249,8 +1064,7 @@
             "pronom_id": "fmt/1078",
             "description": "Microsoft PDB 2.00"
         },
-        "model": "fpr.formatversion",
-        "pk": 1590
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1266,8 +1080,7 @@
             "pronom_id": "fmt/1079",
             "description": "Microsoft PDB 7.00"
         },
-        "model": "fpr.formatversion",
-        "pk": 1591
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1283,8 +1096,7 @@
             "pronom_id": "fmt/1080",
             "description": "ASP Application Directive"
         },
-        "model": "fpr.formatversion",
-        "pk": 1592
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1300,8 +1112,7 @@
             "pronom_id": "fmt/1081",
             "description": "ASP Control Directive"
         },
-        "model": "fpr.formatversion",
-        "pk": 1593
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1317,8 +1128,7 @@
             "pronom_id": "fmt/1082",
             "description": "ASP WebService Directive"
         },
-        "model": "fpr.formatversion",
-        "pk": 1594
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1334,8 +1144,7 @@
             "pronom_id": "fmt/1083",
             "description": "HWP 3"
         },
-        "model": "fpr.formatversion",
-        "pk": 1595
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1351,8 +1160,7 @@
             "pronom_id": "fmt/1084",
             "description": "Hangul Word Processor Document"
         },
-        "model": "fpr.formatversion",
-        "pk": 1596
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1368,8 +1176,7 @@
             "pronom_id": "fmt/1085",
             "description": "TRIM Context Reference File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1597
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1385,8 +1192,7 @@
             "pronom_id": "fmt/1086",
             "description": "Monkey's Audio variant 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1598
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1402,8 +1208,7 @@
             "pronom_id": "fmt/1087",
             "description": "FAT Disk Image"
         },
-        "model": "fpr.formatversion",
-        "pk": 1599
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1419,8 +1224,7 @@
             "pronom_id": "fmt/1088",
             "description": "Visual Basic (VB) File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1600
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1436,8 +1240,7 @@
             "pronom_id": "fmt/1089",
             "description": "VBScript (VBS) File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1601
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1453,8 +1256,7 @@
             "pronom_id": "fmt/1090",
             "description": "Exclude File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1602
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1470,8 +1272,7 @@
             "pronom_id": "fmt/1091",
             "description": "Scribus"
         },
-        "model": "fpr.formatversion",
-        "pk": 1603
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1487,8 +1288,7 @@
             "pronom_id": "fmt/1092",
             "description": "Alias Pix Image"
         },
-        "model": "fpr.formatversion",
-        "pk": 1604
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1504,8 +1304,7 @@
             "pronom_id": "fmt/1093",
             "description": "Alias Scene Description Language"
         },
-        "model": "fpr.formatversion",
-        "pk": 1605
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1521,8 +1320,7 @@
             "pronom_id": "fmt/1094",
             "description": "The Neuroimaging Informatics Technology Initiative File Format V2 variant1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1606
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1538,8 +1336,7 @@
             "pronom_id": "fmt/1095",
             "description": "PEA Archive"
         },
-        "model": "fpr.formatversion",
-        "pk": 1607
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1555,8 +1352,7 @@
             "pronom_id": "fmt/1096",
             "description": "FreeArc Archive Format"
         },
-        "model": "fpr.formatversion",
-        "pk": 1608
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1572,8 +1368,7 @@
             "pronom_id": "fmt/1097",
             "description": "ZPAQ Archive Format variant 1"
         },
-        "model": "fpr.formatversion",
-        "pk": 1609
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1589,8 +1384,7 @@
             "pronom_id": "fmt/1099",
             "description": "TCR eBook"
         },
-        "model": "fpr.formatversion",
-        "pk": 1610
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1606,8 +1400,7 @@
             "pronom_id": "fmt/1098",
             "description": "XZ File Format"
         },
-        "model": "fpr.formatversion",
-        "pk": 1611
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1623,8 +1416,7 @@
             "pronom_id": "fmt/1100",
             "description": "yEnc File"
         },
-        "model": "fpr.formatversion",
-        "pk": 1612
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1640,8 +1432,7 @@
             "pronom_id": "fmt/1042",
             "description": "WordPerfect Graphics"
         },
-        "model": "fpr.formatversion",
-        "pk": 1613
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1657,8 +1448,7 @@
             "pronom_id": "x-fmt/395",
             "description": "WordPerfect Graphics Metafile "
         },
-        "model": "fpr.formatversion",
-        "pk": 1614
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1674,8 +1464,7 @@
             "pronom_id": "fmt/1042",
             "description": "WordPerfect Graphics Metafile"
         },
-        "model": "fpr.formatversion",
-        "pk": 1615
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1691,8 +1480,7 @@
             "pronom_id": "fmt/1083",
             "description": "Hangul Word Processor Document"
         },
-        "model": "fpr.formatversion",
-        "pk": 1616
+        "model": "fpr.formatversion"
     },
     {
         "fields": {
@@ -1707,8 +1495,7 @@
             "purpose": "access",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 837
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1723,8 +1510,7 @@
             "purpose": "preservation",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 838
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1739,8 +1525,7 @@
             "purpose": "thumbnail",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 839
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1755,8 +1540,7 @@
             "purpose": "access",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 840
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1771,8 +1555,7 @@
             "purpose": "preservation",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 841
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1787,8 +1570,7 @@
             "purpose": "thumbnail",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 842
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1803,8 +1585,7 @@
             "purpose": "access",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 843
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1819,8 +1600,7 @@
             "purpose": "preservation",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 844
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1835,8 +1615,7 @@
             "purpose": "thumbnail",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 845
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1851,8 +1630,7 @@
             "purpose": "access",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 846
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1867,8 +1645,7 @@
             "purpose": "preservation",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 847
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1883,8 +1660,7 @@
             "purpose": "thumbnail",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 848
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1899,8 +1675,7 @@
             "purpose": "extract",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 849
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1915,8 +1690,7 @@
             "purpose": "extract",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 850
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1931,8 +1705,7 @@
             "purpose": "characterization",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 851
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1947,8 +1720,7 @@
             "purpose": "characterization",
             "count_okay": 0
         },
-        "model": "fpr.fprule",
-        "pk": 852
+        "model": "fpr.fprule"
     },
     {
         "fields": {
@@ -1960,8 +1732,7 @@
             "command_output": ".hdf",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 807
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -1973,8 +1744,7 @@
             "command_output": ".prx",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 808
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -1986,8 +1756,7 @@
             "command_output": ".rnd",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 809
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -1999,8 +1768,7 @@
             "command_output": ".drc",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 810
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2012,8 +1780,7 @@
             "command_output": ".gfs",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 811
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2025,8 +1792,7 @@
             "command_output": ".jnt",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 813
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2038,8 +1804,7 @@
             "command_output": ".bknas",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 814
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2051,8 +1816,7 @@
             "command_output": ".pek",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 815
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2064,8 +1828,7 @@
             "command_output": ".mts",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 816
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2077,8 +1840,7 @@
             "command_output": ".mdf",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 817
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2090,8 +1852,7 @@
             "command_output": ".snpdf",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 818
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2103,8 +1864,7 @@
             "command_output": ".iiq",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 819
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2116,8 +1876,7 @@
             "command_output": ".mos",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 820
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2129,8 +1888,7 @@
             "command_output": ".cue",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 823
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2142,8 +1900,7 @@
             "command_output": ".gslides",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 824
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2155,8 +1912,7 @@
             "command_output": ".mpl",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 825
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2168,8 +1924,7 @@
             "command_output": ".tid",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 827
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2181,8 +1936,7 @@
             "command_output": ".asax",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 829
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2194,8 +1948,7 @@
             "command_output": ".ascx",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 830
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2207,8 +1960,7 @@
             "command_output": ".asmx",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 831
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2220,8 +1972,7 @@
             "command_output": ".tr5",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 833
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2233,8 +1984,7 @@
             "command_output": ".ape",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 834
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2246,8 +1996,7 @@
             "command_output": ".vb",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 835
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2259,8 +2008,7 @@
             "command_output": ".vbs",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 836
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2272,8 +2020,7 @@
             "command_output": ".exclude",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 837
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2285,8 +2032,7 @@
             "command_output": ".sla",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 838
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2298,8 +2044,7 @@
             "command_output": ".sdl",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 839
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2311,8 +2056,7 @@
             "command_output": ".nii",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 840
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2324,8 +2068,7 @@
             "command_output": ".pea",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 841
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2337,8 +2080,7 @@
             "command_output": ".zpaq",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 842
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2350,8 +2092,7 @@
             "command_output": ".tcr",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 843
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2363,8 +2104,7 @@
             "command_output": ".xz",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 844
+        "model": "fpr.idrule"
     },
     {
         "fields": {
@@ -2376,7 +2116,6 @@
             "command_output": ".yenc",
             "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
         },
-        "model": "fpr.idrule",
-        "pk": 845
+        "model": "fpr.idrule"
     }
 ]
