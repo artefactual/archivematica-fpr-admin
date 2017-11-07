@@ -1,0 +1,18 @@
+---
+language: python
+sudo: false
+script:
+
+
+  # Test if there are migrations that need to be created
+  - |
+      set -o errexit
+      set -o pipefail
+      testproject/manage.py makemigrations
+      ! git status --porcelain fpr/migrations/ 2>/dev/null | grep "^??"
+
+  # Test that we can migrate an empty database
+  - testproject/manage.py migrate
+
+notifications:
+  email: false
