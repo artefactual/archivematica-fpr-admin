@@ -12,9 +12,9 @@ def data_migration(apps, schema_editor):
     transfer. See
     https://github.com/artefactual/archivematica-fpr-admin/issues/66
     """
-    IDCommand = apps.get_model('fpr', 'IDCommand')
-    ocr_command = IDCommand.objects.get(
-        uuid='5d501dbf-76bb-4569-a9db-9e367800995e')
+    FPCommand = apps.get_model('fpr', 'FPCommand')
+    ocr_command = FPCommand.objects.get(
+        uuid='4ea06c2b-ee42-4f80-ad10-4e044ba0676a')
     ocr_command.command = (
         'ocrfiles="%SIPObjectsDirectory%metadata/OCRfiles"\n'
         'test -d "$ocrfiles" || mkdir -p "$ocrfiles"\n\n'
