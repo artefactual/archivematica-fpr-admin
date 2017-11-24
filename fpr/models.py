@@ -251,7 +251,9 @@ class IDTool(models.Model):
 
     def _slug(self):
         """ Returns string to be slugified. """
-        return "{} {}".format(self.description, self.version)
+        src = '{} {}'.format(self.description, self.version)
+        encoded = src.encode('utf-8')[:self._meta.get_field('slug').max_length]
+        return encoded.decode('utf-8', 'ignore')
 
 
 # ########### NORMALIZATION ############
@@ -389,7 +391,9 @@ class FPTool(models.Model):
 
     def _slug(self):
         """ Returns string to be slugified. """
-        return "{} {}".format(self.description, self.version)
+        src = '{} {}'.format(self.description, self.version)
+        encoded = src.encode('utf-8')[:self._meta.get_field('slug').max_length]
+        return encoded.decode('utf-8', 'ignore')
 
 
 # ########################### API V1 & V2 MODELS #############################
