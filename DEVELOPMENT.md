@@ -7,8 +7,8 @@ Download the sources:
 
 Create the virtual environment and install the requirements:
 
-    $ virtualenv env
-    $ source env/bin/activate
+    $ virtualenv .env
+    $ source .env/bin/activate
     $ pip install -r requirements.txt
 
 Bootstrap database:
