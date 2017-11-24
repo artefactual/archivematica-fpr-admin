@@ -397,7 +397,7 @@
     },
     {
         "fields": {
-            "slug": "the-neuroimaging-informatics-technology-initiative-2",
+            "slug": "the-neuroimaging-informatics-technology-init-2",
             "group": "9c183a8f-89b7-47cc-a6ba-4ed038cf63d5",
             "uuid": "42b7510a-e4af-4a76-8702-d3eb9910e8dd",
             "description": "The Neuroimaging Informatics Technology Initiative File Format"
@@ -1316,7 +1316,7 @@
             "access_format": false,
             "preservation_format": false,
             "version": "2",
-            "slug": "the-neuroimaging-informatics-technology-initiative-2",
+            "slug": "the-neuroimaging-informatics-technology-init-2",
             "pronom_id": "fmt/1094",
             "description": "The Neuroimaging Informatics Technology Initiative File Format V2 variant1"
         },
