@@ -1,18 +1,23 @@
 ---
-language: python
+
 sudo: false
-script:
 
+language: python
 
-  # Test if there are migrations that need to be created
-  - |
-      set -o errexit
-      set -o pipefail
-      testproject/manage.py makemigrations
-      ! git status --porcelain fpr/migrations/ 2>/dev/null | grep "^??"
+jobs:
+  include:
 
-  # Test that we can migrate an empty database
-  - testproject/manage.py migrate
+    - stage: Migration test with SQLite
+      env: "DATABASE_URL=sqlite:////home/travis/build/artefactual/archivematica-fpr-admin/testproject/db.sqlite3"
+      install: pip install -r dev_requirements.txt
+      script: ./scripts/test-migrations.sh
+
+    - stage: Migration test with MySQL
+      env: "DATABASE_URL=mysql://root@127.0.0.1/fpr"
+      services: mysql
+      before_install: "mysql -e 'CREATE DATABASE fpr;'"
+      install: pip install -r dev_requirements.txt
+      script: ./scripts/test-migrations.sh
 
 notifications:
   email: false
