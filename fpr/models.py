@@ -70,7 +70,7 @@ class Format(models.Model):
     uuid = UUIDField(editable=False, unique=True, version=4, help_text=_("Unique identifier"))
     description = models.CharField(_('description'), max_length=128, help_text=_("Common name of format"))
     group = models.ForeignKey('FormatGroup', to_field='uuid', null=True, verbose_name=_('the related group'))
-    slug = AutoSlugField(_('slug'), populate_from='description')
+    slug = AutoSlugField(_('slug'), populate_from='description', unique=True)
 
     class Meta:
         verbose_name = _("Format")
@@ -84,7 +84,7 @@ class FormatGroup(models.Model):
     """ Group/classification for formats.  Eg. image, video, audio. """
     uuid = UUIDField(editable=False, unique=True, version=4, help_text=_("Unique identifier"))
     description = models.CharField(_('description'), max_length=128)
-    slug = AutoSlugField(_('slug'), populate_from='description')
+    slug = AutoSlugField(_('slug'), populate_from='description', unique=True)
 
     class Meta:
         verbose_name = _("Format group")
@@ -238,7 +238,7 @@ class IDTool(models.Model):
     description = models.CharField(_('description'), max_length=256, help_text=_("Name of tool"))
     version = models.CharField(_('version'), max_length=64)
     enabled = models.BooleanField(_('enabled'), default=True)
-    slug = AutoSlugField(_('slug'), populate_from='_slug', always_update=True)
+    slug = AutoSlugField(_('slug'), populate_from='_slug', always_update=True, unique=True)
 
     class Meta:
         verbose_name = _("Format identification tool")
@@ -380,7 +380,7 @@ class FPTool(models.Model):
     description = models.CharField(_('description'), max_length=256, help_text=_("Name of tool"))
     version = models.CharField(_('version'), max_length=64)
     enabled = models.BooleanField(_('enabled'), default=True)
-    slug = AutoSlugField(_('slug'), populate_from='_slug')
+    slug = AutoSlugField(_('slug'), populate_from='_slug', unique=True)
     # Many to many field is on FPCommand
 
     class Meta:
