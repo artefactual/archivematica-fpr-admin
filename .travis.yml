@@ -10,14 +10,18 @@ jobs:
     - stage: Migration test with SQLite
       env: "DATABASE_URL=sqlite:////home/travis/build/artefactual/archivematica-fpr-admin/testproject/db.sqlite3"
       install: pip install -r dev_requirements.txt
-      script: ./scripts/test-migrations.sh
+      script:
+        - scripts/test-migrations.sh
+        - testproject/manage.py test
 
     - stage: Migration test with MySQL
       env: "DATABASE_URL=mysql://root@127.0.0.1/fpr"
       services: mysql
       before_install: "mysql -e 'CREATE DATABASE fpr;'"
       install: pip install -r dev_requirements.txt
-      script: ./scripts/test-migrations.sh
+      script:
+        - scripts/test-migrations.sh
+        - testproject/manage.py test
 
 notifications:
   email: false
