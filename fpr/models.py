@@ -128,7 +128,7 @@ class FormatVersion(VersionedModel, models.Model):
                 })
 
     def __unicode__(self):
-        return _("%(format)s: %(description)s") % {'format': self.format, 'description': self.description}
+        return _("%(format)s: %(description)s (%(pronom_id)s)") % {'format': self.format, 'description': self.description, 'pronom_id': self.pronom_id}
 
 
 # ########### ID TOOLS ############
