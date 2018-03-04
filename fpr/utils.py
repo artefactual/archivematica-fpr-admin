@@ -4,7 +4,6 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 # External dependencies, alphabetical
-from annoying.functions import get_object_or_None
 
 ############ DEPENDENCIES ############
 
@@ -73,8 +72,11 @@ def get_revision_ancestors(model, uuid, ancestors):
 def get_revision_descendants(model, uuid, decendants):
     """ Get revisions that have replaces a given revision. """
     revision = model.objects.get(uuid=uuid)
-    descendant = get_object_or_None(model, replaces=revision)
-    if descendant:
+    try:
+        descendant = model.objects.get(replaces=revision)
+    except model.DoesNotExist:
+        pass
+    else:
         decendants.append(descendant)
         get_revision_descendants(model, descendant.uuid, decendants)
     return decendants

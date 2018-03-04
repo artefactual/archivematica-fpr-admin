@@ -11,7 +11,6 @@ from django.utils.translation import ugettext as _
 
 
 # External dependencies, alphabetical
-from annoying.functions import get_object_or_None
 
 # This project, alphabetical
 from fpr import forms as fprforms
@@ -340,12 +339,14 @@ def idcommand_edit(request, uuid=None):
     else:
         idcommand = None
         title = _('Create identification command')
+
     # Set tool to parent if it exists
     initial = {}
-    if 'parent' in request.GET:
-        tool_uuid = request.GET['parent']
-        tool = get_object_or_None(fprmodels.IDTool, uuid=tool_uuid, enabled=True)
-        initial = {'tool': tool}
+    try:
+        initial['tool'] = fprmodels.IDTool.objects.get(
+            uuid=request.GET['parent'], enabled=True)
+    except (KeyError, fprmodels.IDTool.DoesNotExist):
+        initial['tool'] = None
 
     form = fprforms.IDCommandForm(request.POST or None, instance=idcommand, initial=initial)
     if form.is_valid():
@@ -546,10 +547,11 @@ def fpcommand_edit(request, uuid=None):
     else:
         # Set tool to parent if it exists
         initial = {}
-        if 'parent' in request.GET:
-            tool_uuid = request.GET['parent']
-            fptool = get_object_or_None(fprmodels.FPTool, uuid=tool_uuid, enabled=True)
-            initial = {'tool': fptool}
+        try:
+            initial['tool'] = fprmodels.FPTool.objects.get(
+                uuid=request.GET['parent'], enabled=True)
+        except (KeyError, fprmodels.FPTool.DoesNotExist):
+            initial['tool'] = None
         form = fprforms.FPCommandForm(instance=fpcommand, initial=initial)
         utils.warn_if_replacing_with_old_revision(request, fpcommand)
 

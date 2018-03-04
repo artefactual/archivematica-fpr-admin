@@ -43,7 +43,6 @@ setup(
         'Programming Language :: Python :: 2.7',
     ],
     install_requires=[
-        'django-annoying==0.7.7',
         'django-autoslug==1.9.3',
         'django-extensions==1.1.1',
         'django-forms-bootstrap>=3.0.0,<4.0.0',
