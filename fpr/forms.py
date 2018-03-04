@@ -3,7 +3,6 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 # External dependencies, alphabetical
-from annoying.functions import get_object_or_None
 
 # This project, alphabetical
 from fpr import models as fprmodels
@@ -50,21 +49,12 @@ class FormatGroupForm(forms.ModelForm):
 class IDToolForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(IDToolForm, self).clean()
-        if self.instance.pk is None:
-            submitted_description = cleaned_data.get('description')
-            submitted_version = cleaned_data.get('version')
-
-            existing_idtool = get_object_or_None(
-                fprmodels.IDTool,
-                description=submitted_description,
-                version=submitted_version
-            )
-
-            if existing_idtool:
-                raise forms.ValidationError(
-                    _('An ID tool with this description and version already'
-                      ' exists'))
-
+        if self.instance.pk is None and fprmodels.IDTool.objects.filter(
+            description=cleaned_data.get('description'),
+            version=cleaned_data.get('version')).exists():
+            raise forms.ValidationError(
+                _('An ID tool with this description and version already'
+                  ' exists'))
         return cleaned_data
 
     class Meta:
@@ -116,18 +106,16 @@ class FPRuleForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(FPRuleForm, self).clean()
         if self.instance.pk is None:
-            submitted_purpose = cleaned_data.get('purpose')
-            submitted_format = cleaned_data.get('format')
-            submitted_command = cleaned_data.get('command')
-            existing_fprule = get_object_or_None(
-                fprmodels.FPRule,
-                purpose=submitted_purpose,
-                format=submitted_format,
-                command=submitted_command
-            )
+            try:
+                existing_fprule = fprmodels.FPRule.objects.get(
+                    purpose=cleaned_data.get('purpose'),
+                    format=cleaned_data.get('format'),
+                    command=cleaned_data.get('command'))
+            except fprmodels.FPRule.DoesNotExist:
+                return cleaned_data
             # If there is an existing matching rule, the error message should
             # give its UUID so that the user can reasonably track it down.
-            if existing_fprule != None:
+            else:
                 ex_fpr_uuid = existing_fprule.uuid
                 msg = _('An identical FP rule already exists. See rule'
                         ' %(uuid)s.') % {'uuid': ex_fpr_uuid}
