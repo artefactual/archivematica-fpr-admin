@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 # This project, alphabetical
 from fpr import models as fprmodels
 
-############ FORMATS ############
+
+# ########## FORMATS ############
 
 class FormatForm(forms.ModelForm):
     group = forms.ChoiceField(
@@ -44,14 +45,15 @@ class FormatGroupForm(forms.ModelForm):
         model = fprmodels.FormatGroup
         fields = ('description',)
 
-############ ID TOOLS ############
+
+# ########## ID TOOLS ############
 
 class IDToolForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(IDToolForm, self).clean()
         if self.instance.pk is None and fprmodels.IDTool.objects.filter(
-            description=cleaned_data.get('description'),
-            version=cleaned_data.get('version')).exists():
+                description=cleaned_data.get('description'),
+                version=cleaned_data.get('version')).exists():
             raise forms.ValidationError(
                 _('An ID tool with this description and version already'
                   ' exists'))
@@ -67,7 +69,8 @@ class IDCommandForm(forms.ModelForm):
         model = fprmodels.IDCommand
         fields = ('tool', 'description', 'config', 'script_type', 'script',)
 
-############ ID RULES ############
+
+# ########## ID RULES ############
 
 class IDRuleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -80,7 +83,8 @@ class IDRuleForm(forms.ModelForm):
         model = fprmodels.IDRule
         fields = ('format', 'command', 'command_output')
 
-############ FP RULES ############
+
+# ########## FP RULES ############
 
 class FPRuleForm(forms.ModelForm):
     command = forms.ChoiceField(choices=fprmodels.FPCommand.objects.all())
@@ -137,9 +141,10 @@ class FPRuleForm(forms.ModelForm):
 
     class Meta:
         model = fprmodels.FPRule
-        fields = ('purpose','format')
+        fields = ('purpose', 'format')
 
-############ FP TOOLS ############
+
+# ########## FP TOOLS ############
 
 class FPToolForm(forms.ModelForm):
     class Meta:
