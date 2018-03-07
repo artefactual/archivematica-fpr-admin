@@ -654,5 +654,5 @@ def _augment_revisions_with_detail_url(request, entity_name, model, revisions):
             else:
                 revision.detail_url = reverse(detail_view_name, args=[revision.slug])
 
-        except:
+        except Exception:
             revision.detail_url = reverse(detail_view_name, args=[revision.uuid])

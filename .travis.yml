@@ -23,5 +23,10 @@ jobs:
         - scripts/test-migrations.sh
         - testproject/manage.py test
 
+    - stage: Linter
+      install: pip install -r dev_requirements.txt
+      script:
+        - flake8 fpr/
+
 notifications:
   email: false

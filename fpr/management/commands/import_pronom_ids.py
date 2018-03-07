@@ -135,7 +135,8 @@ def main(pronom_xml, output_format=SQL_OUTPUT, output_file=sys.stdout):
                     group=unknown_format_group,
                     uuid=str(uuid.uuid4())
                 )
-                migration = '''    Format.objects.create(description="{}", group_id="{}", uuid="{}")'''.format(new_format.format_name, unknown_format_group.uuid, parent_format.uuid)
+                migration = '''    Format.objects.create(description="{}", group_id="{}", uuid="{}")'''.format(
+                    new_format.format_name, unknown_format_group.uuid, parent_format.uuid)
                 sql = save_object(parent_format)
                 choose_output(output_format, output_file, sql, migration)
                 archivematica_formats[new_format.format_name] = parent_format
@@ -148,7 +149,8 @@ def main(pronom_xml, output_format=SQL_OUTPUT, output_file=sys.stdout):
             uuid=str(uuid.uuid4())
         )
         sql = save_object(format_version)
-        migration = '''    FormatVersion.objects.create(format_id="{}", pronom_id="{}", description="{}", version="{}", uuid="{}")'''.format(parent_format.uuid, new_format.puid, new_format.version_name, new_format.version, format_version.uuid)
+        migration = '''    FormatVersion.objects.create(format_id="{}", pronom_id="{}", description="{}", version="{}", uuid="{}")'''.format(
+            parent_format.uuid, new_format.puid, new_format.version_name, new_format.version, format_version.uuid)
         choose_output(output_format, output_file, sql, migration)
 
         # If an extension is listed, set up a new IDRule so that
@@ -169,6 +171,7 @@ def main(pronom_xml, output_format=SQL_OUTPUT, output_file=sys.stdout):
                     command_output=new_format.extension
                 )
                 sql = save_object(rule)
-                migration = '''    IDRule.objects.create(format_id="{}", command_id="{}", command_output="{}")'''.format(format_version.uuid, file_by_extension.uuid, new_format.extension)
+                migration = '''    IDRule.objects.create(format_id="{}", command_id="{}", command_output="{}")'''.format(
+                    format_version.uuid, file_by_extension.uuid, new_format.extension)
                 choose_output(output_format, output_file, sql, migration)
         print(file=output_file)

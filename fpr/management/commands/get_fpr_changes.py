@@ -2,8 +2,6 @@ from __future__ import print_function
 
 import itertools
 import json
-import os
-import sys
 
 from django.core.management.base import BaseCommand
 from frozendict import frozendict
