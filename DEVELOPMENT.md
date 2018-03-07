@@ -7,9 +7,9 @@ Download the sources:
 
 Create the virtual environment and install the requirements:
 
-    $ virtualenv .env
+    $ virtualenv --python=python2.7 .env
     $ source .env/bin/activate
-    $ pip install -r requirements.txt
+    $ pip install -r dev_requirements.txt
 
 Bootstrap database:
 
@@ -24,3 +24,7 @@ Extract and compile messages. These commands will generate `.po` and `.mo` files
 
     $ testproject/manage.py makemessages --all
     $ testproject/manage.py compilemessages
+
+You can run the tests with the following command:
+
+    $ testproject/manage.py test
