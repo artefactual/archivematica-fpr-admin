@@ -24,3 +24,7 @@ Extract and compile messages. These commands will generate `.po` and `.mo` files
 
     $ testproject/manage.py makemessages --all
     $ testproject/manage.py compilemessages
+
+You can run the tests with the following command:
+
+    $ testproject/manage.py test
