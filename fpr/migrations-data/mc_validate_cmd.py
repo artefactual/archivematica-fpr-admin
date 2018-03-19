@@ -21,11 +21,10 @@ Parse = namedtuple('Parse', 'etree_el stdout')
 
 
 def parse_mediaconch_data(target):
-    """Run `mediaconch -mc -fx <target>` against `target` and return an
+    """Run `mediaconch -mc -fx -iv 4 <target>` against `target` and return an
     lxml etree parse of the output.
     """
-
-    args = ['mediaconch', '-mc', '-fx', target]
+    args = ['mediaconch', '-mc', '-fx', '-iv', '4', target]
     try:
         output = subprocess.check_output(args)
     except subprocess.CalledProcessError:
@@ -79,9 +78,7 @@ def get_impl_checks(doc):
     function returns a dict mapping implementation check names to dicts that
     map individual check names to lists of test outcomes, i.e., 'pass' or
     'fail'.
-
     """
-
     impl_checks = {}
     path = '.%smedia/%simplementationChecks' % (NS, NS)
     for impl_check_el in doc.iterfind(path):
@@ -94,12 +91,10 @@ def get_impl_checks(doc):
 
 def get_event_outcome_information_detail(impl_checks):
     """Return a 2-tuple of info and detail.
-
     - info: 'pass' or 'fail'
     - detail: human-readable string indicating which implementation checks
       passed or failed. If implementation check as a whole passed, just return
       the passed check names; if it failed, just return the failed ones.
-
     """
     info = 'pass'
     failed_impl_checks = []
@@ -138,7 +133,6 @@ def main(target):
     `target` is a valid Matroska (.mkv) file. Parse the XML output by
     MediaConch and print a JSON representation of that output.
     """
-
     try:
         parse = parse_mediaconch_data(target)
         impl_checks = get_impl_checks(parse.etree_el)
