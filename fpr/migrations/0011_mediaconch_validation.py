@@ -33,9 +33,9 @@ def data_migration(apps, schema_editor):
     mediaconch_tool = FPTool.objects.create(
         uuid=mediaconch_tool_uuid,
         description='MediaConch',
-        version='17.12',
+        version='18.03',
         enabled=True,
-        slug='mediaconch-1712'
+        slug='mediaconch-1803'
     )
 
     # MediaConch Validation FPR Command
