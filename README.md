@@ -2,6 +2,9 @@
 
 By [Artefactual](https://www.artefactual.com/)
 
+NOTE: As of the 1.7 version of Archivematica, the FPR server has been decoupled from Archivematica. Please see the [release notes](https://wiki.archivematica.org/Archivematica_1.7_and_Storage_Service_0.11_release_notes#Archivematica_decoupled_from_the_FPR_server). Issue creation has been disabled for this
+repository.
+
 The Archivematica Format Policy Registry is part of the Archivematica project.
 Archivematica is a web- and standards-based, open-source application which allows your institution to preserve long-term access to trustworthy, authentic and reliable digital content.
 Our target users are archivists, librarians, and anyone working to preserve digital objects.
