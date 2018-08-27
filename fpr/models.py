@@ -7,7 +7,7 @@ Describes the data model for the FPR
 import logging
 import uuid
 
-from django.db import models
+from django.db import connection, models
 from django.utils.translation import ugettext_lazy as _
 
 from autoslug import AutoSlugField
@@ -61,6 +61,60 @@ class VersionedModel(models.Model):
 # ########### FORMATS ############
 
 
+class FormatManager(models.Manager):
+    def get_full_list(self):
+        """Detailed list of formats including PRONOM IDs.
+
+        This is used by ``views.format_list`` so we can return the full list of
+        formats making a single query to the database. Using our initial
+        dataset, we were making more than 2k queries. Looking up the PRONOM IDs
+        on each result added other 2k queries.
+
+        This approach is not ideal and it should be revisited once ``fpr``
+        becomes part of the Dashboard. In the future, we could use a paginator
+        or DataTables + XHR (e.g. via ``django-datatables_view``). Currently,
+        it is hard to make changes like this because of they way that templates
+        and JavaScript code is arranged. This is a temporary fix!
+        """
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT
+                    fpr_format.id,
+                    fpr_format.uuid,
+                    fpr_format.description,
+                    fpr_format.slug,
+                    fpr_formatgroup.slug AS group_slug,
+                    fpr_formatgroup.description AS group_name,
+                    group_concat(fpr_formatversion.pronom_id) AS pronom_ids
+                FROM fpr_format
+                LEFT JOIN fpr_formatgroup
+                    ON (fpr_format.group_id = fpr_formatgroup.uuid)
+                LEFT JOIN fpr_formatversion
+                    ON (fpr_format.uuid = fpr_formatversion.format_id
+                        AND fpr_formatversion.pronom_id != "")
+                GROUP BY fpr_format.id;
+            """)
+            ret = []
+            for row in cursor.fetchall():
+                # Include PRONOM IDs (up to three) in the format description.
+                description = row[2]
+                pronom_ids = row[6]
+                if pronom_ids:
+                    pronom_ids = pronom_ids.split(",")
+                    if len(pronom_ids) > 3:
+                        pronom_ids = pronom_ids[:3]
+                        pronom_ids.append("...")
+                    description = '{} ({})'.format(
+                        description, ", ".join(pronom_ids))
+                # Hydrate model.
+                m = self.model(id=row[0], uuid=row[1],
+                               description=description, slug=row[3])
+                m.group_slug = row[4]
+                m.group_name = row[5]
+                ret.append(m)
+            return ret
+
+
 class Format(models.Model):
     """ User-friendly description of format.
 
@@ -71,6 +125,8 @@ class Format(models.Model):
     description = models.CharField(_('description'), max_length=128, help_text=_("Common name of format"))
     group = models.ForeignKey('FormatGroup', to_field='uuid', null=True, verbose_name=_('the related group'))
     slug = AutoSlugField(_('slug'), populate_from='description', unique=True)
+
+    objects = FormatManager()
 
     class Meta:
         verbose_name = _("Format")
