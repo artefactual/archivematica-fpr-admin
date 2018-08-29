@@ -119,7 +119,7 @@ def main(pronom_xml, output_format=SQL_OUTPUT, output_file=sys.stdout):
             FormatVersion.objects.get(pronom_id=puid)
             print('Ignoring {}'.format(puid))
             continue
-        except FormatVersion.DoesNotExist:
+        except (FormatVersion.DoesNotExist, FormatVersion.MultipleObjectsReturned):
             print('DOES NOT EXIST OK!')
             pass
 
