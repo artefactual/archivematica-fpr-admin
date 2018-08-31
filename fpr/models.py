@@ -76,6 +76,10 @@ class Format(models.Model):
         verbose_name = _("Format")
         ordering = ['group', 'description']
 
+    def get_pronom_ids(self):
+        s = FormatVersion.objects.filter(format=self).values_list('pronom_id',flat=True)
+        return ", ".join(s)
+
     def __unicode__(self):
         return u"{}: {}".format(self.group.description, self.description)
 
