@@ -146,102 +146,6 @@
     {
         "fields": {
             "replaces": null,
-            "uuid": "49073505-f8cd-47f3-9041-7b77aa874ff8",
-            "format": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "lastmodified": "2018-08-28T23:58:46.526Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "1.0",
-            "slug": "wordperfect-graphics-10-2",
-            "pronom_id": "x-fmt/395",
-            "description": "WordPerfect Graphics 1.0"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "e8de9743-ac2b-432a-8662-7408b309546f",
-            "format": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "lastmodified": "2018-08-28T23:58:47.215Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "2.0",
-            "slug": "wordperfect-graphics-20-2",
-            "pronom_id": "fmt/1042",
-            "description": "WordPerfect Graphics 2.0"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "48d1cfab-b938-4242-b1b6-a642dce5ec8f",
-            "format": "1a91d8c5-7bfb-47b1-9e4c-8dd934f33cda",
-            "lastmodified": "2018-08-28T23:58:47.268Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "3",
-            "slug": "hwp-3-2",
-            "pronom_id": "fmt/1083",
-            "description": "HWP 3"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "ec196238-2461-4066-bd05-ee9210286e7e",
-            "format": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "lastmodified": "2018-08-29T00:02:12.463Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "1.0",
-            "slug": "wordperfect-graphics-10-3",
-            "pronom_id": "x-fmt/395",
-            "description": "WordPerfect Graphics 1.0"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "82cad44c-0f23-4fc9-b7b7-d08ce2e48511",
-            "format": "9b3f9406-a375-4b66-9081-61a317e68cbf",
-            "lastmodified": "2018-08-29T00:02:13.200Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "2.0",
-            "slug": "wordperfect-graphics-20-3",
-            "pronom_id": "fmt/1042",
-            "description": "WordPerfect Graphics 2.0"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "938fec89-28f5-4448-bbd0-fdcf298ad3e1",
-            "format": "1a91d8c5-7bfb-47b1-9e4c-8dd934f33cda",
-            "lastmodified": "2018-08-29T00:02:13.260Z",
-            "enabled": true,
-            "access_format": false,
-            "preservation_format": false,
-            "version": "3",
-            "slug": "hwp-3-3",
-            "pronom_id": "fmt/1083",
-            "description": "HWP 3"
-        },
-        "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
             "uuid": "6fdfc554-be9b-48c7-89cc-5f24c4037564",
             "format": "7960e5c5-4ef6-4696-a86f-f6314fb6cee4",
             "lastmodified": "2018-08-29T00:02:13.291Z",
@@ -734,18 +638,6 @@
             "description": "Gatan Digital Micrograph 3"
         },
         "model": "fpr.formatversion"
-    },
-    {
-        "fields": {
-            "replaces": null,
-            "uuid": "861eb463-497a-4ec4-a506-41b88c1191f0",
-            "format": "82cad44c-0f23-4fc9-b7b7-d08ce2e48511",
-            "lastmodified": "2018-08-29T00:02:13.214Z",
-            "enabled": true,
-            "command_output": ".wpg",
-            "command": "41efbe1b-3fc7-4b24-9290-d0fb5d0ea9e9"
-        },
-        "model": "fpr.idrule"
     },
     {
         "fields": {
