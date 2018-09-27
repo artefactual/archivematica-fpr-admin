@@ -63,10 +63,10 @@ def toggle_enabled(request, category, uuid):
 # ########### FORMATS ############
 
 def format_list(request):
-    return render(request, 'fpr/format/list.html', {
+    return render(request, 'fpr/format/list.html', context({
         # TODO: use paginator or something like django_datatables_view.
         'formats': fprmodels.Format.objects.get_full_list(),
-    })
+    }))
 
 
 def format_detail(request, slug):
