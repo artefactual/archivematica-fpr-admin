@@ -322,8 +322,7 @@ def idrule_delete(request, uuid):
 
 
 def idcommand_list(request):
-    replacing_commands = [r[0] for r in fprmodels.IDCommand.objects.filter(replaces__isnull=False).values_list('replaces_id')]
-    idcommands = fprmodels.IDCommand.objects.exclude(uuid__in=replacing_commands)
+    idcommands = fprmodels.IDCommand.active.all()
     return render(request, 'fpr/idcommand/list.html', context(locals()))
 
 
