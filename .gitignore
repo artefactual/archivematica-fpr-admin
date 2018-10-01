@@ -1,3 +1,4 @@
 *.py[co]
 /.env
 /testproject/db.sqlite3
+/testproject/locale

@@ -26,6 +26,9 @@ LANGUAGES = [
     ('fr', _('French')),
     ('en', _('English')),
     ('es', _('Spanish')),
+    ('pt-br', _('Brazilian Portuguese')),
+    ('ja', _('Japanese')),
+    ('sv', _('Swedish')),
 ]
 
 LOCALE_PATHS = [
