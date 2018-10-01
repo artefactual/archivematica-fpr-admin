@@ -2,400 +2,445 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 01:25+0000\n"
+"POT-Creation-Date: 2018-10-01 19:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: artefactual <translate@artefactual.com>, 2016\n"
-"Language-Team: French (https://www.transifex.com/artefactual/teams/1506/"
-"fr/)\n"
-"Language: fr\n"
+"Last-Translator: August Frihammar <august.frihammar@arkivit.se>, 2017\n"
+"Language-Team: Swedish (https://www.transifex.com/artefactual/teams/1506/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fpr/forms.py:24 fpr/forms.py:102
+msgid "Create New"
+msgstr "Skapa ny"
+
+#: fpr/forms.py:58
+msgid "An ID tool with this description and version already exists"
+msgstr "Ett ID-verktyg med samma namn och version existerar redan"
+
+#: fpr/forms.py:124
+#, python-format
+msgid "An identical FP rule already exists. See rule %(uuid)s."
+msgstr "En identisk FP regel existerar redan. Se regel %(uuid)s."
+
+#: fpr/forms.py:130
+#, python-format
+msgid ""
+" Rule %(uuid)s is disabled and has been replaced by the following rule(s): "
+"%(repl_uuids)s"
+msgstr ""
+"Regel %(uuid)s är inaktiverad och har blivit ersatt av följande "
+"regel/regler: %(repl_uuids)s"
+
+#: fpr/forms.py:137
+#, python-format
+msgid " Rule %(uuid)s is disabled."
+msgstr "Regel %(uuid)s är inaktiverad."
 
 #: fpr/models.py:40
 msgid "the related model"
-msgstr ""
+msgstr "den relaterade gruppen"
 
-#: fpr/models.py:41 fpr/models.py:237 fpr/models.py:373 fpr/models.py:409
-#: fpr/models.py:433 fpr/models.py:445 fpr/models.py:459 fpr/models.py:474
-#: fpr/models.py:488 fpr/models.py:505 fpr/models.py:520
+#: fpr/models.py:41 fpr/models.py:296 fpr/models.py:438 fpr/models.py:476
+#: fpr/models.py:500 fpr/models.py:512 fpr/models.py:526 fpr/models.py:541
+#: fpr/models.py:555 fpr/models.py:572 fpr/models.py:587
 msgid "enabled"
-msgstr ""
+msgstr "aktiverad"
 
-#: fpr/models.py:42 fpr/models.py:408 fpr/models.py:432 fpr/models.py:444
-#: fpr/models.py:458 fpr/models.py:473 fpr/models.py:487 fpr/models.py:504
-#: fpr/models.py:519
+#: fpr/models.py:42 fpr/models.py:475 fpr/models.py:499 fpr/models.py:511
+#: fpr/models.py:525 fpr/models.py:540 fpr/models.py:554 fpr/models.py:571
+#: fpr/models.py:586
 msgid "last modified"
-msgstr ""
+msgstr "senast ändrad"
 
-#: fpr/models.py:70 fpr/models.py:85 fpr/models.py:99 fpr/models.py:141
-#: fpr/models.py:198 fpr/models.py:234 fpr/models.py:257 fpr/models.py:333
-#: fpr/models.py:370
+#: fpr/models.py:124 fpr/models.py:141 fpr/models.py:155 fpr/models.py:197
+#: fpr/models.py:254 fpr/models.py:293 fpr/models.py:318 fpr/models.py:398
+#: fpr/models.py:435
 msgid "Unique identifier"
-msgstr ""
+msgstr "Unik identifierare"
 
-#: fpr/models.py:71 fpr/models.py:86 fpr/models.py:103 fpr/models.py:142
-#: fpr/models.py:235 fpr/models.py:336 fpr/models.py:371 fpr/models.py:428
-#: fpr/models.py:441 fpr/models.py:456 fpr/models.py:467
+#: fpr/models.py:125 fpr/models.py:142 fpr/models.py:159 fpr/models.py:198
+#: fpr/models.py:294 fpr/models.py:401 fpr/models.py:436 fpr/models.py:495
+#: fpr/models.py:508 fpr/models.py:523 fpr/models.py:534
 msgid "description"
-msgstr "description"
+msgstr "beskrivning"
 
-#: fpr/models.py:71
+#: fpr/models.py:125
 msgid "Common name of format"
-msgstr ""
+msgstr "Formatets allmänna benämning"
 
-#: fpr/models.py:72
+#: fpr/models.py:126
 msgid "the related group"
-msgstr ""
+msgstr "relaterad grupp"
 
-#: fpr/models.py:73 fpr/models.py:87 fpr/models.py:238 fpr/models.py:374
+#: fpr/models.py:127 fpr/models.py:143 fpr/models.py:297 fpr/models.py:439
 msgid "slug"
-msgstr ""
+msgstr "slug"
 
-#: fpr/models.py:76 fpr/templates/fpr/format/version/detail.html:31
+#: fpr/models.py:132 fpr/templates/fpr/format/version/detail.html:31
 #: fpr/templates/fpr/fprule/detail.html:30
 #: fpr/templates/fpr/fprule/list.html:30 fpr/templates/fpr/idrule/list.html:28
 msgid "Format"
 msgstr "Format"
 
-#: fpr/models.py:90
-msgid "Format group"
-msgstr ""
-
-#: fpr/models.py:100 fpr/models.py:200 fpr/models.py:298 fpr/models.py:477
-msgid "the related format"
-msgstr ""
-
-#: fpr/models.py:101 fpr/models.py:236 fpr/models.py:372
-msgid "version"
-msgstr ""
-
-#: fpr/models.py:102
-msgid "pronom id"
-msgstr ""
-
-#: fpr/models.py:103
-msgid "Formal name to go in the METS file."
-msgstr ""
-
-#: fpr/models.py:104
-msgid "access format"
-msgstr ""
-
-#: fpr/models.py:105
-msgid "preservation format"
-msgstr ""
-
-#: fpr/models.py:110 fpr/templates/fpr/idrule/detail.html:28 fpr/views.py:603
-msgid "Format version"
-msgstr ""
-
-#: fpr/models.py:127
-msgid ""
-"Unable to save, an active Format Version  with this pronom id already exists."
-msgstr ""
-
-#: fpr/models.py:131
-#, python-format
-msgid "%(format)s: %(description)s"
-msgstr ""
-
-#: fpr/models.py:142
-msgid "Name to identify script"
-msgstr ""
-
-#: fpr/models.py:144
-msgid "PUID"
-msgstr ""
-
-#: fpr/models.py:145
-msgid "MIME type"
-msgstr "Type MIME"
-
 #: fpr/models.py:146
-msgid "File extension"
-msgstr ""
+msgid "Format group"
+msgstr "Formatgrupp"
 
-#: fpr/models.py:148
-msgid "configuration"
-msgstr ""
+#: fpr/models.py:156 fpr/models.py:256 fpr/models.py:360 fpr/models.py:544
+msgid "the related format"
+msgstr "det relaterade formatet"
 
-#: fpr/models.py:150
-msgid "script"
-msgstr ""
+#: fpr/models.py:157 fpr/models.py:295 fpr/models.py:437
+msgid "version"
+msgstr "version"
 
-#: fpr/models.py:150
-msgid "Script to be executed."
-msgstr ""
+#: fpr/models.py:158
+msgid "pronom id"
+msgstr "pronom id"
 
-#: fpr/models.py:152 fpr/models.py:339
-msgid "Bash script"
-msgstr ""
+#: fpr/models.py:159
+msgid "Formal name to go in the METS file."
+msgstr "Formatnamn som ska användas i METS filen."
 
-#: fpr/models.py:153 fpr/models.py:340
-msgid "Python script"
-msgstr ""
-
-#: fpr/models.py:154 fpr/models.py:341
-msgid "Command line"
-msgstr ""
-
-#: fpr/models.py:155 fpr/models.py:342
-msgid "No shebang needed"
-msgstr ""
-
-#: fpr/models.py:157 fpr/models.py:344
-msgid "script type"
-msgstr ""
-
-#: fpr/models.py:158 fpr/models.py:335
-msgid "the related tool"
-msgstr ""
+#: fpr/models.py:160
+msgid "access format"
+msgstr "åtkomstformat"
 
 #: fpr/models.py:161
-msgid "Format identification command"
-msgstr ""
+msgid "preservation format"
+msgstr "Bevarandeformat"
 
-#: fpr/models.py:165
+#: fpr/models.py:166 fpr/templates/fpr/idrule/detail.html:28 fpr/views.py:606
+msgid "Format version"
+msgstr "Formatversion"
+
+#: fpr/models.py:183
+msgid ""
+"Unable to save, an active Format Version  with this pronom id already "
+"exists."
+msgstr ""
+"Kunde inte spara, det finns redan en aktiv formatversion med detta pronom "
+"ID."
+
+#: fpr/models.py:187
 #, python-format
-msgid "%(tool)s %(config)s runs %(command)s"
+msgid "%(format)s: %(description)s (%(pronom_id)s)"
 msgstr ""
 
-#: fpr/models.py:199 fpr/models.py:297
-msgid "the related command"
-msgstr ""
+#: fpr/models.py:198
+msgid "Name to identify script"
+msgstr "Namn för att identifiera skript"
+
+#: fpr/models.py:200
+msgid "PUID"
+msgstr "PUID"
+
+#: fpr/models.py:201
+msgid "MIME type"
+msgstr "MIME-typ"
 
 #: fpr/models.py:202
-msgid "command output"
-msgstr ""
+msgid "File extension"
+msgstr "Filändelse"
 
-#: fpr/models.py:205
-msgid "Format identification rule"
-msgstr ""
+#: fpr/models.py:204
+msgid "configuration"
+msgstr "konfigurering"
+
+#: fpr/models.py:206
+msgid "script"
+msgstr "skript"
+
+#: fpr/models.py:206
+msgid "Script to be executed."
+msgstr "Skript som ska köras."
+
+#: fpr/models.py:208 fpr/models.py:404
+msgid "Bash script"
+msgstr "Bash skript"
+
+#: fpr/models.py:209 fpr/models.py:405
+msgid "Python script"
+msgstr "Python skript"
+
+#: fpr/models.py:210 fpr/models.py:406
+msgid "Command line"
+msgstr "Kommandorad"
+
+#: fpr/models.py:211 fpr/models.py:407
+msgid "No shebang needed"
+msgstr "Shebang krävs inte"
+
+#: fpr/models.py:213 fpr/models.py:409
+msgid "script type"
+msgstr "skripttyp"
+
+#: fpr/models.py:214 fpr/models.py:400
+msgid "the related tool"
+msgstr "det relaterade verktyget"
+
+#: fpr/models.py:217
+msgid "Format identification command"
+msgstr "Formatidentifikations-verktyg"
 
 #: fpr/models.py:221
+#, python-format
+msgid "%(tool)s %(config)s runs %(command)s"
+msgstr "%(tool)s%(config)skör%(command)s"
+
+#: fpr/models.py:255 fpr/models.py:359
+msgid "the related command"
+msgstr "det relaterade kommandot"
+
+#: fpr/models.py:258
+msgid "command output"
+msgstr "kommandots output"
+
+#: fpr/models.py:261
+msgid "Format identification rule"
+msgstr "Formatidentifikationsregel"
+
+#: fpr/models.py:277
 msgid ""
 "Unable to save, a rule with this output already exists for this command."
 msgstr ""
+"Kunde inte spara, en regel med denna utdata existerar redan för detta "
+"kommando."
 
-#: fpr/models.py:225
+#: fpr/models.py:281
 #, python-format
-msgid "%(command)s with %(output)s is %(format)s"
-msgstr ""
-
-#: fpr/models.py:235 fpr/models.py:371
-msgid "Name of tool"
-msgstr ""
-
-#: fpr/models.py:241
-msgid "Format identification tool"
-msgstr ""
-
-#: fpr/models.py:247 fpr/models.py:381
-#, python-format
-msgid "%(description)s version %(version)s"
-msgstr ""
-
-#: fpr/models.py:275
-msgid "Access"
-msgstr "Accès"
-
-#: fpr/models.py:276 fpr/models.py:348
-msgid "Characterization"
-msgstr ""
-
-#: fpr/models.py:277
-msgid "Extract"
-msgstr ""
-
-#: fpr/models.py:278 fpr/templates/fpr/format/version/detail.html:33
-msgid "Preservation"
-msgstr ""
-
-#: fpr/models.py:279
-msgid "Thumbnail"
-msgstr "Vignette"
-
-#: fpr/models.py:280 fpr/models.py:352
-msgid "Transcription"
-msgstr ""
-
-#: fpr/models.py:281 fpr/models.py:353
-msgid "Validation"
-msgstr ""
+msgid "Format identification rule %(uuid)s"
+msgstr "Formatidentifikationsregel %(uuid)s"
 
 #: fpr/models.py:284
-msgid "Default access"
-msgstr ""
+#, python-format
+msgid "%(command)s with %(output)s is %(format)s"
+msgstr "%(command)s med %(output)s är %(format)s"
 
-#: fpr/models.py:285
-msgid "Default characterization"
-msgstr ""
-
-#: fpr/models.py:286
-msgid "Default thumbnail"
-msgstr ""
-
-#: fpr/models.py:296
-msgid "purpose"
-msgstr ""
+#: fpr/models.py:294 fpr/models.py:436
+msgid "Name of tool"
+msgstr "Verktygets namn"
 
 #: fpr/models.py:300
-msgid "count attempts"
-msgstr ""
+msgid "Format identification tool"
+msgstr "Formatidentifikationsverktyg"
 
-#: fpr/models.py:301
-msgid "count okay"
-msgstr ""
-
-#: fpr/models.py:302
-msgid "count not okay"
-msgstr ""
-
-#: fpr/models.py:305 fpr/views.py:608
-msgid "Format policy rule"
-msgstr ""
-
-#: fpr/models.py:325
+#: fpr/models.py:306 fpr/models.py:446
 #, python-format
-msgid "Normalize %(format)s for %(purpose)s via %(command)s"
-msgstr ""
+msgid "%(description)s version %(version)s"
+msgstr "%(description)s version %(version)s"
 
-#: fpr/models.py:337 fpr/models.py:426 fpr/models.py:501
-msgid "command"
-msgstr ""
+#: fpr/models.py:335
+msgid "Access"
+msgstr "Åtkomst"
 
-#: fpr/models.py:345 fpr/models.py:427
-msgid "output location"
-msgstr ""
+#: fpr/models.py:336 fpr/models.py:413
+msgid "Characterization"
+msgstr "Karaktärisering"
+
+#: fpr/models.py:337
+msgid "Extract"
+msgstr "Extrahera"
+
+#: fpr/models.py:338 fpr/templates/fpr/format/version/detail.html:33
+msgid "Preservation"
+msgstr "Bevarande"
+
+#: fpr/models.py:339
+msgid "Thumbnail"
+msgstr "Förhandsgranskning"
+
+#: fpr/models.py:340 fpr/models.py:417
+msgid "Transcription"
+msgstr "Transkribering"
+
+#: fpr/models.py:341 fpr/models.py:418
+msgid "Validation"
+msgstr "Godkännande"
+
+#: fpr/models.py:342
+msgid "Validation against a policy"
+msgstr "Validifiering mot policy"
+
+#: fpr/models.py:345
+msgid "Default access"
+msgstr "Standard-tillträde"
 
 #: fpr/models.py:346
-msgid "the related output format"
-msgstr ""
+msgid "Default characterization"
+msgstr "Standardkarakterisering"
 
-#: fpr/models.py:349
-msgid "Event Detail"
-msgstr ""
-
-#: fpr/models.py:350
-msgid "Extraction"
-msgstr ""
-
-#: fpr/models.py:351
-msgid "Normalization"
-msgstr ""
-
-#: fpr/models.py:354
-msgid "Verification"
-msgstr ""
-
-#: fpr/models.py:356 fpr/models.py:418
-msgid "command usage"
-msgstr ""
-
-#: fpr/models.py:357
-msgid "the related verification command"
-msgstr ""
+#: fpr/models.py:347
+msgid "Default thumbnail"
+msgstr "Standardförhandsgranskning"
 
 #: fpr/models.py:358
-msgid "the related event detail command"
-msgstr ""
+msgid "purpose"
+msgstr "syfte"
 
-#: fpr/models.py:361 fpr/views.py:607
-msgid "Format policy command"
-msgstr ""
+#: fpr/models.py:362
+msgid "count attempts"
+msgstr "räkning försök"
 
-#: fpr/models.py:378
-msgid "Normalization tool"
-msgstr ""
+#: fpr/models.py:363
+msgid "count okay"
+msgstr "räkning okej"
 
-#: fpr/models.py:392
-msgid "agent identifier type"
-msgstr ""
+#: fpr/models.py:364
+msgid "count not okay"
+msgstr "räkning ej okej"
 
-#: fpr/models.py:393
-msgid "agent identifier value"
-msgstr ""
+#: fpr/models.py:367 fpr/views.py:611
+msgid "Format policy rule"
+msgstr "Formatpolicyregel"
 
-#: fpr/models.py:394
-msgid "agent name"
-msgstr ""
+#: fpr/models.py:387
+#, python-format
+msgid "Format policy rule %(uuid)s"
+msgstr "Formatpolicyregel %(uuid)s"
 
-#: fpr/models.py:395
-msgid "agent type"
-msgstr ""
+#: fpr/models.py:390
+#, python-format
+msgid "Normalize %(format)s for %(purpose)s via %(command)s"
+msgstr "Normalisera %(format)s för %(purpose)s via %(command)s"
 
-#: fpr/models.py:396
-msgid "client IP address"
-msgstr ""
+#: fpr/models.py:402 fpr/models.py:493 fpr/models.py:568
+msgid "command"
+msgstr "kommando"
 
-#: fpr/models.py:406 fpr/models.py:431 fpr/models.py:443 fpr/models.py:457
-#: fpr/models.py:472 fpr/models.py:486 fpr/models.py:503 fpr/models.py:518
-msgid "replaces"
-msgstr ""
+#: fpr/models.py:410 fpr/models.py:494
+msgid "output location"
+msgstr "utdataförvaring"
 
-#: fpr/models.py:407
-msgid "type"
-msgstr ""
+#: fpr/models.py:411
+msgid "the related output format"
+msgstr "det relaterade outputformatet"
+
+#: fpr/models.py:414
+msgid "Event Detail"
+msgstr "Händelsedetalj"
+
+#: fpr/models.py:415
+msgid "Extraction"
+msgstr "Extrahering"
+
+#: fpr/models.py:416
+msgid "Normalization"
+msgstr "Normalisering"
 
 #: fpr/models.py:419
-msgid "command type"
-msgstr ""
+msgid "Verification"
+msgstr "Verifiering"
 
-#: fpr/models.py:421
-msgid "verification command"
-msgstr ""
+#: fpr/models.py:421 fpr/models.py:485
+msgid "command usage"
+msgstr "kommando användande"
+
+#: fpr/models.py:422
+msgid "the related verification command"
+msgstr "relaterad verifikationskommando"
 
 #: fpr/models.py:423
+msgid "the related event detail command"
+msgstr "det relaterade händelsedetaljs-kommandot"
+
+#: fpr/models.py:426 fpr/views.py:610
+msgid "Format policy command"
+msgstr "Formatpolicykommando"
+
+#: fpr/models.py:443
+msgid "Normalization tool"
+msgstr "Normaliseringsverktyg"
+
+#: fpr/models.py:459
+msgid "agent identifier type"
+msgstr "typ av agentsignum"
+
+#: fpr/models.py:460
+msgid "agent identifier value"
+msgstr "agentsignumets värde"
+
+#: fpr/models.py:461
+msgid "agent name"
+msgstr "agentnamn"
+
+#: fpr/models.py:462
+msgid "agent type"
+msgstr "agenttyp"
+
+#: fpr/models.py:463
+msgid "client IP address"
+msgstr "klients IP adress"
+
+#: fpr/models.py:473 fpr/models.py:498 fpr/models.py:510 fpr/models.py:524
+#: fpr/models.py:539 fpr/models.py:553 fpr/models.py:570 fpr/models.py:585
+msgid "replaces"
+msgstr "ersätter"
+
+#: fpr/models.py:474
+msgid "type"
+msgstr "typ"
+
+#: fpr/models.py:486
+msgid "command type"
+msgstr "kommandotyp"
+
+#: fpr/models.py:488
+msgid "verification command"
+msgstr "verifikationskommando"
+
+#: fpr/models.py:490
 msgid "event detail command"
-msgstr ""
+msgstr "händelsedetaljs-kommando"
 
-#: fpr/models.py:425
+#: fpr/models.py:492
 msgid "supported by"
-msgstr ""
+msgstr "stöds av"
 
-#: fpr/models.py:429
+#: fpr/models.py:496
 msgid "output file format"
-msgstr ""
+msgstr "filformat för utdata"
 
-#: fpr/models.py:468
+#: fpr/models.py:535
 msgid "valid preservation format"
-msgstr ""
+msgstr "giltigt bevarandeformat"
 
-#: fpr/models.py:469
+#: fpr/models.py:536
 msgid "valid access format"
-msgstr ""
+msgstr "giltigt åtkomstformat"
 
-#: fpr/models.py:471
+#: fpr/models.py:538
 msgid "file ID type"
-msgstr ""
+msgstr "fils ID-typ"
 
-#: fpr/models.py:485
+#: fpr/models.py:552
 msgid "classification"
-msgstr ""
+msgstr "klassificering"
 
-#: fpr/models.py:497
+#: fpr/models.py:564
 msgid "command clasification"
-msgstr ""
+msgstr "kommando klassificering"
 
-#: fpr/models.py:502 fpr/models.py:514
+#: fpr/models.py:569 fpr/models.py:581
 msgid "file ID"
-msgstr ""
+msgstr "fil-ID"
 
-#: fpr/models.py:516
+#: fpr/models.py:583
 msgid "tool"
-msgstr ""
+msgstr "verktyg"
 
-#: fpr/models.py:517
+#: fpr/models.py:584
 msgid "tool version"
-msgstr ""
+msgstr "verktygsversion"
 
 #: fpr/templates/fpr/_sidebar.html:14 fpr/templates/fpr/format/detail.html:9
 #: fpr/templates/fpr/format/form.html:19
@@ -408,139 +453,139 @@ msgstr ""
 #: fpr/templates/fpr/format/version/detail.html:10
 #: fpr/templates/fpr/format/version/form.html:10
 msgid "Formats"
-msgstr ""
+msgstr "Format"
 
 #: fpr/templates/fpr/_sidebar.html:15
 #: fpr/templates/fpr/format/group/delete.html:10
 #: fpr/templates/fpr/format/group/form.html:11
 #: fpr/templates/fpr/format/group/list.html:10
 msgid "Groups"
-msgstr "Groupes"
+msgstr "Grupper"
 
 #: fpr/templates/fpr/_sidebar.html:17
 msgid "Identification"
-msgstr ""
+msgstr "Identifiering"
 
 #: fpr/templates/fpr/_sidebar.html:18 fpr/templates/fpr/_sidebar.html.py:23
 #: fpr/templates/fpr/idrule/list.html:31
 msgid "Tools"
-msgstr ""
+msgstr "Verktyg"
 
 #: fpr/templates/fpr/_sidebar.html:19 fpr/templates/fpr/_sidebar.html.py:29
 msgid "Rules"
-msgstr ""
+msgstr "Regler"
 
 #: fpr/templates/fpr/_sidebar.html:20 fpr/templates/fpr/_sidebar.html.py:30
 #: fpr/templates/fpr/idtool/detail.html:38
 msgid "Commands"
-msgstr ""
+msgstr "Kommandon"
 
 #: fpr/templates/fpr/_sidebar.html:22
 msgid "Format policy registry"
-msgstr ""
+msgstr "Formatpolicyregister"
 
 #: fpr/templates/fpr/app_layout.html:5
 msgid "Format Policy Registry"
-msgstr ""
+msgstr "Formatpolicyregister"
 
 #: fpr/templates/fpr/app_layout.html:36
 msgctxt "DataTable - emptyTable"
 msgid "No data available in table"
-msgstr ""
+msgstr "Ingen data tillgänglig i tabellen"
 
 #: fpr/templates/fpr/app_layout.html:37
 msgctxt "DataTable - info"
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr ""
+msgstr "Visar _START_ till _END_ av _TOTAL_ poster"
 
 #: fpr/templates/fpr/app_layout.html:38
 msgctxt "DataTable - infoEmpty"
 msgid "Showing 0 to 0 of 0 entries"
-msgstr ""
+msgstr "Visar 0 till 0 av 0 poster"
 
 #: fpr/templates/fpr/app_layout.html:39
 msgctxt "DataTable - infoFiltered"
 msgid "(filtered from _MAX_ total entries)"
-msgstr ""
+msgstr "(filterat från totalt _MAX_ poster)"
 
 #: fpr/templates/fpr/app_layout.html:41
 msgctxt "DataTable - thousands"
 msgid ","
-msgstr ""
+msgstr ","
 
 #: fpr/templates/fpr/app_layout.html:42
 msgctxt "DataTable - lengthMenu"
 msgid "Show _MENU_ entries"
-msgstr ""
+msgstr "Visa _MENU_ poster"
 
 #: fpr/templates/fpr/app_layout.html:43
 msgctxt "DataTable - loadingRecords"
 msgid "Loading..."
-msgstr ""
+msgstr "Laddar..."
 
 #: fpr/templates/fpr/app_layout.html:44
 msgctxt "DataTable - processing"
 msgid "Processing..."
-msgstr ""
+msgstr "Bearbetar..."
 
 #: fpr/templates/fpr/app_layout.html:45
 msgctxt "DataTable - search"
 msgid "Search:"
-msgstr ""
+msgstr "Sök:"
 
 #: fpr/templates/fpr/app_layout.html:46
 msgctxt "DataTable - zeroRecords"
 msgid "No matching records found"
-msgstr ""
+msgstr "Inga matchande arkiv hittade"
 
 #: fpr/templates/fpr/app_layout.html:48
 msgctxt "DataTable - first"
 msgid "First"
-msgstr ""
+msgstr "Först"
 
 #: fpr/templates/fpr/app_layout.html:49
 msgctxt "DataTable - last"
 msgid "Last"
-msgstr ""
+msgstr "Sist"
 
 #: fpr/templates/fpr/app_layout.html:50
 msgctxt "DataTable - next"
 msgid "Next"
-msgstr "Suivant"
+msgstr "Nästa"
 
 #: fpr/templates/fpr/app_layout.html:51
 msgctxt "DataTable - previous"
 msgid "Previous"
-msgstr "Précédent"
+msgstr "Föregående"
 
 #: fpr/templates/fpr/app_layout.html:54
 msgctxt "DataTable - sortAscending"
 msgid ": activate to sort column ascending"
-msgstr ""
+msgstr ": aktivera för att sortera kolumnen stigande"
 
 #: fpr/templates/fpr/app_layout.html:55
 msgctxt "DataTable - sortDescending"
 msgid ": activate to sort column descending"
-msgstr ""
+msgstr ": aktivera för att sortera kolumnen fallande"
 
 #: fpr/templates/fpr/disable.html:32
 #, python-format
 msgid "Disable %(object)s"
-msgstr ""
+msgstr "Inaktivera %(object)s"
 
 #: fpr/templates/fpr/disable.html:34
 #, python-format
 msgid "Enable %(object)s"
-msgstr ""
+msgstr "Aktivera %(object)s"
 
 #: fpr/templates/fpr/disable.html:41
 #: fpr/templates/fpr/format/group/delete.html:25
 msgid "Are you sure?"
-msgstr ""
+msgstr "Är du säker?"
 
 #: fpr/templates/fpr/disable.html:44
 msgid "The following rules will also be disabled:"
-msgstr ""
+msgstr "Följande regler kommer också att inaktiveras:"
 
 #: fpr/templates/fpr/disable.html:57 fpr/templates/fpr/format/detail.html:74
 #: fpr/templates/fpr/fpcommand/detail.html:59
@@ -552,18 +597,18 @@ msgstr ""
 #: fpr/templates/fpr/idrule/detail.html:39
 #: fpr/templates/fpr/idrule/list.html:48
 msgid "Disable,Enable"
-msgstr ""
+msgstr "Inaktivera,Aktivera"
 
 #: fpr/templates/fpr/disable.html:58
 #: fpr/templates/fpr/format/group/delete.html:50
 msgid "Cancel"
-msgstr "Annuler"
+msgstr "Avbryt"
 
 #: fpr/templates/fpr/format/detail.html:4
 #: fpr/templates/fpr/format/detail.html:5
 #, python-format
 msgid "Format %(description)s"
-msgstr ""
+msgstr "Format %(description)s"
 
 #: fpr/templates/fpr/format/detail.html:23
 #: fpr/templates/fpr/format/version/detail.html:27
@@ -576,7 +621,7 @@ msgstr ""
 #: fpr/templates/fpr/idtool/detail.html:23
 #: fpr/templates/fpr/revisions/list.html:25
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: fpr/templates/fpr/format/detail.html:25
 #: fpr/templates/fpr/format/detail.html:52
@@ -592,12 +637,12 @@ msgstr ""
 #: fpr/templates/fpr/idtool/detail.html:25
 #: fpr/templates/fpr/idtool/list.html:29
 msgid "Description"
-msgstr "Description"
+msgstr "Beskrivning"
 
 #: fpr/templates/fpr/format/detail.html:27
 #: fpr/templates/fpr/format/list.html:34
 msgid "Group"
-msgstr "Groupe"
+msgstr "Grupp"
 
 #: fpr/templates/fpr/format/detail.html:36
 #: fpr/templates/fpr/format/detail.html:58
@@ -620,7 +665,7 @@ msgstr "Groupe"
 #: fpr/templates/fpr/idtool/detail.html:52
 #: fpr/templates/fpr/idtool/list.html:31
 msgid "Actions"
-msgstr "Actions"
+msgstr "Åtgärder"
 
 #: fpr/templates/fpr/format/detail.html:37
 #: fpr/templates/fpr/format/group/form.html:53
@@ -631,15 +676,15 @@ msgstr "Actions"
 #: fpr/templates/fpr/idtool/detail.html:33
 #: fpr/templates/fpr/idtool/list.html:43
 msgid "Edit"
-msgstr "Modifier"
+msgstr "Redigera"
 
 #: fpr/templates/fpr/format/detail.html:42
 msgid "Specific versions"
-msgstr ""
+msgstr "Specifika versioner"
 
 #: fpr/templates/fpr/format/detail.html:45
 msgid "Create new format version"
-msgstr ""
+msgstr "Skapa ny formatversion"
 
 #: fpr/templates/fpr/format/detail.html:53
 #: fpr/templates/fpr/format/version/detail.html:29
@@ -652,15 +697,15 @@ msgstr "Version"
 
 #: fpr/templates/fpr/format/detail.html:54
 msgid "Pronom ID"
-msgstr ""
+msgstr "Pronom ID"
 
 #: fpr/templates/fpr/format/detail.html:55
 msgid "Access format?"
-msgstr ""
+msgstr "Åtkomstformat?"
 
 #: fpr/templates/fpr/format/detail.html:56
 msgid "Preservation format?"
-msgstr ""
+msgstr "Bevarandeformat?"
 
 #: fpr/templates/fpr/format/detail.html:57
 #: fpr/templates/fpr/format/version/detail.html:34
@@ -676,7 +721,7 @@ msgstr ""
 #: fpr/templates/fpr/idtool/detail.html:29
 #: fpr/templates/fpr/idtool/detail.html:51
 msgid "Enabled"
-msgstr "Activé"
+msgstr "Aktiverad"
 
 #: fpr/templates/fpr/format/detail.html:67
 #: fpr/templates/fpr/format/detail.html:68
@@ -695,7 +740,7 @@ msgstr "Activé"
 #: fpr/templates/fpr/idtool/detail.html:30
 #: fpr/templates/fpr/idtool/detail.html:61
 msgid "Yes,No"
-msgstr ""
+msgstr "Ja,Nej"
 
 #: fpr/templates/fpr/format/detail.html:71
 #: fpr/templates/fpr/format/list.html:50
@@ -706,7 +751,7 @@ msgstr ""
 #: fpr/templates/fpr/idtool/detail.html:63
 #: fpr/templates/fpr/idtool/list.html:40
 msgid "View"
-msgstr "Affichage"
+msgstr "Visa"
 
 #: fpr/templates/fpr/format/detail.html:73
 #: fpr/templates/fpr/format/version/detail.html:36
@@ -721,7 +766,7 @@ msgstr "Affichage"
 #: fpr/templates/fpr/idrule/list.html:47
 #: fpr/templates/fpr/idtool/detail.html:65
 msgid "Replace"
-msgstr "Remplacer"
+msgstr "Ersätt"
 
 #: fpr/templates/fpr/format/detail.html:82
 #, python-format
@@ -730,6 +775,9 @@ msgid ""
 "          No versions exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"          Inga versioner existerar för %(description)s.\n"
+"        "
 
 #: fpr/templates/fpr/format/form.html:49
 #: fpr/templates/fpr/format/group/form.html:32
@@ -739,38 +787,40 @@ msgstr ""
 #: fpr/templates/fpr/idcommand/form.html:32
 #: fpr/templates/fpr/idrule/form.html:29 fpr/templates/fpr/idtool/form.html:30
 msgid "Save"
-msgstr "Sauvegarder"
+msgstr "Spara"
 
 #: fpr/templates/fpr/format/group/delete.html:4
 #: fpr/templates/fpr/format/group/delete.html:5
 #, python-format
 msgid "Delete format group %(description)s"
-msgstr ""
+msgstr "radera formatgrupp %(description)s"
 
 #: fpr/templates/fpr/format/group/delete.html:12
 #: fpr/templates/fpr/format/group/delete.html:49
 #: fpr/templates/fpr/format/group/list.html:51
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Radera"
 
 #: fpr/templates/fpr/format/group/delete.html:30
 #, python-format
 msgid ""
 "\n"
-"                %(count)s format(s) were found that are a member of this "
-"group.\n"
+"                %(count)s format(s) were found that are a member of this group.\n"
 "              "
 msgstr ""
+"\n"
+"                %(count)s format hittades som är del av denna grupp.\n"
+"              "
 
 #: fpr/templates/fpr/format/group/delete.html:37
 msgid ""
 "Substitute formats that are a member of this group with the following group:"
-msgstr ""
+msgstr "Ersätt format som är del av denna grupp med följande grupp:"
 
 #: fpr/templates/fpr/format/group/form.html:39
 #: fpr/templates/fpr/format/list.html:26
 msgid "Create new format"
-msgstr ""
+msgstr "Skapa nytt format"
 
 #: fpr/templates/fpr/format/group/form.html:60
 #, python-format
@@ -779,11 +829,14 @@ msgid ""
 "          No formats exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"          Det saknas format för %(description)s.\n"
+"        "
 
 #: fpr/templates/fpr/format/group/list.html:4
 #: fpr/templates/fpr/format/group/list.html:5
 msgid "Format groups"
-msgstr ""
+msgstr "Formatgrupper"
 
 #: fpr/templates/fpr/format/group/list.html:11
 #: fpr/templates/fpr/format/list.html:10
@@ -793,59 +846,59 @@ msgstr ""
 #: fpr/templates/fpr/idrule/list.html:10 fpr/templates/fpr/idtool/list.html:10
 #: fpr/templates/fpr/revisions/list.html:10
 msgid "List"
-msgstr "Liste"
+msgstr "Lista"
 
 #: fpr/templates/fpr/format/group/list.html:23
 msgid "Create new format group"
-msgstr ""
+msgstr "Skapa ny formatgrupp"
 
 #: fpr/templates/fpr/format/group/list.html:60
 msgid "No format groups exist."
-msgstr ""
+msgstr "Inga formatgrupper existerar."
 
 #: fpr/templates/fpr/format/list.html:60
 msgid "No formats exist."
-msgstr ""
+msgstr "Inga format existerar."
 
 #: fpr/templates/fpr/format/version/detail.html:5
 #, python-format
 msgid "Format version %(description)s"
-msgstr ""
+msgstr "Fomatversion %(description)s"
 
 #: fpr/templates/fpr/format/version/detail.html:6
 #, python-format
 msgid "Format version %(format)s"
-msgstr ""
+msgstr "Formatversion %(format)s"
 
 #: fpr/templates/fpr/format/version/detail.html:30
 msgid "Pronom"
-msgstr ""
+msgstr "Pronom"
 
 #: fpr/templates/fpr/format/version/detail.html:32
 msgid "Access?"
-msgstr ""
+msgstr "Åtkomst?"
 
 #: fpr/templates/fpr/fpcommand/detail.html:5
 #: fpr/templates/fpr/fpcommand/detail.html:6
 #: fpr/templates/fpr/fpcommand/detail.html:11
 #, python-format
 msgid "Command %(description)s"
-msgstr ""
+msgstr "Kommando %(description)s"
 
 #: fpr/templates/fpr/fpcommand/detail.html:10
 #: fpr/templates/fpr/fpcommand/form.html:10
 #: fpr/templates/fpr/fpcommand/list.html:4
 #: fpr/templates/fpr/fpcommand/list.html:5
-#: fpr/templates/fpr/fpcommand/list.html:9 fpr/views.py:564
+#: fpr/templates/fpr/fpcommand/list.html:9 fpr/views.py:567
 msgid "Format policy commands"
-msgstr ""
+msgstr "Formatpolicykommandon"
 
 #: fpr/templates/fpr/fpcommand/detail.html:30
 #: fpr/templates/fpr/fpcommand/list.html:31
 #: fpr/templates/fpr/idcommand/detail.html:28
 #: fpr/templates/fpr/idcommand/list.html:30
 msgid "Tool"
-msgstr ""
+msgstr "Verktyg"
 
 #: fpr/templates/fpr/fpcommand/detail.html:32
 #: fpr/templates/fpr/fprule/detail.html:32
@@ -856,125 +909,125 @@ msgstr ""
 #: fpr/templates/fpr/idrule/list.html:29
 #: fpr/templates/fpr/idtool/detail.html:50
 msgid "Command"
-msgstr ""
+msgstr "Kommando"
 
 #: fpr/templates/fpr/fpcommand/detail.html:34
 #: fpr/templates/fpr/idcommand/detail.html:36
 msgid "Script type"
-msgstr ""
+msgstr "Skript typ"
 
 #: fpr/templates/fpr/fpcommand/detail.html:36
 msgid "Output file format"
-msgstr ""
+msgstr "Utdatas filformat"
 
 #: fpr/templates/fpr/fpcommand/detail.html:37
 #: fpr/templates/fpr/fpcommand/detail.html:39
 #: fpr/templates/fpr/fpcommand/detail.html:52
 msgid "None"
-msgstr "Aucun"
+msgstr "Inga"
 
 #: fpr/templates/fpr/fpcommand/detail.html:38
 msgid "Output location"
-msgstr ""
+msgstr "Utdatas placering"
 
 #: fpr/templates/fpr/fpcommand/detail.html:40
 msgid "Command usage"
-msgstr ""
+msgstr "Kommandoanvändning"
 
 #: fpr/templates/fpr/fpcommand/detail.html:42
 msgid "Verification command"
-msgstr ""
+msgstr "Verifieringskommando"
 
 #: fpr/templates/fpr/fpcommand/detail.html:48
 msgid "Event detail command"
-msgstr ""
+msgstr "Händelsedetaljs-kommando"
 
 #: fpr/templates/fpr/fpcommand/list.html:22
 #: fpr/templates/fpr/idcommand/list.html:21
 #: fpr/templates/fpr/idtool/detail.html:41
 msgid "Create new command"
-msgstr ""
+msgstr "Skapa nytt kommando"
 
 #: fpr/templates/fpr/fpcommand/list.html:30
 msgid "Usage"
-msgstr ""
+msgstr "Användning"
 
 #: fpr/templates/fpr/fpcommand/list.html:54
 msgid "No format policy commands exist."
-msgstr ""
+msgstr "Inga formatpolicykommandon existera."
 
 #: fpr/templates/fpr/fprule/detail.html:5
 #: fpr/templates/fpr/fprule/detail.html:6
 #: fpr/templates/fpr/fprule/detail.html:11
 #, python-format
 msgid "Rule %(description)s"
-msgstr ""
+msgstr "Regel %(description)s"
 
 #: fpr/templates/fpr/fprule/detail.html:10
-#: fpr/templates/fpr/fprule/form.html:10 fpr/views.py:456
+#: fpr/templates/fpr/fprule/form.html:10 fpr/views.py:458
 msgid "Format policy rules"
-msgstr ""
+msgstr "Formatpolicyregler"
 
 #: fpr/templates/fpr/fprule/detail.html:28
 #: fpr/templates/fpr/fprule/list.html:29
 msgid "Purpose"
-msgstr ""
+msgstr "Syfte"
 
 #: fpr/templates/fpr/fprule/detail.html:34
 msgid "Stats"
-msgstr ""
+msgstr "Statisitik"
 
 #: fpr/templates/fpr/fprule/detail.html:35
 #, python-format
 msgid "Success: %(count)s"
-msgstr ""
+msgstr "Lyckad(e): %(count)s"
 
 #: fpr/templates/fpr/fprule/detail.html:36
 #, python-format
 msgid "Failure: %(count)s"
-msgstr ""
+msgstr "Misslyckad(e): %(count)s"
 
 #: fpr/templates/fpr/fprule/detail.html:37
 #, python-format
 msgid "Total: %(count)s"
-msgstr ""
+msgstr "Totalt: %(count)s"
 
 #: fpr/templates/fpr/fprule/list.html:4 fpr/templates/fpr/fprule/list.html:5
 #: fpr/templates/fpr/fprule/list.html:9
 msgid "Format policy rules "
-msgstr ""
+msgstr "Formatpolicyregler"
 
 #: fpr/templates/fpr/fprule/list.html:22 fpr/templates/fpr/idrule/list.html:21
 msgid "Create new rule"
-msgstr ""
+msgstr "Skapa ny regel"
 
 #: fpr/templates/fpr/fprule/list.html:32
 msgid "Success"
-msgstr ""
+msgstr "Lyckat"
 
 #: fpr/templates/fpr/fprule/list.html:59
 msgid "No format policy rules exist."
-msgstr ""
+msgstr "Inga formatpolicyregler finns."
 
 #: fpr/templates/fpr/fptool/detail.html:4
 #: fpr/templates/fpr/fptool/detail.html:5
 #, python-format
 msgid "Format policy registry tool %(description)s %(version)s"
-msgstr ""
+msgstr "Formatpolicyregistersverktyg %(description)s %(version)s"
 
-#: fpr/templates/fpr/fptool/detail.html:9 fpr/templates/fpr/fptool/form.html:10
-#: fpr/templates/fpr/fptool/list.html:4 fpr/templates/fpr/fptool/list.html:5
-#: fpr/templates/fpr/fptool/list.html:9
+#: fpr/templates/fpr/fptool/detail.html:9
+#: fpr/templates/fpr/fptool/form.html:10 fpr/templates/fpr/fptool/list.html:4
+#: fpr/templates/fpr/fptool/list.html:5 fpr/templates/fpr/fptool/list.html:9
 msgid "Format policy registry tools"
-msgstr ""
+msgstr "Formatpolicyregistersversion"
 
 #: fpr/templates/fpr/fptool/detail.html:38
 msgid "Tool commands"
-msgstr ""
+msgstr "Verktygskommandon"
 
 #: fpr/templates/fpr/fptool/detail.html:41
 msgid "Create new tool command"
-msgstr ""
+msgstr "Skapa nytt verktygskommando"
 
 #: fpr/templates/fpr/fptool/detail.html:69
 #: fpr/templates/fpr/idtool/detail.html:75
@@ -984,265 +1037,270 @@ msgid ""
 "          No commands exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"          Det finns inga kommandon för %(description)s.\n"
+"        "
 
 #: fpr/templates/fpr/fptool/list.html:22 fpr/templates/fpr/idtool/list.html:22
 msgid "Create new tool"
-msgstr ""
+msgstr "Skapa nytt verktyg"
 
 #: fpr/templates/fpr/fptool/list.html:50
 msgid "No tools exist."
-msgstr ""
+msgstr "Det finns inga verktyg"
 
 #: fpr/templates/fpr/idcommand/detail.html:5
 #: fpr/templates/fpr/idcommand/detail.html:6
 #, python-format
 msgid "Identification command %(description)s"
-msgstr ""
+msgstr "Identifieringskommando %(description)s"
 
 #: fpr/templates/fpr/idcommand/detail.html:10
 #: fpr/templates/fpr/idcommand/form.html:10
 #: fpr/templates/fpr/idcommand/list.html:4
 #: fpr/templates/fpr/idcommand/list.html:5
-#: fpr/templates/fpr/idcommand/list.html:9 fpr/views.py:369
+#: fpr/templates/fpr/idcommand/list.html:9 fpr/views.py:371
 msgid "Identification commands"
-msgstr ""
+msgstr "Identifieringskommandon"
 
 #: fpr/templates/fpr/idcommand/detail.html:32
 #: fpr/templates/fpr/idcommand/list.html:31
 msgid "Mode"
-msgstr ""
+msgstr "Läge"
 
 #: fpr/templates/fpr/idcommand/detail.html:34
 msgid "Script"
-msgstr "Écriture"
+msgstr "Skript"
 
 #: fpr/templates/fpr/idcommand/list.html:29
 msgid "Type"
-msgstr "Type"
+msgstr "Typ"
 
 #: fpr/templates/fpr/idcommand/list.html:56
 msgid "No identification commands exist."
-msgstr ""
+msgstr "Inga identifieringskommandon existerar."
 
 #: fpr/templates/fpr/idrule/detail.html:5
 #: fpr/templates/fpr/idrule/detail.html:6
 #: fpr/templates/fpr/idrule/detail.html:11
 #, python-format
 msgid "Identification rule %(uuid)s"
-msgstr ""
+msgstr "Identifieringsregel %(uuid)s"
 
 #: fpr/templates/fpr/idrule/detail.html:10
 #: fpr/templates/fpr/idrule/form.html:10 fpr/templates/fpr/idrule/list.html:4
 #: fpr/templates/fpr/idrule/list.html:5 fpr/templates/fpr/idrule/list.html:9
 #: fpr/views.py:300
 msgid "Identification rules"
-msgstr ""
+msgstr "Identifieringsregler"
 
 #: fpr/templates/fpr/idrule/detail.html:32
 msgid "Command output"
-msgstr ""
+msgstr "Kommandoutdata"
 
 #: fpr/templates/fpr/idrule/list.html:30
 msgid "Output"
-msgstr ""
+msgstr "Utdata"
 
 #: fpr/templates/fpr/idrule/list.html:56
 msgid "No identification rules exist."
-msgstr ""
+msgstr "Det finns inga identfieringsregler."
 
 #: fpr/templates/fpr/idtool/detail.html:4
 #: fpr/templates/fpr/idtool/detail.html:5
 #, python-format
 msgid "Identification tool %(description)s"
-msgstr ""
+msgstr "Identifieringsverktyg %(description)s"
 
-#: fpr/templates/fpr/idtool/detail.html:9 fpr/templates/fpr/idtool/form.html:10
-#: fpr/templates/fpr/idtool/list.html:4 fpr/templates/fpr/idtool/list.html:5
-#: fpr/templates/fpr/idtool/list.html:9
+#: fpr/templates/fpr/idtool/detail.html:9
+#: fpr/templates/fpr/idtool/form.html:10 fpr/templates/fpr/idtool/list.html:4
+#: fpr/templates/fpr/idtool/list.html:5 fpr/templates/fpr/idtool/list.html:9
 msgid "Identification tools"
-msgstr ""
+msgstr "Identifieringsverktyg"
 
 #: fpr/templates/fpr/idtool/detail.html:48
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurering"
 
 #: fpr/templates/fpr/idtool/detail.html:49
 msgid "Identifier"
-msgstr "Identifiant"
+msgstr "Signum"
 
 #: fpr/templates/fpr/idtool/detail.html:66
 msgid "Disable"
-msgstr ""
+msgstr "Inaktivera"
 
 #: fpr/templates/fpr/idtool/list.html:51
 msgid "No identification tools exist."
-msgstr ""
+msgstr "Det finns inga identfieringsverktyg."
 
 #: fpr/templates/fpr/revisions/list.html:4
 #: fpr/templates/fpr/revisions/list.html:9
 msgid "Revisions"
-msgstr ""
+msgstr "Bearbetning"
 
 #: fpr/templates/fpr/revisions/list.html:5
 #, python-format
 msgid "%(revision_type)s revision history"
-msgstr ""
+msgstr "%(revision_type)s bearbetningshistioria"
 
 #: fpr/templates/fpr/revisions/list.html:26
 msgid "Last modified"
-msgstr ""
+msgstr "Senast ändrad"
 
 #: fpr/templates/fpr/revisions/list.html:49
 msgid "No revisions exist."
-msgstr ""
+msgstr "Inga bearbetningar existerar."
 
-#: fpr/utils.py:59
+#: fpr/utils.py:65
 msgid ""
 "You are replacing the current revision with data from an older revision."
 msgstr ""
+"Du ersätter den nuvarande bearbetningen med data från en tidigare "
+"bearbetning."
 
-#: fpr/utils.py:63
+#: fpr/utils.py:70
 msgid "You are viewing a disabled revision."
-msgstr ""
+msgstr "Du visar en inaktiverad bearbetning."
 
 #: fpr/views.py:83
 #, python-format
 msgid "Edit format %(name)s"
-msgstr ""
+msgstr "Redigera format %(name)s"
 
 #: fpr/views.py:85
 msgid "Create format"
-msgstr ""
+msgstr "Skapa format"
 
 #: fpr/views.py:96 fpr/views.py:103 fpr/views.py:135 fpr/views.py:255
-#: fpr/views.py:288 fpr/views.py:356 fpr/views.py:436 fpr/views.py:444
-#: fpr/views.py:502 fpr/views.py:544
+#: fpr/views.py:288 fpr/views.py:358 fpr/views.py:438 fpr/views.py:446
+#: fpr/views.py:504 fpr/views.py:546
 msgid "Saved."
-msgstr ""
+msgstr "Sparad."
 
 #: fpr/views.py:123
 #, python-format
 msgid "Replace format version %(name)s"
-msgstr ""
+msgstr "Ersätt formatversion %(name)s"
 
-#: fpr/views.py:126 fpr/views.py:533
+#: fpr/views.py:126 fpr/views.py:535
 msgid "Create format version"
-msgstr ""
+msgstr "Skapa formatversion"
 
 #: fpr/views.py:149
 msgid "Format versions"
-msgstr ""
+msgstr "Formatversioner"
 
-#: fpr/views.py:155 fpr/views.py:306 fpr/views.py:375 fpr/views.py:463
-#: fpr/views.py:570
+#: fpr/views.py:155 fpr/views.py:306 fpr/views.py:377 fpr/views.py:465
+#: fpr/views.py:573
 msgid "Disabled."
-msgstr ""
+msgstr "Inaktiverad."
 
-#: fpr/views.py:161 fpr/views.py:309 fpr/views.py:381 fpr/views.py:466
-#: fpr/views.py:576
+#: fpr/views.py:161 fpr/views.py:309 fpr/views.py:383 fpr/views.py:468
+#: fpr/views.py:579
 msgid "Enabled."
-msgstr ""
+msgstr "Aktiverad."
 
 #: fpr/views.py:168
 msgid "Enable/disable format version"
-msgstr ""
+msgstr "Aktivera/inaktivera formatversion"
 
 #: fpr/views.py:185
 #, python-format
 msgid "Edit format group %(name)s"
-msgstr ""
+msgstr "Redigera formatgrupp %(name)s"
 
 #: fpr/views.py:187
 msgid "Create format group"
-msgstr ""
+msgstr "Skapa formatgrupp"
 
 #: fpr/views.py:218
 #, python-format
 msgid "%(count)d substitutions were performed."
-msgstr ""
+msgstr "%(count)d ersättningar utfördes."
 
 #: fpr/views.py:220
 msgid "Please select a group to substitute for this group in member formats."
-msgstr ""
+msgstr "Vänligen välj en grupp att ersätta denna grupp i medlemsformat."
 
 #: fpr/views.py:223
 msgid "Deleted."
-msgstr ""
+msgstr "Raderad."
 
 #: fpr/views.py:247
 #, python-format
 msgid "Edit identification tool %(name)s"
-msgstr ""
+msgstr "Redigera identifieringsverktyg %(name)s"
 
 #: fpr/views.py:250
 msgid "Create identification tool"
-msgstr ""
+msgstr "Skapa identifieringsverktyg"
 
 #: fpr/views.py:279
 #, python-format
 msgid "Replace identification rule %(uuid)s"
-msgstr ""
+msgstr "Ersätt identifieringsregel %(uuid)s"
 
 #: fpr/views.py:282
 msgid "Create identification rule"
-msgstr ""
+msgstr "Skapa identifieringsregel"
 
 #: fpr/views.py:316
 msgid "Enable/disable identification rule"
-msgstr ""
+msgstr "Aktivera/deaktivera identifieringsregel"
 
 #: fpr/views.py:339
 #, python-format
 msgid "Replace identification command %(name)s"
-msgstr ""
+msgstr "Ersätt identifieringskommando %(name)s"
 
 #: fpr/views.py:342
 msgid "Create identification command"
-msgstr ""
+msgstr "Skapa identifieringskommando"
 
-#: fpr/views.py:388
+#: fpr/views.py:390
 msgid "Enable/disable identification command"
-msgstr ""
+msgstr "Aktivera/inaktivera identfieringskommando"
 
-#: fpr/views.py:422
+#: fpr/views.py:424
 #, python-format
 msgid "Replace format policy rule %(uuid)s"
-msgstr ""
+msgstr "Ersätt formatpolicyregel %(uuid)s"
 
-#: fpr/views.py:426
+#: fpr/views.py:428
 msgid "Create format policy rule"
-msgstr ""
+msgstr "Skapa formatpolicyregel"
 
-#: fpr/views.py:473
+#: fpr/views.py:475
 msgid "Enable/disable format policy registry rule"
-msgstr ""
+msgstr "Aktivera/deaktivera formatpolicyregel"
 
-#: fpr/views.py:495
+#: fpr/views.py:497
 #, python-format
 msgid "Replace format policy registry tool %(name)s"
-msgstr ""
+msgstr "Ersätt formatpolicyregistersverktyg %(name)s"
 
-#: fpr/views.py:498
+#: fpr/views.py:500
 msgid "Create format policy registry tool"
-msgstr ""
+msgstr "Skapa formatpolicyregister-verktyg"
 
-#: fpr/views.py:530
+#: fpr/views.py:532
 #, python-format
 msgid "Replace command %(name)s"
-msgstr ""
+msgstr "Ersätt kommando %(name)s"
 
-#: fpr/views.py:583
+#: fpr/views.py:586
 msgid "Enable/disable format policy command"
-msgstr ""
+msgstr "Aktivera/deaktivera formatpolicykommando"
 
-#: fpr/views.py:604
+#: fpr/views.py:607
 msgid "Identification tool configuration"
-msgstr ""
+msgstr "Identiferingsverktygs konfigurering"
 
-#: fpr/views.py:605
+#: fpr/views.py:608
 msgid "Identification rule"
-msgstr ""
+msgstr "Indtifieringsregel"
 
-#: fpr/views.py:606
+#: fpr/views.py:609
 msgid "Identification command"
-msgstr ""
+msgstr "Identifieringskommando"

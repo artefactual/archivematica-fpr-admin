@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 01:25+0000\n"
+"POT-Creation-Date: 2018-10-01 20:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,381 +17,420 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: fpr/forms.py:24 fpr/forms.py:102
+msgid "Create New"
+msgstr ""
+
+#: fpr/forms.py:58
+msgid "An ID tool with this description and version already exists"
+msgstr ""
+
+#: fpr/forms.py:124
+#, python-format
+msgid "An identical FP rule already exists. See rule %(uuid)s."
+msgstr ""
+
+#: fpr/forms.py:130
+#, python-format
+msgid ""
+" Rule %(uuid)s is disabled and has been replaced by the following rule(s): "
+"%(repl_uuids)s"
+msgstr ""
+
+#: fpr/forms.py:137
+#, python-format
+msgid " Rule %(uuid)s is disabled."
+msgstr ""
+
 #: fpr/models.py:40
 msgid "the related model"
 msgstr ""
 
-#: fpr/models.py:41 fpr/models.py:237 fpr/models.py:373 fpr/models.py:409
-#: fpr/models.py:433 fpr/models.py:445 fpr/models.py:459 fpr/models.py:474
-#: fpr/models.py:488 fpr/models.py:505 fpr/models.py:520
+#: fpr/models.py:41 fpr/models.py:296 fpr/models.py:438 fpr/models.py:476
+#: fpr/models.py:500 fpr/models.py:512 fpr/models.py:526 fpr/models.py:541
+#: fpr/models.py:555 fpr/models.py:572 fpr/models.py:587
 msgid "enabled"
 msgstr ""
 
-#: fpr/models.py:42 fpr/models.py:408 fpr/models.py:432 fpr/models.py:444
-#: fpr/models.py:458 fpr/models.py:473 fpr/models.py:487 fpr/models.py:504
-#: fpr/models.py:519
+#: fpr/models.py:42 fpr/models.py:475 fpr/models.py:499 fpr/models.py:511
+#: fpr/models.py:525 fpr/models.py:540 fpr/models.py:554 fpr/models.py:571
+#: fpr/models.py:586
 msgid "last modified"
 msgstr ""
 
-#: fpr/models.py:70 fpr/models.py:85 fpr/models.py:99 fpr/models.py:141
-#: fpr/models.py:198 fpr/models.py:234 fpr/models.py:257 fpr/models.py:333
-#: fpr/models.py:370
+#: fpr/models.py:124 fpr/models.py:141 fpr/models.py:155 fpr/models.py:197
+#: fpr/models.py:254 fpr/models.py:293 fpr/models.py:318 fpr/models.py:398
+#: fpr/models.py:435
 msgid "Unique identifier"
 msgstr ""
 
-#: fpr/models.py:71 fpr/models.py:86 fpr/models.py:103 fpr/models.py:142
-#: fpr/models.py:235 fpr/models.py:336 fpr/models.py:371 fpr/models.py:428
-#: fpr/models.py:441 fpr/models.py:456 fpr/models.py:467
+#: fpr/models.py:125 fpr/models.py:142 fpr/models.py:159 fpr/models.py:198
+#: fpr/models.py:294 fpr/models.py:401 fpr/models.py:436 fpr/models.py:495
+#: fpr/models.py:508 fpr/models.py:523 fpr/models.py:534
 msgid "description"
 msgstr ""
 
-#: fpr/models.py:71
+#: fpr/models.py:125
 msgid "Common name of format"
 msgstr ""
 
-#: fpr/models.py:72
+#: fpr/models.py:126
 msgid "the related group"
 msgstr ""
 
-#: fpr/models.py:73 fpr/models.py:87 fpr/models.py:238 fpr/models.py:374
+#: fpr/models.py:127 fpr/models.py:143 fpr/models.py:297 fpr/models.py:439
 msgid "slug"
 msgstr ""
 
-#: fpr/models.py:76 fpr/templates/fpr/format/version/detail.html:31
+#: fpr/models.py:132 fpr/templates/fpr/format/version/detail.html:31
 #: fpr/templates/fpr/fprule/detail.html:30
 #: fpr/templates/fpr/fprule/list.html:30 fpr/templates/fpr/idrule/list.html:28
 msgid "Format"
 msgstr ""
 
-#: fpr/models.py:90
+#: fpr/models.py:146
 msgid "Format group"
 msgstr ""
 
-#: fpr/models.py:100 fpr/models.py:200 fpr/models.py:298 fpr/models.py:477
+#: fpr/models.py:156 fpr/models.py:256 fpr/models.py:360 fpr/models.py:544
 msgid "the related format"
 msgstr ""
 
-#: fpr/models.py:101 fpr/models.py:236 fpr/models.py:372
+#: fpr/models.py:157 fpr/models.py:295 fpr/models.py:437
 msgid "version"
 msgstr ""
 
-#: fpr/models.py:102
+#: fpr/models.py:158
 msgid "pronom id"
 msgstr ""
 
-#: fpr/models.py:103
+#: fpr/models.py:159
 msgid "Formal name to go in the METS file."
 msgstr ""
 
-#: fpr/models.py:104
+#: fpr/models.py:160
 msgid "access format"
 msgstr ""
 
-#: fpr/models.py:105
+#: fpr/models.py:161
 msgid "preservation format"
 msgstr ""
 
-#: fpr/models.py:110 fpr/templates/fpr/idrule/detail.html:28 fpr/views.py:603
+#: fpr/models.py:166 fpr/templates/fpr/idrule/detail.html:28 fpr/views.py:606
 msgid "Format version"
 msgstr ""
 
-#: fpr/models.py:127
+#: fpr/models.py:183
 msgid ""
 "Unable to save, an active Format Version  with this pronom id already exists."
 msgstr ""
 
-#: fpr/models.py:131
+#: fpr/models.py:187
 #, python-format
-msgid "%(format)s: %(description)s"
+msgid "%(format)s: %(description)s (%(pronom_id)s)"
 msgstr ""
 
-#: fpr/models.py:142
+#: fpr/models.py:198
 msgid "Name to identify script"
 msgstr ""
 
-#: fpr/models.py:144
+#: fpr/models.py:200
 msgid "PUID"
 msgstr ""
 
-#: fpr/models.py:145
+#: fpr/models.py:201
 msgid "MIME type"
 msgstr ""
 
-#: fpr/models.py:146
+#: fpr/models.py:202
 msgid "File extension"
 msgstr ""
 
-#: fpr/models.py:148
+#: fpr/models.py:204
 msgid "configuration"
 msgstr ""
 
-#: fpr/models.py:150
+#: fpr/models.py:206
 msgid "script"
 msgstr ""
 
-#: fpr/models.py:150
+#: fpr/models.py:206
 msgid "Script to be executed."
 msgstr ""
 
-#: fpr/models.py:152 fpr/models.py:339
+#: fpr/models.py:208 fpr/models.py:404
 msgid "Bash script"
 msgstr ""
 
-#: fpr/models.py:153 fpr/models.py:340
+#: fpr/models.py:209 fpr/models.py:405
 msgid "Python script"
 msgstr ""
 
-#: fpr/models.py:154 fpr/models.py:341
+#: fpr/models.py:210 fpr/models.py:406
 msgid "Command line"
 msgstr ""
 
-#: fpr/models.py:155 fpr/models.py:342
+#: fpr/models.py:211 fpr/models.py:407
 msgid "No shebang needed"
 msgstr ""
 
-#: fpr/models.py:157 fpr/models.py:344
+#: fpr/models.py:213 fpr/models.py:409
 msgid "script type"
 msgstr ""
 
-#: fpr/models.py:158 fpr/models.py:335
+#: fpr/models.py:214 fpr/models.py:400
 msgid "the related tool"
 msgstr ""
 
-#: fpr/models.py:161
+#: fpr/models.py:217
 msgid "Format identification command"
 msgstr ""
 
-#: fpr/models.py:165
+#: fpr/models.py:221
 #, python-format
 msgid "%(tool)s %(config)s runs %(command)s"
 msgstr ""
 
-#: fpr/models.py:199 fpr/models.py:297
+#: fpr/models.py:255 fpr/models.py:359
 msgid "the related command"
 msgstr ""
 
-#: fpr/models.py:202
+#: fpr/models.py:258
 msgid "command output"
 msgstr ""
 
-#: fpr/models.py:205
+#: fpr/models.py:261
 msgid "Format identification rule"
 msgstr ""
 
-#: fpr/models.py:221
+#: fpr/models.py:277
 msgid ""
 "Unable to save, a rule with this output already exists for this command."
 msgstr ""
 
-#: fpr/models.py:225
+#: fpr/models.py:281
+#, python-format
+msgid "Format identification rule %(uuid)s"
+msgstr ""
+
+#: fpr/models.py:284
 #, python-format
 msgid "%(command)s with %(output)s is %(format)s"
 msgstr ""
 
-#: fpr/models.py:235 fpr/models.py:371
+#: fpr/models.py:294 fpr/models.py:436
 msgid "Name of tool"
 msgstr ""
 
-#: fpr/models.py:241
+#: fpr/models.py:300
 msgid "Format identification tool"
 msgstr ""
 
-#: fpr/models.py:247 fpr/models.py:381
+#: fpr/models.py:306 fpr/models.py:446
 #, python-format
 msgid "%(description)s version %(version)s"
 msgstr ""
 
-#: fpr/models.py:275
+#: fpr/models.py:335
 msgid "Access"
 msgstr ""
 
-#: fpr/models.py:276 fpr/models.py:348
+#: fpr/models.py:336 fpr/models.py:413
 msgid "Characterization"
 msgstr ""
 
-#: fpr/models.py:277
+#: fpr/models.py:337
 msgid "Extract"
 msgstr ""
 
-#: fpr/models.py:278 fpr/templates/fpr/format/version/detail.html:33
+#: fpr/models.py:338 fpr/templates/fpr/format/version/detail.html:33
 msgid "Preservation"
 msgstr ""
 
-#: fpr/models.py:279
+#: fpr/models.py:339
 msgid "Thumbnail"
 msgstr ""
 
-#: fpr/models.py:280 fpr/models.py:352
+#: fpr/models.py:340 fpr/models.py:417
 msgid "Transcription"
 msgstr ""
 
-#: fpr/models.py:281 fpr/models.py:353
+#: fpr/models.py:341 fpr/models.py:418
 msgid "Validation"
 msgstr ""
 
-#: fpr/models.py:284
+#: fpr/models.py:342
+msgid "Validation against a policy"
+msgstr ""
+
+#: fpr/models.py:345
 msgid "Default access"
 msgstr ""
 
-#: fpr/models.py:285
+#: fpr/models.py:346
 msgid "Default characterization"
 msgstr ""
 
-#: fpr/models.py:286
+#: fpr/models.py:347
 msgid "Default thumbnail"
 msgstr ""
 
-#: fpr/models.py:296
+#: fpr/models.py:358
 msgid "purpose"
 msgstr ""
 
-#: fpr/models.py:300
+#: fpr/models.py:362
 msgid "count attempts"
 msgstr ""
 
-#: fpr/models.py:301
+#: fpr/models.py:363
 msgid "count okay"
 msgstr ""
 
-#: fpr/models.py:302
+#: fpr/models.py:364
 msgid "count not okay"
 msgstr ""
 
-#: fpr/models.py:305 fpr/views.py:608
+#: fpr/models.py:367 fpr/views.py:611
 msgid "Format policy rule"
 msgstr ""
 
-#: fpr/models.py:325
+#: fpr/models.py:387
+#, python-format
+msgid "Format policy rule %(uuid)s"
+msgstr ""
+
+#: fpr/models.py:390
 #, python-format
 msgid "Normalize %(format)s for %(purpose)s via %(command)s"
 msgstr ""
 
-#: fpr/models.py:337 fpr/models.py:426 fpr/models.py:501
+#: fpr/models.py:402 fpr/models.py:493 fpr/models.py:568
 msgid "command"
 msgstr ""
 
-#: fpr/models.py:345 fpr/models.py:427
+#: fpr/models.py:410 fpr/models.py:494
 msgid "output location"
 msgstr ""
 
-#: fpr/models.py:346
+#: fpr/models.py:411
 msgid "the related output format"
 msgstr ""
 
-#: fpr/models.py:349
+#: fpr/models.py:414
 msgid "Event Detail"
 msgstr ""
 
-#: fpr/models.py:350
+#: fpr/models.py:415
 msgid "Extraction"
 msgstr ""
 
-#: fpr/models.py:351
+#: fpr/models.py:416
 msgid "Normalization"
 msgstr ""
 
-#: fpr/models.py:354
+#: fpr/models.py:419
 msgid "Verification"
 msgstr ""
 
-#: fpr/models.py:356 fpr/models.py:418
+#: fpr/models.py:421 fpr/models.py:485
 msgid "command usage"
 msgstr ""
 
-#: fpr/models.py:357
+#: fpr/models.py:422
 msgid "the related verification command"
 msgstr ""
 
-#: fpr/models.py:358
+#: fpr/models.py:423
 msgid "the related event detail command"
 msgstr ""
 
-#: fpr/models.py:361 fpr/views.py:607
+#: fpr/models.py:426 fpr/views.py:610
 msgid "Format policy command"
 msgstr ""
 
-#: fpr/models.py:378
+#: fpr/models.py:443
 msgid "Normalization tool"
 msgstr ""
 
-#: fpr/models.py:392
+#: fpr/models.py:459
 msgid "agent identifier type"
 msgstr ""
 
-#: fpr/models.py:393
+#: fpr/models.py:460
 msgid "agent identifier value"
 msgstr ""
 
-#: fpr/models.py:394
+#: fpr/models.py:461
 msgid "agent name"
 msgstr ""
 
-#: fpr/models.py:395
+#: fpr/models.py:462
 msgid "agent type"
 msgstr ""
 
-#: fpr/models.py:396
+#: fpr/models.py:463
 msgid "client IP address"
 msgstr ""
 
-#: fpr/models.py:406 fpr/models.py:431 fpr/models.py:443 fpr/models.py:457
-#: fpr/models.py:472 fpr/models.py:486 fpr/models.py:503 fpr/models.py:518
+#: fpr/models.py:473 fpr/models.py:498 fpr/models.py:510 fpr/models.py:524
+#: fpr/models.py:539 fpr/models.py:553 fpr/models.py:570 fpr/models.py:585
 msgid "replaces"
 msgstr ""
 
-#: fpr/models.py:407
+#: fpr/models.py:474
 msgid "type"
 msgstr ""
 
-#: fpr/models.py:419
+#: fpr/models.py:486
 msgid "command type"
 msgstr ""
 
-#: fpr/models.py:421
+#: fpr/models.py:488
 msgid "verification command"
 msgstr ""
 
-#: fpr/models.py:423
+#: fpr/models.py:490
 msgid "event detail command"
 msgstr ""
 
-#: fpr/models.py:425
+#: fpr/models.py:492
 msgid "supported by"
 msgstr ""
 
-#: fpr/models.py:429
+#: fpr/models.py:496
 msgid "output file format"
 msgstr ""
 
-#: fpr/models.py:468
+#: fpr/models.py:535
 msgid "valid preservation format"
 msgstr ""
 
-#: fpr/models.py:469
+#: fpr/models.py:536
 msgid "valid access format"
 msgstr ""
 
-#: fpr/models.py:471
+#: fpr/models.py:538
 msgid "file ID type"
 msgstr ""
 
-#: fpr/models.py:485
+#: fpr/models.py:552
 msgid "classification"
 msgstr ""
 
-#: fpr/models.py:497
+#: fpr/models.py:564
 msgid "command clasification"
 msgstr ""
 
-#: fpr/models.py:502 fpr/models.py:514
+#: fpr/models.py:569 fpr/models.py:581
 msgid "file ID"
 msgstr ""
 
-#: fpr/models.py:516
+#: fpr/models.py:583
 msgid "tool"
 msgstr ""
 
-#: fpr/models.py:517
+#: fpr/models.py:584
 msgid "tool version"
 msgstr ""
 
@@ -834,7 +873,7 @@ msgstr ""
 #: fpr/templates/fpr/fpcommand/form.html:10
 #: fpr/templates/fpr/fpcommand/list.html:4
 #: fpr/templates/fpr/fpcommand/list.html:5
-#: fpr/templates/fpr/fpcommand/list.html:9 fpr/views.py:564
+#: fpr/templates/fpr/fpcommand/list.html:9 fpr/views.py:567
 msgid "Format policy commands"
 msgstr ""
 
@@ -909,7 +948,7 @@ msgid "Rule %(description)s"
 msgstr ""
 
 #: fpr/templates/fpr/fprule/detail.html:10
-#: fpr/templates/fpr/fprule/form.html:10 fpr/views.py:456
+#: fpr/templates/fpr/fprule/form.html:10 fpr/views.py:458
 msgid "Format policy rules"
 msgstr ""
 
@@ -1001,7 +1040,7 @@ msgstr ""
 #: fpr/templates/fpr/idcommand/form.html:10
 #: fpr/templates/fpr/idcommand/list.html:4
 #: fpr/templates/fpr/idcommand/list.html:5
-#: fpr/templates/fpr/idcommand/list.html:9 fpr/views.py:369
+#: fpr/templates/fpr/idcommand/list.html:9 fpr/views.py:371
 msgid "Identification commands"
 msgstr ""
 
@@ -1094,12 +1133,12 @@ msgstr ""
 msgid "No revisions exist."
 msgstr ""
 
-#: fpr/utils.py:59
+#: fpr/utils.py:65
 msgid ""
 "You are replacing the current revision with data from an older revision."
 msgstr ""
 
-#: fpr/utils.py:63
+#: fpr/utils.py:70
 msgid "You are viewing a disabled revision."
 msgstr ""
 
@@ -1113,8 +1152,8 @@ msgid "Create format"
 msgstr ""
 
 #: fpr/views.py:96 fpr/views.py:103 fpr/views.py:135 fpr/views.py:255
-#: fpr/views.py:288 fpr/views.py:356 fpr/views.py:436 fpr/views.py:444
-#: fpr/views.py:502 fpr/views.py:544
+#: fpr/views.py:288 fpr/views.py:358 fpr/views.py:438 fpr/views.py:446
+#: fpr/views.py:504 fpr/views.py:546
 msgid "Saved."
 msgstr ""
 
@@ -1123,7 +1162,7 @@ msgstr ""
 msgid "Replace format version %(name)s"
 msgstr ""
 
-#: fpr/views.py:126 fpr/views.py:533
+#: fpr/views.py:126 fpr/views.py:535
 msgid "Create format version"
 msgstr ""
 
@@ -1131,13 +1170,13 @@ msgstr ""
 msgid "Format versions"
 msgstr ""
 
-#: fpr/views.py:155 fpr/views.py:306 fpr/views.py:375 fpr/views.py:463
-#: fpr/views.py:570
+#: fpr/views.py:155 fpr/views.py:306 fpr/views.py:377 fpr/views.py:465
+#: fpr/views.py:573
 msgid "Disabled."
 msgstr ""
 
-#: fpr/views.py:161 fpr/views.py:309 fpr/views.py:381 fpr/views.py:466
-#: fpr/views.py:576
+#: fpr/views.py:161 fpr/views.py:309 fpr/views.py:383 fpr/views.py:468
+#: fpr/views.py:579
 msgid "Enabled."
 msgstr ""
 
@@ -1198,49 +1237,49 @@ msgstr ""
 msgid "Create identification command"
 msgstr ""
 
-#: fpr/views.py:388
+#: fpr/views.py:390
 msgid "Enable/disable identification command"
 msgstr ""
 
-#: fpr/views.py:422
+#: fpr/views.py:424
 #, python-format
 msgid "Replace format policy rule %(uuid)s"
 msgstr ""
 
-#: fpr/views.py:426
+#: fpr/views.py:428
 msgid "Create format policy rule"
 msgstr ""
 
-#: fpr/views.py:473
+#: fpr/views.py:475
 msgid "Enable/disable format policy registry rule"
 msgstr ""
 
-#: fpr/views.py:495
+#: fpr/views.py:497
 #, python-format
 msgid "Replace format policy registry tool %(name)s"
 msgstr ""
 
-#: fpr/views.py:498
+#: fpr/views.py:500
 msgid "Create format policy registry tool"
 msgstr ""
 
-#: fpr/views.py:530
+#: fpr/views.py:532
 #, python-format
 msgid "Replace command %(name)s"
 msgstr ""
 
-#: fpr/views.py:583
+#: fpr/views.py:586
 msgid "Enable/disable format policy command"
 msgstr ""
 
-#: fpr/views.py:604
+#: fpr/views.py:607
 msgid "Identification tool configuration"
 msgstr ""
 
-#: fpr/views.py:605
+#: fpr/views.py:608
 msgid "Identification rule"
 msgstr ""
 
-#: fpr/views.py:606
+#: fpr/views.py:609
 msgid "Identification command"
 msgstr ""
