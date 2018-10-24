@@ -10,17 +10,17 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-24 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Naosuke Okamoto, 2018\n"
-"Language-Team: Japanese (https://www.transifex.com/artefactual/teams/1506/ja/)\n"
+"Last-Translator: Isabelle Alain <ialain@archivescanada.ca>, 2017\n"
+"Language-Team: French (https://www.transifex.com/artefactual/teams/1506/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: fpr/forms.py:24 fpr/forms.py:102
 msgid "Create New"
-msgstr "新規作成"
+msgstr ""
 
 #: fpr/forms.py:58
 msgid "An ID tool with this description and version already exists"
@@ -41,91 +41,91 @@ msgstr ""
 #: fpr/forms.py:137
 #, python-format
 msgid " Rule %(uuid)s is disabled."
-msgstr "ルール%(uuid)sは無効です。"
+msgstr ""
 
 #: fpr/models.py:40
 msgid "the related model"
-msgstr "関係するモデル"
+msgstr ""
 
 #: fpr/models.py:41 fpr/models.py:296 fpr/models.py:438 fpr/models.py:476
 #: fpr/models.py:500 fpr/models.py:512 fpr/models.py:526 fpr/models.py:541
 #: fpr/models.py:555 fpr/models.py:572 fpr/models.py:587
 msgid "enabled"
-msgstr "有効"
+msgstr "activé"
 
 #: fpr/models.py:42 fpr/models.py:475 fpr/models.py:499 fpr/models.py:511
 #: fpr/models.py:525 fpr/models.py:540 fpr/models.py:554 fpr/models.py:571
 #: fpr/models.py:586
 msgid "last modified"
-msgstr "最終更新日"
+msgstr "Dernière modification"
 
 #: fpr/models.py:124 fpr/models.py:141 fpr/models.py:155 fpr/models.py:197
 #: fpr/models.py:254 fpr/models.py:293 fpr/models.py:318 fpr/models.py:398
 #: fpr/models.py:435
 msgid "Unique identifier"
-msgstr "一意となる識別子"
+msgstr "Identifiant unique"
 
 #: fpr/models.py:125 fpr/models.py:142 fpr/models.py:159 fpr/models.py:198
 #: fpr/models.py:294 fpr/models.py:401 fpr/models.py:436 fpr/models.py:495
 #: fpr/models.py:508 fpr/models.py:523 fpr/models.py:534
 msgid "description"
-msgstr "記述"
+msgstr "description"
 
 #: fpr/models.py:125
 msgid "Common name of format"
-msgstr "フォーマットの共通名"
+msgstr ""
 
 #: fpr/models.py:126
 msgid "the related group"
-msgstr "関連するグループ"
+msgstr ""
 
 #: fpr/models.py:127 fpr/models.py:143 fpr/models.py:297 fpr/models.py:439
 msgid "slug"
-msgstr "slug"
+msgstr "permalien"
 
 #: fpr/models.py:132 fpr/templates/fpr/format/version/detail.html:31
 #: fpr/templates/fpr/fprule/detail.html:30
 #: fpr/templates/fpr/fprule/list.html:30 fpr/templates/fpr/idrule/list.html:28
 msgid "Format"
-msgstr "フォーマット"
+msgstr "Format"
 
 #: fpr/models.py:146
 msgid "Format group"
-msgstr "フォーマットグループ"
+msgstr "Groupe de formats"
 
 #: fpr/models.py:156 fpr/models.py:256 fpr/models.py:360 fpr/models.py:544
 msgid "the related format"
-msgstr "関連するフォーマット"
+msgstr ""
 
 #: fpr/models.py:157 fpr/models.py:295 fpr/models.py:437
 msgid "version"
-msgstr "バージョン"
+msgstr "version"
 
 #: fpr/models.py:158
 msgid "pronom id"
-msgstr "pronom id"
+msgstr "Pronom ID"
 
 #: fpr/models.py:159
 msgid "Formal name to go in the METS file."
-msgstr "METSファイルに入る正式な名称。"
+msgstr ""
 
 #: fpr/models.py:160
 msgid "access format"
-msgstr "アクセス用フォーマット"
+msgstr "Format d'accès"
 
 #: fpr/models.py:161
 msgid "preservation format"
-msgstr "保存用フォーマット"
+msgstr "format de préservation"
 
 #: fpr/models.py:166 fpr/templates/fpr/idrule/detail.html:28 fpr/views.py:606
 msgid "Format version"
-msgstr "フォーマットバージョン"
+msgstr "Version du format"
 
 #: fpr/models.py:183
 msgid ""
 "Unable to save, an active Format Version  with this pronom id already "
 "exists."
-msgstr "保存できません。このpronom IDを持つ有効なフォーマットバージョンは既に存在します。"
+msgstr ""
 
 #: fpr/models.py:187
 #, python-format
@@ -134,7 +134,7 @@ msgstr ""
 
 #: fpr/models.py:198
 msgid "Name to identify script"
-msgstr "スクリプトを識別する名称"
+msgstr ""
 
 #: fpr/models.py:200
 msgid "PUID"
@@ -142,68 +142,68 @@ msgstr "PUID"
 
 #: fpr/models.py:201
 msgid "MIME type"
-msgstr "MIMEタイプ"
+msgstr "Type MIME"
 
 #: fpr/models.py:202
 msgid "File extension"
-msgstr "ファイル拡張子"
+msgstr "Extension de fichier"
 
 #: fpr/models.py:204
 msgid "configuration"
-msgstr "設定"
+msgstr "configuration"
 
 #: fpr/models.py:206
 msgid "script"
-msgstr "スクリプト"
+msgstr ""
 
 #: fpr/models.py:206
 msgid "Script to be executed."
-msgstr "実行するスクリプト。"
+msgstr ""
 
 #: fpr/models.py:208 fpr/models.py:404
 msgid "Bash script"
-msgstr "Bashスクリプト"
+msgstr "script Bash"
 
 #: fpr/models.py:209 fpr/models.py:405
 msgid "Python script"
-msgstr "Pythonスクリプト"
+msgstr "script Python"
 
 #: fpr/models.py:210 fpr/models.py:406
 msgid "Command line"
-msgstr "コマンドライン"
+msgstr "Ligne de commande"
 
 #: fpr/models.py:211 fpr/models.py:407
 msgid "No shebang needed"
-msgstr "スクリプトの#! から始まる1行目（shebang）は必要ありません"
+msgstr ""
 
 #: fpr/models.py:213 fpr/models.py:409
 msgid "script type"
-msgstr "スクリプトタイプ"
+msgstr "type de script"
 
 #: fpr/models.py:214 fpr/models.py:400
 msgid "the related tool"
-msgstr "関連するツール"
+msgstr ""
 
 #: fpr/models.py:217
 msgid "Format identification command"
-msgstr "フォーマット識別コマンド"
+msgstr "Commande d'identification de format"
 
 #: fpr/models.py:221
 #, python-format
 msgid "%(tool)s %(config)s runs %(command)s"
-msgstr "%(tool)s %(config)s は%(command)s を実行"
+msgstr ""
 
 #: fpr/models.py:255 fpr/models.py:359
 msgid "the related command"
-msgstr "関連するコマンド"
+msgstr ""
 
 #: fpr/models.py:258
 msgid "command output"
-msgstr "コマンド出力"
+msgstr ""
 
 #: fpr/models.py:261
 msgid "Format identification rule"
-msgstr "フォーマット識別のルール"
+msgstr "Règle d'identification de format"
 
 #: fpr/models.py:277
 msgid ""
@@ -218,15 +218,15 @@ msgstr ""
 #: fpr/models.py:284
 #, python-format
 msgid "%(command)s with %(output)s is %(format)s"
-msgstr ""
+msgstr "%(command)s avec %(output)s est %(format)s"
 
 #: fpr/models.py:294 fpr/models.py:436
 msgid "Name of tool"
-msgstr "ツール名"
+msgstr "Nom de l'outil"
 
 #: fpr/models.py:300
 msgid "Format identification tool"
-msgstr "フォーマット識別ツール"
+msgstr "Outil d'identification de format"
 
 #: fpr/models.py:306 fpr/models.py:446
 #, python-format
@@ -235,31 +235,31 @@ msgstr "%(description)s version %(version)s"
 
 #: fpr/models.py:335
 msgid "Access"
-msgstr "アクセス"
+msgstr "Accès"
 
 #: fpr/models.py:336 fpr/models.py:413
 msgid "Characterization"
-msgstr ""
+msgstr "Caractérisation"
 
 #: fpr/models.py:337
 msgid "Extract"
-msgstr "抽出"
+msgstr "Extraire"
 
 #: fpr/models.py:338 fpr/templates/fpr/format/version/detail.html:33
 msgid "Preservation"
-msgstr "保存"
+msgstr "Préservation"
 
 #: fpr/models.py:339
 msgid "Thumbnail"
-msgstr "サムネイル"
+msgstr "Vignette"
 
 #: fpr/models.py:340 fpr/models.py:417
 msgid "Transcription"
-msgstr "転写"
+msgstr "Transcription"
 
 #: fpr/models.py:341 fpr/models.py:418
 msgid "Validation"
-msgstr "妥当性確認"
+msgstr "Validation"
 
 #: fpr/models.py:342
 msgid "Validation against a policy"
@@ -267,23 +267,23 @@ msgstr ""
 
 #: fpr/models.py:345
 msgid "Default access"
-msgstr ""
+msgstr "Accès par défaut "
 
 #: fpr/models.py:346
 msgid "Default characterization"
-msgstr ""
+msgstr "Caractérisation par défaut"
 
 #: fpr/models.py:347
 msgid "Default thumbnail"
-msgstr "デフォルトのサムネイル"
+msgstr "Vignette par défaut"
 
 #: fpr/models.py:358
 msgid "purpose"
-msgstr "目的"
+msgstr "but"
 
 #: fpr/models.py:362
 msgid "count attempts"
-msgstr "試行回数"
+msgstr ""
 
 #: fpr/models.py:363
 msgid "count okay"
@@ -295,7 +295,7 @@ msgstr ""
 
 #: fpr/models.py:367 fpr/views.py:611
 msgid "Format policy rule"
-msgstr ""
+msgstr "Règle des politiques de format"
 
 #: fpr/models.py:387
 #, python-format
@@ -305,35 +305,35 @@ msgstr ""
 #: fpr/models.py:390
 #, python-format
 msgid "Normalize %(format)s for %(purpose)s via %(command)s"
-msgstr ""
+msgstr "Normaliser %(format)s pour %(purpose)s via %(command)s"
 
 #: fpr/models.py:402 fpr/models.py:493 fpr/models.py:568
 msgid "command"
-msgstr "コマンド"
+msgstr "commande"
 
 #: fpr/models.py:410 fpr/models.py:494
 msgid "output location"
-msgstr "出力先"
+msgstr ""
 
 #: fpr/models.py:411
 msgid "the related output format"
-msgstr "関連する出力フォーマット"
+msgstr ""
 
 #: fpr/models.py:414
 msgid "Event Detail"
-msgstr "イベント詳細"
+msgstr "Détail de l'événement"
 
 #: fpr/models.py:415
 msgid "Extraction"
-msgstr ""
+msgstr "Extraction"
 
 #: fpr/models.py:416
 msgid "Normalization"
-msgstr ""
+msgstr "Normalisation"
 
 #: fpr/models.py:419
 msgid "Verification"
-msgstr "検証"
+msgstr "Vérification"
 
 #: fpr/models.py:421 fpr/models.py:485
 msgid "command usage"
@@ -353,7 +353,7 @@ msgstr ""
 
 #: fpr/models.py:443
 msgid "Normalization tool"
-msgstr ""
+msgstr "Outil de normalisation"
 
 #: fpr/models.py:459
 msgid "agent identifier type"
@@ -365,60 +365,60 @@ msgstr ""
 
 #: fpr/models.py:461
 msgid "agent name"
-msgstr "エージェント名"
+msgstr "nom de l'agent"
 
 #: fpr/models.py:462
 msgid "agent type"
-msgstr "エージェントタイプ"
+msgstr "Type d'identificateur de l’agent"
 
 #: fpr/models.py:463
 msgid "client IP address"
-msgstr "クライアントIPアドレス"
+msgstr "Adresse IP du client"
 
 #: fpr/models.py:473 fpr/models.py:498 fpr/models.py:510 fpr/models.py:524
 #: fpr/models.py:539 fpr/models.py:553 fpr/models.py:570 fpr/models.py:585
 msgid "replaces"
-msgstr ""
+msgstr "Remplace"
 
 #: fpr/models.py:474
 msgid "type"
-msgstr ""
+msgstr "Type"
 
 #: fpr/models.py:486
 msgid "command type"
-msgstr "コマンドタイプ"
+msgstr "Type de commande"
 
 #: fpr/models.py:488
 msgid "verification command"
-msgstr ""
+msgstr "Commande de vérification"
 
 #: fpr/models.py:490
 msgid "event detail command"
-msgstr ""
+msgstr "Commande de détail de l'évènement"
 
 #: fpr/models.py:492
 msgid "supported by"
-msgstr ""
+msgstr "soutenu par"
 
 #: fpr/models.py:496
 msgid "output file format"
-msgstr "出力ファイルフォーマット"
+msgstr ""
 
 #: fpr/models.py:535
 msgid "valid preservation format"
-msgstr "保存用フォーマットの妥当性確認"
+msgstr "format de préservation valide"
 
 #: fpr/models.py:536
 msgid "valid access format"
-msgstr "アクセス用フォーマットの妥当性確認"
+msgstr "format d'accès valide"
 
 #: fpr/models.py:538
 msgid "file ID type"
-msgstr ""
+msgstr "Type d'ID du fichier"
 
 #: fpr/models.py:552
 msgid "classification"
-msgstr "分類"
+msgstr "Classification"
 
 #: fpr/models.py:564
 msgid "command clasification"
@@ -426,15 +426,15 @@ msgstr ""
 
 #: fpr/models.py:569 fpr/models.py:581
 msgid "file ID"
-msgstr "ファイルID"
+msgstr "ID du fichier"
 
 #: fpr/models.py:583
 msgid "tool"
-msgstr "ツール"
+msgstr "outil"
 
 #: fpr/models.py:584
 msgid "tool version"
-msgstr "ツールのバージョン"
+msgstr "Version de l'outil"
 
 #: fpr/templates/fpr/_sidebar.html:14 fpr/templates/fpr/format/detail.html:9
 #: fpr/templates/fpr/format/form.html:19
@@ -447,60 +447,60 @@ msgstr "ツールのバージョン"
 #: fpr/templates/fpr/format/version/detail.html:10
 #: fpr/templates/fpr/format/version/form.html:10
 msgid "Formats"
-msgstr "フォーマット"
+msgstr "Formats"
 
 #: fpr/templates/fpr/_sidebar.html:15
 #: fpr/templates/fpr/format/group/delete.html:10
 #: fpr/templates/fpr/format/group/form.html:11
 #: fpr/templates/fpr/format/group/list.html:10
 msgid "Groups"
-msgstr "グループ"
+msgstr "Groupes"
 
 #: fpr/templates/fpr/_sidebar.html:17
 msgid "Identification"
-msgstr "識別"
+msgstr "Identification"
 
 #: fpr/templates/fpr/_sidebar.html:18 fpr/templates/fpr/_sidebar.html.py:23
 #: fpr/templates/fpr/idrule/list.html:31
 msgid "Tools"
-msgstr "ツール"
+msgstr "Outils"
 
 #: fpr/templates/fpr/_sidebar.html:19 fpr/templates/fpr/_sidebar.html.py:29
 msgid "Rules"
-msgstr "ルール"
+msgstr "Règles"
 
 #: fpr/templates/fpr/_sidebar.html:20 fpr/templates/fpr/_sidebar.html.py:30
 #: fpr/templates/fpr/idtool/detail.html:38
 msgid "Commands"
-msgstr "コマンド"
+msgstr "Commandes"
 
 #: fpr/templates/fpr/_sidebar.html:22
 msgid "Format policy registry"
-msgstr "フォーマットポリシーレジストリ"
+msgstr "Registre de politiques de formats"
 
 #: fpr/templates/fpr/app_layout.html:5
 msgid "Format Policy Registry"
-msgstr "フォーマットポリシーレジストリ"
+msgstr "Registre de politiques de formats"
 
 #: fpr/templates/fpr/app_layout.html:36
 msgctxt "DataTable - emptyTable"
 msgid "No data available in table"
-msgstr "テーブルにデータがありません"
+msgstr "Aucune donnée disponible dans le tableau"
 
 #: fpr/templates/fpr/app_layout.html:37
 msgctxt "DataTable - info"
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
-msgstr "登録 _TOTAL_ の _START_ から _END_ を表示"
+msgstr "Afficher _START_ to _END_ of _TOTAL_ entrées"
 
 #: fpr/templates/fpr/app_layout.html:38
 msgctxt "DataTable - infoEmpty"
 msgid "Showing 0 to 0 of 0 entries"
-msgstr "登録0の0から0を表示"
+msgstr "Afficher 0 à 0 sur 0 entrées"
 
 #: fpr/templates/fpr/app_layout.html:39
 msgctxt "DataTable - infoFiltered"
 msgid "(filtered from _MAX_ total entries)"
-msgstr "( _MAX_ の総エントリからフィルタしました)"
+msgstr "(filtrés à partir d'un total de _MAX_ entrées)"
 
 #: fpr/templates/fpr/app_layout.html:41
 msgctxt "DataTable - thousands"
@@ -510,72 +510,72 @@ msgstr ","
 #: fpr/templates/fpr/app_layout.html:42
 msgctxt "DataTable - lengthMenu"
 msgid "Show _MENU_ entries"
-msgstr "_MENU_エントリを表示"
+msgstr "Afficher _MENU_ entées"
 
 #: fpr/templates/fpr/app_layout.html:43
 msgctxt "DataTable - loadingRecords"
 msgid "Loading..."
-msgstr "ロード中..."
+msgstr "Chargement …"
 
 #: fpr/templates/fpr/app_layout.html:44
 msgctxt "DataTable - processing"
 msgid "Processing..."
-msgstr "処理中..."
+msgstr "En traitement..."
 
 #: fpr/templates/fpr/app_layout.html:45
 msgctxt "DataTable - search"
 msgid "Search:"
-msgstr "検索："
+msgstr "Rechercher :"
 
 #: fpr/templates/fpr/app_layout.html:46
 msgctxt "DataTable - zeroRecords"
 msgid "No matching records found"
-msgstr "該当するレコードが見つかりません"
+msgstr "Aucun d'enregistrement correspondant trouvé"
 
 #: fpr/templates/fpr/app_layout.html:48
 msgctxt "DataTable - first"
 msgid "First"
-msgstr "先頭"
+msgstr "Premier"
 
 #: fpr/templates/fpr/app_layout.html:49
 msgctxt "DataTable - last"
 msgid "Last"
-msgstr "最後"
+msgstr "Dernier"
 
 #: fpr/templates/fpr/app_layout.html:50
 msgctxt "DataTable - next"
 msgid "Next"
-msgstr "次"
+msgstr "Suivant"
 
 #: fpr/templates/fpr/app_layout.html:51
 msgctxt "DataTable - previous"
 msgid "Previous"
-msgstr "前"
+msgstr "Précédent"
 
 #: fpr/templates/fpr/app_layout.html:54
 msgctxt "DataTable - sortAscending"
 msgid ": activate to sort column ascending"
-msgstr "：昇順に並べ替えるためアクティブにする"
+msgstr ": activer le tri ascendant"
 
 #: fpr/templates/fpr/app_layout.html:55
 msgctxt "DataTable - sortDescending"
 msgid ": activate to sort column descending"
-msgstr "：降順に並べ替えるためアクティブにする"
+msgstr ": activer le tri descendant"
 
 #: fpr/templates/fpr/disable.html:32
 #, python-format
 msgid "Disable %(object)s"
-msgstr "無効%(object)s"
+msgstr "Désactiver %(object)s"
 
 #: fpr/templates/fpr/disable.html:34
 #, python-format
 msgid "Enable %(object)s"
-msgstr "有効 %(object)s"
+msgstr "Activer %(object)s"
 
 #: fpr/templates/fpr/disable.html:41
 #: fpr/templates/fpr/format/group/delete.html:25
 msgid "Are you sure?"
-msgstr "本当によろしいですか？"
+msgstr "Êtes-vous certain? "
 
 #: fpr/templates/fpr/disable.html:44
 msgid "The following rules will also be disabled:"
@@ -591,18 +591,18 @@ msgstr ""
 #: fpr/templates/fpr/idrule/detail.html:39
 #: fpr/templates/fpr/idrule/list.html:48
 msgid "Disable,Enable"
-msgstr "有効、無効"
+msgstr "Désactiver,Activer"
 
 #: fpr/templates/fpr/disable.html:58
 #: fpr/templates/fpr/format/group/delete.html:50
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr "Annuler"
 
 #: fpr/templates/fpr/format/detail.html:4
 #: fpr/templates/fpr/format/detail.html:5
 #, python-format
 msgid "Format %(description)s"
-msgstr "フォーマット %(description)s"
+msgstr "Format %(description)s"
 
 #: fpr/templates/fpr/format/detail.html:23
 #: fpr/templates/fpr/format/version/detail.html:27
@@ -631,12 +631,12 @@ msgstr "UUID"
 #: fpr/templates/fpr/idtool/detail.html:25
 #: fpr/templates/fpr/idtool/list.html:29
 msgid "Description"
-msgstr "記述"
+msgstr "Description"
 
 #: fpr/templates/fpr/format/detail.html:27
 #: fpr/templates/fpr/format/list.html:34
 msgid "Group"
-msgstr "グループ"
+msgstr "Groupe"
 
 #: fpr/templates/fpr/format/detail.html:36
 #: fpr/templates/fpr/format/detail.html:58
@@ -659,7 +659,7 @@ msgstr "グループ"
 #: fpr/templates/fpr/idtool/detail.html:52
 #: fpr/templates/fpr/idtool/list.html:31
 msgid "Actions"
-msgstr "行動"
+msgstr "Actions"
 
 #: fpr/templates/fpr/format/detail.html:37
 #: fpr/templates/fpr/format/group/form.html:53
@@ -670,22 +670,22 @@ msgstr "行動"
 #: fpr/templates/fpr/idtool/detail.html:33
 #: fpr/templates/fpr/idtool/list.html:43
 msgid "Edit"
-msgstr "編集"
+msgstr "Modifier"
 
 #: fpr/templates/fpr/format/detail.html:42
 msgid "Specific versions"
-msgstr "特定のバージョン"
+msgstr "Versions spécifiques"
 
 #: fpr/templates/fpr/format/detail.html:45
 msgid "Create new format version"
-msgstr ""
+msgstr "Créer une nouvelle version du format"
 
 #: fpr/templates/fpr/format/detail.html:53
 #: fpr/templates/fpr/format/version/detail.html:29
 #: fpr/templates/fpr/idtool/detail.html:27
 #: fpr/templates/fpr/idtool/list.html:30
 msgid "Version"
-msgstr "バージョン"
+msgstr "Version"
 
 #: fpr/templates/fpr/format/detail.html:54
 msgid "Pronom ID"
@@ -693,11 +693,11 @@ msgstr "Pronom ID"
 
 #: fpr/templates/fpr/format/detail.html:55
 msgid "Access format?"
-msgstr ""
+msgstr "Format de consultation?"
 
 #: fpr/templates/fpr/format/detail.html:56
 msgid "Preservation format?"
-msgstr ""
+msgstr "Format de préservation?"
 
 #: fpr/templates/fpr/format/detail.html:57
 #: fpr/templates/fpr/format/version/detail.html:34
@@ -713,7 +713,7 @@ msgstr ""
 #: fpr/templates/fpr/idtool/detail.html:29
 #: fpr/templates/fpr/idtool/detail.html:51
 msgid "Enabled"
-msgstr "有効"
+msgstr "Activé"
 
 #: fpr/templates/fpr/format/detail.html:67
 #: fpr/templates/fpr/format/detail.html:68
@@ -732,7 +732,7 @@ msgstr "有効"
 #: fpr/templates/fpr/idtool/detail.html:30
 #: fpr/templates/fpr/idtool/detail.html:61
 msgid "Yes,No"
-msgstr "はい,いいえ"
+msgstr "Oui,Non"
 
 #: fpr/templates/fpr/format/detail.html:71
 #: fpr/templates/fpr/format/list.html:50
@@ -743,7 +743,7 @@ msgstr "はい,いいえ"
 #: fpr/templates/fpr/idtool/detail.html:63
 #: fpr/templates/fpr/idtool/list.html:40
 msgid "View"
-msgstr "見る"
+msgstr "Affichage"
 
 #: fpr/templates/fpr/format/detail.html:73
 #: fpr/templates/fpr/format/version/detail.html:36
@@ -758,7 +758,7 @@ msgstr "見る"
 #: fpr/templates/fpr/idrule/list.html:47
 #: fpr/templates/fpr/idtool/detail.html:65
 msgid "Replace"
-msgstr "置換"
+msgstr "Remplacer"
 
 #: fpr/templates/fpr/format/detail.html:82
 #, python-format
@@ -767,6 +767,8 @@ msgid ""
 "          No versions exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"Aucune version n'existe pour  %(description)s"
 
 #: fpr/templates/fpr/format/form.html:49
 #: fpr/templates/fpr/format/group/form.html:32
@@ -776,7 +778,7 @@ msgstr ""
 #: fpr/templates/fpr/idcommand/form.html:32
 #: fpr/templates/fpr/idrule/form.html:29 fpr/templates/fpr/idtool/form.html:30
 msgid "Save"
-msgstr "保存"
+msgstr "Sauvegarder"
 
 #: fpr/templates/fpr/format/group/delete.html:4
 #: fpr/templates/fpr/format/group/delete.html:5
@@ -788,7 +790,7 @@ msgstr ""
 #: fpr/templates/fpr/format/group/delete.html:49
 #: fpr/templates/fpr/format/group/list.html:51
 msgid "Delete"
-msgstr "削除"
+msgstr "Supprimer"
 
 #: fpr/templates/fpr/format/group/delete.html:30
 #, python-format
@@ -797,6 +799,8 @@ msgid ""
 "                %(count)s format(s) were found that are a member of this group.\n"
 "              "
 msgstr ""
+"\n"
+" %(count)s format(s) qui font partie de ce groupe ont été trouvés"
 
 #: fpr/templates/fpr/format/group/delete.html:37
 msgid ""
@@ -806,7 +810,7 @@ msgstr ""
 #: fpr/templates/fpr/format/group/form.html:39
 #: fpr/templates/fpr/format/list.html:26
 msgid "Create new format"
-msgstr "新しいフォーマットを作成"
+msgstr "Créer un nouveau format"
 
 #: fpr/templates/fpr/format/group/form.html:60
 #, python-format
@@ -815,11 +819,13 @@ msgid ""
 "          No formats exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"Aucun format n'existe pour  %(description)s"
 
 #: fpr/templates/fpr/format/group/list.html:4
 #: fpr/templates/fpr/format/group/list.html:5
 msgid "Format groups"
-msgstr "フォーマットグループ"
+msgstr ""
 
 #: fpr/templates/fpr/format/group/list.html:11
 #: fpr/templates/fpr/format/list.html:10
@@ -829,29 +835,29 @@ msgstr "フォーマットグループ"
 #: fpr/templates/fpr/idrule/list.html:10 fpr/templates/fpr/idtool/list.html:10
 #: fpr/templates/fpr/revisions/list.html:10
 msgid "List"
-msgstr "リスト"
+msgstr "Liste"
 
 #: fpr/templates/fpr/format/group/list.html:23
 msgid "Create new format group"
-msgstr "新しいフォーマットグループを作成"
+msgstr ""
 
 #: fpr/templates/fpr/format/group/list.html:60
 msgid "No format groups exist."
-msgstr "フォーマットグループがありません。"
+msgstr ""
 
 #: fpr/templates/fpr/format/list.html:60
 msgid "No formats exist."
-msgstr "フォーマットがありません。"
+msgstr ""
 
 #: fpr/templates/fpr/format/version/detail.html:5
 #, python-format
 msgid "Format version %(description)s"
-msgstr "フォーマットバージョン %(description)s"
+msgstr "Version du format  %(description)s"
 
 #: fpr/templates/fpr/format/version/detail.html:6
 #, python-format
 msgid "Format version %(format)s"
-msgstr "フォーマットバージョン %(format)s"
+msgstr "Version du format  %(format)s"
 
 #: fpr/templates/fpr/format/version/detail.html:30
 msgid "Pronom"
@@ -859,14 +865,14 @@ msgstr "Pronom"
 
 #: fpr/templates/fpr/format/version/detail.html:32
 msgid "Access?"
-msgstr ""
+msgstr "Accès?"
 
 #: fpr/templates/fpr/fpcommand/detail.html:5
 #: fpr/templates/fpr/fpcommand/detail.html:6
 #: fpr/templates/fpr/fpcommand/detail.html:11
 #, python-format
 msgid "Command %(description)s"
-msgstr "コマンド %(description)s"
+msgstr "Commande  %(description)s"
 
 #: fpr/templates/fpr/fpcommand/detail.html:10
 #: fpr/templates/fpr/fpcommand/form.html:10
@@ -874,14 +880,14 @@ msgstr "コマンド %(description)s"
 #: fpr/templates/fpr/fpcommand/list.html:5
 #: fpr/templates/fpr/fpcommand/list.html:9 fpr/views.py:567
 msgid "Format policy commands"
-msgstr ""
+msgstr "Commandes de politiques de format"
 
 #: fpr/templates/fpr/fpcommand/detail.html:30
 #: fpr/templates/fpr/fpcommand/list.html:31
 #: fpr/templates/fpr/idcommand/detail.html:28
 #: fpr/templates/fpr/idcommand/list.html:30
 msgid "Tool"
-msgstr "ツール"
+msgstr "Outil"
 
 #: fpr/templates/fpr/fpcommand/detail.html:32
 #: fpr/templates/fpr/fprule/detail.html:32
@@ -892,69 +898,69 @@ msgstr "ツール"
 #: fpr/templates/fpr/idrule/list.html:29
 #: fpr/templates/fpr/idtool/detail.html:50
 msgid "Command"
-msgstr "コマンド"
+msgstr "Commande"
 
 #: fpr/templates/fpr/fpcommand/detail.html:34
 #: fpr/templates/fpr/idcommand/detail.html:36
 msgid "Script type"
-msgstr "スクリプトタイプ"
+msgstr "Type de script"
 
 #: fpr/templates/fpr/fpcommand/detail.html:36
 msgid "Output file format"
-msgstr "出力ファイルフォーマット"
+msgstr ""
 
 #: fpr/templates/fpr/fpcommand/detail.html:37
 #: fpr/templates/fpr/fpcommand/detail.html:39
 #: fpr/templates/fpr/fpcommand/detail.html:52
 msgid "None"
-msgstr "なし"
+msgstr "Aucun"
 
 #: fpr/templates/fpr/fpcommand/detail.html:38
 msgid "Output location"
-msgstr "出力先"
+msgstr ""
 
 #: fpr/templates/fpr/fpcommand/detail.html:40
 msgid "Command usage"
-msgstr "コマンドの使用法"
+msgstr ""
 
 #: fpr/templates/fpr/fpcommand/detail.html:42
 msgid "Verification command"
-msgstr ""
+msgstr "Commande de vérification"
 
 #: fpr/templates/fpr/fpcommand/detail.html:48
 msgid "Event detail command"
-msgstr ""
+msgstr "Commande de détail de l'évènement"
 
 #: fpr/templates/fpr/fpcommand/list.html:22
 #: fpr/templates/fpr/idcommand/list.html:21
 #: fpr/templates/fpr/idtool/detail.html:41
 msgid "Create new command"
-msgstr ""
+msgstr "Créer une nouvelle commande"
 
 #: fpr/templates/fpr/fpcommand/list.html:30
 msgid "Usage"
-msgstr "使い方"
+msgstr "Utilisation"
 
 #: fpr/templates/fpr/fpcommand/list.html:54
 msgid "No format policy commands exist."
-msgstr ""
+msgstr "Aucune commande de politiques de format n'existe."
 
 #: fpr/templates/fpr/fprule/detail.html:5
 #: fpr/templates/fpr/fprule/detail.html:6
 #: fpr/templates/fpr/fprule/detail.html:11
 #, python-format
 msgid "Rule %(description)s"
-msgstr "ルール %(description)s"
+msgstr "Règle  %(description)s"
 
 #: fpr/templates/fpr/fprule/detail.html:10
 #: fpr/templates/fpr/fprule/form.html:10 fpr/views.py:458
 msgid "Format policy rules"
-msgstr ""
+msgstr "Règles de politiques de format"
 
 #: fpr/templates/fpr/fprule/detail.html:28
 #: fpr/templates/fpr/fprule/list.html:29
 msgid "Purpose"
-msgstr "目的"
+msgstr "But"
 
 #: fpr/templates/fpr/fprule/detail.html:34
 msgid "Stats"
@@ -963,34 +969,34 @@ msgstr ""
 #: fpr/templates/fpr/fprule/detail.html:35
 #, python-format
 msgid "Success: %(count)s"
-msgstr "成功数： %(count)s"
+msgstr "Succès :  %(count)s"
 
 #: fpr/templates/fpr/fprule/detail.html:36
 #, python-format
 msgid "Failure: %(count)s"
-msgstr "失敗数：%(count)s"
+msgstr "Échecs : %(count)s"
 
 #: fpr/templates/fpr/fprule/detail.html:37
 #, python-format
 msgid "Total: %(count)s"
-msgstr ""
+msgstr "Total : %(count)s"
 
 #: fpr/templates/fpr/fprule/list.html:4 fpr/templates/fpr/fprule/list.html:5
 #: fpr/templates/fpr/fprule/list.html:9
 msgid "Format policy rules "
-msgstr ""
+msgstr "Règles de politiques de format"
 
 #: fpr/templates/fpr/fprule/list.html:22 fpr/templates/fpr/idrule/list.html:21
 msgid "Create new rule"
-msgstr "新しいルールを作成"
+msgstr "Créer une nouvelle règle"
 
 #: fpr/templates/fpr/fprule/list.html:32
 msgid "Success"
-msgstr "成功"
+msgstr "Succès"
 
 #: fpr/templates/fpr/fprule/list.html:59
 msgid "No format policy rules exist."
-msgstr ""
+msgstr "Aucune règle de politiques de format n'existe."
 
 #: fpr/templates/fpr/fptool/detail.html:4
 #: fpr/templates/fpr/fptool/detail.html:5
@@ -1002,15 +1008,15 @@ msgstr ""
 #: fpr/templates/fpr/fptool/form.html:10 fpr/templates/fpr/fptool/list.html:4
 #: fpr/templates/fpr/fptool/list.html:5 fpr/templates/fpr/fptool/list.html:9
 msgid "Format policy registry tools"
-msgstr ""
+msgstr "Outil du registre de politiques de formats"
 
 #: fpr/templates/fpr/fptool/detail.html:36
 msgid "Tool commands"
-msgstr "ツールコマンド"
+msgstr ""
 
 #: fpr/templates/fpr/fptool/detail.html:39
 msgid "Create new tool command"
-msgstr "新しいツールコマンドを作成"
+msgstr ""
 
 #: fpr/templates/fpr/fptool/detail.html:67
 #: fpr/templates/fpr/idtool/detail.html:75
@@ -1020,20 +1026,22 @@ msgid ""
 "          No commands exist for %(description)s.\n"
 "        "
 msgstr ""
+"\n"
+"Aucune commande n'existe pour  %(description)s"
 
 #: fpr/templates/fpr/fptool/list.html:22 fpr/templates/fpr/idtool/list.html:22
 msgid "Create new tool"
-msgstr "新しいツールを作成"
+msgstr "Créer un nouvel outil"
 
 #: fpr/templates/fpr/fptool/list.html:48
 msgid "No tools exist."
-msgstr "ツールがありません。"
+msgstr "Aucun outil n'existe."
 
 #: fpr/templates/fpr/idcommand/detail.html:5
 #: fpr/templates/fpr/idcommand/detail.html:6
 #, python-format
 msgid "Identification command %(description)s"
-msgstr ""
+msgstr "Commande d'identification  %(description)s"
 
 #: fpr/templates/fpr/idcommand/detail.html:10
 #: fpr/templates/fpr/idcommand/form.html:10
@@ -1041,96 +1049,96 @@ msgstr ""
 #: fpr/templates/fpr/idcommand/list.html:5
 #: fpr/templates/fpr/idcommand/list.html:9 fpr/views.py:371
 msgid "Identification commands"
-msgstr "識別コマンド"
+msgstr "Commandes d'identification"
 
 #: fpr/templates/fpr/idcommand/detail.html:32
 #: fpr/templates/fpr/idcommand/list.html:31
 msgid "Mode"
-msgstr "モード"
+msgstr "Mode"
 
 #: fpr/templates/fpr/idcommand/detail.html:34
 msgid "Script"
-msgstr "スクリプト"
+msgstr "Écriture"
 
 #: fpr/templates/fpr/idcommand/list.html:29
 msgid "Type"
-msgstr "種別"
+msgstr "Type"
 
 #: fpr/templates/fpr/idcommand/list.html:56
 msgid "No identification commands exist."
-msgstr ""
+msgstr "Aucune commande d'identification n'existe."
 
 #: fpr/templates/fpr/idrule/detail.html:5
 #: fpr/templates/fpr/idrule/detail.html:6
 #: fpr/templates/fpr/idrule/detail.html:11
 #, python-format
 msgid "Identification rule %(uuid)s"
-msgstr ""
+msgstr "Règle d'identification  %(uuid)s"
 
 #: fpr/templates/fpr/idrule/detail.html:10
 #: fpr/templates/fpr/idrule/form.html:10 fpr/templates/fpr/idrule/list.html:4
 #: fpr/templates/fpr/idrule/list.html:5 fpr/templates/fpr/idrule/list.html:9
 #: fpr/views.py:300
 msgid "Identification rules"
-msgstr ""
+msgstr "Règles d'identification"
 
 #: fpr/templates/fpr/idrule/detail.html:32
 msgid "Command output"
-msgstr "コマンド出力"
+msgstr ""
 
 #: fpr/templates/fpr/idrule/list.html:30
 msgid "Output"
-msgstr "出力"
+msgstr ""
 
 #: fpr/templates/fpr/idrule/list.html:56
 msgid "No identification rules exist."
-msgstr "識別ルールがありません。"
+msgstr "Aucune règle d'authentification n'existe."
 
 #: fpr/templates/fpr/idtool/detail.html:4
 #: fpr/templates/fpr/idtool/detail.html:5
 #, python-format
 msgid "Identification tool %(description)s"
-msgstr ""
+msgstr "Outil d'identification %(description)s"
 
 #: fpr/templates/fpr/idtool/detail.html:9
 #: fpr/templates/fpr/idtool/form.html:10 fpr/templates/fpr/idtool/list.html:4
 #: fpr/templates/fpr/idtool/list.html:5 fpr/templates/fpr/idtool/list.html:9
 msgid "Identification tools"
-msgstr "識別ツール"
+msgstr "Outils d'identification"
 
 #: fpr/templates/fpr/idtool/detail.html:48
 msgid "Configuration"
-msgstr "設定"
+msgstr "Configuration"
 
 #: fpr/templates/fpr/idtool/detail.html:49
 msgid "Identifier"
-msgstr "識別子"
+msgstr "Identifiant"
 
 #: fpr/templates/fpr/idtool/detail.html:66
 msgid "Disable"
-msgstr "無効"
+msgstr "Désactiver"
 
 #: fpr/templates/fpr/idtool/list.html:51
 msgid "No identification tools exist."
-msgstr "識別ツールがありません。"
+msgstr "Aucun outil d'identification n'existe"
 
 #: fpr/templates/fpr/revisions/list.html:4
 #: fpr/templates/fpr/revisions/list.html:9
 msgid "Revisions"
-msgstr "改訂"
+msgstr "Révisions"
 
 #: fpr/templates/fpr/revisions/list.html:5
 #, python-format
 msgid "%(revision_type)s revision history"
-msgstr "%(revision_type)s 改訂履歴"
+msgstr ""
 
 #: fpr/templates/fpr/revisions/list.html:26
 msgid "Last modified"
-msgstr "最終更新日"
+msgstr "Dernière modification"
 
 #: fpr/templates/fpr/revisions/list.html:49
 msgid "No revisions exist."
-msgstr "改訂はありません。"
+msgstr "Aucune révision n'existe."
 
 #: fpr/utils.py:65
 msgid ""
@@ -1144,44 +1152,44 @@ msgstr ""
 #: fpr/views.py:83
 #, python-format
 msgid "Edit format %(name)s"
-msgstr ""
+msgstr "Modifier le format  %(name)s"
 
 #: fpr/views.py:85
 msgid "Create format"
-msgstr "フォーマットを作成"
+msgstr "Créer un format"
 
 #: fpr/views.py:96 fpr/views.py:103 fpr/views.py:135 fpr/views.py:255
 #: fpr/views.py:288 fpr/views.py:358 fpr/views.py:438 fpr/views.py:446
 #: fpr/views.py:504 fpr/views.py:546
 msgid "Saved."
-msgstr "保存されました。"
+msgstr "Sauvé."
 
 #: fpr/views.py:123
 #, python-format
 msgid "Replace format version %(name)s"
-msgstr ""
+msgstr "Remplacer la version du format  %(name)s"
 
 #: fpr/views.py:126 fpr/views.py:535
 msgid "Create format version"
-msgstr "フォーマットバージョンを作成"
+msgstr "Créer une version du format"
 
 #: fpr/views.py:149
 msgid "Format versions"
-msgstr "フォーマットバージョン"
+msgstr "Versions du format"
 
 #: fpr/views.py:155 fpr/views.py:306 fpr/views.py:377 fpr/views.py:465
 #: fpr/views.py:573
 msgid "Disabled."
-msgstr "無効です。"
+msgstr "Désactivé"
 
 #: fpr/views.py:161 fpr/views.py:309 fpr/views.py:383 fpr/views.py:468
 #: fpr/views.py:579
 msgid "Enabled."
-msgstr "有効です。"
+msgstr "Activé."
 
 #: fpr/views.py:168
 msgid "Enable/disable format version"
-msgstr "有効／無効フォーマットバージョン"
+msgstr "Activer/désactiver une version du format"
 
 #: fpr/views.py:185
 #, python-format
@@ -1190,7 +1198,7 @@ msgstr ""
 
 #: fpr/views.py:187
 msgid "Create format group"
-msgstr "フォーマットグループを作成"
+msgstr ""
 
 #: fpr/views.py:218
 #, python-format
@@ -1203,82 +1211,82 @@ msgstr ""
 
 #: fpr/views.py:223
 msgid "Deleted."
-msgstr "削除しました。"
+msgstr "Supprimé."
 
 #: fpr/views.py:247
 #, python-format
 msgid "Edit identification tool %(name)s"
-msgstr ""
+msgstr "Modifier l'outil d'identification  %(name)s "
 
 #: fpr/views.py:250
 msgid "Create identification tool"
-msgstr "識別ツールを作成"
+msgstr "Créer un outil d'identification"
 
 #: fpr/views.py:279
 #, python-format
 msgid "Replace identification rule %(uuid)s"
-msgstr ""
+msgstr "Remplacer la règle d'identification %(uuid)s"
 
 #: fpr/views.py:282
 msgid "Create identification rule"
-msgstr "識別のルールを作成"
+msgstr "Créer une règle d'identification"
 
 #: fpr/views.py:316
 msgid "Enable/disable identification rule"
-msgstr "有効／無効 識別のルール"
+msgstr "Activer/désactiver une règle d'identification"
 
 #: fpr/views.py:339
 #, python-format
 msgid "Replace identification command %(name)s"
-msgstr ""
+msgstr "Remplacer la commande d'identification %(name)s"
 
 #: fpr/views.py:342
 msgid "Create identification command"
-msgstr "識別コマンドを作成"
+msgstr "Créer une commande d'identification"
 
 #: fpr/views.py:390
 msgid "Enable/disable identification command"
-msgstr ""
+msgstr "Activer/désactiver une commande d'identification"
 
 #: fpr/views.py:424
 #, python-format
 msgid "Replace format policy rule %(uuid)s"
-msgstr ""
+msgstr "Remplacer la règle de politiques de formats %(uuid)s"
 
 #: fpr/views.py:428
 msgid "Create format policy rule"
-msgstr "フォーマットポリシールールを作成"
+msgstr "Créer une règle de politiques de formats"
 
 #: fpr/views.py:475
 msgid "Enable/disable format policy registry rule"
-msgstr ""
+msgstr "Activer/désactiver une règle du registre de politiques de formats"
 
 #: fpr/views.py:497
 #, python-format
 msgid "Replace format policy registry tool %(name)s"
-msgstr ""
+msgstr "Remplacer l'outil du registre de politiques de formats %(name)s"
 
 #: fpr/views.py:500
 msgid "Create format policy registry tool"
-msgstr ""
+msgstr "Créer un outil du registre de politiques de formats"
 
 #: fpr/views.py:532
 #, python-format
 msgid "Replace command %(name)s"
-msgstr ""
+msgstr "Remplacer la commande %(name)s"
 
 #: fpr/views.py:586
 msgid "Enable/disable format policy command"
-msgstr "有効／無効フォーマットポリシーコマンド"
+msgstr "Activer/désactiver une commande de politiques de formats"
 
 #: fpr/views.py:607
 msgid "Identification tool configuration"
-msgstr ""
+msgstr "Configuration d'un outil d'identification "
 
 #: fpr/views.py:608
 msgid "Identification rule"
-msgstr "識別のルール"
+msgstr "Règle d'identification"
 
 #: fpr/views.py:609
 msgid "Identification command"
-msgstr "識別コマンド"
+msgstr "Commandes d'identification"

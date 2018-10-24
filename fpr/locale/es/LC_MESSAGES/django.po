@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-01 19:48+0000\n"
+"POT-Creation-Date: 2018-10-24 15:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: artefactual <translate@artefactual.com>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/artefactual/teams/1506/es/)\n"
@@ -614,7 +614,7 @@ msgstr "Formato %(description)s"
 #: fpr/templates/fpr/fpcommand/detail.html:26
 #: fpr/templates/fpr/fprule/detail.html:26
 #: fpr/templates/fpr/fptool/detail.html:23
-#: fpr/templates/fpr/fptool/detail.html:49
+#: fpr/templates/fpr/fptool/detail.html:47
 #: fpr/templates/fpr/idcommand/detail.html:26
 #: fpr/templates/fpr/idrule/detail.html:26
 #: fpr/templates/fpr/idtool/detail.html:23
@@ -653,9 +653,9 @@ msgstr "Grupo"
 #: fpr/templates/fpr/fpcommand/list.html:33
 #: fpr/templates/fpr/fprule/detail.html:41
 #: fpr/templates/fpr/fprule/list.html:34
-#: fpr/templates/fpr/fptool/detail.html:32
-#: fpr/templates/fpr/fptool/detail.html:51
-#: fpr/templates/fpr/fptool/list.html:31
+#: fpr/templates/fpr/fptool/detail.html:30
+#: fpr/templates/fpr/fptool/detail.html:49
+#: fpr/templates/fpr/fptool/list.html:30
 #: fpr/templates/fpr/idcommand/detail.html:41
 #: fpr/templates/fpr/idcommand/list.html:33
 #: fpr/templates/fpr/idrule/detail.html:37
@@ -670,8 +670,8 @@ msgstr "Acciones"
 #: fpr/templates/fpr/format/group/form.html:53
 #: fpr/templates/fpr/format/group/list.html:48
 #: fpr/templates/fpr/format/list.html:52
-#: fpr/templates/fpr/fptool/detail.html:33
-#: fpr/templates/fpr/fptool/list.html:42
+#: fpr/templates/fpr/fptool/detail.html:31
+#: fpr/templates/fpr/fptool/list.html:40
 #: fpr/templates/fpr/idtool/detail.html:33
 #: fpr/templates/fpr/idtool/list.html:43
 msgid "Edit"
@@ -687,8 +687,6 @@ msgstr "Crear nueva versión de formato"
 
 #: fpr/templates/fpr/format/detail.html:53
 #: fpr/templates/fpr/format/version/detail.html:29
-#: fpr/templates/fpr/fptool/detail.html:27
-#: fpr/templates/fpr/fptool/list.html:30
 #: fpr/templates/fpr/idtool/detail.html:27
 #: fpr/templates/fpr/idtool/list.html:30
 msgid "Version"
@@ -712,7 +710,7 @@ msgstr "Formato de preservación"
 #: fpr/templates/fpr/fpcommand/list.html:32
 #: fpr/templates/fpr/fprule/detail.html:38
 #: fpr/templates/fpr/fprule/list.html:33
-#: fpr/templates/fpr/fptool/detail.html:29
+#: fpr/templates/fpr/fptool/detail.html:27
 #: fpr/templates/fpr/idcommand/detail.html:38
 #: fpr/templates/fpr/idcommand/list.html:32
 #: fpr/templates/fpr/idrule/detail.html:34
@@ -731,7 +729,7 @@ msgstr "Activado"
 #: fpr/templates/fpr/fpcommand/list.html:42
 #: fpr/templates/fpr/fprule/detail.html:39
 #: fpr/templates/fpr/fprule/list.html:44
-#: fpr/templates/fpr/fptool/detail.html:30
+#: fpr/templates/fpr/fptool/detail.html:28
 #: fpr/templates/fpr/idcommand/detail.html:39
 #: fpr/templates/fpr/idcommand/list.html:43
 #: fpr/templates/fpr/idrule/detail.html:35
@@ -744,7 +742,7 @@ msgstr "Sí,No"
 #: fpr/templates/fpr/format/detail.html:71
 #: fpr/templates/fpr/format/list.html:50
 #: fpr/templates/fpr/fpcommand/list.html:43
-#: fpr/templates/fpr/fprule/list.html:46 fpr/templates/fpr/fptool/list.html:40
+#: fpr/templates/fpr/fprule/list.html:46 fpr/templates/fpr/fptool/list.html:38
 #: fpr/templates/fpr/idcommand/list.html:45
 #: fpr/templates/fpr/idrule/list.html:45
 #: fpr/templates/fpr/idtool/detail.html:63
@@ -758,7 +756,7 @@ msgstr "Ver"
 #: fpr/templates/fpr/fpcommand/list.html:45
 #: fpr/templates/fpr/fprule/detail.html:42
 #: fpr/templates/fpr/fprule/list.html:49
-#: fpr/templates/fpr/fptool/detail.html:61
+#: fpr/templates/fpr/fptool/detail.html:59
 #: fpr/templates/fpr/idcommand/detail.html:42
 #: fpr/templates/fpr/idcommand/list.html:47
 #: fpr/templates/fpr/idrule/detail.html:38
@@ -899,7 +897,7 @@ msgstr "Herramienta"
 #: fpr/templates/fpr/fpcommand/detail.html:32
 #: fpr/templates/fpr/fprule/detail.html:32
 #: fpr/templates/fpr/fprule/list.html:31
-#: fpr/templates/fpr/fptool/detail.html:48
+#: fpr/templates/fpr/fptool/detail.html:46
 #: fpr/templates/fpr/idcommand/list.html:28
 #: fpr/templates/fpr/idrule/detail.html:30
 #: fpr/templates/fpr/idrule/list.html:29
@@ -1008,9 +1006,8 @@ msgstr "No se han encontrado reglas de normas de formato en el sistema."
 #: fpr/templates/fpr/fptool/detail.html:4
 #: fpr/templates/fpr/fptool/detail.html:5
 #, python-format
-msgid "Format policy registry tool %(description)s %(version)s"
+msgid "Format policy registry tool %(description)s "
 msgstr ""
-"Herramienta de registro de normas de formato %(description)s %(version)s"
 
 #: fpr/templates/fpr/fptool/detail.html:9
 #: fpr/templates/fpr/fptool/form.html:10 fpr/templates/fpr/fptool/list.html:4
@@ -1018,15 +1015,15 @@ msgstr ""
 msgid "Format policy registry tools"
 msgstr "Registro de herramientas de normas de formato"
 
-#: fpr/templates/fpr/fptool/detail.html:38
+#: fpr/templates/fpr/fptool/detail.html:36
 msgid "Tool commands"
 msgstr "Comandos de herramientas"
 
-#: fpr/templates/fpr/fptool/detail.html:41
+#: fpr/templates/fpr/fptool/detail.html:39
 msgid "Create new tool command"
 msgstr "Crear nuevo comando de herramienta"
 
-#: fpr/templates/fpr/fptool/detail.html:69
+#: fpr/templates/fpr/fptool/detail.html:67
 #: fpr/templates/fpr/idtool/detail.html:75
 #, python-format
 msgid ""
@@ -1041,7 +1038,7 @@ msgstr ""
 msgid "Create new tool"
 msgstr "Crear nueva herramienta"
 
-#: fpr/templates/fpr/fptool/list.html:50
+#: fpr/templates/fpr/fptool/list.html:48
 msgid "No tools exist."
 msgstr "No se han encontrado herramientas en el sistema."
 
