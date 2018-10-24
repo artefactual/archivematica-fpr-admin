@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from fpr import views
 
-UUID_REGEX = '[\w]{8}(-[\w]{4}){3}-[\w]{12}'
+UUID_REGEX = r'[\w]{8}(-[\w]{4}){3}-[\w]{12}'
 
 urlpatterns = [
     url(r'^$', views.home, name='fpr_index'),
