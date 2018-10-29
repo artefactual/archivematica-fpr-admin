@@ -211,7 +211,7 @@ class IDCommand(VersionedModel, models.Model):
         ('as_is', _('No shebang needed'))
     )
     script_type = models.CharField(_('script type'), max_length=16, choices=SCRIPT_TYPE_CHOICES)
-    tool = models.ForeignKey('IDTool', to_field='uuid', null=True, blank=True, verbose_name=_('the related tool'))
+    tool = models.ForeignKey('IDTool', to_field='uuid', null=True, verbose_name=_('the related tool'))
 
     class Meta:
         verbose_name = _("Format identification command")
